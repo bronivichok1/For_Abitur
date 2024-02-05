@@ -1,16 +1,20 @@
-import Button from '../components/Button'
-import { openInNewTab } from '../providers/OpenAdress';
-import { closeInNewTab } from '../providers/CloseAdress';
+import ButtonForNavigate from '../components/ButtonForNavigate'
+import { useLocation} from 'react-router-dom';
+import { useEffect } from 'react';
 
  function Home() {
+  const location = useLocation();
 
-  return (
-    
+  useEffect(() => {
+    console.log('Current location is ', location);
+  }, [location]);
+ 
+  return ( 
     <div >
       <main>
-          <div align="center">
-                <Button title='Заполнить заявление абитуриента' adress={() => openInNewTab('/Anketa')}/>
-                <Button title='Исправить/удалить заявление абитуриента'adress={() => openInNewTab('/Anketa')}/>
+        <div align="center">
+          <ButtonForNavigate title='Заполнить заявление абитуриента' adress='FillData' style="btn btn-1 btn-sep icon-info"/>
+          <ButtonForNavigate title='Исправить/удалить заявление абитуриента' adress='FindData' style="btn btn-4 btn-sep icon-send"/>
         </div>
       </main>
     </div>
