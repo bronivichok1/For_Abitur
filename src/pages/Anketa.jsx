@@ -11,7 +11,7 @@ import Points from '../components/Points';
 function Anketa() {
 
     return (
-        <body>  
+        <div>  
             <PassportForm/>
             <AdressData/>
             <Education/>
@@ -21,7 +21,7 @@ function Anketa() {
             <Awards/>
             <Points/>
             <button type="submit" class="btn btn-outline-primary btn-lg">Отправить</button>
-        </body>
+        </div>
     )
   }
   export default Anketa
