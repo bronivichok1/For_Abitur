@@ -4,12 +4,12 @@ import { set, useForm } from 'react-hook-form'
 
 
 
-const useValidation=(value,validations)=>{
+export const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)
     const[minLengthError,setMinLengthError]=useState(true)
     const[isRus,setRus]=useState(true)
     const[isEng,setEng]=useState(true)
-
+    const[inputValid,setInputValid]=useState(false)
     useEffect(()=>{
         for(const validation in validations){
 
@@ -21,40 +21,36 @@ const useValidation=(value,validations)=>{
                     value?setEmpty(false):setEmpty(true)
                 break;
                 case 'isRus':
-                var only =/^[А-я]$/i;
-                if(!value.match(only)||!value[0].match(only))
-                {
-                    setRus(false) 
-                }
-                else{
-                    setRus(true)  
-                }
-                
+                    var re =/[А-ЯЁ]{1}[а-яё]+$/i
+                    re.test(String(value).toLowerCase())?setRus(false):setRus(true)
                 break;
                 case'isEng':
-
-                if(value.match(/^[a-z]/)&&value[0].match(/^[A-Z]/))
-                {
-                    setEng(false)
-                }
-                else
-                {
-                    setEng(true)
-                }
+                    var ru=/[A-Z]{1}[a-z]+$/i
+                    ru.test(String(value).toLowerCase())?setEng(false):setEng(true)
                 break;
             }
 
         }
     },[value])
+    
+    useEffect(()=>{
+        if(isEmpty||minLengthError||isEng||isRus){
+            setInputValid(false)
+        } else {
+            setInputValid(true)
+        }
+    },[isEmpty,minLengthError,isEng,isRus])
+
     return{
         isEmpty,
         minLengthError,
         isRus,
-        isEng
+        isEng,
+        inputValid
 
     }
 }
-const useInput=(InitialValue,validations)=>{
+export const useInput=(InitialValue,validations)=>{
     const [value,setValue]=useState(InitialValue)
     const[isDirty,setDirty]=useState(false)
     const valid=useValidation(value,validations)
@@ -75,13 +71,13 @@ const useInput=(InitialValue,validations)=>{
 
 export default function PassportForm(){
 
-    const surname=useInput('',{isEmpty:true})
-    const surname_lat=useInput('',{isEmpty:true})
-    const name=useInput('',{isEmpty:true})
-    const second_name=useInput('',{isEmpty:true})
+    const surname=useInput('',{isEmpty:true,isRus:true})
+    const name=useInput('',{isEmpty:true,isRus:true})
+    const second_name=useInput('',{isEmpty:true,isRus:true})
+    const surname_lat=useInput('',{isEmpty:true,isEng:true})
+    const name_lat=useInput('',{isEmpty:true,isEng:true})
     const date_of_birth=useInput('',{isEmpty:true})
     const citizenship=useInput('',{isEmpty:true})
-    const name_lat=useInput('',{isEmpty:true})
     const serial=useInput('',{isEmpty:true})
     const number=useInput('',{isEmpty:true})
     const person_id=useInput('',{isEmpty:true})
