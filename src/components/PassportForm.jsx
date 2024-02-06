@@ -4,7 +4,7 @@ import { set, useForm } from 'react-hook-form'
 
 
 
-export const useValidation=(value,validations)=>{
+const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)
     const[minLengthError,setMinLengthError]=useState(true)
     const[isRus,setRus]=useState(true)
@@ -50,7 +50,7 @@ export const useValidation=(value,validations)=>{
 
     }
 }
-export const useInput=(InitialValue,validations)=>{
+const useInput=(InitialValue,validations)=>{
     const [value,setValue]=useState(InitialValue)
     const[isDirty,setDirty]=useState(false)
     const valid=useValidation(value,validations)
@@ -75,7 +75,7 @@ export default function PassportForm(){
     const name=useInput('',{isEmpty:true,isRus:true})
     const second_name=useInput('',{isEmpty:true,isRus:true})
     const surname_lat=useInput('',{isEmpty:true,isEng:true})
-    const name_lat=useInput('',{isEmpty:true,isEng:true})
+    const name_lat=useInput('',{isEmpty:true,isEng:true})//ready valid
     const date_of_birth=useInput('',{isEmpty:true})
     const citizenship=useInput('',{isEmpty:true})
     const serial=useInput('',{isEmpty:true})
