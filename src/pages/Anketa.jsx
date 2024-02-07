@@ -1,15 +1,6 @@
-import PassportForm from '../components/PassportForm';
 import "../style/Anketa.css"
-import AdressData from '../components/AdressData';
-import Education from '../components/Education';
-import AdmissionInfo from '../components/AdmissionInfo';
-import WorkInfo from '../components/WorkInfo';
-import Family from '../components/Family'
-import Awards from '../components/Awards';
-import Points from '../components/Points';
 import "../style/Form.css"
 import { useEffect, useState } from 'react'
-import { set, useForm } from 'react-hook-form'
 
 
 
@@ -18,6 +9,8 @@ const useValidation=(value,validations)=>{
     const[minLengthError,setMinLengthError]=useState(true)
     const[isRus,setRus]=useState(true)
     const[isEng,setEng]=useState(true)
+    const[ismobileNum,setmobileNum]=useState(true)
+    const[isemailCheck,setemailCheck]=useState(true)
     const[inputValid,setInputValid]=useState(false)
     useEffect(()=>{
         for(const validation in validations){
@@ -37,6 +30,19 @@ const useValidation=(value,validations)=>{
                     var ru=/[A-Z]{1}[a-z]+$/i
                     ru.test(String(value).toLowerCase())?setEng(false):setEng(true)
                 break;
+                case'ismobileNum':
+                    var ru=/[+]{1}[0-9]+$/i
+                    ru.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true)
+
+                break;
+                case'isemailCheck':
+                    var ru=/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
+                    ru.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true)
+                break;
+                case'DatCheck'
+                    var ru=/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/i
+                
+                    break;
             }
 
         }
@@ -55,7 +61,9 @@ const useValidation=(value,validations)=>{
         minLengthError,
         isRus,
         isEng,
-        inputValid
+        inputValid,
+        ismobileNum,
+        isemailCheck
 
     }
 }
@@ -100,8 +108,8 @@ function Anketa() {
     const housing=useInput('',{isEmpty:true})
     const apartment=useInput('',{isEmpty:true})
     const stat_tel=useInput('',{isEmpty:true})
-    const mobile_tel=useInput('+375',{isEmpty:true})
-    const email=useInput('',{isEmpty:true})
+    const mobile_tel=useInput('+375',{isEmpty:true,ismobileNum:true})
+    const email=useInput('',{isEmpty:true,isemailCheck:true})
     const edu_date_of_issue=useInput('',{isEmpty:true})
     const edu_serial_number=useInput('',{isEmpty:true})
     const edu_name=useInput('',{isEmpty:true})
@@ -138,40 +146,41 @@ function Anketa() {
     const cert_biol_number=useInput('',{isEmpty:true})
     const sex=useInput('1',{isEmpty:true})
     const doc_type=useInput('1',{isEmpty:true})
+    const country=useInput('0',{isEmpty:true})
 
 
 
     
     return (
     <div>  
-        <form >
+        <form  method="POST">
 <legend>Личные и паспортные данные</legend>
                     <div class="row">
                 <label class="form-label col-sm">Фамилия<span>*</span>
                         <input  class="form-control "onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value} name="surname" maxlength="50" />
                         {(surname.isDirty&&surname.isEmpty)&&<div style={{color:'red'}}> Поле "Фамилия" обязательно для заполнения.</div>}
-                        {(surname.isDirty&&surname.isRus)&&<div style={{color:'red'}}> В поле "Фамилия" допустима только кириллица, первая буква - заглавная.</div>}
+                        {(surname.isDirty&&surname.isRus&&!surname.isEmpty)&&<div style={{color:'red'}}> В поле "Фамилия" допустима только кириллица, первая буква - заглавная.</div>}
                 </label> 
                 <label class="form-label col-sm" >Имя<span>*</span>
                         <input class="form-control " onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} name="name" maxlength="50"/>
                         {(name.isDirty&&name.isEmpty)&&<div style={{color:'red'}}> Поле "Имя" обязательно для заполнения.</div>}
-                        {(name.isDirty&&name.isRus)&&<div style={{color:'red'}}> В поле "Имя" допустима только кириллица, первая буква - заглавная.</div>}
+                        {(name.isDirty&&name.isRus&&!name.isEmpty)&&<div style={{color:'red'}}> В поле "Имя" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                 <label class="form-label col-sm">Отчество
                         <input onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} value={second_name.value} class="form-control " name="second_name" maxlength="50" />
-                        {(second_name.isDirty&&second_name.isRus)&&<div style={{color:'red'}}> В поле "Отчество" допустима только кириллица, первая буква - заглавная.</div>}
+                        {(second_name.isDirty&&second_name.isRus&&!second_name.isEmpty)&&<div style={{color:'red'}}> В поле "Отчество" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                     </div>
                     <div class="row">
                 <label class="form-label col-sm">Фамилия (латиница)<span >*</span>
                         <input class="form-control is-invalid" onChange={e=>surname_lat.onChange(e)} onBlur={e=>surname_lat.onBlur(e)} value={surname_lat.value} name="surname_lat" maxlength="50" />
                         {(surname_lat.isDirty&&surname_lat.isEmpty)&&<div style={{color:'red'}}> Поле "Фамилия(латиница)" обязательно для заполнения.</div>}
-                        {(surname_lat.isDirty&&surname_lat.isEng)&&<div style={{color:'red'}}> В поле "Фамилия(латиница)" допустима только латиница,первая буква - заглавная .</div>}
+                        {(surname_lat.isDirty&&surname_lat.isEng&&!surname_lat.isEmpty)&&<div style={{color:'red'}}> В поле "Фамилия(латиница)" допустима только латиница,первая буква - заглавная .</div>}
                 </label> 
                 <label class="form-label col-sm">Имя (латиница)<span >*</span>
                         <input onChange={e=>name_lat.onChange(e)} onBlur={e=>name_lat.onBlur(e)} value={name_lat.value} class="form-control is-invalid" name="name_lat" maxlength="50" />
                         {(name_lat.isDirty&&name_lat.isEmpty)&&<div style={{color:'red'}}> Поле "Имя(латиница)" обязательно для заполнения.</div>}
-                        {(name_lat.isDirty&&name_lat.isEng)&&<div style={{color:'red'}}> В поле "Имя(латиница)" допустима только латиница,первая буква - заглавная .</div>}
+                        {(name_lat.isDirty&&name_lat.isEng&&!name_lat.isEmpty)&&<div style={{color:'red'}}> В поле "Имя(латиница)" допустима только латиница,первая буква - заглавная .</div>}
                 </label>
                     </div>
                     <div class="row">
@@ -237,8 +246,9 @@ function Anketa() {
 <legend class="text-center">Адрес места жительства в соответствии со штампом о регистрации, контактные данные</legend>
                 <div class="row">
                     <label class="form-label col-sm-4">Почтовый индекс
-                    <input onChange={e=>postcode.onChange(e)} onBlur={e=>postcode.onBlur(e)} value={postcode.value} class="form-control " name="postcode" maxlength="10"/></label>
-                    <label class="form-label col-sm-8">Страна<select class="form-select " name="country">
+                        <input onChange={e=>postcode.onChange(e)} onBlur={e=>postcode.onBlur(e)} value={postcode.value} class="form-control " name="postcode" maxlength="10"/></label>
+                    <label class="form-label col-sm-8">Страна
+                        <select onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value} class="form-select " name="country">
                         <option value="0">Республика Беларусь</option>
                         <option value="1">Российская Федерация</option>
                         <option value="2">Республика Казахстан</option>
@@ -248,7 +258,7 @@ function Anketa() {
                 </div>
                 <div class="row">
                     <label class="form-label col-sm">Область
-                        <select class="form-select " name="region">
+                        <select class="form-select " name="region" hidden={country.value!="0"}>
                         <option value="1">г. Минск</option>
                         <option value="2">Брестская область</option>
                         <option value="3">Витебская область</option>
@@ -257,7 +267,7 @@ function Anketa() {
                         <option value="6">Минская область</option>
                         <option value="7">Могилевская область</option>
                     </select>
-                        <input onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value} class="form-control d-none " name="region" maxlength="50" disabled/></label>
+                        <input onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value} class="form-control d-none " name="region" maxlength="50" hidden={country.value=="0"}/></label>
                     <label class="form-label col-sm">Район<input class="form-control " name="area" maxlength="50" value=""/></label>
                 </div>
                 <div class="row">
@@ -303,8 +313,13 @@ function Anketa() {
                 <div class="row">
                     <label class="form-label col-sm">Мобильный тел.<span >*</span>
                         <input onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value} class="form-control " name="mobile_tel" maxlength="20"  required/></label>
+                        {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." обязательно для заполнения.</div>}
+                        {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." может содержать только цифры.</div>}
                     <label class="form-label col-sm">E-mail<span >*</span>
                         <input onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value} class="form-control " name="email" maxlength="50"  required/></label>
+                        {(email.isDirty&&email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" обязательно для заполнения.</div>}
+                        {(email.isDirty&&email.isemailCheck&&!email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" заполнено неверно.</div>}
+               
                 </div>
                         <legend class="text-center">Образование, сведения документа об образовании</legend>
                     <label class="form-label w-100">Название УО<span ></span>
