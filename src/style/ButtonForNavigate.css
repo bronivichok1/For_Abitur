@@ -132,6 +132,7 @@
   
   /* Button 3 */
   .btn-three {
+    border-radius: 0.25rem;
     color: #000000;
     transition: all 0.5s;
     position: relative;
@@ -148,7 +149,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: rgba(31, 81, 248, 0.1);
+    background-color: rgba(198, 196, 233, 0.808);
     transition: all 0.3s;
   }
   .btn-three:hover::before {

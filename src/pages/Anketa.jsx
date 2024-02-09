@@ -104,7 +104,6 @@ function Anketa() {
     const postcode=useInput('',{isEmpty:true})
     const region=useInput('',{isEmpty:true})
     const settlement_name=useInput('',{isEmpty:true})
-    const district=useInput('',{isEmpty:true})
     const street_name=useInput('',{isEmpty:true})
     const building=useInput('',{isEmpty:true})
     const housing=useInput('',{isEmpty:true})
@@ -160,8 +159,8 @@ function Anketa() {
 <legend>Личные и паспортные данные</legend>
                     <div class="row">
                 <label class="form-label col-sm">Фамилия<span>*</span>
-                        <input  class="input-small "onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}  name="surname" maxlength="50" />
-                        {(surname.isDirty&&surname.isEmpty)&&<div required style={{color:'red'}}> Поле "Фамилия" обязательно для заполнения.</div>}
+                        <input  class="input-small "onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}  required="false" valid="true" name="surname" maxlength="50" />
+                        {(surname.isDirty&&surname.isEmpty)&&<div  style={{color:'red'}}> Поле "Фамилия" обязательно для заполнения.</div>}
                         {(surname.isDirty&&surname.isRus&&!surname.isEmpty)&&<div  style={{color:'red'}}> В поле "Фамилия" допустима только кириллица, первая буква - заглавная.</div>}
                 </label> 
                 <label class="form-label col-sm" >Имя<span>*</span>
@@ -451,6 +450,41 @@ function Anketa() {
                     <label class="form-label w-100">Полный адрес
                         <input class="input-big" onChange={e=>mother_address.onChange(e)} onBlur={e=>mother_address.onBlur(e)} value={mother_address.value}  name="mother_address" maxlength="150" /></label>
                         <hr/>
+
+<legend class="text-center">Льготы</legend>
+                <div class="form-check mb-3">
+                    <input id="pr_chbx_1" class="form-check-input " name="privil[]" type="checkbox" value="18"/>
+                    <label for="pr_chbx_1" class="form-check-label">Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input id="pr_chbx_2" class="form-check-input " name="privil[]" type="checkbox" value="19-23"/>
+                    <label for="pr_chbx_2" class="form-check-label">Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input id="pr_chbx_3" class="form-check-input " name="privil[]" type="checkbox" value="dis"/>
+                    <label for="pr_chbx_3" class="form-check-label">Ребенок-инвалид, инвалид I, II, III гр.</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input id="pr_chbx_4" class="form-check-input " name="privil[]" type="checkbox" value="nop"/>
+                    <label for="pr_chbx_4" class="form-check-label">Сирота или ребенок, оставшийся без попечения родителей</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input id="pr_chbx_5" class="form-check-input " name="privil[]" type="checkbox" value="mil"/>
+                    <label for="pr_chbx_5" class="form-check-label">Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input id="pr_chbx_6" class="form-check-input " name="privil[]" type="checkbox" value="bff"/>
+                    <label for="pr_chbx_6" class="form-check-label">Из многодетной семьи</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input id="pr_chbx_7" class="form-check-input " name="privil[]" type="checkbox" value="medal"/>
+                    <label for="pr_chbx_7" class="form-check-label">Имею аттестат с медалью</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input id="pr_chbx_8" class="form-check-input " name="privil[]" type="checkbox" value="diplo"/>
+                    <label for="pr_chbx_8" class="form-check-label">Имею диплом с отличием</label> 
+                </div>
+                <hr/>
 <legend class="text-center">Награды по предметам</legend>
                 <div class="row">
                     <label class="form-label col-lg">Язык
