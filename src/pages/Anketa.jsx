@@ -149,8 +149,22 @@ function Anketa() {
     const doc_type=useInput('1',{isEmpty:true})
     const country=useInput('0',{isEmpty:true})
     const area=useInput('',{isEmpty:true})
-
-
+    const settlement_type=useInput('')
+    const street_type=useInput('')
+    const edu_foreign_lang=useInput('')
+    const pref_faculty=useInput('')
+    const awards_lang=useInput('')
+    const awards_chem=useInput('')
+    const awards_biol=useInput('')
+    const DD=useInput('')
+    const diplo=useInput('')
+    const medal=useInput('')
+    const bff=useInput('')
+    const mil=useInput('')
+    const nop=useInput('')
+    const dis=useInput('')
+    const stat19_23=useInput('')
+    const stat18=useInput('')
 
     
     return (
@@ -261,7 +275,7 @@ function Anketa() {
                 </div>
                 <div class="row">
                     <label class="form-label col-sm">Область
-                        <select class="select-medium " name="region" hidden={country.value!="0"}>
+                        <select class="select-medium " onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value} name="region" hidden={country.value!="0"}>
                         <option value="1">г. Минск</option>
                         <option value="2">Брестская область</option>
                         <option value="3">Витебская область</option>
@@ -276,7 +290,7 @@ function Anketa() {
                 </div>
                 <div class="row">
                     <label class="form-label col-sm">Тип насел. пункта
-                    <select class="select-medium " name="settlement_type">
+                    <select class="select-medium "onChange={e=>settlement_type.onChange(e)} onBlur={e=>settlement_type.onBlur(e)} value={settlement_type.value} name="settlement_type">
                         <option value="1">Город</option>
                         <option value="2">Городской поселок</option>
                         <option value="3">Агрогородок</option>
@@ -290,7 +304,7 @@ function Anketa() {
                 </div>
                 <div class="row">
                     <label class="form-label col-sm-3">Тип улицы
-                    <select class="select-medium " name="street_type">
+                    <select  class="select-medium " onChange={e=>street_type.onChange(e)} onBlur={e=>street_type.onBlur(e)} value={street_type.value} name="м">
                         <option value="1">улица</option>
                         <option value="2">проспект</option>
                         <option value="3">бульвар</option>
@@ -338,7 +352,7 @@ function Anketa() {
                     <label class="form-label col-sm">Средний балл<span ></span>
                         <input class="input-medium" onChange={e=>edu_average.onChange(e)} onBlur={e=>edu_average.onBlur(e)} value={edu_average.value} name="edu_average" maxlength="3"  /></label>
                     <label class="form-label col-sm">Иностранный язык<span></span>
-                    <select class="select-medium " name="edu_foreign_lang" >
+                    <select class="select-medium " onChange={e=>edu_foreign_lang.onChange(e)} onBlur={e=>edu_foreign_lang.onBlur(e)} value={edu_foreign_lang.value} name="edu_foreign_lang" >
                         <option value="1">Английский</option>
                         <option value="2">Немецкий</option>
                         <option value="3">Французcкий</option>
@@ -351,7 +365,7 @@ function Anketa() {
                 <hr/>
 <legend class="text-center">Информация о поступлении</legend>
                     <label class="form-label w-200">Факультет/Институт<span >*</span>
-                    <select class="select-big1200 " name="pref_faculty" >
+                    <select class="select-big1200 " onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
                         <optgroup label="Факультеты">	
                             <option value="1">Лечебный</option>
                             <option value="2">Педиатрический</option>
@@ -453,42 +467,42 @@ function Anketa() {
 
 <legend class="text-center">Льготы</legend>
                 <div class="row">
-                    <input id="pr_chbx_1" class="custom-radio" name="privil[]" type="checkbox" value="18"/>
+                    <input id="pr_chbx_1" class="custom-radio" onChange={e=>stat18.onChange(e)} onBlur={e=>stat18.onBlur(e)} value={stat18.value} name="stat18" type="checkbox" />
                     <label for="pr_chbx_1" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
                 </div>
                 <div class="row">
-                    <input id="pr_chbx_2" class="custom-radio" name="privil[]" type="checkbox" value="19-23"/>
+                    <input id="pr_chbx_2" class="custom-radio" onChange={e=>stat19_23.onChange(e)} onBlur={e=>stat19_23.onBlur(e)} value={stat19_23.value} name="stat19_23" type="checkbox" />
                     <label for="pr_chbx_2" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
                 </div>
                 <div class="row">
-                    <input id="pr_chbx_3" class="custom-radio" name="privil[]" type="checkbox" value="dis"/>
+                    <input id="pr_chbx_3" class="custom-radio" onChange={e=>dis.onChange(e)} onBlur={e=>dis.onBlur(e)} value={dis.value} name="dis" type="checkbox" />
                     <label for="pr_chbx_3" >Ребенок-инвалид, инвалид I, II, III гр.</label>
                 </div>
                 <div class="row">
-                    <input id="pr_chbx_4" class="custom-radio" name="privil[]" type="checkbox" value="nop"/>
+                    <input id="pr_chbx_4" class="custom-radio"  onChange={e=>nop.onChange(e)} onBlur={e=>nop.onBlur(e)} value={nop.value} name="nop" type="checkbox" />
                     <label for="pr_chbx_4">Сирота или ребенок, оставшийся без попечения родителей</label>
                 </div>
                 <div class="row">
-                    <input id="pr_chbx_5" class="custom-radio" name="privil[]" type="checkbox" value="mil"/>
+                    <input id="pr_chbx_5" class="custom-radio" onChange={e=>mil.onChange(e)} onBlur={e=>mil.onBlur(e)} value={mil.value} name="mil" type="checkbox" />
                     <label for="pr_chbx_5" >Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
                 </div>
                 <div class="row">
-                    <input id="pr_chbx_6" class="custom-radio" name="privil[]" type="checkbox" value="bff"/>
+                    <input id="pr_chbx_6" class="custom-radio" onChange={e=>bff.onChange(e)} onBlur={e=>bff.onBlur(e)} value={bff.value} name="bff" type="checkbox"/>
                     <label for="pr_chbx_6">Из многодетной семьи</label>
                 </div>
                 <div class="row">
-                    <input id="pr_chbx_7" class="custom-radio" name="privil[]" type="checkbox" value="medal"/>
+                    <input id="pr_chbx_7" class="custom-radio" onChange={e=>medal.onChange(e)} onBlur={e=>medal.onBlur(e)} value={medal.value} name="medal" type="checkbox" />
                     <label for="pr_chbx_7" >Имею аттестат с медалью</label>
                 </div>
                 <div class="row">
-                    <input id="pr_chbx_8" class="custom-radio" name="privil[]" type="checkbox" value="diplo"/>
+                    <input id="pr_chbx_8" class="custom-radio" onChange={e=>diplo.onChange(e)} onBlur={e=>diplo.onBlur(e)} value={diplo.value}   name="diplo" type="checkbox" />
                     <label for="pr_chbx_8" >Имею диплом с отличием</label> 
                 </div>
                 <hr/>
 <legend class="text-center">Награды по предметам</legend>
                 <div class="row">
                     <label class="form-label col-lg">Язык
-                    <select class="select-medium400" name="awards_lang">
+                    <select class="select-medium400" onChange={e=>awards_lang.onChange(e)} onBlur={e=>awards_lang.onBlur(e)} value={awards_lang.value} name="awards_lang">
                         <option value="0">Нет наград</option>
                         <option value="1">Международная I cт.</option>
                         <option value="2">Международная II cт.</option>
@@ -500,7 +514,7 @@ function Anketa() {
                         <option value="9">Лауреат СФП РБ по предмету</option>
                     </select></label>
                     <label class="form-label col-lg">Химия
-                    <select class="select-medium400" name="awards_chem">
+                    <select class="select-medium400" onChange={e=>awards_chem.onChange(e)} onBlur={e=>awards_chem.onBlur(e)} value={awards_chem.value} name="awards_chem">
                         <option value="0">Нет наград</option>
                         <option value="1">Международная I cт.</option>
                         <option value="2">Международная II cт.</option>
@@ -512,7 +526,7 @@ function Anketa() {
                         <option value="9">Лауреат СФП РБ по предмету</option>
                     </select></label>
                     <label class="form-label col-lg">Биология
-                    <select class="select-medium400" name="awards_biol">
+                    <select class="select-medium400" onChange={e=>awards_biol.onChange(e)} onBlur={e=>awards_biol.onBlur(e)} value={awards_biol.value} name="awards_biol">
                         <option value="0">Нет наград</option>
                         <option value="1">Международная I cт.</option>
                         <option value="2">Международная II cт.</option>
@@ -556,7 +570,7 @@ function Anketa() {
                 </div>
                 <hr/>
                 <div >
-                    <input  id="agreement" class="custom-radio" type="checkbox"></input>
+                    <input  id="agreement" class="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} value={DD.value} name="DD"type="checkbox"></input>
 <label for="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
