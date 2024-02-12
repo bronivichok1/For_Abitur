@@ -198,7 +198,7 @@ function Anketa() {
 
                 </label>
                 <label class="form-label col-sm-6">Тип документа<span >*</span>
-                    <select class="input-medium " onChange={e=>doc_type.onChange(e)} onBlur={e=>doc_type.onBlur(e)} value={doc_type.value}  name="doc_type">
+                    <select class="select-medium " onChange={e=>doc_type.onChange(e)} onBlur={e=>doc_type.onBlur(e)} value={doc_type.value}  name="doc_type">
                         <option value="1" selected="">паспорт гражданина РБ</option>
                         <option value="2">паспорт иностранного гражданина</option>
                         <option value="3">вид на жительство РБ</option>
@@ -312,11 +312,11 @@ function Anketa() {
                     <label class="form-label col-sm-2">Квартира
                         <input class="input-Small200 " onChange={e=>apartment.onChange(e)} onBlur={e=>apartment.onBlur(e)} value={apartment.value}  name="apartment" maxlength="10" /></label>
                     <label class="form-label col-sm-6">Домашний тел.
-                        <input class="input-medium " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel" placeholder="+375XXXXXXXXX" maxlength="20" /></label>
+                        <input class="input-medium " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel"  maxlength="20" /></label>
                 </div>
                 <div class="row">
                     <label class="form-label col-sm">Мобильный тел.<span >*</span>
-                        <input class="input-medium " onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  name="mobile_tel" maxlength="20"  /></label>
+                        <input class="input-medium " onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxlength="20"  /></label>
                         {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." обязательно для заполнения.</div>}
                         {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." может содержать только цифры.</div>}
                     <label class="form-label col-sm">E-mail<span >*</span>
@@ -350,7 +350,7 @@ function Anketa() {
                 </div>
                 <hr/>
 <legend class="text-center">Информация о поступлении</legend>
-                    <label class="form-label w-100">Факультет/Институт<span >*</span>
+                    <label class="form-label w-200">Факультет/Институт<span >*</span>
                     <select class="select-big1200 " name="pref_faculty" >
                         <optgroup label="Факультеты">	
                             <option value="1">Лечебный</option>
@@ -380,23 +380,23 @@ function Anketa() {
                             <option value="18">МЧС</option>
                         </optgroup>
                     </select></label>
-                <div class="row row-cols-lg-auto g-3 align-items-center">
-                    <div class="form-check form-check-inline mb-3 me-5">
-                            <input onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} value={pref_target.value} id="prform_chbx_1" class="form-check-input " name="pref_target" type="checkbox" />
+                <div class="row">
+                    <div class="row">
+                            <input class="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} value={pref_target.value} id="prform_chbx_1"  name="pref_target" type="checkbox" />
                         <label for="prform_chbx_1">На условиях целевой подготовки</label>
                     </div>
-                    <div class="form-check form-check-inline mb-3 me-5">
-                            <input onChange={e=>pref_nopay.onChange(e)} onBlur={e=>pref_nopay.onBlur(e)} value={pref_nopay.value} id="prform_chbx_2" class="form-check-input " name="pref_nopay" type="checkbox" />
+                    <div class="row">
+                            <input class="custom-radio" onChange={e=>pref_nopay.onChange(e)} onBlur={e=>pref_nopay.onBlur(e)} value={pref_nopay.value} id="prform_chbx_2" name="pref_nopay" type="checkbox" />
                         <label for="prform_chbx_2" >За счет средств бюджета</label>
                     </div>
-                    <div class="form-check form-check-inline mb-3 me-5">
-                            <input onChange={e=>pref_pay.onChange(e)} onBlur={e=>pref_pay.onBlur(e)} value={pref_pay.value} id="prform_chbx_3" class="form-check-input " name="pref_pay" type="checkbox" />
+                    <div class="row">
+                            <input class="custom-radio" onChange={e=>pref_pay.onChange(e)} onBlur={e=>pref_pay.onBlur(e)} value={pref_pay.value} id="prform_chbx_3"  name="pref_pay" type="checkbox" />
                         <label for="prform_chbx_3" >На платной основе</label>
                     </div>
                 </div>
-                    <div class="form-check mb-3">
-                            <input onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} value={pref_dorm.value} id="prform_chbx_4" class="form-check-input " name="pref_dorm" type="checkbox" />
-                        <label for="prform_chbx_4" class="form-check-label">Нуждаюсь в общежитии</label>
+                    <div class="row">
+                            <input class="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} value={pref_dorm.value} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
+                        <label for="prform_chbx_4">Нуждаюсь в общежитии</label>
                     </div>
                     <hr/>
 <legend class="text-center">Работа и стаж</legend>
@@ -452,37 +452,37 @@ function Anketa() {
                         <hr/>
 
 <legend class="text-center">Льготы</legend>
-                <div class="form-check mb-3">
-                    <input id="pr_chbx_1" class="form-check-input " name="privil[]" type="checkbox" value="18"/>
-                    <label for="pr_chbx_1" class="form-check-label">Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
+                <div class="row">
+                    <input id="pr_chbx_1" class="custom-radio" name="privil[]" type="checkbox" value="18"/>
+                    <label for="pr_chbx_1" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
                 </div>
-                <div class="form-check mb-3">
-                    <input id="pr_chbx_2" class="form-check-input " name="privil[]" type="checkbox" value="19-23"/>
-                    <label for="pr_chbx_2" class="form-check-label">Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
+                <div class="row">
+                    <input id="pr_chbx_2" class="custom-radio" name="privil[]" type="checkbox" value="19-23"/>
+                    <label for="pr_chbx_2" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
                 </div>
-                <div class="form-check mb-3">
-                    <input id="pr_chbx_3" class="form-check-input " name="privil[]" type="checkbox" value="dis"/>
-                    <label for="pr_chbx_3" class="form-check-label">Ребенок-инвалид, инвалид I, II, III гр.</label>
+                <div class="row">
+                    <input id="pr_chbx_3" class="custom-radio" name="privil[]" type="checkbox" value="dis"/>
+                    <label for="pr_chbx_3" >Ребенок-инвалид, инвалид I, II, III гр.</label>
                 </div>
-                <div class="form-check mb-3">
-                    <input id="pr_chbx_4" class="form-check-input " name="privil[]" type="checkbox" value="nop"/>
-                    <label for="pr_chbx_4" class="form-check-label">Сирота или ребенок, оставшийся без попечения родителей</label>
+                <div class="row">
+                    <input id="pr_chbx_4" class="custom-radio" name="privil[]" type="checkbox" value="nop"/>
+                    <label for="pr_chbx_4">Сирота или ребенок, оставшийся без попечения родителей</label>
                 </div>
-                <div class="form-check mb-3">
-                    <input id="pr_chbx_5" class="form-check-input " name="privil[]" type="checkbox" value="mil"/>
-                    <label for="pr_chbx_5" class="form-check-label">Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
+                <div class="row">
+                    <input id="pr_chbx_5" class="custom-radio" name="privil[]" type="checkbox" value="mil"/>
+                    <label for="pr_chbx_5" >Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
                 </div>
-                <div class="form-check mb-3">
-                    <input id="pr_chbx_6" class="form-check-input " name="privil[]" type="checkbox" value="bff"/>
-                    <label for="pr_chbx_6" class="form-check-label">Из многодетной семьи</label>
+                <div class="row">
+                    <input id="pr_chbx_6" class="custom-radio" name="privil[]" type="checkbox" value="bff"/>
+                    <label for="pr_chbx_6">Из многодетной семьи</label>
                 </div>
-                <div class="form-check mb-3">
-                    <input id="pr_chbx_7" class="form-check-input " name="privil[]" type="checkbox" value="medal"/>
-                    <label for="pr_chbx_7" class="form-check-label">Имею аттестат с медалью</label>
+                <div class="row">
+                    <input id="pr_chbx_7" class="custom-radio" name="privil[]" type="checkbox" value="medal"/>
+                    <label for="pr_chbx_7" >Имею аттестат с медалью</label>
                 </div>
-                <div class="form-check mb-3">
-                    <input id="pr_chbx_8" class="form-check-input " name="privil[]" type="checkbox" value="diplo"/>
-                    <label for="pr_chbx_8" class="form-check-label">Имею диплом с отличием</label> 
+                <div class="row">
+                    <input id="pr_chbx_8" class="custom-radio" name="privil[]" type="checkbox" value="diplo"/>
+                    <label for="pr_chbx_8" >Имею диплом с отличием</label> 
                 </div>
                 <hr/>
 <legend class="text-center">Награды по предметам</legend>
@@ -556,8 +556,8 @@ function Anketa() {
                 </div>
                 <hr/>
                 <div >
-                    <input  id="agreement" class="form-check-input" type="checkbox"></input>
-<label for="agreement" class="form-check-label">Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
+                    <input  id="agreement" class="custom-radio" type="checkbox"></input>
+<label for="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
                     <button type="submit" class="btn-three">Отправить</button>

@@ -38,7 +38,7 @@ legend{
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #000000dc;
+    color: #ced4da;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -64,7 +64,7 @@ legend{
     }
     select {
         margin-top: 10px;
-
+        border-color: #ced4da;
         width: 100px;
         height: auto;
         padding: 0px;
@@ -79,7 +79,7 @@ legend{
       width: 150px;
       margin: 10px;
       margin-top: 10px;
-
+      border-color: #ced4da;
       -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
       -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
       box-sizing: border-box;
@@ -96,6 +96,8 @@ legend{
      }
 
      .input-small{
+      border: 1px solid #ced4da;
+      color: black;
         width: 400px;
      height: 40px;
       margin-top: 0px;
@@ -113,6 +115,8 @@ legend{
      }
 
      .input-medium{
+      border: 1px solid #ced4da;
+      color: black;
         width: 600px;
         height: 40px;
          margin-top: 0px;
@@ -127,6 +131,8 @@ legend{
 
      }
      .select-small{
+      border: 1px solid #ced4da;
+      color: black;
         width: 300px;
         height: 40px;
          margin-top: 0px;
@@ -139,8 +145,13 @@ legend{
          box-sizing: border-box;
          background-color: #fff;
          font-size: 15px;
+         font-size: 16px;
+         margin-bottom: 10px;
+         padding: 0;
      }
      .select-big{
+      border: 1px solid #ced4da;
+      color: black;
         width: 900px;
         height: 40px;
          margin-top: 0px;
@@ -153,8 +164,13 @@ legend{
          box-sizing: border-box;
          background-color: #fff;
          font-size: 15px;
+         font-size: 16px;
+         margin-bottom: 10px;
+         padding: 0;
      }
      .select-medium{
+      border: 1px solid #ced4da;
+      color: black;
       padding: 20px;
       font: 18px/1.5 sans-serif;
         width: 600px;
@@ -169,8 +185,13 @@ legend{
          box-sizing: border-box;
          background-color: #fff;
          font-size: 15px;
+         font-size: 16px;
+         margin-bottom: 10px;
+         padding: 0;
      }
      .select-medium400{
+      border: 1px solid #ced4da;
+      color: black;
         width: 400px;
         height: 40px;
          margin-top: 0px;
@@ -183,8 +204,14 @@ legend{
          box-sizing: border-box;
          background-color: #fff;
          font-size: 15px;
+         font-size: 16px;
+         margin-bottom: 10px;
+         padding: 0;
      }
      .input-verySmall{
+      border: 1px solid #ced4da;
+      color: black;
+      border-color: #ced4da;
         width: 300px;
         height: 40px;
          margin-top: 0px;
@@ -199,6 +226,9 @@ legend{
          font-size: 15px;
      }
      .input-medium{
+      border: 1px solid #ced4da;
+      color: black;
+      border-color: #ced4da;
         width: 600px;
         height: 40px;
          margin-top: 0px;
@@ -213,6 +243,9 @@ legend{
          font-size: 15px;
      }
      .input-big{
+      border: 1px solid #ced4da;
+      color: black;
+      border-color: #ced4da;
         width: 1200px;
         height: 40px;
          margin-top: 0px;
@@ -226,13 +259,11 @@ legend{
          background-color: #fff;
          font-size: 15px;
      }
-     .input-Err{
-        border-color: #e96666;
-        outline: 0;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-     }
+
      .input-Small200{
+      border: 1px solid #ced4da;
+      color: black;
+      border-color: #ced4da;
         width: 200px;
         height: 40px;
          margin-top: 0px;
@@ -247,8 +278,10 @@ legend{
          font-size: 15px;
      }
      .select-big1200{
-        width: 1200px;
+      border: 1px solid #ced4da;
+      color: black;
         height: 40px;
+        width: 1200px;
          margin-top: 0px;
          margin-left: 0px;
          margin-right: 10px;
@@ -258,7 +291,10 @@ legend{
          -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
          box-sizing: border-box;
          background-color: #fff;
-         font-size: 15px;
+         font-size: 16px;
+         margin-bottom: 10px;
+         padding: 0;
+         
      }
      .input-small:focus,
      .input-Small200:focus,
@@ -266,16 +302,16 @@ legend{
      .select-medium:focus,
      .select-big:focus,
      .input-medium:focus,
-     .input-verySmall,
-     .select-big1200,
+     .input-verySmall:focus,
+     .select-big1200:focus,
      .input-big:focus,
-     .select-medium400 {
+     .select-medium400:focus {
         border-color: #66afe9;
         outline: 0;
         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
         }
-        .input-small:required,
+ /*       .input-small:required,
         .input-medium:required {
           border-color: #e96678;
           outline: 0;
@@ -283,40 +319,83 @@ legend{
           box-shadow: inset 0 1px 1px rgba(216, 58, 58, 0.897),0 0 8px rgba(233, 99, 99, 0.6);
          }
          .input-small:valid {
-          border: 1px solid rgb(110, 172, 253); /* Зеленая рамка для валидно заполненных полей */
+          border: 1px solid rgb(110, 172, 253); 
         }
-        .clear {clear: both;}
+        .clear {clear: both;}*/
 label {float: left;}
 
 .labeltext {
     display: inline-block;
-    float: left;
     padding-top: 6px;
     padding-left: 10px;
 }
 
-.custom-big-checkbox input[type="checkbox"] {
+
+.custom-radio {
   position: absolute;
-  left: -9999px;
+  z-index: -1;
+  opacity: 0;
 }
-
-.custom-big-checkbox {
-  cursor: pointer;
-  display: inline-block;
+/* для элемента label связанного с .custom-radio */
+.custom-radio+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
 }
-
-.custom-big-checkbox__checkbox {
-  display: inline-block;
-  width: 26px;
-  height: 26px;
-  border: 2px solid silver;
-  transition: border 0.3s ease;
+/* создание в label псевдоэлемента  before со следующими стилями */
+.custom-radio+label::before {
+  content: '';
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box; 
+  box-sizing: border-box;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 10px;
 }
-
-.custom-big-checkbox input[type="checkbox"]:checked + .custom-big-checkbox__checkbox {
-  background: url(https://di-grand.com/blog/html/images/checked.svg) center center no-repeat;   border-color: red;
+/* стили при наведении курсора на радио */
+.custom-radio:not(:disabled):not(:checked)+label:hover::before {
+  border-color: #b3d7ff;
 }
-
-.custom-big-checkbox:hover .custom-big-checkbox__checkbox {
-  border-color: red;
+/* стили для активной радиокнопки (при нажатии на неё) */
+.custom-radio:not(:disabled):active+label::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+/* стили для радиокнопки, находящейся в фокусе */
+.custom-radio:focus+label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+/* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+.custom-radio:focus:not(:checked)+label::before {
+  border-color: #80bdff;
+}
+/* стили для радиокнопки, находящейся в состоянии checked */
+.custom-radio:checked+label::before {
+  border-color: #0b76ef;
+  background-color: #0b76ef;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+/* стили для радиокнопки, находящейся в состоянии disabled */
+.custom-radio:disabled+label::before {
+  background-color: #e9ecef;
+}
+.lead{
+  color:#1b1c1dd2;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 10px;
+  height: 20px;
+  box-sizing: border-box;
+  display: inline-flex;
+  font-size: 22px;
 }
