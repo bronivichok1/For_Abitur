@@ -1,5 +1,4 @@
 import "../style/Anketa.css"
-import "../style/Form.css"
 import { useEffect, useState } from 'react'
 import ButtonForNavigate from '../components/ButtonForNavigate'
 
@@ -87,7 +86,17 @@ const useInput=(InitialValue,validations)=>{
         ...valid
     }
 }
+
+
+    //For Error-style
+
+
+  
 function Anketa() {
+
+
+
+    
     const surname=useInput('',{isEmpty:true,isRus:true})
     const name=useInput('',{isEmpty:true,isRus:true})
     const second_name=useInput('',{isEmpty:true,isRus:true})
@@ -173,28 +182,28 @@ function Anketa() {
 <legend>Личные и паспортные данные</legend>
                     <div class="row">
                 <label class="form-label col-sm">Фамилия<span>*</span>
-                        <input  class="input-small "onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}  required="false" valid="true" name="surname" maxlength="50" />
+                        <input  className={surname.isDirty&&(surname.isRus||surname.isEmpty)?"input-small-error":"input-small"} onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}   name="surname" maxlength="50" />
                         {(surname.isDirty&&surname.isEmpty)&&<div  style={{color:'red'}}> Поле "Фамилия" обязательно для заполнения.</div>}
                         {(surname.isDirty&&surname.isRus&&!surname.isEmpty)&&<div  style={{color:'red'}}> В поле "Фамилия" допустима только кириллица, первая буква - заглавная.</div>}
                 </label> 
                 <label class="form-label col-sm" >Имя<span>*</span>
-                        <input class="input-small " onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} required valid name="name" maxlength="50"/>
+                        <input className={name.isDirty&&(name.isRus||name.isEmpty)?"input-small-error":"input-small"} onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} required valid name="name" maxlength="50"/>
                         {(name.isDirty&&name.isEmpty)&&<div style={{color:'red'}}> Поле "Имя" обязательно для заполнения.</div>}
                         {(name.isDirty&&name.isRus&&!name.isEmpty)&&<div style={{color:'red'}}> В поле "Имя" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                 <label class="form-label col-sm">Отчество
-                        <input class="input-small " onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} required valid value={second_name.value}  name="second_name" maxlength="50" />
+                        <input className={second_name.isDirty&&second_name.isRus&&!second_name.isEmpty?"input-small-error":"input-small"} onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} required valid value={second_name.value}  name="second_name" maxlength="50" />
                         {(second_name.isDirty&&second_name.isRus&&!second_name.isEmpty)&&<div style={{color:'red'}}> В поле "Отчество" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                     </div>
                     <div class="row">
                 <label class="form-label col-sm">Фамилия (латиница)<span >*</span>
-                        <input class="input-medium" onChange={e=>surname_lat.onChange(e)} onBlur={e=>surname_lat.onBlur(e)} value={surname_lat.value} name="surname_lat" maxlength="50" />
+                        <input className={surname_lat.isDirty&&(surname_lat.isEng||surname_lat.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>surname_lat.onChange(e)} onBlur={e=>surname_lat.onBlur(e)} value={surname_lat.value} name="surname_lat" maxlength="50" />
                         {(surname_lat.isDirty&&surname_lat.isEmpty)&&<div style={{color:'red'}}> Поле "Фамилия(латиница)" обязательно для заполнения.</div>}
                         {(surname_lat.isDirty&&surname_lat.isEng&&!surname_lat.isEmpty)&&<div style={{color:'red'}}> В поле "Фамилия(латиница)" допустима только латиница,первая буква - заглавная .</div>}
                 </label> 
                 <label class="form-label col-sm">Имя (латиница)<span >*</span>
-                        <input class="input-medium" onChange={e=>name_lat.onChange(e)} onBlur={e=>name_lat.onBlur(e)} value={name_lat.value}  name="name_lat" maxlength="50" />
+                        <input className={name_lat.isDirty&&(name_lat.isEng||name_lat.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>name_lat.onChange(e)} onBlur={e=>name_lat.onBlur(e)} value={name_lat.value}  name="name_lat" maxlength="50" />
                         {(name_lat.isDirty&&name_lat.isEmpty)&&<div style={{color:'red'}}> Поле "Имя(латиница)" обязательно для заполнения.</div>}
                         {(name_lat.isDirty&&name_lat.isEng&&!name_lat.isEmpty)&&<div style={{color:'red'}}> В поле "Имя(латиница)" допустима только латиница,первая буква - заглавная .</div>}
                 </label>
@@ -207,7 +216,7 @@ function Anketa() {
                     </select>
                 </label>
                 <label class="form-label col-sm">Дата рождения<span >*</span>
-                    <input class="input-verySmall" onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value} name="date_of_birth" maxlength="10" placeholder="дд.мм.гггг" />
+                    <input className={date_of_birth.isDirty&&date_of_birth.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value} name="date_of_birth" maxlength="10" placeholder="дд.мм.гггг" />
                     {(date_of_birth.isDirty&&date_of_birth.isEmpty)&&<div style={{color:'red'}}> Поле "Дата рождения" обязательно для заполнения.</div>}
 
                 </label>

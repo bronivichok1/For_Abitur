@@ -1,5 +1,4 @@
-import "../style/ForRead.css"
-import "../style/Form.css"
+import "../style/Anketa.css"
 import DataForRed from "../components/DataForRed"
 import ButtonForNavigate from "../components/ButtonForNavigate"
 import { useLocation } from "react-router-dom";
@@ -93,7 +92,7 @@ return{
 
 
 
-function ForRed() {
+function ForRead() {
     const location = useLocation();
 
     useEffect(() => {
@@ -104,30 +103,30 @@ function ForRed() {
     const number=useInput('',{isEmpty:true})
     const date_of_issue=useInput('',{isEmpty:true})
 
-
+    
     return (
  
-        <div class="div">
-          <form  method="post">
-            <p class="lead">Введите данные документа:</p>
-<label class="form-label w-100">Серия
+        <div className="div">
+          <form className="form-ForRead" method="post">
+            <legend className="lead" >Введите данные документа:</legend>
+<label className="form-label w-100">Серия
             <input class="input-medium" onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxlength="15" required/>
             {(serial.isDirty&&serial.isEmpty)&&<div  style={{color:'red'}}> Неверная серия.</div>}
 </label>
-<label class="form-label w-100">Номер
-            <input class="input-medium" onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxlength="15"  required/>
+<label className="form-label w-100">Номер
+            <input className="input-medium" onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxlength="15"  required/>
             {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> Неверный номер.</div>}
 </label>
-<label class="form-label w-100">Дата выдачи
-            <input class="input-medium" onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxlength="10" required/>
+<label className="form-label w-100">Дата выдачи
+            <input className="input-medium" onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxlength="10" required/>
             {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> Неверная дата выдачи.</div>}
 </label>
         <div align ="center" >
-                    <button type="submit" class="btn btn-1 btn-sep icon-info">Далее</button>
+                    <button type="submit" className="btn btn-1 btn-sep icon-info">Далее</button>
                 </div>
               </form>
         </div>
         
     )
   }
-  export default ForRed
+  export default ForRead

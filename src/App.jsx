@@ -1,7 +1,7 @@
 import {  BrowserRouter, Routes, Route} from 'react-router-dom';
 import Main from './pages/Main';
 import Anketa from './pages/Anketa';
-import ForRed from './pages/ForRed';
+import ForRead from './pages/ForRead';
 function App() {
   return (
 
@@ -9,7 +9,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Main/>} />
               <Route path="FillData" element={<Anketa/>} />
-              <Route path="FindData" element={<ForRed/>} />
+              <Route path="FindData" element={<ForRead/>} />
               <Route path="FindData/FillData" element={<Anketa/>} />
             </Routes>
           </BrowserRouter>
