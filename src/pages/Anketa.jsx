@@ -187,12 +187,12 @@ function Anketa() {
                         {(surname.isDirty&&surname.isRus&&!surname.isEmpty)&&<div  style={{color:'red'}}> В поле "Фамилия" допустима только кириллица, первая буква - заглавная.</div>}
                 </label> 
                 <label class="form-label col-sm" >Имя<span>*</span>
-                        <input className={name.isDirty&&(name.isRus||name.isEmpty)?"input-small-error":"input-small"} onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} required valid name="name" maxlength="50"/>
+                        <input className={name.isDirty&&(name.isRus||name.isEmpty)?"input-small-error":"input-small"} onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} name="name" maxlength="50"/>
                         {(name.isDirty&&name.isEmpty)&&<div style={{color:'red'}}> Поле "Имя" обязательно для заполнения.</div>}
                         {(name.isDirty&&name.isRus&&!name.isEmpty)&&<div style={{color:'red'}}> В поле "Имя" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                 <label class="form-label col-sm">Отчество
-                        <input className={second_name.isDirty&&second_name.isRus&&!second_name.isEmpty?"input-small-error":"input-small"} onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} required valid value={second_name.value}  name="second_name" maxlength="50" />
+                        <input className={second_name.isDirty&&second_name.isRus&&!second_name.isEmpty?"input-small-error":"input-small"} onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} value={second_name.value}  name="second_name" maxlength="50" />
                         {(second_name.isDirty&&second_name.isRus&&!second_name.isEmpty)&&<div style={{color:'red'}}> В поле "Отчество" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                     </div>
@@ -238,7 +238,7 @@ function Anketa() {
                     </div>
                     <div class="row">
                 <label class="form-label col-sm-6">Гражданство<span >*</span>
-                        <input class="input-medium" onChange={e=>citizenship.onChange(e)} onBlur={e=>citizenship.onBlur(e)} value={citizenship.value} name="citizenship" maxlength="50" />
+                        <input className={citizenship.isDirty&&citizenship.isEmpty?"input-medium-error":"input-medium"} onChange={e=>citizenship.onChange(e)} onBlur={e=>citizenship.onBlur(e)} value={citizenship.value} name="citizenship" maxlength="50" />
                         {(citizenship.isDirty&&citizenship.isEmpty)&&<div style={{color:'red'}}> Поле "Гражданство" обязательно для заполнения.</div>}
 
                 </label>
@@ -246,7 +246,7 @@ function Anketa() {
                         <input class="input-verySmall" onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxlength="10" />
                 </label>
                 <label class="form-label col-sm-4">Номер<span >*</span>
-                        <input class="input-verySmall" onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxlength="15" />
+                        <input className={number.isDirty&&number.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxlength="15" />
                         {(number.isDirty&&number.isEmpty)&&<div style={{color:'red'}}> Поле "Номер" обязательно для заполнения.</div>}
                 </label>
                     </div>
@@ -255,16 +255,16 @@ function Anketa() {
                         <input class="input-medium" onChange={e=>person_id.onChange(e)} onBlur={e=>person_id.onBlur(e)} value={person_id.value}  name="person_id" maxlength="20" />
                 </label>
                 <label class="form-label col-sm-3">Дата выдачи<span >*</span>
-                        <input class="input-verySmall" onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder="дд.мм.гггг" maxlength="10" />
+                        <input className={date_of_issue.isDirty&&date_of_issue.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder="дд.мм.гггг" maxlength="10" />
                         {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
                 </label>
                 <label class="form-label col-sm-3">Срок действия<span >*</span>
-                        <input class="input-verySmall" onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxlength="10"/>
+                        <input className={date_of_expiry.isDirty&&date_of_expiry.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxlength="10"/>
                         {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}> Поле "Срок действия" обязательно для заполнения.</div>}
                 </label>
                     </div>
                 <label class="form-label w-100">Кем выдан<span >*</span>
-                        <input class="input-big" onChange={e=>authority.onChange(e)} onBlur={e=>authority.onBlur(e)} value={authority.value}  name="authority" maxlength="100" />
+                        <input className={authority.isDirty&&authority.isEmpty?"input-big-error":"input-big"} onChange={e=>authority.onChange(e)} onBlur={e=>authority.onBlur(e)} value={authority.value}  name="authority" maxlength="100" />
                         {(authority.isDirty&&authority.isEmpty)&&<div style={{color:'red'}}> Поле "Кем выдан" обязательно для заполнения.</div>}
 
                 </label>
@@ -339,11 +339,12 @@ function Anketa() {
                 </div>
                 <div class="row">
                     <label class="form-label col-sm">Мобильный тел.<span >*</span>
-                        <input class="input-medium " onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxlength="20"  /></label>
+                        <input className={mobile_tel.isDirty&&(mobile_tel.ismobileNum||mobile_tel.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxlength="20"  /></label>
                         {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." обязательно для заполнения.</div>}
                         {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." может содержать только цифры.</div>}
+
                     <label class="form-label col-sm">E-mail<span >*</span>
-                        <input class="input-medium " onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxlength="50"/></label>
+                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxlength="50"/></label>
                         {(email.isDirty&&email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" обязательно для заполнения.</div>}
                         {(email.isDirty&&email.isemailCheck&&!email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" заполнено неверно.</div>}
                 </div>

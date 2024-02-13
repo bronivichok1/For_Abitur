@@ -327,6 +327,27 @@ legend{
          background-color: #fff;
          font-size: 15px;
      }
+     .input-big-error{
+      border: 1px solid #ced4da;
+      color: black;
+      border-color: #ced4da;
+        width: 1200px;
+        height: 40px;
+         margin-top: 0px;
+         margin-left: 0px;
+         margin-right: 10px;
+         border-radius: 0.25rem;
+           border-color: none;
+         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+         box-sizing: border-box;
+         background-color: #fff;
+         font-size: 15px;
+         border-color: #e26647;
+         outline: 0;
+         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+     }
 
      .input-Small200{
       border: 1px solid #ced4da;
