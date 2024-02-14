@@ -1,5 +1,4 @@
 import "../style/Anketa.css"
-import DataForRed from "../components/DataForRed"
 import ButtonForNavigate from "../components/ButtonForNavigate"
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from 'react'
@@ -14,6 +13,8 @@ const useValidation=(value,validations)=>{
   const[ismobileNum,setmobileNum]=useState(true)
   const[isemailCheck,setemailCheck]=useState(true)
   const[inputValid,setInputValid]=useState(false)
+  const[inputData,setInputData]=useState(false)
+
   useEffect(()=>{
     for(const validation in validations){
 
@@ -41,10 +42,10 @@ const useValidation=(value,validations)=>{
                 var ru=/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
                 ru.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true)
             break;
-           // case'DatCheck'
-              //  var ru=/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/i
-            
-             //   break;
+            case'inputData':
+            var ru=/^\d{4}[-|\/|.]\d{2}\1\d{2}$/i
+            ru.test(String(value).toLowerCase())?setInputData(false):setInputData(true)
+            break;
         }
 
     }
@@ -64,7 +65,8 @@ return{
   isEng,
   inputValid,
   ismobileNum,
-  isemailCheck
+  isemailCheck,
+  inputData
 
 }
 }
