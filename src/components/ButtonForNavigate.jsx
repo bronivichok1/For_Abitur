@@ -5,7 +5,7 @@ export default function ButtonForNavigate(props){
 
     return(
       <div class="container">
-            <button class={props.style}  id="submit" onClick={() => navigate(props.adress, { replace: false })}>
+            <button className={props.style}  id="submit" onClick={() => navigate(props.adress, { replace: false })}>
             <p>{props.title}</p>
             </button>
       </div>

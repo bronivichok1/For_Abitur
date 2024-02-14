@@ -210,7 +210,7 @@ function Anketa() {
                     <div className="row">
                 <label className="form-label col-sm">Пол<span >*</span>
                     <select className="select-small " onChange={e=>sex.onChange(e)} onBlur={e=>sex.onBlur(e)} value={sex.value}  name="sex">
-                        <option value="0" selected="">Женский</option>
+                        <option value="0">Женский</option>
                         <option value="1">Мужской</option>
                     </select>
                 </label>
@@ -221,7 +221,7 @@ function Anketa() {
                 </label>
                 <label className="form-label col-sm-6">Тип документа<span >*</span>
                     <select className="select-medium " onChange={e=>doc_type.onChange(e)} onBlur={e=>doc_type.onBlur(e)} value={doc_type.value}  name="doc_type">
-                        <option value="1" selected="">паспорт гражданина РБ</option>
+                        <option value="1" >паспорт гражданина РБ</option>
                         <option value="2">паспорт иностранного гражданина</option>
                         <option value="3">вид на жительство РБ</option>
                         <option value="4">справка об освобождении</option>
@@ -277,7 +277,7 @@ function Anketa() {
 <legend className="text-center">Адрес места жительства в соответствии со штампом о регистрации, контактные данные</legend>
                 <div className="row">
                     <label className="form-label col-sm-4">Почтовый индекс
-                        <input className="input-verySmall" onChange={e=>postcode.onChange(e)} onBlur={e=>postcode.onBlur(e)} value={postcode.value}  name="postcode" maxlength="10"/></label>
+                        <input className="input-verySmall" onChange={e=>postcode.onChange(e)} onBlur={e=>postcode.onBlur(e)} value={postcode.value}  name="postcode" maxLength="10"/></label>
                     <label className="form-label col-sm-8">Страна
                         <select className="select-big" onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value}  name="country">
                         <option value="0">Республика Беларусь</option>
@@ -412,20 +412,20 @@ function Anketa() {
                 <div className="row">
                     <div className="row">
                             <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} value={pref_target.value} id="prform_chbx_1"  name="pref_target" type="checkbox" />
-                        <label for="prform_chbx_1">На условиях целевой подготовки</label>
+                        <label htmlFor="prform_chbx_1">На условиях целевой подготовки</label>
                     </div>
                     <div className="row">
                             <input className="custom-radio" onChange={e=>pref_nopay.onChange(e)} onBlur={e=>pref_nopay.onBlur(e)} value={pref_nopay.value} id="prform_chbx_2" name="pref_nopay" type="checkbox" />
-                        <label for="prform_chbx_2" >За счет средств бюджета</label>
+                        <label htmlFor="prform_chbx_2" >За счет средств бюджета</label>
                     </div>
                     <div className="row">
                             <input className="custom-radio" onChange={e=>pref_pay.onChange(e)} onBlur={e=>pref_pay.onBlur(e)} value={pref_pay.value} id="prform_chbx_3"  name="pref_pay" type="checkbox" />
-                        <label for="prform_chbx_3" >На платной основе</label>
+                        <label htmlFor="prform_chbx_3" >На платной основе</label>
                     </div>
                 </div>
                     <div className="row">
                             <input className="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} value={pref_dorm.value} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
-                        <label for="prform_chbx_4">Нуждаюсь в общежитии</label>
+                        <label htmlFor="prform_chbx_4">Нуждаюсь в общежитии</label>
                     </div>
                     <hr/>
 <legend className="text-center">Работа и стаж</legend>
@@ -483,35 +483,35 @@ function Anketa() {
 <legend className="text-center">Льготы</legend>
                 <div className="row">
                     <input id="pr_chbx_1" className="custom-radio" onChange={e=>stat18.onChange(e)} onBlur={e=>stat18.onBlur(e)} value={stat18.value} name="stat18" type="checkbox" />
-                    <label for="pr_chbx_1" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
+                    <label htmlFor="pr_chbx_1" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
                 </div>
                 <div className="row">
                     <input id="pr_chbx_2" className="custom-radio" onChange={e=>stat19_23.onChange(e)} onBlur={e=>stat19_23.onBlur(e)} value={stat19_23.value} name="stat19_23" type="checkbox" />
-                    <label for="pr_chbx_2" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
+                    <label htmlFor="pr_chbx_2" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
                 </div>
                 <div className="row">
                     <input id="pr_chbx_3" className="custom-radio" onChange={e=>dis.onChange(e)} onBlur={e=>dis.onBlur(e)} value={dis.value} name="dis" type="checkbox" />
-                    <label for="pr_chbx_3" >Ребенок-инвалид, инвалид I, II, III гр.</label>
+                    <label htmlFor="pr_chbx_3" >Ребенок-инвалид, инвалид I, II, III гр.</label>
                 </div>
                 <div className="row">
                     <input id="pr_chbx_4" className="custom-radio"  onChange={e=>nop.onChange(e)} onBlur={e=>nop.onBlur(e)} value={nop.value} name="nop" type="checkbox" />
-                    <label for="pr_chbx_4">Сирота или ребенок, оставшийся без попечения родителей</label>
+                    <label htmlFor="pr_chbx_4">Сирота или ребенок, оставшийся без попечения родителей</label>
                 </div>
                 <div className="row">
                     <input id="pr_chbx_5" className="custom-radio" onChange={e=>mil.onChange(e)} onBlur={e=>mil.onBlur(e)} value={mil.value} name="mil" type="checkbox" />
-                    <label for="pr_chbx_5" >Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
+                    <label htmlFor="pr_chbx_5" >Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
                 </div>
                 <div className="row">
                     <input id="pr_chbx_6" className="custom-radio" onChange={e=>bff.onChange(e)} onBlur={e=>bff.onBlur(e)} value={bff.value} name="bff" type="checkbox"/>
-                    <label for="pr_chbx_6">Из многодетной семьи</label>
+                    <label htmlFor="pr_chbx_6">Из многодетной семьи</label>
                 </div>
                 <div className="row">
                     <input id="pr_chbx_7" className="custom-radio" onChange={e=>medal.onChange(e)} onBlur={e=>medal.onBlur(e)} value={medal.value} name="medal" type="checkbox" />
-                    <label for="pr_chbx_7" >Имею аттестат с медалью</label>
+                    <label htmlFor="pr_chbx_7" >Имею аттестат с медалью</label>
                 </div>
                 <div className="row">
                     <input id="pr_chbx_8" className="custom-radio" onChange={e=>diplo.onChange(e)} onBlur={e=>diplo.onBlur(e)} value={diplo.value}   name="diplo" type="checkbox" />
-                    <label for="pr_chbx_8" >Имею диплом с отличием</label> 
+                    <label htmlFor="pr_chbx_8" >Имею диплом с отличием</label> 
                 </div>
                 <hr/>
 <legend className="text-center">Награды по предметам</legend>
@@ -586,7 +586,7 @@ function Anketa() {
                 <hr/>
                 <div >
                     <input  id="agreement" className="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} value={DD.value} name="DD"type="checkbox"></input>
-<label for="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
+<label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
                     <button type="submit" className="btn-three">Отправить</button>
