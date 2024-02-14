@@ -48,13 +48,7 @@ label{
 
 }
 
-body{
-  font-family: var(--bs-body-font-family);
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 16px;
-  background-color: #f0e5cd31;
 
-}
     select {
         margin-top: 10px;
         border-color: #ced4da;
@@ -91,9 +85,14 @@ body{
       height: 498px;
       margin: 0 auto;
   }
-    .someDiv {
-        margin-bottom: 20px; 
-     }
+
+    .divcolor{
+    font-family: var(--bs-body-font-family);
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 16px;
+    background-color: #f0e5cd31;
+
+    }
 
      .input-small{
       border: 1px solid #ced4da;

@@ -176,33 +176,33 @@ function Anketa() {
 
     
     return (
-        <body className="body" method="POST">
+        <div className="divcolor" method="POST">
         <form  className="form" method="POST">
 <legend>Личные и паспортные данные</legend>
                     <div className="row">
                 <label className="form-label col-sm">Фамилия<span>*</span>
-                        <input  className={surname.isDirty&&(surname.isRus||surname.isEmpty)?"input-small-error":"input-small"} onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}   name="surname" maxlength="50" />
+                        <input  className={surname.isDirty&&(surname.isRus||surname.isEmpty)?"input-small-error":"input-small"} onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}   name="surname" maxLength="50" />
                         {(surname.isDirty&&surname.isEmpty)&&<div  style={{color:'red'}}> Поле "Фамилия" обязательно для заполнения.</div>}
                         {(surname.isDirty&&surname.isRus&&!surname.isEmpty)&&<div  style={{color:'red'}}> В поле "Фамилия" допустима только кириллица, первая буква - заглавная.</div>}
                 </label> 
                 <label className="form-label col-sm" >Имя<span>*</span>
-                        <input className={name.isDirty&&(name.isRus||name.isEmpty)?"input-small-error":"input-small"} onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} name="name" maxlength="50"/>
+                        <input className={name.isDirty&&(name.isRus||name.isEmpty)?"input-small-error":"input-small"} onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} name="name" maxLength="50"/>
                         {(name.isDirty&&name.isEmpty)&&<div style={{color:'red'}}> Поле "Имя" обязательно для заполнения.</div>}
                         {(name.isDirty&&name.isRus&&!name.isEmpty)&&<div style={{color:'red'}}> В поле "Имя" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                 <label className="form-label col-sm">Отчество
-                        <input className={second_name.isDirty&&second_name.isRus&&!second_name.isEmpty?"input-small-error":"input-small"} onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} value={second_name.value}  name="second_name" maxlength="50" />
+                        <input className={second_name.isDirty&&second_name.isRus&&!second_name.isEmpty?"input-small-error":"input-small"} onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} value={second_name.value}  name="second_name" maxLength="50" />
                         {(second_name.isDirty&&second_name.isRus&&!second_name.isEmpty)&&<div style={{color:'red'}}> В поле "Отчество" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                     </div>
                     <div className="row">
                 <label className="form-label col-sm">Фамилия (латиница)<span >*</span>
-                        <input className={surname_lat.isDirty&&(surname_lat.isEng||surname_lat.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>surname_lat.onChange(e)} onBlur={e=>surname_lat.onBlur(e)} value={surname_lat.value} name="surname_lat" maxlength="50" />
+                        <input className={surname_lat.isDirty&&(surname_lat.isEng||surname_lat.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>surname_lat.onChange(e)} onBlur={e=>surname_lat.onBlur(e)} value={surname_lat.value} name="surname_lat" maxLength="50" />
                         {(surname_lat.isDirty&&surname_lat.isEmpty)&&<div style={{color:'red'}}> Поле "Фамилия(латиница)" обязательно для заполнения.</div>}
                         {(surname_lat.isDirty&&surname_lat.isEng&&!surname_lat.isEmpty)&&<div style={{color:'red'}}> В поле "Фамилия(латиница)" допустима только латиница,первая буква - заглавная .</div>}
                 </label> 
                 <label className="form-label col-sm">Имя (латиница)<span >*</span>
-                        <input className={name_lat.isDirty&&(name_lat.isEng||name_lat.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>name_lat.onChange(e)} onBlur={e=>name_lat.onBlur(e)} value={name_lat.value}  name="name_lat" maxlength="50" />
+                        <input className={name_lat.isDirty&&(name_lat.isEng||name_lat.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>name_lat.onChange(e)} onBlur={e=>name_lat.onBlur(e)} value={name_lat.value}  name="name_lat" maxLength="50" />
                         {(name_lat.isDirty&&name_lat.isEmpty)&&<div style={{color:'red'}}> Поле "Имя(латиница)" обязательно для заполнения.</div>}
                         {(name_lat.isDirty&&name_lat.isEng&&!name_lat.isEmpty)&&<div style={{color:'red'}}> В поле "Имя(латиница)" допустима только латиница,первая буква - заглавная .</div>}
                 </label>
@@ -215,7 +215,7 @@ function Anketa() {
                     </select>
                 </label>
                 <label className="form-label col-sm">Дата рождения<span >*</span>
-                    <input className={date_of_birth.isDirty&&date_of_birth.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value} name="date_of_birth" maxlength="10" placeholder="дд.мм.гггг" />
+                    <input className={date_of_birth.isDirty&&date_of_birth.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value} name="date_of_birth" maxLength="10" placeholder="дд.мм.гггг" />
                     {(date_of_birth.isDirty&&date_of_birth.isEmpty)&&<div style={{color:'red'}}> Поле "Дата рождения" обязательно для заполнения.</div>}
 
                 </label>
@@ -237,49 +237,49 @@ function Anketa() {
                     </div>
                     <div className="row">
                 <label className="form-label col-sm-6">Гражданство<span >*</span>
-                        <input className={citizenship.isDirty&&citizenship.isEmpty?"input-medium-error":"input-medium"} onChange={e=>citizenship.onChange(e)} onBlur={e=>citizenship.onBlur(e)} value={citizenship.value} name="citizenship" maxlength="50" />
+                        <input className={citizenship.isDirty&&citizenship.isEmpty?"input-medium-error":"input-medium"} onChange={e=>citizenship.onChange(e)} onBlur={e=>citizenship.onBlur(e)} value={citizenship.value} name="citizenship" maxLength="50" />
                         {(citizenship.isDirty&&citizenship.isEmpty)&&<div style={{color:'red'}}> Поле "Гражданство" обязательно для заполнения.</div>}
 
                 </label>
                 <label className="form-label col-sm-2">Серия
-                        <input className="input-verySmall" onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxlength="10" />
+                        <input className="input-verySmall" onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="10" />
                 </label>
                 <label className="form-label col-sm-4">Номер<span >*</span>
-                        <input className={number.isDirty&&number.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxlength="15" />
+                        <input className={number.isDirty&&number.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="15" />
                         {(number.isDirty&&number.isEmpty)&&<div style={{color:'red'}}> Поле "Номер" обязательно для заполнения.</div>}
                 </label>
                     </div>
                     <div className="row">
                 <label className="form-label col-sm-6">Идентификационный номер
-                        <input class="input-medium" onChange={e=>person_id.onChange(e)} onBlur={e=>person_id.onBlur(e)} value={person_id.value}  name="person_id" maxlength="20" />
+                        <input className="input-medium" onChange={e=>person_id.onChange(e)} onBlur={e=>person_id.onBlur(e)} value={person_id.value}  name="person_id" maxLength="20" />
                 </label>
                 <label className="form-label col-sm-3">Дата выдачи<span >*</span>
-                        <input className={date_of_issue.isDirty&&(date_of_issue.inputData||date_of_issue.isEmpty)?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder="дд.мм.гггг" maxlength="10" />
+                        <input className={date_of_issue.isDirty&&(date_of_issue.inputData||date_of_issue.isEmpty)?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" />
                         {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
                         {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div style={{color:'red'}}> Поле "Дата выдачи" может содежрать цифры и ".".</div>}
 
                 </label>
-                <label class="form-label col-sm-3">Срок действия<span >*</span>
-                        <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxlength="10"/>
+                <label className="form-label col-sm-3">Срок действия<span >*</span>
+                        <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10"/>
                         {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}> Поле "Срок действия" обязательно для заполнения.</div>}
                         {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div style={{color:'red'}}> Поле "Срок действия" может содежрать цифры и ".".</div>}
 
                 </label>
                     </div>
                     <div className="row">
-                <label class="form-label w-100">Кем выдан<span >*</span>
-                        <input className={authority.isDirty&&authority.isEmpty?"input-big-error":"input-big"} onChange={e=>authority.onChange(e)} onBlur={e=>authority.onBlur(e)} value={authority.value}  name="authority" maxlength="100" />
+                <label className="form-label w-100">Кем выдан<span >*</span>
+                        <input className={authority.isDirty&&authority.isEmpty?"input-big-error":"input-big"} onChange={e=>authority.onChange(e)} onBlur={e=>authority.onBlur(e)} value={authority.value}  name="authority" maxLength="100" />
                         {(authority.isDirty&&authority.isEmpty)&&<div style={{color:'red'}}> Поле "Кем выдан" обязательно для заполнения.</div>}
 
                 </label>
                 </div>
                 <hr/>
-<legend class="text-center">Адрес места жительства в соответствии со штампом о регистрации, контактные данные</legend>
-                <div class="row">
-                    <label class="form-label col-sm-4">Почтовый индекс
-                        <input class="input-verySmall" onChange={e=>postcode.onChange(e)} onBlur={e=>postcode.onBlur(e)} value={postcode.value}  name="postcode" maxlength="10"/></label>
-                    <label class="form-label col-sm-8">Страна
-                        <select class="select-big" onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value}  name="country">
+<legend className="text-center">Адрес места жительства в соответствии со штампом о регистрации, контактные данные</legend>
+                <div className="row">
+                    <label className="form-label col-sm-4">Почтовый индекс
+                        <input className="input-verySmall" onChange={e=>postcode.onChange(e)} onBlur={e=>postcode.onBlur(e)} value={postcode.value}  name="postcode" maxlength="10"/></label>
+                    <label className="form-label col-sm-8">Страна
+                        <select className="select-big" onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value}  name="country">
                         <option value="0">Республика Беларусь</option>
                         <option value="1">Российская Федерация</option>
                         <option value="2">Республика Казахстан</option>
@@ -287,9 +287,9 @@ function Anketa() {
                         <option value="4">Кыргызская Республика</option>
                     </select></label>
                 </div>
-                <div class="row">
-                    <label class="form-label col-sm">Область
-                        <select class="select-medium " onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value} name="region" hidden={country.value!="0"}>
+                <div className="row">
+                    <label className="form-label col-sm">Область
+                        <select className="select-medium " onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value} name="region" hidden={country.value!="0"}>
                         <option value="1">г. Минск</option>
                         <option value="2">Брестская область</option>
                         <option value="3">Витебская область</option>
@@ -298,13 +298,13 @@ function Anketa() {
                         <option value="6">Минская область</option>
                         <option value="7">Могилевская область</option>
                     </select>
-                        <input class="input-medium" onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value}  name="region" maxlength="50" hidden={country.value=="0"}/></label>
+                        <input className="input-medium" onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value}  name="region" maxLength="50" hidden={country.value=="0"}/></label>
                     <label >Район
-                        <input class="input-medium" onChange={e=>area.onChange(e)} onBlur={e=>area.onBlur(e)} value={area.value} name="area" maxlength="50" /></label>
+                        <input className="input-medium" onChange={e=>area.onChange(e)} onBlur={e=>area.onBlur(e)} value={area.value} name="area" maxLength="50" /></label>
                 </div>
-                <div class="row">
-                    <label class="form-label col-sm">Тип насел. пункта
-                    <select class="select-medium "onChange={e=>settlement_type.onChange(e)} onBlur={e=>settlement_type.onBlur(e)} value={settlement_type.value} name="settlement_type">
+                <div className="row">
+                    <label className="form-label col-sm">Тип насел. пункта
+                    <select className="select-medium "onChange={e=>settlement_type.onChange(e)} onBlur={e=>settlement_type.onBlur(e)} value={settlement_type.value} name="settlement_type">
                         <option value="1">Город</option>
                         <option value="2">Городской поселок</option>
                         <option value="3">Агрогородок</option>
@@ -312,13 +312,13 @@ function Anketa() {
                         <option value="5">Деревня</option>
                         <option value="6">иное</option>
                     </select></label>
-                    <label class="form-label col-sm">Населенный пункт
-                        <input class="input-medium " onChange={e=>settlement_name.onChange(e)} onBlur={e=>settlement_name.onBlur(e)} value={settlement_name.value}  name="settlement_name" maxlength="50" />
+                    <label className="form-label col-sm">Населенный пункт
+                        <input className="input-medium " onChange={e=>settlement_name.onChange(e)} onBlur={e=>settlement_name.onBlur(e)} value={settlement_name.value}  name="settlement_name" maxLength="50" />
                         </label>
                 </div>
-                <div class="row">
-                    <label class="form-label col-sm-3">Тип улицы
-                    <select  class="select-medium " onChange={e=>street_type.onChange(e)} onBlur={e=>street_type.onBlur(e)} value={street_type.value} name="м">
+                <div className="row">
+                    <label className="form-label col-sm-3">Тип улицы
+                    <select  className="select-medium " onChange={e=>street_type.onChange(e)} onBlur={e=>street_type.onBlur(e)} value={street_type.value} name="м">
                         <option value="1">улица</option>
                         <option value="2">проспект</option>
                         <option value="3">бульвар</option>
@@ -329,45 +329,45 @@ function Anketa() {
                         <option value="9">микрорайон</option>
                         <option value="8">иное (указать в названии)</option>
                     </select></label>
-                    <label class="form-label col-sm-5">Название улицы
-                    <input class="input-medium " onChange={e=>street_name.onChange(e)} onBlur={e=>street_name.onBlur(e)} value={street_name.value}  name="street_name" maxlength="50" /></label>
+                    <label className="form-label col-sm-5">Название улицы
+                    <input className="input-medium " onChange={e=>street_name.onChange(e)} onBlur={e=>street_name.onBlur(e)} value={street_name.value}  name="street_name" maxLength="50" /></label>
                 </div>
-                <div class="row">
-                    <label class="form-label col-sm-2">Дом
-                        <input class="input-Small200 " onChange={e=>building.onChange(e)} onBlur={e=>building.onBlur(e)} value={building.value}  name="building" maxlength="10" /></label>
-                    <label class="form-label col-sm-2">Корпус
-                        <input class="input-Small200 " onChange={e=>housing.onChange(e)} onBlur={e=>housing.onBlur(e)} value={housing.value}  name="housing" maxlength="10" /></label>
-                    <label class="form-label col-sm-2">Квартира
-                        <input class="input-Small200 " onChange={e=>apartment.onChange(e)} onBlur={e=>apartment.onBlur(e)} value={apartment.value}  name="apartment" maxlength="10" /></label>
-                    <label class="form-label col-sm-6">Домашний тел.
-                        <input class="input-medium " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel"  maxlength="20" /></label>
+                <div className="row">
+                    <label className="form-label col-sm-2">Дом
+                        <input className="input-Small200 " onChange={e=>building.onChange(e)} onBlur={e=>building.onBlur(e)} value={building.value}  name="building" maxLength="10" /></label>
+                    <label className="form-label col-sm-2">Корпус
+                        <input className="input-Small200 " onChange={e=>housing.onChange(e)} onBlur={e=>housing.onBlur(e)} value={housing.value}  name="housing" maxLength="10" /></label>
+                    <label className="form-label col-sm-2">Квартира
+                        <input className="input-Small200 " onChange={e=>apartment.onChange(e)} onBlur={e=>apartment.onBlur(e)} value={apartment.value}  name="apartment" maxLength="10" /></label>
+                    <label className="form-label col-sm-6">Домашний тел.
+                        <input className="input-medium " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel"  maxLength="20" /></label>
                 </div>
-                <div class="row">
-                    <label class="form-label col-sm">Мобильный тел.<span >*</span>
-                        <input className={mobile_tel.isDirty&&(mobile_tel.ismobileNum||mobile_tel.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxlength="20"  /></label>
+                <div className="row">
+                    <label className="form-label col-sm">Мобильный тел.<span >*</span>
+                        <input className={mobile_tel.isDirty&&(mobile_tel.ismobileNum||mobile_tel.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxLength="20"  /></label>
                         {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." обязательно для заполнения.</div>}
                         {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." может содержать только цифры.</div>}
 
-                    <label class="form-label col-sm">E-mail<span >*</span>
-                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxlength="50"/></label>
+                    <label className="form-label col-sm">E-mail<span >*</span>
+                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxLength="50"/></label>
                         {(email.isDirty&&email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" обязательно для заполнения.</div>}
                         {(email.isDirty&&email.isemailCheck&&!email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" заполнено неверно.</div>}
                 </div>
                 <hr/>
-<legend class="text-center">Образование, сведения документа об образовании</legend>
-                    <label class="form-label w-100">Название УО<span ></span>
-                        <input class="input-big "  onChange={e=>edu_name.onChange(e)} onBlur={e=>edu_name.onBlur(e)} value={edu_name.value} name="edu_name" maxlength="150"  /></label>
-                <div class="row">
-                    <label class="form-label col-sm">Серия Номер<span ></span>
-                        <input class="input-medium" onChange={e=>edu_serial_number.onChange(e)} onBlur={e=>edu_serial_number.onBlur(e)} value={edu_serial_number.value}  name="edu_serial_number" maxlength="20"  /></label>
-                    <label class="form-label col-sm">Дата выдачи<span ></span>
-                        <input class="input-medium" onChange={e=>edu_date_of_issue.onChange(e)} onBlur={e=>edu_date_of_issue.onBlur(e)} value={edu_date_of_issue.value} name="edu_date_of_issue" maxlength="10" placeholder="дд.мм.гггг" /></label>
+<legend className="text-center">Образование, сведения документа об образовании</legend>
+                    <label className="form-label w-100">Название УО<span ></span>
+                        <input v="input-big "  onChange={e=>edu_name.onChange(e)} onBlur={e=>edu_name.onBlur(e)} value={edu_name.value} name="edu_name" maxLength="150"  /></label>
+                <div className="row">
+                    <label className="form-label col-sm">Серия Номер<span ></span>
+                        <input className="input-medium" onChange={e=>edu_serial_number.onChange(e)} onBlur={e=>edu_serial_number.onBlur(e)} value={edu_serial_number.value}  name="edu_serial_number" maxLength="20"  /></label>
+                    <label className="form-label col-sm">Дата выдачи<span ></span>
+                        <input className="input-medium" onChange={e=>edu_date_of_issue.onChange(e)} onBlur={e=>edu_date_of_issue.onBlur(e)} value={edu_date_of_issue.value} name="edu_date_of_issue" maxLength="10" placeholder="дд.мм.гггг" /></label>
                 </div>
-                <div class="row">
-                    <label class="form-label col-sm">Средний балл<span ></span>
-                        <input class="input-medium" onChange={e=>edu_average.onChange(e)} onBlur={e=>edu_average.onBlur(e)} value={edu_average.value} name="edu_average" maxlength="3"  /></label>
-                    <label class="form-label col-sm">Иностранный язык<span></span>
-                    <select class="select-medium " onChange={e=>edu_foreign_lang.onChange(e)} onBlur={e=>edu_foreign_lang.onBlur(e)} value={edu_foreign_lang.value} name="edu_foreign_lang" >
+                <div className="row">
+                    <label className="form-label col-sm">Средний балл<span ></span>
+                        <input className="input-medium" onChange={e=>edu_average.onChange(e)} onBlur={e=>edu_average.onBlur(e)} value={edu_average.value} name="edu_average" maxLength="3"  /></label>
+                    <label className="form-label col-sm">Иностранный язык<span></span>
+                    <select className="select-medium " onChange={e=>edu_foreign_lang.onChange(e)} onBlur={e=>edu_foreign_lang.onBlur(e)} value={edu_foreign_lang.value} name="edu_foreign_lang" >
                         <option value="1">Английский</option>
                         <option value="2">Немецкий</option>
                         <option value="3">Французcкий</option>
@@ -378,9 +378,9 @@ function Anketa() {
                     </select></label>
                 </div>
                 <hr/>
-<legend class="text-center">Информация о поступлении</legend>
-                    <label class="form-label w-200">Факультет/Институт<span >*</span>
-                    <select class="select-big1200 " onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
+<legend className="text-center">Информация о поступлении</legend>
+                    <label className="form-label w-200">Факультет/Институт<span >*</span>
+                    <select className="select-big1200 " onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
                         <optgroup label="Факультеты">	
                             <option value="1">Лечебный</option>
                             <option value="2">Педиатрический</option>
@@ -409,115 +409,115 @@ function Anketa() {
                             <option value="18">МЧС</option>
                         </optgroup>
                     </select></label>
-                <div class="row">
-                    <div class="row">
-                            <input class="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} value={pref_target.value} id="prform_chbx_1"  name="pref_target" type="checkbox" />
+                <div className="row">
+                    <div className="row">
+                            <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} value={pref_target.value} id="prform_chbx_1"  name="pref_target" type="checkbox" />
                         <label for="prform_chbx_1">На условиях целевой подготовки</label>
                     </div>
-                    <div class="row">
-                            <input class="custom-radio" onChange={e=>pref_nopay.onChange(e)} onBlur={e=>pref_nopay.onBlur(e)} value={pref_nopay.value} id="prform_chbx_2" name="pref_nopay" type="checkbox" />
+                    <div className="row">
+                            <input className="custom-radio" onChange={e=>pref_nopay.onChange(e)} onBlur={e=>pref_nopay.onBlur(e)} value={pref_nopay.value} id="prform_chbx_2" name="pref_nopay" type="checkbox" />
                         <label for="prform_chbx_2" >За счет средств бюджета</label>
                     </div>
-                    <div class="row">
-                            <input class="custom-radio" onChange={e=>pref_pay.onChange(e)} onBlur={e=>pref_pay.onBlur(e)} value={pref_pay.value} id="prform_chbx_3"  name="pref_pay" type="checkbox" />
+                    <div className="row">
+                            <input className="custom-radio" onChange={e=>pref_pay.onChange(e)} onBlur={e=>pref_pay.onBlur(e)} value={pref_pay.value} id="prform_chbx_3"  name="pref_pay" type="checkbox" />
                         <label for="prform_chbx_3" >На платной основе</label>
                     </div>
                 </div>
-                    <div class="row">
-                            <input class="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} value={pref_dorm.value} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
+                    <div className="row">
+                            <input className="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} value={pref_dorm.value} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
                         <label for="prform_chbx_4">Нуждаюсь в общежитии</label>
                     </div>
                     <hr/>
-<legend class="text-center">Работа и стаж</legend>
-                <label class="form-label w-100">Место работы, занимаемая должность (профессия)
-                    <input class="input-big" onChange={e=>exp_position.onChange(e)} onBlur={e=>exp_position.onBlur(e)} value={exp_position.value}  name="exp_position" maxlength="150" /></label>
-                <p class="lead">Трудовой стаж по профилю избранной специальности:</p>
-                <div class="row">
-                    <label class="form-label col-sm">Полных лет
-                        <input class="input-medium "  onChange={e=>exp_years.onChange(e)} onBlur={e=>exp_years.onBlur(e)} value={exp_years.value} name="exp_years" maxlength="2" /></label>
-                    <label class="form-label col-sm">Полных месяцев
-                        <input class="input-medium " onChange={e=>exp_months.onChange(e)} onBlur={e=>exp_months.onBlur(e)} value={exp_months.value}  name="exp_months" maxlength="2" /></label>
+<legend className="text-center">Работа и стаж</legend>
+                <label className="form-label w-100">Место работы, занимаемая должность (профессия)
+                    <input className="input-big" onChange={e=>exp_position.onChange(e)} onBlur={e=>exp_position.onBlur(e)} value={exp_position.value}  name="exp_position" maxLength="150" /></label>
+                <p className="lead">Трудовой стаж по профилю избранной специальности:</p>
+                <div className="row">
+                    <label className="form-label col-sm">Полных лет
+                        <input className="input-medium "  onChange={e=>exp_years.onChange(e)} onBlur={e=>exp_years.onBlur(e)} value={exp_years.value} name="exp_years" maxLength="2" /></label>
+                    <label className="form-label col-sm">Полных месяцев
+                        <input className="input-medium " onChange={e=>exp_months.onChange(e)} onBlur={e=>exp_months.onBlur(e)} value={exp_months.value}  name="exp_months" maxLength="2" /></label>
                 </div>
                 <hr/>
-<legend class="text-center">Родители</legend>
-                <p class="lead">Отец</p>
-                <div class="row">
-                    <label class="form-label col-sm">Фамилия
-                        <input class="input-small"  onChange={e=>father_surname.onChange(e)} onBlur={e=>father_surname.onBlur(e)} value={father_surname.value} name="father_surname" maxlength="50" /></label>
-                    <label class="form-label col-sm">Имя
-                        <input class="input-small"  onChange={e=>father_name.onChange(e)} onBlur={e=>father_name.onBlur(e)} value={father_name.value}  name="father_name" maxlength="50" /></label> 
-                    <label class="form-label col-sm">Отчество
-                        <input class="input-small"  onChange={e=>father_second_name.onChange(e)} onBlur={e=>father_second_name.onBlur(e)} value={father_second_name.value} name="father_second_name" maxlength="50" /></label>
+<legend className="text-center">Родители</legend>
+                <p className="lead">Отец</p>
+                <div className="row">
+                    <label className="form-label col-sm">Фамилия
+                        <input className="input-small"  onChange={e=>father_surname.onChange(e)} onBlur={e=>father_surname.onBlur(e)} value={father_surname.value} name="father_surname" maxLength="50" /></label>
+                    <label className="form-label col-sm">Имя
+                        <input className="input-small"  onChange={e=>father_name.onChange(e)} onBlur={e=>father_name.onBlur(e)} value={father_name.value}  name="father_name" maxLength="50" /></label> 
+                    <label className="form-label col-sm">Отчество
+                        <input className="input-small"  onChange={e=>father_second_name.onChange(e)} onBlur={e=>father_second_name.onBlur(e)} value={father_second_name.value} name="father_second_name" maxLength="50" /></label>
                 </div>
-                <label class="form-label w-100">Место работы
-                    <input class="input-big" onChange={e=>father_job.onChange(e)} onBlur={e=>father_job.onBlur(e)} value={father_job.value} name="father_job" maxlength="150" /></label>
-                <div class="row">
-                    <label class="form-label col-sm">Должность
-                        <input class="input-medium" onChange={e=>father_position.onChange(e)} onBlur={e=>father_position.onBlur(e)} value={father_position.value}  name="father_position" maxlength="50" /></label>
-                    <label class="form-label col-sm">Моб. телефон
-                        <input class="input-medium" onChange={e=>father_phone.onChange(e)} onBlur={e=>father_phone.onBlur(e)} value={father_phone.value}  name="father_phone" maxlength="50" /></label>
+                <label className="form-label w-100">Место работы
+                    <input className="input-big" onChange={e=>father_job.onChange(e)} onBlur={e=>father_job.onBlur(e)} value={father_job.value} name="father_job" maxLength="150" /></label>
+                <div className="row">
+                    <label className="form-label col-sm">Должность
+                        <input className="input-medium" onChange={e=>father_position.onChange(e)} onBlur={e=>father_position.onBlur(e)} value={father_position.value}  name="father_position" maxLength="50" /></label>
+                    <label className="form-label col-sm">Моб. телефон
+                        <input className="input-medium" onChange={e=>father_phone.onChange(e)} onBlur={e=>father_phone.onBlur(e)} value={father_phone.value}  name="father_phone" maxLength="50" /></label>
                 </div>
-                    <label class="form-label w-100">Полный адрес
-                        <input class="input-big" onChange={e=>father_address.onChange(e)} onBlur={e=>father_address.onBlur(e)} value={father_address.value}  name="father_address" maxlength="150" /></label>
-                <p class="lead">Мать</p>
-                <div class="row">
-                    <label class="form-label col-sm">Фамилия
-                        <input class="input-small"  onChange={e=>mother_surname.onChange(e)} onBlur={e=>mother_surname.onBlur(e)} value={mother_surname.value}  name="mother_surname" maxlength="50" /></label>
-                    <label class="form-label col-sm">Имя
-                        <input class="input-small"  onChange={e=>mother_name.onChange(e)} onBlur={e=>mother_name.onBlur(e)} value={mother_name.value} name="mother_name" maxlength="50" /></label> 
-                    <label class="form-label col-sm">Отчество
-                        <input class="input-small"   onChange={e=>mother_second_name.onChange(e)} onBlur={e=>mother_second_name.onBlur(e)} value={mother_second_name.value}  name="mother_second_name" maxlength="50" /></label>
+                    <label className="form-label w-100">Полный адрес
+                        <input className="input-big" onChange={e=>father_address.onChange(e)} onBlur={e=>father_address.onBlur(e)} value={father_address.value}  name="father_address" maxLength="150" /></label>
+                <p className="lead">Мать</p>
+                <div className="row">
+                    <label className="form-label col-sm">Фамилия
+                        <input className="input-small"  onChange={e=>mother_surname.onChange(e)} onBlur={e=>mother_surname.onBlur(e)} value={mother_surname.value}  name="mother_surname" maxLength="50" /></label>
+                    <label className="form-label col-sm">Имя
+                        <input className="input-small"  onChange={e=>mother_name.onChange(e)} onBlur={e=>mother_name.onBlur(e)} value={mother_name.value} name="mother_name" maxLength="50" /></label> 
+                    <label className="form-label col-sm">Отчество
+                        <input className="input-small"   onChange={e=>mother_second_name.onChange(e)} onBlur={e=>mother_second_name.onBlur(e)} value={mother_second_name.value}  name="mother_second_name" maxLength="50" /></label>
                 </div>
-                    <label class="form-label w-100">Место работы
-                        <input class="input-big"  onChange={e=>mother_job.onChange(e)} onBlur={e=>mother_job.onBlur(e)} value={mother_job.value} name="mother_job" maxlength="150" /></label>
-                <div class="row">
-                    <label class="form-label col-sm">Должность
-                        <input class="input-medium"  onChange={e=>mother_position.onChange(e)} onBlur={e=>mother_position.onBlur(e)} value={mother_position.value} name="mother_position" maxlength="50" /></label>
-                    <label class="form-label col-sm">Моб. телефон
-                        <input class="input-medium"  onChange={e=>mother_phone.onChange(e)} onBlur={e=>mother_phone.onBlur(e)} value={mother_phone.value}  name="mother_phone" maxlength="50" /></label>
+                    <label className="form-label w-100">Место работы
+                        <input className="input-big"  onChange={e=>mother_job.onChange(e)} onBlur={e=>mother_job.onBlur(e)} value={mother_job.value} name="mother_job" maxLength="150" /></label>
+                <div className="row">
+                    <label className="form-label col-sm">Должность
+                        <input className="input-medium"  onChange={e=>mother_position.onChange(e)} onBlur={e=>mother_position.onBlur(e)} value={mother_position.value} name="mother_position" maxLength="50" /></label>
+                    <label className="form-label col-sm">Моб. телефон
+                        <input className="input-medium"  onChange={e=>mother_phone.onChange(e)} onBlur={e=>mother_phone.onBlur(e)} value={mother_phone.value}  name="mother_phone" maxLength="50" /></label>
                 </div>
-                    <label class="form-label w-100">Полный адрес
-                        <input class="input-big" onChange={e=>mother_address.onChange(e)} onBlur={e=>mother_address.onBlur(e)} value={mother_address.value}  name="mother_address" maxlength="150" /></label>
+                    <label className="form-label w-100">Полный адрес
+                        <input className="input-big" onChange={e=>mother_address.onChange(e)} onBlur={e=>mother_address.onBlur(e)} value={mother_address.value}  name="mother_address" maxLength="150" /></label>
                         <hr/>
 
-<legend class="text-center">Льготы</legend>
-                <div class="row">
-                    <input id="pr_chbx_1" class="custom-radio" onChange={e=>stat18.onChange(e)} onBlur={e=>stat18.onBlur(e)} value={stat18.value} name="stat18" type="checkbox" />
+<legend className="text-center">Льготы</legend>
+                <div className="row">
+                    <input id="pr_chbx_1" className="custom-radio" onChange={e=>stat18.onChange(e)} onBlur={e=>stat18.onBlur(e)} value={stat18.value} name="stat18" type="checkbox" />
                     <label for="pr_chbx_1" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
                 </div>
-                <div class="row">
-                    <input id="pr_chbx_2" class="custom-radio" onChange={e=>stat19_23.onChange(e)} onBlur={e=>stat19_23.onBlur(e)} value={stat19_23.value} name="stat19_23" type="checkbox" />
+                <div className="row">
+                    <input id="pr_chbx_2" className="custom-radio" onChange={e=>stat19_23.onChange(e)} onBlur={e=>stat19_23.onBlur(e)} value={stat19_23.value} name="stat19_23" type="checkbox" />
                     <label for="pr_chbx_2" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
                 </div>
-                <div class="row">
-                    <input id="pr_chbx_3" class="custom-radio" onChange={e=>dis.onChange(e)} onBlur={e=>dis.onBlur(e)} value={dis.value} name="dis" type="checkbox" />
+                <div className="row">
+                    <input id="pr_chbx_3" className="custom-radio" onChange={e=>dis.onChange(e)} onBlur={e=>dis.onBlur(e)} value={dis.value} name="dis" type="checkbox" />
                     <label for="pr_chbx_3" >Ребенок-инвалид, инвалид I, II, III гр.</label>
                 </div>
-                <div class="row">
-                    <input id="pr_chbx_4" class="custom-radio"  onChange={e=>nop.onChange(e)} onBlur={e=>nop.onBlur(e)} value={nop.value} name="nop" type="checkbox" />
+                <div className="row">
+                    <input id="pr_chbx_4" className="custom-radio"  onChange={e=>nop.onChange(e)} onBlur={e=>nop.onBlur(e)} value={nop.value} name="nop" type="checkbox" />
                     <label for="pr_chbx_4">Сирота или ребенок, оставшийся без попечения родителей</label>
                 </div>
-                <div class="row">
-                    <input id="pr_chbx_5" class="custom-radio" onChange={e=>mil.onChange(e)} onBlur={e=>mil.onBlur(e)} value={mil.value} name="mil" type="checkbox" />
+                <div className="row">
+                    <input id="pr_chbx_5" className="custom-radio" onChange={e=>mil.onChange(e)} onBlur={e=>mil.onBlur(e)} value={mil.value} name="mil" type="checkbox" />
                     <label for="pr_chbx_5" >Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
                 </div>
-                <div class="row">
-                    <input id="pr_chbx_6" class="custom-radio" onChange={e=>bff.onChange(e)} onBlur={e=>bff.onBlur(e)} value={bff.value} name="bff" type="checkbox"/>
+                <div className="row">
+                    <input id="pr_chbx_6" className="custom-radio" onChange={e=>bff.onChange(e)} onBlur={e=>bff.onBlur(e)} value={bff.value} name="bff" type="checkbox"/>
                     <label for="pr_chbx_6">Из многодетной семьи</label>
                 </div>
-                <div class="row">
-                    <input id="pr_chbx_7" class="custom-radio" onChange={e=>medal.onChange(e)} onBlur={e=>medal.onBlur(e)} value={medal.value} name="medal" type="checkbox" />
+                <div className="row">
+                    <input id="pr_chbx_7" className="custom-radio" onChange={e=>medal.onChange(e)} onBlur={e=>medal.onBlur(e)} value={medal.value} name="medal" type="checkbox" />
                     <label for="pr_chbx_7" >Имею аттестат с медалью</label>
                 </div>
-                <div class="row">
-                    <input id="pr_chbx_8" class="custom-radio" onChange={e=>diplo.onChange(e)} onBlur={e=>diplo.onBlur(e)} value={diplo.value}   name="diplo" type="checkbox" />
+                <div className="row">
+                    <input id="pr_chbx_8" className="custom-radio" onChange={e=>diplo.onChange(e)} onBlur={e=>diplo.onBlur(e)} value={diplo.value}   name="diplo" type="checkbox" />
                     <label for="pr_chbx_8" >Имею диплом с отличием</label> 
                 </div>
                 <hr/>
-<legend class="text-center">Награды по предметам</legend>
-                <div class="row">
-                    <label class="form-label col-lg">Язык
-                    <select class="select-medium400" onChange={e=>awards_lang.onChange(e)} onBlur={e=>awards_lang.onBlur(e)} value={awards_lang.value} name="awards_lang">
+<legend className="text-center">Награды по предметам</legend>
+                <div className="row">
+                    <label className="form-label col-lg">Язык
+                    <select className="select-medium400" onChange={e=>awards_lang.onChange(e)} onBlur={e=>awards_lang.onBlur(e)} value={awards_lang.value} name="awards_lang">
                         <option value="0">Нет наград</option>
                         <option value="1">Международная I cт.</option>
                         <option value="2">Международная II cт.</option>
@@ -528,8 +528,8 @@ function Anketa() {
                         <option value="7">Областная (Минск. гор.) I cт.</option>
                         <option value="9">Лауреат СФП РБ по предмету</option>
                     </select></label>
-                    <label class="form-label col-lg">Химия
-                    <select class="select-medium400" onChange={e=>awards_chem.onChange(e)} onBlur={e=>awards_chem.onBlur(e)} value={awards_chem.value} name="awards_chem">
+                    <label className="form-label col-lg">Химия
+                    <select className="select-medium400" onChange={e=>awards_chem.onChange(e)} onBlur={e=>awards_chem.onBlur(e)} value={awards_chem.value} name="awards_chem">
                         <option value="0">Нет наград</option>
                         <option value="1">Международная I cт.</option>
                         <option value="2">Международная II cт.</option>
@@ -540,8 +540,8 @@ function Anketa() {
                         <option value="7">Областная (Минск. гор.) I cт.</option>
                         <option value="9">Лауреат СФП РБ по предмету</option>
                     </select></label>
-                    <label class="form-label col-lg">Биология
-                    <select class="select-medium400" onChange={e=>awards_biol.onChange(e)} onBlur={e=>awards_biol.onBlur(e)} value={awards_biol.value} name="awards_biol">
+                    <label className="form-label col-lg">Биология
+                    <select className="select-medium400" onChange={e=>awards_biol.onChange(e)} onBlur={e=>awards_biol.onBlur(e)} value={awards_biol.value} name="awards_biol">
                         <option value="0">Нет наград</option>
                         <option value="1">Международная I cт.</option>
                         <option value="2">Международная II cт.</option>
@@ -555,45 +555,45 @@ function Anketa() {
                     </select></label>
                 </div>
                 <hr/>
-<legend class="text-center">ЦТ и баллы</legend>
-                <p class="lead">Язык</p>
-                <div class="row">
-                    <label class="form-label col-sm">Серия
-                        <input onChange={e=>cert_lang_serial.onChange(e)} onBlur={e=>cert_lang_serial.onBlur(e)} value={cert_lang_serial.value} class="input-small " name="cert_lang_serial" maxlength="8" /></label>
-                    <label class="form-label col-sm">Номер
-                        <input onChange={e=>cert_lang_number.onChange(e)} onBlur={e=>cert_lang_number.onBlur(e)} value={cert_lang_number.value} class="input-small " name="cert_lang_number" maxlength="7" /></label> 
-                    <label class="form-label col-sm-2">Балл
-                        <input onChange={e=>cert_lang_score.onChange(e)} onBlur={e=>cert_lang_score.onBlur(e)} value={cert_lang_score.value} class="input-small "name="cert_lang_score" maxlength="3" /></label>
+<legend className="text-center">ЦТ и баллы</legend>
+                <p className="lead">Язык</p>
+                <div className="row">
+                    <label className="form-label col-sm">Серия
+                        <input onChange={e=>cert_lang_serial.onChange(e)} onBlur={e=>cert_lang_serial.onBlur(e)} value={cert_lang_serial.value} className="input-small " name="cert_lang_serial" maxLength="8" /></label>
+                    <label className="form-label col-sm">Номер
+                        <input onChange={e=>cert_lang_number.onChange(e)} onBlur={e=>cert_lang_number.onBlur(e)} value={cert_lang_number.value} className="input-small " name="cert_lang_number" maxLength="7" /></label> 
+                    <label className="form-label col-sm-2">Балл
+                        <input onChange={e=>cert_lang_score.onChange(e)} onBlur={e=>cert_lang_score.onBlur(e)} value={cert_lang_score.value} className="input-small "name="cert_lang_score" maxLength="3" /></label>
                 </div>
-                <p class="lead">Химия</p>
-                <div class="row">
-                    <label class="form-label col-sm">Серия
-                        <input onChange={e=>cert_chem_serial.onChange(e)} onBlur={e=>cert_chem_serial.onBlur(e)} value={cert_chem_serial.value} class="input-small " name="cert_chem_serial" maxlength="8" /></label>
-                    <label class="form-label col-sm">Номер
-                        <input onChange={e=>cert_chem_number.onChange(e)} onBlur={e=>cert_chem_number.onBlur(e)} value={cert_chem_number.value} class="input-small " name="cert_chem_number" maxlength="7" /></label> 
-                    <label class="form-label col-sm-2">Балл
-                        <input onChange={e=>cert_chem_score.onChange(e)} onBlur={e=>cert_chem_score.onBlur(e)} value={cert_chem_score.value} class="input-small " name="cert_chem_score" maxlength="3" /></label>
+                <p className="lead">Химия</p>
+                <div className="row">
+                    <label className="form-label col-sm">Серия
+                        <input onChange={e=>cert_chem_serial.onChange(e)} onBlur={e=>cert_chem_serial.onBlur(e)} value={cert_chem_serial.value} className="input-small " name="cert_chem_serial" maxLength="8" /></label>
+                    <label className="form-label col-sm">Номер
+                        <input onChange={e=>cert_chem_number.onChange(e)} onBlur={e=>cert_chem_number.onBlur(e)} value={cert_chem_number.value} className="input-small " name="cert_chem_number" maxLength="7" /></label> 
+                    <label className="form-label col-sm-2">Балл
+                        <input onChange={e=>cert_chem_score.onChange(e)} onBlur={e=>cert_chem_score.onBlur(e)} value={cert_chem_score.value} className="input-small " name="cert_chem_score" maxLength="3" /></label>
                 </div>
-                <p class="lead">Биология</p>
-                <div class="row">
-                    <label class="form-label col-sm">Серия
-                        <input onChange={e=>cert_biol_serial.onChange(e)} onBlur={e=>cert_biol_serial.onBlur(e)} value={cert_biol_serial.value} class="input-small " name="cert_biol_serial" maxlength="8" /></label>
-                    <label class="form-label col-sm">Номер
-                        <input onChange={e=>cert_biol_number.onChange(e)} onBlur={e=>cert_biol_number.onBlur(e)} value={cert_biol_number.value} class="input-small " name="cert_biol_number" maxlength="7" /></label> 
-                    <label class="form-label col-sm-2">Балл
-                        <input onChange={e=>cert_biol_score.onChange(e)} onBlur={e=>cert_biol_score.onBlur(e)} value={cert_biol_score.value} class="input-small " name="cert_biol_score" maxlength="3" /></label>
+                <p className="lead">Биология</p>
+                <div className="row">
+                    <label className="form-label col-sm">Серия
+                        <input onChange={e=>cert_biol_serial.onChange(e)} onBlur={e=>cert_biol_serial.onBlur(e)} value={cert_biol_serial.value} className="input-small " name="cert_biol_serial" maxLength="8" /></label>
+                    <label className="form-label col-sm">Номер
+                        <input onChange={e=>cert_biol_number.onChange(e)} onBlur={e=>cert_biol_number.onBlur(e)} value={cert_biol_number.value} className="input-small " name="cert_biol_number" maxLength="7" /></label> 
+                    <label className="form-label col-sm-2">Балл
+                        <input onChange={e=>cert_biol_score.onChange(e)} onBlur={e=>cert_biol_score.onBlur(e)} value={cert_biol_score.value} className="input-small " name="cert_biol_score" maxLength="3" /></label>
                 </div>
                 <hr/>
                 <div >
-                    <input  id="agreement" class="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} value={DD.value} name="DD"type="checkbox"></input>
+                    <input  id="agreement" className="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} value={DD.value} name="DD"type="checkbox"></input>
 <label for="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button type="submit" class="btn-three">Отправить</button>
+                    <button type="submit" className="btn-three">Отправить</button>
                 </div>
                         
                 </form>
-    </body>
+    </div>
     )
   }
   export default Anketa

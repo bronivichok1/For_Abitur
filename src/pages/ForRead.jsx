@@ -112,15 +112,15 @@ function ForRead() {
           <form className="form-ForRead" method="post">
             <legend className="lead" >Введите данные документа:</legend>
 <label className="form-label w-100">Серия
-            <input className={serial.isDirty&&serial.isEmpty?"input-medium-error":"input-medium"} onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxlength="15" />
+            <input className={serial.isDirty&&serial.isEmpty?"input-medium-error":"input-medium"} onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="15" />
             {(serial.isDirty&&serial.isEmpty)&&<div  style={{color:'red'}}> Неверная серия.</div>}
 </label>
 <label className="form-label w-100">Номер
-            <input className={number.isDirty&&number.isEmpty?"input-medium-error":"input-medium"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxlength="15"  />
+            <input className={number.isDirty&&number.isEmpty?"input-medium-error":"input-medium"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  />
             {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> Неверный номер.</div>}
 </label>
 <label className="form-label w-100">Дата выдачи
-            <input className={date_of_issue.isDirty&&date_of_issue.isEmpty?"input-medium-error":"input-medium"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxlength="10" />
+            <input className={date_of_issue.isDirty&&date_of_issue.isEmpty?"input-medium-error":"input-medium"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" />
             {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> Неверная дата выдачи.</div>}
 </label>
         <div align ="center" >
