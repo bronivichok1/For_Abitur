@@ -77,7 +77,9 @@ label{
         height: 498px;
         margin: 0 auto;
         box-sizing: border-box;
+        
     }
+
     .form-ForRead {
       position: relative;
       
@@ -86,7 +88,7 @@ label{
       margin: 0 auto;
   }
 
-    .divcolor{
+    body{
     font-family: var(--bs-body-font-family);
     font-family: 'Roboto', Arial, sans-serif;
     font-size: 16px;

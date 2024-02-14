@@ -176,8 +176,8 @@ function Anketa() {
 
     
     return (
-        <div className="divcolor" method="POST">
-        <form  className="form" method="POST">
+
+        <form  className="form" method="POST" >
 <legend>Личные и паспортные данные</legend>
                     <div className="row">
                 <label className="form-label col-sm">Фамилия<span>*</span>
@@ -593,7 +593,7 @@ function Anketa() {
                 </div>
                         
                 </form>
-    </div>
+
     )
   }
   export default Anketa
