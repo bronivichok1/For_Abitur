@@ -113,10 +113,48 @@ label{
       padding-right: 1em;
       font-size: 20px;
      }
+     .input-small380{
+      border: 1px solid #ced4da;
+      color: black;
+        width: 390px;
+     height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+        border-color: #ced4da;
+      -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+      -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+      box-sizing: border-box;
+      background-color: #fff;
+      padding-right: 1em;
+      font-size: 20px;
+     }
      .input-small-error{
       border: 1px solid #ced4da;
       color: black;
         width: 400px;
+     height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+        border-color: #ced4da;
+      -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+      -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+      box-sizing: border-box;
+      background-color: #fff;
+      padding-right: 1em;
+      font-size: 20px;
+      border-color: #e26647;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+     }
+     .input-small380-error{
+      border: 1px solid #ced4da;
+      color: black;
+        width: 390px;
      height: 40px;
       margin-top: 0px;
       margin-left: 0px;
@@ -214,7 +252,7 @@ label{
       color: black;
       padding: 20px;
       font: 18px/1.5 sans-serif;
-        width: 600px;
+        width: 595px;
         height: 40px;
          margin-top: 0px;
          margin-left: 0px;
@@ -253,7 +291,7 @@ label{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 300px;
+        width: 295px;
         height: 40px;
          margin-top: 0px;
          margin-left: 0px;
@@ -304,11 +342,28 @@ label{
          background-color: #fff;
          font-size: 15px;
      }
+     .input-medium580{
+      border: 1px solid #ced4da;
+      color: black;
+      border-color: #ced4da;
+        width: 580px;
+        height: 40px;
+         margin-top: 0px;
+         margin-left: 0px;
+         margin-right: 10px;
+         border-radius: 0.25rem;
+           border-color: none;
+         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+         box-sizing: border-box;
+         background-color: #fff;
+         font-size: 15px;
+     }
      .input-big{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 1200px;
+        width: 1210px;
         height: 40px;
          margin-top: 0px;
          margin-left: 0px;
@@ -325,7 +380,7 @@ label{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 1200px;
+        width: 1210px;
         height: 40px;
          margin-top: 0px;
          margin-left: 0px;
@@ -364,7 +419,7 @@ label{
       border: 1px solid #ced4da;
       color: black;
         height: 40px;
-        width: 1200px;
+        width: 1210px;
          margin-top: 0px;
          margin-left: 0px;
          margin-right: 10px;

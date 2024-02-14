@@ -191,7 +191,7 @@ function Anketa() {
                         {(name.isDirty&&name.isRus&&!name.isEmpty)&&<div style={{color:'red'}}> В поле "Имя" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                 <label className="form-label col-sm">Отчество
-                        <input className={second_name.isDirty&&second_name.isRus&&!second_name.isEmpty?"input-small-error":"input-small"} onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} value={second_name.value}  name="second_name" maxLength="50" />
+                        <input className={second_name.isDirty&&second_name.isRus&&!second_name.isEmpty?"input-small380-error":"input-small380"} onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} value={second_name.value}  name="second_name" maxLength="50" />
                         {(second_name.isDirty&&second_name.isRus&&!second_name.isEmpty)&&<div style={{color:'red'}}> В поле "Отчество" допустима только кириллица, первая буква - заглавная.</div>}
                 </label>
                     </div>
@@ -340,7 +340,7 @@ function Anketa() {
                     <label className="form-label col-sm-2">Квартира
                         <input className="input-Small200 " onChange={e=>apartment.onChange(e)} onBlur={e=>apartment.onBlur(e)} value={apartment.value}  name="apartment" maxLength="10" /></label>
                     <label className="form-label col-sm-6">Домашний тел.
-                        <input className="input-medium " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel"  maxLength="20" /></label>
+                        <input className="input-medium580 " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel"  maxLength="20" /></label>
                 </div>
                 <div className="row">
                     <label className="form-label col-sm">Мобильный тел.<span >*</span>
@@ -356,7 +356,7 @@ function Anketa() {
                 <hr/>
 <legend className="text-center">Образование, сведения документа об образовании</legend>
                     <label className="form-label w-100">Название УО<span ></span>
-                        <input v="input-big "  onChange={e=>edu_name.onChange(e)} onBlur={e=>edu_name.onBlur(e)} value={edu_name.value} name="edu_name" maxLength="150"  /></label>
+                        <input className="input-big "  onChange={e=>edu_name.onChange(e)} onBlur={e=>edu_name.onBlur(e)} value={edu_name.value} name="edu_name" maxLength="150"  /></label>
                 <div className="row">
                     <label className="form-label col-sm">Серия Номер<span ></span>
                         <input className="input-medium" onChange={e=>edu_serial_number.onChange(e)} onBlur={e=>edu_serial_number.onBlur(e)} value={edu_serial_number.value}  name="edu_serial_number" maxLength="20"  /></label>
@@ -447,7 +447,7 @@ function Anketa() {
                     <label className="form-label col-sm">Имя
                         <input className="input-small"  onChange={e=>father_name.onChange(e)} onBlur={e=>father_name.onBlur(e)} value={father_name.value}  name="father_name" maxLength="50" /></label> 
                     <label className="form-label col-sm">Отчество
-                        <input className="input-small"  onChange={e=>father_second_name.onChange(e)} onBlur={e=>father_second_name.onBlur(e)} value={father_second_name.value} name="father_second_name" maxLength="50" /></label>
+                        <input className="input-small380"  onChange={e=>father_second_name.onChange(e)} onBlur={e=>father_second_name.onBlur(e)} value={father_second_name.value} name="father_second_name" maxLength="50" /></label>
                 </div>
                 <label className="form-label w-100">Место работы
                     <input className="input-big" onChange={e=>father_job.onChange(e)} onBlur={e=>father_job.onBlur(e)} value={father_job.value} name="father_job" maxLength="150" /></label>
@@ -466,7 +466,7 @@ function Anketa() {
                     <label className="form-label col-sm">Имя
                         <input className="input-small"  onChange={e=>mother_name.onChange(e)} onBlur={e=>mother_name.onBlur(e)} value={mother_name.value} name="mother_name" maxLength="50" /></label> 
                     <label className="form-label col-sm">Отчество
-                        <input className="input-small"   onChange={e=>mother_second_name.onChange(e)} onBlur={e=>mother_second_name.onBlur(e)} value={mother_second_name.value}  name="mother_second_name" maxLength="50" /></label>
+                        <input className="input-small380"   onChange={e=>mother_second_name.onChange(e)} onBlur={e=>mother_second_name.onBlur(e)} value={mother_second_name.value}  name="mother_second_name" maxLength="50" /></label>
                 </div>
                     <label className="form-label w-100">Место работы
                         <input className="input-big"  onChange={e=>mother_job.onChange(e)} onBlur={e=>mother_job.onBlur(e)} value={mother_job.value} name="mother_job" maxLength="150" /></label>
