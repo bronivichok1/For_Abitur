@@ -19,31 +19,31 @@ const useValidation=(value,validations)=>{
 
             switch(validation){
                 case'minLength':
-                    value.length<validations[validation]?setMinLengthError(true):setMinLengthError(false)
+                    value.length<validations[validation]?setMinLengthError(true):setMinLengthError(false) //work
                 break;
                 case 'isEmpty':
-                    value?setEmpty(false):setEmpty(true)
+                    value?setEmpty(false):setEmpty(true)  //work
                 break;
                 case 'isRus':
-                    var re =/[А-ЯЁ]{1}[а-яё]+$/i
-                    re.test(String(value).toLowerCase())?setRus(false):setRus(true)
+                    var ru =/^([А-ЯЁ]{1}[а-яё]{1,49})$/i
+                    ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //nowork +-
                 break;
                 case'isEng':
-                    var ru=/[A-Z]{1}[a-z]+$/i
-                    ru.test(String(value).toLowerCase())?setEng(false):setEng(true)
+                    var eng=/^([A-Z]{1}[a-z]{1,49})$/i
+                    eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //nowork +- 
                 break;
                 case'ismobileNum':
-                    var ru=/[+]{1}[0-9]+$/i
-                    ru.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true)
+                    var num=/^[+]{1}[0-9]+$/gm
+                    num.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true) //work
 
                 break;
                 case'isemailCheck':
-                    var ru=/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
-                    ru.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true)
+                    var mail=/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
+                    mail.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true) //work
                 break;
                 case'inputData':
-                var ru=/^\d{2}[-|\/|.]\d{2}\1\d{4}$/i
-                ru.test(String(value).toLowerCase())?setInputData(false):setInputData(true)
+                var data=/^(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\dс$/
+                data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //nowork
                 break;
             }
 
@@ -51,12 +51,12 @@ const useValidation=(value,validations)=>{
     },[value])
     
     useEffect(()=>{
-        if(isEmpty||minLengthError||isEng||isRus){
+        if(isEmpty||minLengthError||isEng||isRus||ismobileNum||isemailCheck||inputData){
             setInputValid(false)
         } else {
             setInputValid(true)
         }
-    },[isEmpty,minLengthError,isEng,isRus])
+    },[isEmpty,minLengthError,isEng,isRus,inputData,isemailCheck,ismobileNum])
 
     return{
         isEmpty,
@@ -67,7 +67,6 @@ const useValidation=(value,validations)=>{
         ismobileNum,
         isemailCheck,
         inputData
-
     }
 }
 const useInput=(InitialValue,validations)=>{
@@ -589,7 +588,7 @@ function Anketa() {
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button type="submit" className="btn-three">Отправить</button>
+                    <button disabled={!name.inputValid||!surname.inputValid||!second_name.inputValid||!surname_lat.inputValid||!name_lat.inputValid||!date_of_birth.inputValid||!citizenship.inputValid||!number.inputValid||!date_of_issue.inputValid||!date_of_expiry.inputValid||!authority.inputValid||!mobile_tel.inputValid||!email.inputValid} type="submit" className="btn-three">Отправить</button>
                 </div>
                         
                 </form>
