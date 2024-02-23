@@ -25,11 +25,11 @@ const useValidation=(value,validations)=>{
                     value?setEmpty(false):setEmpty(true)  //work
                 break;
                 case 'isRus':
-                    var ru =/^([А-ЯЁ]{1}[а-яё]{1,49})$/i
+                    var ru =/^[А-ЯЁ]{1}[а-яё]{1,39}$/i
                     ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //nowork +-
                 break;
                 case'isEng':
-                    var eng=/^([A-Z]{1}[a-z]{1,49})$/i
+                    var eng=/^[A-Z]{1}[a-z]{1,39}$/i
                     eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //nowork +- 
                 break;
                 case'ismobileNum':
@@ -42,7 +42,7 @@ const useValidation=(value,validations)=>{
                     mail.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true) //work
                 break;
                 case'inputData':
-                var data=/^(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\dс$/
+                var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
                 data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //nowork
                 break;
             }
@@ -100,7 +100,7 @@ function Anketa() {
     const second_name=useInput('',{isEmpty:true,isRus:true})
     const surname_lat=useInput('',{isEmpty:true,isEng:true})
     const name_lat=useInput('',{isEmpty:true,isEng:true})
-    const date_of_birth=useInput('',{isEmpty:true})
+    const date_of_birth=useInput('',{isEmpty:true,inputData:true})
     const citizenship=useInput('',{isEmpty:true})
     const serial=useInput('',{isEmpty:true})
     const number=useInput('',{isEmpty:true})
@@ -214,8 +214,9 @@ function Anketa() {
                     </select>
                 </label>
                 <label className="form-label col-sm">Дата рождения<span >*</span>
-                    <input className={date_of_birth.isDirty&&date_of_birth.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value} name="date_of_birth" maxLength="10" placeholder="дд.мм.гггг" />
-                    {(date_of_birth.isDirty&&date_of_birth.isEmpty)&&<div style={{color:'red'}}> Поле "Дата рождения" обязательно для заполнения.</div>}
+                <input className={date_of_birth.isDirty&&(date_of_birth.inputData||date_of_birth.isEmpty)?"input-verySmall-error":"input-verySmall"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value}  name="date_of_birth" placeholder="дд.мм.гггг" maxLength="10" />
+                        {(date_of_birth.isDirty&&date_of_birth.isEmpty)&&<div style={{color:'red'}}> Поле "Дата рождения" обязательно для заполнения.</div>}
+                        {(date_of_birth.isDirty&&date_of_birth.inputData&&!date_of_birth.isEmpty)&&<div style={{color:'red'}}> Поле "Дата рождения" может содежрать цифры и ".".</div>}
 
                 </label>
                 <label className="form-label col-sm-6">Тип документа<span >*</span>
@@ -242,6 +243,7 @@ function Anketa() {
                 </label>
                 <label className="form-label col-sm-2">Серия
                         <input className="input-verySmall" onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="10" />
+                
                 </label>
                 <label className="form-label col-sm-4">Номер<span >*</span>
                         <input className={number.isDirty&&number.isEmpty?"input-verySmall-error":"input-verySmall"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="15" />
@@ -343,14 +345,15 @@ function Anketa() {
                 </div>
                 <div className="row">
                     <label className="form-label col-sm">Мобильный тел.<span >*</span>
-                        <input className={mobile_tel.isDirty&&(mobile_tel.ismobileNum||mobile_tel.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxLength="20"  /></label>
-                        {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." обязательно для заполнения.</div>}
-                        {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div style={{color:'red'}}> Поле "Мобильный тел." может содержать только цифры.</div>}
-
+                        <input className={mobile_tel.isDirty&&(mobile_tel.ismobileNum||mobile_tel.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxLength="20"  />
+                        {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div  style={{color:'red'}}> Поле "Мобильный тел." обязательно для заполнения.</div>}
+                        {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div  style={{color:'red'}}> Поле "Мобильный тел." может содержать только цифры.</div>}
+                        </label>
                     <label className="form-label col-sm">E-mail<span >*</span>
-                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxLength="50"/></label>
+                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input-medium-error":"input-medium"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxLength="50"/>
                         {(email.isDirty&&email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" обязательно для заполнения.</div>}
                         {(email.isDirty&&email.isemailCheck&&!email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" заполнено неверно.</div>}
+                        </label>
                 </div>
                 <hr/>
 <legend className="text-center">Образование, сведения документа об образовании</legend>
