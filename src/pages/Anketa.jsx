@@ -220,7 +220,7 @@ function Anketa() {
 
                 </label>
                 <label className="form-label col-sm-6">Тип документа<span >*</span>
-                    <select className="select_w900" onChange={e=>doc_type.onChange(e)} onBlur={e=>doc_type.onBlur(e)} value={doc_type.value}  name="doc_type">
+                    <select className="select_w595" onChange={e=>doc_type.onChange(e)} onBlur={e=>doc_type.onBlur(e)} value={doc_type.value}  name="doc_type">
                         <option value="1" >паспорт гражданина РБ</option>
                         <option value="2">паспорт иностранного гражданина</option>
                         <option value="3">вид на жительство РБ</option>
@@ -290,7 +290,7 @@ function Anketa() {
                 </div>
                 <div className="row">
                     <label className="form-label col-sm">Область
-                        <select className="select_w900" onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value} name="region" hidden={country.value!="0"}>
+                        <select className="select_w595" onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value} name="region" hidden={country.value!="0"}>
                         <option value="1">г. Минск</option>
                         <option value="2">Брестская область</option>
                         <option value="3">Витебская область</option>
@@ -305,7 +305,7 @@ function Anketa() {
                 </div>
                 <div className="row">
                     <label className="form-label col-sm">Тип насел. пункта
-                    <select className="select_w900"onChange={e=>settlement_type.onChange(e)} onBlur={e=>settlement_type.onBlur(e)} value={settlement_type.value} name="settlement_type">
+                    <select className="select_w595"onChange={e=>settlement_type.onChange(e)} onBlur={e=>settlement_type.onBlur(e)} value={settlement_type.value} name="settlement_type">
                         <option value="1">Город</option>
                         <option value="2">Городской поселок</option>
                         <option value="3">Агрогородок</option>
@@ -319,7 +319,7 @@ function Anketa() {
                 </div>
                 <div className="row">
                     <label className="form-label col-sm-3">Тип улицы
-                    <select  className="select_w900" onChange={e=>street_type.onChange(e)} onBlur={e=>street_type.onBlur(e)} value={street_type.value} name="м">
+                    <select  className="select_w595" onChange={e=>street_type.onChange(e)} onBlur={e=>street_type.onBlur(e)} value={street_type.value} name="м">
                         <option value="1">улица</option>
                         <option value="2">проспект</option>
                         <option value="3">бульвар</option>
@@ -369,7 +369,7 @@ function Anketa() {
                     <label className="form-label col-sm">Средний балл<span ></span>
                         <input className="input_w600" onChange={e=>edu_average.onChange(e)} onBlur={e=>edu_average.onBlur(e)} value={edu_average.value} name="edu_average" maxLength="3"  /></label>
                     <label className="form-label col-sm">Иностранный язык<span></span>
-                    <select className="select_w900" onChange={e=>edu_foreign_lang.onChange(e)} onBlur={e=>edu_foreign_lang.onBlur(e)} value={edu_foreign_lang.value} name="edu_foreign_lang" >
+                    <select className="select_w595" onChange={e=>edu_foreign_lang.onChange(e)} onBlur={e=>edu_foreign_lang.onBlur(e)} value={edu_foreign_lang.value} name="edu_foreign_lang" >
                         <option value="1">Английский</option>
                         <option value="2">Немецкий</option>
                         <option value="3">Французcкий</option>
