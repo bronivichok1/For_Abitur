@@ -69,6 +69,7 @@ const useValidation=(value,validations)=>{
         inputData
     }
 }
+
 const useInput=(InitialValue,validations)=>{
     const [value,setValue]=useState(InitialValue)
     const[isDirty,setDirty]=useState(false)
@@ -594,7 +595,7 @@ function Anketa() {
                     <button disabled={!name.inputValid||!surname.inputValid||!second_name.inputValid||!surname_lat.inputValid||!name_lat.inputValid||!date_of_birth.inputValid||!citizenship.inputValid||!number.inputValid||!date_of_issue.inputValid||!date_of_expiry.inputValid||!authority.inputValid||!mobile_tel.inputValid||!email.inputValid} type="submit" className="glow-button">Отправить</button>
                 </div>
                         
-                </form>
+        </form>
 
     )
   }

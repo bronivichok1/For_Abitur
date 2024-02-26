@@ -19,44 +19,44 @@ const useValidation=(value,validations)=>{
     for(const validation in validations){
 
         switch(validation){
-            case'minLength':
-                value.length<validations[validation]?setMinLengthError(true):setMinLengthError(false)
-            break;
-            case 'isEmpty':
-                value?setEmpty(false):setEmpty(true)
-            break;
-            case 'isRus':
-                var re =/[А-ЯЁ]{1}[а-яё]+$/i
-                re.test(String(value).toLowerCase())?setRus(false):setRus(true)
-            break;
-            case'isEng':
-                var ru=/[A-Z]{1}[a-z]+$/i
-                ru.test(String(value).toLowerCase())?setEng(false):setEng(true)
-            break;
-            case'ismobileNum':
-                var ru=/[+]{1}[0-9]+$/i
-                ru.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true)
+          case'minLength':
+          value.length<validations[validation]?setMinLengthError(true):setMinLengthError(false) //work
+          break;
+          case 'isEmpty':
+              value?setEmpty(false):setEmpty(true)  //work
+          break;
+          case 'isRus':
+              var ru =/^[А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?( [А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?)?$/i
+              ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //nowork +-
+          break;
+          case'isEng':
+              var eng=/^[A-Z]{1}[a-z]+(-[A-Z]{1}[a-z]+)?( [A-Z]{1}[-a-z]+(-[A-Z]{1}[a-z]+)?)?$/i
+              eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //nowork +- 
+          break;
+          case'ismobileNum':
+              var num=/^[+]{1}[0-9]+$/gm
+              num.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true) //work
 
-            break;
-            case'isemailCheck':
-                var ru=/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
-                ru.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true)
-            break;
-            case'inputData':
-            var ru=/^\d{4}[-|\/|.]\d{2}\1\d{2}$/i
-            ru.test(String(value).toLowerCase())?setInputData(false):setInputData(true)
-            break;
+          break;
+          case'isemailCheck':
+              var mail=/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
+              mail.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true) //work
+          break;
+          case'inputData':
+          var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
+          data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //nowork
+          break;
         }
 
     }
 },[value])
 useEffect(()=>{
-  if(isEmpty||minLengthError||isEng||isRus){
+  if(isEmpty||minLengthError||isEng||isRus||inputData||isemailCheck||ismobileNum){
       setInputValid(false)
   } else {
       setInputValid(true)
   }
-},[isEmpty,minLengthError,isEng,isRus])
+},[isEmpty,minLengthError,isEng,isRus,inputData,isemailCheck,ismobileNum])
 
 return{
   isEmpty,
@@ -103,7 +103,7 @@ function ForRead() {
 
     const serial=useInput('',{isEmpty:true})
     const number=useInput('',{isEmpty:true})
-    const date_of_issue=useInput('',{isEmpty:true})
+    const date_of_issue=useInput('',{isEmpty:true,inputData:true})
 
     
     return (
@@ -113,18 +113,20 @@ function ForRead() {
             <legend className="lead" >Введите данные документа:</legend>
 <label className="form-label w-100">Серия
             <input className={serial.isDirty&&serial.isEmpty?"input_w600-error":"input_w600"} onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="15" />
-            {(serial.isDirty&&serial.isEmpty)&&<div  style={{color:'red'}}> Неверная серия.</div>}
+            {(serial.isDirty&&serial.isEmpty)&&<div  style={{color:'red'}}> Поле "Серия" обязательно для заполнения.</div>}
 </label>
 <label className="form-label w-100">Номер
             <input className={number.isDirty&&number.isEmpty?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  />
-            {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> Неверный номер.</div>}
+            {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> Поле "Номер" обязательно для заполнения.</div>}
 </label>
 <label className="form-label w-100">Дата выдачи
             <input className={date_of_issue.isDirty&&date_of_issue.isEmpty?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" />
-            {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> Неверная дата выдачи.</div>}
+            {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
+            {(date_of_issue.isDirty&&date_of_issue.inputData)&&<div  style={{color:'red'}}>Поле "Дата выдачи" заполнено неверно.</div>}
+
 </label>
         <div align ="center" >
-                    <button type="submit" className="btn btn-1 btn-sep icon-info">Далее</button>
+                    <button disabled={!number.inputValid||!date_of_issue.inputValid||!serial.inputValid} type="submit" className="btn btn-1 btn-sep icon-info">Далее</button>
                 </div>
               </form>
         </div>
