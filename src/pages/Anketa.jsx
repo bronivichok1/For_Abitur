@@ -25,11 +25,11 @@ const useValidation=(value,validations)=>{
                     value?setEmpty(false):setEmpty(true)  //work
                 break;
                 case 'isRus':
-                    var ru =/^[А-ЯЁ]{1}[а-яё]{1,39}$/i
+                    var ru =/^[А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?( [А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?)?$/i
                     ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //nowork +-
                 break;
                 case'isEng':
-                    var eng=/^[A-Z]{1}[a-z]{1,39}$/i
+                    var eng=/^[A-Z]{1}[a-z]+(-[A-Z]{1}[a-z]+)?( [A-Z]{1}[-a-z]+(-[A-Z]{1}[a-z]+)?)?$/i
                     eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //nowork +- 
                 break;
                 case'ismobileNum':

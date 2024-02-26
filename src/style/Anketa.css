@@ -1,53 +1,49 @@
-*, ::after, ::before {
-    box-sizing: border-box;
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
 
-}
-span {
-    color: red;
-}
+    span {
+        color: red;
+    }
 
-legend{
-    text-align: center;
-    float: left;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 0.5rem;
-    font-size: calc(1.275rem + .3vw);
-    line-height: inherit;
+    legend{
+        text-align: center;
+        float: left;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 0.5rem;
+        font-size: calc(1.275rem + .3vw);
+        line-height: inherit;
+    }
 
+    .row {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        display: flex;
+        margin-top: calc(-1 * var(--bs-gutter-y));
+        margin-right: calc(-.5 * var(--bs-gutter-x));
+        margin-bottom: 20px;
+        margin-top: 10px;
+        border: none;
+        background-clip: content-box;
+    }
 
-}
-.row {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    margin-top: calc(-1 * var(--bs-gutter-y));
-    margin-right: calc(-.5 * var(--bs-gutter-x));
-    margin-bottom: 20px;
-    margin-top: 10px;
-    border: none;
-    background-clip: content-box;
-}
-.form-control {
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #ced4da;
-    border: 1px solid #ced4da;
-    appearance: none;
-    border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s;
-    width: 100%;
-    box-sizing: border-box;
-    
-}
-    
-label{
-  color:black;
-
-
-}
-
+    .form-control {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #ced4da;
+        border: 1px solid #ced4da;
+        appearance: none;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s;
+        width: 100%;
+        box-sizing: border-box;
+    }
+      
+    label{
+      color:black;
+    }
 
     select {
         margin-top: 10px;
@@ -57,20 +53,18 @@ label{
         padding: 0px;
         border-radius: 4px;
         background-color: #fff;
-        -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-        -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
         box-sizing: border-box;
         margin: 10px;
     }
+
     input{
       width: 150px;
       margin: 10px;
       margin-top: 10px;
       border-color: #ced4da;
-      -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-      -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
       box-sizing: border-box;
     }
+
     form {
         position: relative;
         width: 1200px;
@@ -82,43 +76,22 @@ label{
 
     .form-ForRead {
       position: relative;
-      
       width: 600px;
       height: 498px;
       margin: 0 auto;
       box-sizing: border-box;
 
-  }
-
-    body{
-    font-family: var(--bs-body-font-family);
-    font-family: 'Roboto', Arial, sans-serif;
-    font-size: 16px;
-    background-color: #edf3d825;
-    box-sizing: border-box;
-
     }
 
-     .input_w400{
-      border: 1px solid #ced4da;
-      color: black;
-        width: 400px;
-     height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-        border-color: #ced4da;
-      -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-      -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-      box-sizing: border-box;
-      background-color: #fff;
-      padding-right: 1em;
+    body{
+      font-family: var(--bs-body-font-family);
+      font-family: 'Roboto', Arial, sans-serif;
       font-size: 16px;
-      padding-left: 10px;
+      background-color: #edf3d825;
+      box-sizing: border-box;
+      }
 
-     }
-     .input_w400-error{
+     .input_w400{
       border: 1px solid #ced4da;
       color: black;
       width: 400px;
@@ -132,35 +105,47 @@ label{
       background-color: #fff;
       padding-right: 1em;
       font-size: 16px;
+      padding-left: 10px;
+     }
+
+     .input_w400-error{
+      border: 1px solid #ced4da;
+      color: black;
+      width: 400px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      padding: 0px;
+      padding-right: 1em;
+      font-size: 16px;
       border-color: #e26647;
       outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       padding-left: 10px;
       background: url('exclamation-circle.svg') no-repeat 370px  #fff;
-        
-
      }
 
      .input_w390{
       border: 1px solid #ced4da;
       color: black;
-        width: 390px;
-     height: 40px;
+      width: 390px;
+      height: 40px;
       margin-top: 0px;
       margin-left: 0px;
       margin-right: 10px;
       border-radius: 0.25rem;
-        border-color: #ced4da;
-      -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-      -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+      border-color: #ced4da;
       box-sizing: border-box;
       background-color: #fff;
       padding-right: 1em;
       font-size: 16px;
       padding-left: 10px;
-
-
      }
 
      .input_w390-error{
@@ -173,8 +158,6 @@ label{
       margin-right: 10px;
       border-radius: 0.25rem;
       border-color: #ced4da;
-      -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-      -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
       box-sizing: border-box;
       background-color: #fff;
       padding-right: 1em;
@@ -183,301 +166,270 @@ label{
       outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      padding: 0px;
       padding-left: 10px;
       background: url('exclamation-circle.svg') no-repeat 360px  #fff;
-
      }
 
      .input_w600{
       border: 1px solid #ced4da;
       color: black;
-        width: 600px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: #ced4da;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         padding-left: 10px;
-        
-         
+      width: 600px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      padding-left: 10px;   
      }
+
      .input_w600-error{
       border: 1px solid #ced4da;
       color: black;
-        width: 600px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: #ced4da;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         border-color: #e26647;
-         outline: 0;
-         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-         padding-left: 10px;
-         background: url('exclamation-circle.svg') no-repeat 570px  #fff;
-
-
+      width: 600px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      border-color: #e26647;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      padding: 0px;
+      padding-left: 10px;
+      background: url('exclamation-circle.svg') no-repeat 570px  #fff;
      }
+
      .select_w300{
       border: 1px solid #ced4da;
       color: black;
-        width: 300px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: #ced4da;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         margin-bottom: 10px;
-         padding: 0;
-         padding-left: 10px;
-
+      width: 300px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 0;
+      padding-left: 10px;
      }
+
      .select_w900{
       border: 1px solid #ced4da;
       color: black;
-        width: 900px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: #ced4da;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         margin-bottom: 10px;
-         padding: 0;
-         padding-left: 10px;
-
+      width: 900px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 0;
+      padding-left: 10px;
      }
+
      .select_w595{
       border: 1px solid #ced4da;
       color: black;
       padding: 20px;
       font: 18px/1.5 sans-serif;
-        width: 595px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: #ced4da;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         margin-bottom: 10px;
-         padding: 0;
-         padding-left: 10px;
-
+      width: 595px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 0;
+      padding-left: 10px;
      }
+
      .select_w400{
       border: 1px solid #ced4da;
       color: black;
-        width: 400px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: #ced4da;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         margin-bottom: 10px;
-         padding: 0;
-         padding-left: 10px;
-
+      width: 400px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 0;
+      padding-left: 10px;
      }
+
      .input_w295{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 295px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: none;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         padding-left: 10px;
-
+      width: 295px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: none;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      padding-left: 10px;
      }
+
      .input_w295-error{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 300px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: none;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         border-color: #e26647;
-         outline: 0;
-         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-         padding-left: 10px;
-         background: url('exclamation-circle.svg') no-repeat 270px  #fff;
-         
-
+      width: 300px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: none;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      border-color: #e26647;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      padding: 0px;
+      padding-left: 10px;
+      background: url('exclamation-circle.svg') no-repeat 270px  #fff;
      }
+
      .input_w600{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 600px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: none;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         padding-left: 10px;
-
+      width: 600px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: none;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      padding-left: 10px;
      }
+
      .input_w580{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 580px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: none;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         padding-left: 10px;
-
+      width: 580px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: none;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      padding-left: 10px;
      }
+
      .input_w1210{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 1210px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: none;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         padding-left: 10px;
-
+      width: 1210px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: none;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      padding-left: 10px;
      }
+
      .input_w1210-error{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 1210px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: none;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         border-color: #e26647;
-         outline: 0;
-         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-         padding-left: 10px;
-         background: url('exclamation-circle.svg') no-repeat 1280px  #fff;
- 
-
+      width: 1210px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: none;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      border-color: #e26647;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      padding: 0px;
+      padding-left: 10px;
+      background: url('exclamation-circle.svg') no-repeat 1280px  #fff;
      }
 
      .input_w200{
       border: 1px solid #ced4da;
       color: black;
       border-color: #ced4da;
-        width: 200px;
-        height: 40px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: none;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         padding-left: 10px;
-
+      width: 200px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: none;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      padding-left: 10px;
      }
+
      .select_w1210{
       border: 1px solid #ced4da;
       color: black;
-        height: 40px;
-        width: 1210px;
-         margin-top: 0px;
-         margin-left: 0px;
-         margin-right: 10px;
-         border-radius: 0.25rem;
-           border-color: #ced4da;
-         -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
-         -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
-         box-sizing: border-box;
-         background-color: #fff;
-         font-size: 16px;
-         margin-bottom: 10px;
-         padding: 0;
-         padding-left: 10px;
-
-         
+      height: 40px;
+      width: 1210px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 0;
+      padding-left: 10px;   
      }
+
      .input_w400:focus,
      .input_w200:focus,
      .select_w300:focus,
@@ -493,93 +445,84 @@ label{
         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
         }
- /*       .input-small:required,
-        .input-medium:required {
-          border-color: #e96678;
-          outline: 0;
-          -webkit-box-shadow: inset 0 1px 1px rgba(216, 58, 58, 0.897),0 0 8px rgba(233, 99, 99, 0.6);
-          box-shadow: inset 0 1px 1px rgba(216, 58, 58, 0.897),0 0 8px rgba(233, 99, 99, 0.6);
-         }
-         .input-small:valid {
-          border: 1px solid rgb(110, 172, 253); 
-        }
-        .clear {clear: both;}*/
-label {float: left;}
 
-.labeltext {
-    display: inline-block;
-    padding-top: 6px;
-    padding-left: 10px;
-    
-}
+    label {float: left;}
+
+    .labeltext {
+        display: inline-block;
+        padding-top: 6px;
+        padding-left: 10px;
+        
+    }
 
 
-.custom-radio {
-  position: absolute;
-  z-index: -1;
-  opacity: 0;
-}
-/* для элемента label связанного с .custom-radio */
-.custom-radio+label {
-  display: inline-flex;
-  align-items: center;
-  user-select: none;
-}
-/* создание в label псевдоэлемента  before со следующими стилями */
-.custom-radio+label::before {
-  content: '';
-  display: inline-flex;
-  width: 1.25em;
-  height: 1.25em;
-  flex-shrink: 0;
-  flex-grow: 0;
-  border: 1px solid #adb5bd;
-  border-radius: 50%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50% 50%;
-  -webkit-box-sizing: border-box; 
-  -moz-box-sizing: border-box; 
-  box-sizing: border-box;
-  margin-top: 0px;
-  margin-left: 16px;
-  margin-right: 5px;
+    .custom-radio {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+    /* для элемента label связанного с .custom-radio */
+    .custom-radio+label {
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+    }
+    /* создание в label псевдоэлемента  before со следующими стилями */
+    .custom-radio+label::before {
+      content: '';
+      display: inline-flex;
+      width: 1.25em;
+      height: 1.25em;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 1px solid #adb5bd;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% 50%;
+      -webkit-box-sizing: border-box; 
+      -moz-box-sizing: border-box; 
+      box-sizing: border-box;
+      margin-top: 0px;
+      margin-left: 16px;
+      margin-right: 5px;
 
 
-}
-/* стили при наведении курсора на радио */
-.custom-radio:not(:disabled):not(:checked)+label:hover::before {
-  border-color: #b3d7ff;
-}
-/* стили для активной радиокнопки (при нажатии на неё) */
-.custom-radio:not(:disabled):active+label::before {
-  background-color: #b3d7ff;
-  border-color: #b3d7ff;
-}
-/* стили для радиокнопки, находящейся в фокусе */
-.custom-radio:focus+label::before {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-/* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
-.custom-radio:focus:not(:checked)+label::before {
-  border-color: #80bdff;
-}
-/* стили для радиокнопки, находящейся в состоянии checked */
-.custom-radio:checked+label::before {
-  border-color: #0b76ef;
-  background-color: #0b76ef;
-  background: url('check-circle-fill.svg') no-repeat center  #fff;
-}
-/* стили для радиокнопки, находящейся в состоянии disabled */
-.custom-radio:disabled+label::before {
-  background-color: #e9ecef;
-}
-.lead{
-  color:#1b1c1dd2;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 10px;
-  box-sizing: border-box;
-  display: inline-flex;
-  font-size: 22px;
-}
+    }
+    /* стили при наведении курсора на радио */
+    .custom-radio:not(:disabled):not(:checked)+label:hover::before {
+      border-color: #b3d7ff;
+    }
+    /* стили для активной радиокнопки (при нажатии на неё) */
+    .custom-radio:not(:disabled):active+label::before {
+      background-color: #b3d7ff;
+      border-color: #b3d7ff;
+    }
+    /* стили для радиокнопки, находящейся в фокусе */
+    .custom-radio:focus+label::before {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    /* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+    .custom-radio:focus:not(:checked)+label::before {
+      border-color: #80bdff;
+    }
+    /* стили для радиокнопки, находящейся в состоянии checked */
+    .custom-radio:checked+label::before {
+      border-color: #0b76ef;
+      background-color: #0b76ef;
+      background: url('check-circle-fill.svg') no-repeat center  #fff;
+    }
+    /* стили для радиокнопки, находящейся в состоянии disabled */
+    .custom-radio:disabled+label::before {
+      background-color: #e9ecef;
+    }
+
+    .lead{
+      color:#1b1c1dd2;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      box-sizing: border-box;
+      display: inline-flex;
+      font-size: 22px;
+    }

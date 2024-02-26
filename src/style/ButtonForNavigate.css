@@ -139,7 +139,7 @@
     height: 60px;
     width: 200px;
     font-family: 'Roboto', Arial, sans-serif;
-        font-size: 20px;
+    font-size: 20px;
   }
   .btn-three::before {
     content: '';
@@ -175,7 +175,6 @@
   }
 
   .glow-button {
-    text-decoration: none;
     display: inline-block;
     padding: 15px 180px;
     margin: 10px 20px;
