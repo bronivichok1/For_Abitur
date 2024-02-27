@@ -14,6 +14,11 @@ const useValidation=(value,validations)=>{
     const[inputValid,setInputValid]=useState(false)
     const[inputData,setInputData]=useState(true)
 
+
+
+    
+
+
     useEffect(()=>{
         for(const validation in validations){
 
@@ -26,11 +31,11 @@ const useValidation=(value,validations)=>{
                 break;
                 case 'isRus':
                     var ru =/^[А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?( [А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?)?$/i
-                    ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //nowork +-
+                    ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //work
                 break;
                 case'isEng':
                     var eng=/^[A-Z]{1}[a-z]+(-[A-Z]{1}[a-z]+)?( [A-Z]{1}[-a-z]+(-[A-Z]{1}[a-z]+)?)?$/i
-                    eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //nowork +- 
+                    eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //work
                 break;
                 case'ismobileNum':
                     var num=/^[+]{1}[0-9]+$/gm
@@ -43,7 +48,7 @@ const useValidation=(value,validations)=>{
                 break;
                 case'inputData':
                 var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
-                data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //nowork
+                data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //work
                 break;
             }
 
@@ -93,9 +98,34 @@ const useInput=(InitialValue,validations)=>{
   
 function Anketa() {
 
+    const requestURL = 'https://jsonplaceholder.typicode.com/users'
 
-
+    function sendRequest(method, url, body = null) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
     
+        xhr.open(method, url)
+    
+        xhr.responseType = 'json'
+        xhr.setRequestHeader('Content-Type', 'application/json')
+    
+        xhr.onload = () => {
+          if (xhr.status >= 400) {
+            reject(xhr.response)
+          } else {
+            resolve(xhr.response)
+          }
+        }
+    
+        xhr.onerror = () => {
+          reject(xhr.response)
+        }
+    
+        xhr.send(JSON.stringify(body))
+      })
+    }
+    
+
     const surname=useInput('',{isEmpty:true,isRus:true})
     const name=useInput('',{isEmpty:true,isRus:true})
     const second_name=useInput('',{isEmpty:true,isRus:true})
@@ -173,6 +203,86 @@ function Anketa() {
     const dis=useInput('')
     const stat19_23=useInput('')
     const stat18=useInput('')
+    
+    const body = {
+      name: name.value,
+      surname: surname.value,
+      second_name:second_name.value,
+      surname_lat:surname_lat.value,
+      name_lat:name_lat.value,
+      date_of_birth:date_of_birth.value,
+      citizenship:citizenship.value,
+      serial:serial.value,
+      number:number.value,
+      person_id:person_id.value,
+      date_of_issue:date_of_issue.value,
+      date_of_expiry:date_of_expiry.value,
+      authority:authority.value,
+      postcode:postcode.value,
+      region:region.value,
+      settlement_name:settlement_name.value,
+      street_name:street_name.value,
+      building:building.value,
+      housing:housing.value,
+      apartment:apartment.value,
+      stat_tel:stat_tel.value,
+      mobile_tel:mobile_tel.value,
+      email:email.value,
+      edu_date_of_issue:edu_date_of_issue.value,
+      edu_serial_number:edu_serial_number.value,
+      edu_name:edu_name.value,
+      edu_average:edu_average.value,
+      pref_pay:pref_pay.value,
+      pref_nopay:pref_nopay.value,
+      pref_target:pref_target.value,
+      pref_dorm:pref_dorm.value,
+      exp_position:exp_position.value,
+      exp_years:exp_years.value,
+      exp_months:exp_months.value,
+      father_surname:father_surname.value,
+      father_name:father_name.value,
+      father_second_name:father_second_name.value,
+      father_job:father_job.value,
+      father_position:father_position.value,
+      father_phone:father_phone.value,
+      father_address:father_address.value,
+      mother_surname:mother_surname.value,
+      mother_name:mother_name.value,
+      mother_second_name:mother_second_name.value,
+      mother_job:mother_job.value,
+      mother_position:mother_position.value,
+      mother_phone:mother_phone.value,
+      mother_address:mother_address.value,
+      cert_lang_serial:cert_lang_serial.value,
+      cert_lang_number:cert_lang_number.value,
+      cert_lang_score:cert_lang_score.value,
+      cert_chem_serial:cert_chem_serial.value,
+      cert_chem_number:cert_chem_number.value,
+      cert_chem_score:cert_chem_score.value,
+      cert_biol_serial:cert_biol_serial.value,
+      cert_biol_score:cert_biol_score.value,
+      cert_biol_number:cert_biol_number.value,
+      sex:sex.value,
+      doc_type:doc_type.value,
+      country:country.value,
+      area:area.value,
+      settlement_type:settlement_type.value,
+      street_type:street_type.value,
+      edu_foreign_lang:edu_foreign_lang.value,
+      pref_faculty:pref_faculty.value,
+      awards_lang:awards_lang.value,
+      awards_chem:awards_chem.value,
+      awards_biol:awards_biol.value,
+      DD:DD.value,
+      diplo:diplo.value,
+      medal:medal.value,
+      bff:bff.value,
+      mil:mil.value,
+      nop:nop.value,
+      dis:dis.value,
+      stat19_23:stat19_23.value,
+      stat18:stat18.value
+    }
 
     
     return (
@@ -592,7 +702,12 @@ function Anketa() {
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={!name.inputValid||!surname.inputValid||!second_name.inputValid||!surname_lat.inputValid||!name_lat.inputValid||!date_of_birth.inputValid||!citizenship.inputValid||!number.inputValid||!date_of_issue.inputValid||!date_of_expiry.inputValid||!authority.inputValid||!mobile_tel.inputValid||!email.inputValid} type="submit" className="glow-button">Отправить</button>
+                    <button  disabled={!name.inputValid||!surname.inputValid||!second_name.inputValid||!surname_lat.inputValid||!name_lat.inputValid||!date_of_birth.inputValid||!citizenship.inputValid||!number.inputValid||!date_of_issue.inputValid||!date_of_expiry.inputValid||!authority.inputValid||!mobile_tel.inputValid||!email.inputValid}
+                    onClick={   sendRequest('POST', requestURL, body)
+                    .then(data => console.log(data))
+                    .catch(err => console.log(err))
+                    }
+                    type="submit" className="glow-button">Отправить</button>
                 </div>
                         
         </form>

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { redirect } from "react-router-dom";
 
 
+
 const useValidation=(value,validations)=>{
   const[isEmpty,setEmpty]=useState(true)
   const[minLengthError,setMinLengthError]=useState(true)
@@ -27,11 +28,11 @@ const useValidation=(value,validations)=>{
           break;
           case 'isRus':
               var ru =/^[А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?( [А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?)?$/i
-              ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //nowork +-
+              ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //work
           break;
           case'isEng':
               var eng=/^[A-Z]{1}[a-z]+(-[A-Z]{1}[a-z]+)?( [A-Z]{1}[-a-z]+(-[A-Z]{1}[a-z]+)?)?$/i
-              eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //nowork +- 
+              eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //work
           break;
           case'ismobileNum':
               var num=/^[+]{1}[0-9]+$/gm
@@ -44,7 +45,7 @@ const useValidation=(value,validations)=>{
           break;
           case'inputData':
           var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
-          data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //nowork
+          data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //work
           break;
         }
 
@@ -120,9 +121,9 @@ function ForRead() {
             {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> Поле "Номер" обязательно для заполнения.</div>}
 </label>
 <label className="form-label w-100">Дата выдачи
-            <input className={date_of_issue.isDirty&&date_of_issue.isEmpty?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" />
+            <input className={date_of_issue.isDirty&&(date_of_issue.isEmpty||date_of_issue.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" />
             {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
-            {(date_of_issue.isDirty&&date_of_issue.inputData)&&<div  style={{color:'red'}}>Поле "Дата выдачи" заполнено неверно.</div>}
+            {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div  style={{color:'red'}}>Поле "Дата выдачи" заполнено неверно.</div>}
 
 </label>
         <div align ="center" >
