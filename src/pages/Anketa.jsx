@@ -95,7 +95,7 @@ const useInput=(InitialValue,validations)=>{
     }
 }
 
-  
+ 
 function Anketa() {
 
     const requestURL = 'https://jsonplaceholder.typicode.com/users'
@@ -103,12 +103,9 @@ function Anketa() {
     function sendRequest(method, url, body = null) {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
-    
         xhr.open(method, url)
-    
         xhr.responseType = 'json'
         xhr.setRequestHeader('Content-Type', 'application/json')
-    
         xhr.onload = () => {
           if (xhr.status >= 400) {
             reject(xhr.response)
@@ -116,11 +113,9 @@ function Anketa() {
             resolve(xhr.response)
           }
         }
-    
         xhr.onerror = () => {
           reject(xhr.response)
         }
-    
         xhr.send(JSON.stringify(body))
       })
     }
@@ -284,10 +279,15 @@ function Anketa() {
       stat18:stat18.value
     }
 
-    
+    function dataOut(){
+               sendRequest('POST', requestURL, body)
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+            }
+
     return (
 
-        <form  className="form" method="POST" >
+        <form  className="form">
 <legend>Личные и паспортные данные</legend>
                     <div className="row">
                 <label className="form-label col-sm">Фамилия<span>*</span>
@@ -702,11 +702,8 @@ function Anketa() {
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button  disabled={!name.inputValid||!surname.inputValid||!second_name.inputValid||!surname_lat.inputValid||!name_lat.inputValid||!date_of_birth.inputValid||!citizenship.inputValid||!number.inputValid||!date_of_issue.inputValid||!date_of_expiry.inputValid||!authority.inputValid||!mobile_tel.inputValid||!email.inputValid}
-                    onClick={   sendRequest('POST', requestURL, body)
-                    .then(data => console.log(data))
-                    .catch(err => console.log(err))
-                    }
+                    <button  /* disabled={!name.inputValid||!surname.inputValid||!second_name.inputValid||!surname_lat.inputValid||!name_lat.inputValid||!date_of_birth.inputValid||!citizenship.inputValid||!number.inputValid||!date_of_issue.inputValid||!date_of_expiry.inputValid||!authority.inputValid||!mobile_tel.inputValid||!email.inputValid}
+                   */onClick={()=>dataOut()}
                     type="submit" className="glow-button">Отправить</button>
                 </div>
                         

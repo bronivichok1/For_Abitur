@@ -431,7 +431,9 @@
      .input_w295:focus,
      .select_w1210:focus,
      .input_w1210:focus,
-     .select_w400:focus {
+     .select_w400:focus,
+     .input_w390:focus,
+     .input_w580:focus {
         border-color: #66afe9;
         outline: 0;
         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
