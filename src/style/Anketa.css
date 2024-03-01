@@ -439,6 +439,29 @@
         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
         }
+      
+      input:-webkit-autofill:focus,
+      .input_w400:-webkit-autofill,
+      .input_w400-error:-webkit-autofill,
+      .input_w200:-webkit-autofill,
+      .select_w300:-webkit-autofill,
+      .select_w595:-webkit-autofill,
+      .select_w900:-webkit-autofill,
+      .input_w600:-webkit-autofill,
+      .input_w600-error:-webkit-autofill,
+      .input_w295:-webkit-autofill,
+      .input_w295-error:-webkit-autofill,
+      .select_w1210:-webkit-autofill,
+      .input_w1210:-webkit-autofill,
+      .input_w1210-error:-webkit-autofill,
+      .select_w400:-webkit-autofill,
+      .input_w390:-webkit-autofill,
+      .input_w390-error:-webkit-autofill,
+      .input_w580:-webkit-autofill{
+          -webkit-box-shadow: 0 0 0 1000px white inset; /* Добавьте свойство box-shadow с нужным цветом фона */
+          transition: background-color 5000s ease-in-out 0s;
+          box-shadow: 0 0 0 30px white inset;
+        }
 
     label {float: left;}
 
