@@ -10,6 +10,7 @@ const useValidation=(value,validations)=>{
   const[isEmpty,setEmpty]=useState(true)
   const[inputValid,setInputValid]=useState(false)
   const[inputData,setInputData]=useState(false)
+  const[Num,setInputNum]=useState(true)
 
   useEffect(()=>{
     for(const validation in validations){
@@ -19,8 +20,11 @@ const useValidation=(value,validations)=>{
               value?setEmpty(false):setEmpty(true)  //work
           break;
           case'inputData':
-          var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
-          data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //work
+            var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
+            data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //work
+          break;
+            var num= /^\d+$/
+            num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
           break;
         }
 
@@ -37,7 +41,8 @@ useEffect(()=>{
 return{
   isEmpty,
   inputValid,
-  inputData
+  inputData,
+  Num
 }
 }
 const useInput=(InitialValue,validations)=>{
@@ -92,7 +97,7 @@ function ForRead() {
     }, [location]);
 
     const serial=useInput('',{isEmpty:true})
-    const number=useInput('',{isEmpty:true})
+    const number=useInput('',{isEmpty:true,isEmpty:true})
     const date_of_issue=useInput('',{isEmpty:true,inputData:true})
 
     const body = {
@@ -115,8 +120,9 @@ function ForRead() {
             {(serial.isDirty&&serial.isEmpty)&&<div  style={{color:'red'}}> Поле "Серия" обязательно для заполнения.</div>}
 </label>
 <label className="form-label w-100">Номер
-            <input className={number.isDirty&&number.isEmpty?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  autoComplete="off"/>
+            <input className={number.isDirty&&(number.isEmpty||number.Num)?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  autoComplete="off"/>
             {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> Поле "Номер" обязательно для заполнения.</div>}
+            {(number.isDirty&&number.Num&&!number.isEmpty)&&<div style={{color:'red'}}> Поле "Номер" может содержать только цифры.</div>}
 </label>
 <label className="form-label w-100">Дата выдачи
             <input className={date_of_issue.isDirty&&(date_of_issue.isEmpty||date_of_issue.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" autoComplete="off"/>

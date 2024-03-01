@@ -179,14 +179,14 @@
     padding: 15px 180px;
     margin: 10px 20px;
     border-radius: 10px;
-    box-shadow: 0 0 40px 40px blue inset, 0 0 0 0 blue;
+    box-shadow: 0 0 40px 40px rgb(67, 155, 255) inset, 0 0 0 0 #3498db;
     letter-spacing: 2px;
     font-size: 22px;
     color: white;
     transition: .15s ease-in-out;
-    border-color: blue;
+    border-color: #3498db;
   }
   .glow-button:hover {
-    box-shadow: 0 0 10px 0 blue inset, 0 0 0 0 blue;
-    color: blue;
+    box-shadow: 0 0 10px 0 #3498db inset, 0 0 0 0 #3498db;
+    color: #3498db;
   }

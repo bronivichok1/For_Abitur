@@ -36,7 +36,7 @@ const useValidation=(value,validations)=>{
                     eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //work
                 break;
                 case'ismobileNum':
-                    var num=/^[+]{1}[0-9]+$/gm
+                    var num=/^\+375\d{9}$/
                     num.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true) //work
 
                 break;
@@ -87,7 +87,6 @@ const useInput=(InitialValue,validations)=>{
     }
     const onBlur=(e)=>{
         setDirty(true)
-      
     }
     return{
         value,
@@ -122,9 +121,6 @@ function Anketa() {
         xhr.send(JSON.stringify(body))
       })
     }
-    
-
-
 
 
     const surname=useInput('',{isEmpty:true,isRus:true})
@@ -166,14 +162,14 @@ function Anketa() {
     const father_second_name=useInput('',{isEmpty:true})
     const father_job=useInput('',{isEmpty:true})
     const father_position=useInput('',{isEmpty:true})
-    const father_phone=useInput('',{isEmpty:true,ismobileNum:true })
+    const father_phone=useInput('+375',{isEmpty:true,ismobileNum:true })
     const father_address=useInput('',{isEmpty:true})
     const mother_surname=useInput('',{isEmpty:true})
     const mother_name=useInput('',{isEmpty:true})
     const mother_second_name=useInput('',{isEmpty:true})
     const mother_job=useInput('',{isEmpty:true})
     const mother_position=useInput('',{isEmpty:true})
-    const mother_phone=useInput('',{isEmpty:true,ismobileNum:true})
+    const mother_phone=useInput('+375',{isEmpty:true,ismobileNum:true})
     const mother_address=useInput('',{isEmpty:true})
     const cert_lang_serial=useInput('',{isEmpty:true})
     const cert_lang_number=useInput('',{isEmpty:true})
@@ -469,7 +465,7 @@ function Anketa() {
                     <label className="form-label col-sm">Мобильный тел.<span >*</span>
                         <input className={mobile_tel.isDirty&&(mobile_tel.ismobileNum||mobile_tel.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxLength="20"  />
                         {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div  style={{color:'red'}}> Поле "Мобильный тел." обязательно для заполнения.</div>}
-                        {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div  style={{color:'red'}}> Поле "Мобильный тел." может содержать только цифры.</div>}
+                        {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div  style={{color:'red'}}> Поле "Мобильный тел." должно соответствовать формату "+375XXXXXXXXX".</div>}
                         </label>
                     <label className="form-label col-sm">E-mail<span >*</span>
                         <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxLength="50"/>
@@ -582,7 +578,7 @@ function Anketa() {
                         <input className="input_w600" onChange={e=>father_position.onChange(e)} onBlur={e=>father_position.onBlur(e)} value={father_position.value}  name="father_position" maxLength="50" /></label>
                     <label className="form-label col-sm">Моб. телефон
                         <input className={(father_phone.isDirty&&father_phone.ismobileNum&&!father_phone.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>father_phone.onChange(e)} onBlur={e=>father_phone.onBlur(e)} value={father_phone.value}  name="father_phone" placeholder="+375XXXXXXXXX" maxLength="50" />
-                        {(father_phone.isDirty&&father_phone.ismobileNum&&!father_phone.isEmpty)&&<div  style={{color:'red'}}> Поле "Моб. тел." может содержать только цифры.</div>}
+                        {(father_phone.isDirty&&father_phone.ismobileNum&&!father_phone.isEmpty)&&<div  style={{color:'red'}}> Поле "Моб. тел." должно соответствовать формату "+375XXXXXXXXX".</div>}
                         </label>
                 </div>
                     <label className="form-label w-100">Полный адрес
@@ -603,7 +599,7 @@ function Anketa() {
                         <input className="input_w600"  onChange={e=>mother_position.onChange(e)} onBlur={e=>mother_position.onBlur(e)} value={mother_position.value} name="mother_position" maxLength="50" /></label>
                     <label className="form-label col-sm">Моб. телефон
                         <input className={(mother_phone.isDirty&&mother_phone.ismobileNum&&!mother_phone.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>mother_phone.onChange(e)} onBlur={e=>mother_phone.onBlur(e)} value={mother_phone.value}  placeholder="+375XXXXXXXXX" name="mother_phone" maxLength="50" />
-                        {(mother_phone.isDirty&&mother_phone.ismobileNum&&!mother_phone.isEmpty)&&<div  style={{color:'red'}}> Поле "Моб. тел." может содержать только цифры.</div>}
+                        {(mother_phone.isDirty&&mother_phone.ismobileNum&&!mother_phone.isEmpty)&&<div  style={{color:'red'}}> Поле "Моб. тел." должно соответствовать формату "+375XXXXXXXXX".</div>}
                         </label>
                 </div>
                     <label className="form-label w-100">Полный адрес
@@ -719,8 +715,8 @@ function Anketa() {
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={!name.inputValid||!surname.inputValid||!second_name.inputValid||!surname_lat.inputValid||!name_lat.inputValid||!date_of_birth.inputValid||!citizenship.inputValid||!number.inputValid||!date_of_issue.inputValid||!date_of_expiry.inputValid||!authority.inputValid||!mobile_tel.inputValid||!email.inputValid}
-                   onClick={()=>dataOut()}
+                    <button /*disabled={!name.inputValid||!surname.inputValid||!second_name.inputValid||!surname_lat.inputValid||!name_lat.inputValid||!date_of_birth.inputValid||!citizenship.inputValid||!number.inputValid||!date_of_issue.inputValid||!date_of_expiry.inputValid||!authority.inputValid||!mobile_tel.inputValid||!email.inputValid}
+                  */ onClick={/*()=>dataOut()&&*/console.log(name.inputValid)}
                     type="submit" className="glow-button">Отправить</button>
                 </div>
                         
