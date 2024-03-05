@@ -9,7 +9,7 @@ import { redirect } from "react-router-dom";
 const useValidation=(value,validations)=>{
   const[isEmpty,setEmpty]=useState(true)
   const[inputValid,setInputValid]=useState(false)
-  const[inputData,setInputData]=useState(false)
+  const[inputData,setInputData]=useState(true)
   const[Num,setInputNum]=useState(true)
 
   useEffect(()=>{
@@ -23,20 +23,19 @@ const useValidation=(value,validations)=>{
             var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
             data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //work
           break;
+          case'Num':
             var num= /^\d+$/
             num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
           break;
         }
-
+        if(isEmpty||inputData||Num){
+          setInputValid(false)
+      } else {
+          setInputValid(true)
+      }
     }
-},[value])
-useEffect(()=>{
-  if(isEmpty||inputData){
-      setInputValid(false)
-  } else {
-      setInputValid(true)
-  }
-},[isEmpty,inputData])
+},[value,isEmpty,inputData,Num])
+
 
 return{
   isEmpty,
@@ -90,14 +89,10 @@ function sendRequest(method, url, body = null) {
 
 
 function ForRead() {
-    const location = useLocation();
 
-    useEffect(() => {
-      console.log('Current location is ', location);
-    }, [location]);
 
     const serial=useInput('',{isEmpty:true})
-    const number=useInput('',{isEmpty:true,isEmpty:true})
+    const number=useInput('',{isEmpty:true,Num:true})
     const date_of_issue=useInput('',{isEmpty:true,inputData:true})
 
     const body = {
