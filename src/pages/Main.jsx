@@ -4,10 +4,6 @@ import { useEffect } from 'react';
 
  function Home() {
   const location = useLocation();
-
-  useEffect(() => {
-    console.log('Current location is ', location);
-  }, [location]);
  
   return ( 
     <div >

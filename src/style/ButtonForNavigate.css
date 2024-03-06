@@ -54,6 +54,10 @@
     font-size: 140%;
     width: 60px;
   }
+  .btn-1:disabled{
+      background:#c9d6dfd7;
+    color:#000000b2;
+    }
 
   .btn-4 {
     background: #34495e;
@@ -189,4 +193,16 @@
   .glow-button:hover {
     box-shadow: 0 0 10px 0 #3498db inset, 0 0 0 0 #3498db;
     color: #3498db;
+  }
+  .glow-button:disabled{
+    display: inline-block;
+    padding: 15px 180px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 40px 40px rgb(185, 199, 216) inset, 0 0 0 0 #c9d6dfd7;
+    letter-spacing: 2px;
+    font-size: 22px;
+    transition: .15s ease-in-out;
+    border-color: #c9d6dfd7;
+    color: #000000b2;
   }
