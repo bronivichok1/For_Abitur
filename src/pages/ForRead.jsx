@@ -8,7 +8,6 @@ import { redirect } from "react-router-dom";
 
 const useValidation=(value,validations)=>{
   const[isEmpty,setEmpty]=useState(true)
-  const[inputValid,setInputValid]=useState(false)
   const[inputData,setInputData]=useState(true)
   const[Num,setInputNum]=useState(true)
 
@@ -27,21 +26,16 @@ const useValidation=(value,validations)=>{
             var num= /^\d+$/
             num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
           break;
-        }
-        if(isEmpty||inputData||Num){
-          setInputValid(false)
-      } else {
-          setInputValid(true)
-      }
+        }      
     }
-},[value,isEmpty,inputData,Num])
+},[value])
 
 
 return{
   isEmpty,
-  inputValid,
   inputData,
   Num
+  
 }
 }
 const useInput=(InitialValue,validations)=>{
@@ -108,7 +102,7 @@ function ForRead() {
     return (
  
         <div className="div">
-          <form className="form-ForRead" method="post">
+          <form className="form-ForRead" >
             <legend className="lead" >Введите данные документа:</legend>
 <label className="form-label w-100">Серия
             <input className={serial.isDirty&&serial.isEmpty?"input_w600-error":"input_w600"} onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="15" autoComplete="off"/>
@@ -126,7 +120,7 @@ function ForRead() {
 
 </label>
         <div align ="center" >
-                    <button disabled={!number.inputValid||!date_of_issue.inputValid||!serial.inputValid}
+                    <button disabled={number.Num||number.isEmpty||date_of_issue.inputData||date_of_issue.isEmpty||serial.isEmpty}
                     onClickCapture={()=>dataOut()}
                      type="submit" className="btn btn-1 btn-sep icon-info">Далее</button>
                 </div>
