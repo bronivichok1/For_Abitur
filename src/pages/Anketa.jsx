@@ -15,7 +15,6 @@ const useValidation=(value,validations)=>{
     const[Num,setInputNum]=useState(true)
 
 
-
     useEffect(()=>{
         for(const validation in validations){
 
@@ -74,16 +73,19 @@ const useValidation=(value,validations)=>{
 
 const useInput=(InitialValue,validations)=>{
     const [value,setValue]=useState(InitialValue)
+    const [checked, setChecked] = useState(false);
     const [isDirty,setDirty]=useState(false)
     const valid=useValidation(value,validations)
     const onChange=(e)=>{
         setValue(e.target.value)
+        setChecked(e.target.checked)
     }
     const onBlur=(e)=>{
         setDirty(true)
     }
     return{
         value,
+        checked,
         onChange,
         onBlur,
         isDirty,
@@ -97,24 +99,26 @@ function Anketa() {
     const requestURL = 'https://jsonplaceholder.typicode.com/users'
 
     function sendRequest(method, url, body = null) {
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest()
-        xhr.open(method, url)
-        xhr.responseType = 'json'
-        xhr.setRequestHeader('Content-Type', 'application/json')
-        xhr.onload = () => {
-          if (xhr.status >= 400) {
-            reject(xhr.response)
-          } else {
-            resolve(xhr.response)
+        const headers = {
+          'Content-Type': 'application/json'
+        }
+      
+        return fetch(url, {
+          method: method,
+          body: JSON.stringify(body),
+          headers: headers
+        }).then(response => {
+          if (response.ok) {
+            return response.json()
           }
-        }
-        xhr.onerror = () => {
-          reject(xhr.response)
-        }
-        xhr.send(JSON.stringify(body))
-      })
-    }
+      
+          return response.json().then(error => {
+            const e = new Error('Что-то пошло не так')
+            e.data = error
+            throw e
+          })
+        })
+      }
 
 
     const surname=useInput('',{isEmpty:true,isRus:true})
@@ -185,7 +189,7 @@ function Anketa() {
     const awards_lang=useInput('')
     const awards_chem=useInput('')
     const awards_biol=useInput('')
-    const DD=useInput('')
+    const DD=useInput('',{isEmpty:true})
     const diplo=useInput('')
     const medal=useInput('')
     const bff=useInput('')
@@ -223,10 +227,10 @@ function Anketa() {
       edu_serial_number:edu_serial_number.value,
       edu_name:edu_name.value,
       edu_average:edu_average.value,
-      pref_pay:pref_pay.value,
-      pref_nopay:pref_nopay.value,
-      pref_target:pref_target.value,
-      pref_dorm:pref_dorm.value,
+      pref_pay:pref_pay.checked,
+      pref_nopay:pref_nopay.checked,
+      pref_target:pref_target.checked,
+      pref_dorm:pref_dorm.checked,
       exp_position:exp_position.value,
       exp_years:exp_years.value,
       exp_months:exp_months.value,
@@ -264,20 +268,20 @@ function Anketa() {
       awards_lang:awards_lang.value,
       awards_chem:awards_chem.value,
       awards_biol:awards_biol.value,
-      DD:DD.value,
-      diplo:diplo.value,
-      medal:medal.value,
-      bff:bff.value,
-      mil:mil.value,
-      nop:nop.value,
-      dis:dis.value,
-      stat19_23:stat19_23.value,
-      stat18:stat18.value
+      DD:DD.checked,
+      diplo:diplo.checked,
+      medal:medal.checked,
+      bff:bff.checked,
+      mil:mil.checked,
+      nop:nop.checked,
+      dis:dis.checked,
+      stat19_23:stat19_23.checked,
+      stat18:stat18.checked
     }
 
     function dataOut(){
                sendRequest('POST', requestURL, body)
-                .then(data => console.log(data))
+                .then(body => console.log(body))
                 .catch(err => console.log(err))
             }
 
@@ -527,32 +531,32 @@ function Anketa() {
                     </select></label>
                 <div className="row">
                     <div className="row">
-                            <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} value={pref_target.value} id="prform_chbx_1"  name="pref_target" type="checkbox" />
+                            <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} checked={pref_target.checked} id="prform_chbx_1"  name="pref_target" type="checkbox" />
                         <label htmlFor="prform_chbx_1">На условиях целевой подготовки</label>
                     </div>
                     <div className="row">
-                            <input className="custom-radio" onChange={e=>pref_nopay.onChange(e)} onBlur={e=>pref_nopay.onBlur(e)} value={pref_nopay.value} id="prform_chbx_2" name="pref_nopay" type="checkbox" />
+                            <input className="custom-radio" onChange={e=>pref_nopay.onChange(e)} onBlur={e=>pref_nopay.onBlur(e)} checked={pref_nopay.checked} id="prform_chbx_2" name="pref_nopay" type="checkbox" />
                         <label htmlFor="prform_chbx_2" >За счет средств бюджета</label>
                     </div>
                     <div className="row">
-                            <input className="custom-radio" onChange={e=>pref_pay.onChange(e)} onBlur={e=>pref_pay.onBlur(e)} value={pref_pay.value} id="prform_chbx_3"  name="pref_pay" type="checkbox" />
+                            <input className="custom-radio" onChange={e=>pref_pay.onChange(e)} onBlur={e=>pref_pay.onBlur(e)} checked={pref_pay.checked} id="prform_chbx_3"  name="pref_pay" type="checkbox" />
                         <label htmlFor="prform_chbx_3" >На платной основе</label>
                     </div>
                 </div>
                     <div className="row">
-                            <input className="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} value={pref_dorm.value} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
+                            <input className="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} checked={pref_dorm.checked} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
                         <label htmlFor="prform_chbx_4">Нуждаюсь в общежитии</label>
                     </div>
                     <hr/>
 <legend className="text-center">Работа и стаж</legend>
                 <label className="form-label w-100">Место работы, занимаемая должность (профессия)
-                    <input className="input_w1210" onChange={e=>exp_position.onChange(e)} onBlur={e=>exp_position.onBlur(e)} value={exp_position.value}  name="exp_position" maxLength="150" /></label>
+                    <input className="input_w1210" onChange={e=>exp_position.onChange(e)} onBlur={e=>exp_position.onBlur(e)} checked={exp_position.checked}  name="exp_position" maxLength="150" /></label>
                 <p className="lead">Трудовой стаж по профилю избранной специальности:</p>
                 <div className="row">
                     <label className="form-label col-sm">Полных лет
-                        <input className="input_w600"  onChange={e=>exp_years.onChange(e)} onBlur={e=>exp_years.onBlur(e)} value={exp_years.value} name="exp_years" maxLength="2" /></label>
+                        <input className="input_w600"  onChange={e=>exp_years.onChange(e)} onBlur={e=>exp_years.onBlur(e)} checked={exp_years.checked} name="exp_years" maxLength="2" /></label>
                     <label className="form-label col-sm">Полных месяцев
-                        <input className="input_w600" onChange={e=>exp_months.onChange(e)} onBlur={e=>exp_months.onBlur(e)} value={exp_months.value}  name="exp_months" maxLength="2" /></label>
+                        <input className="input_w600" onChange={e=>exp_months.onChange(e)} onBlur={e=>exp_months.onBlur(e)} checked={exp_months.checked}  name="exp_months" maxLength="2" /></label>
                 </div>
                 <hr/>
 <legend className="text-center">Родители</legend>
@@ -602,35 +606,35 @@ function Anketa() {
 
 <legend className="text-center">Льготы</legend>
                 <div className="row">
-                    <input id="pr_chbx_1" className="custom-radio" onChange={e=>stat18.onChange(e)} onBlur={e=>stat18.onBlur(e)} value={stat18.value} name="stat18" type="checkbox" />
+                    <input id="pr_chbx_1" className="custom-radio" onChange={e=>stat18.onChange(e)} onBlur={e=>stat18.onBlur(e)} checked={stat18.checked} name="stat18" type="checkbox" />
                     <label htmlFor="pr_chbx_1" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
                 </div>
                 <div className="row">
-                    <input id="pr_chbx_2" className="custom-radio" onChange={e=>stat19_23.onChange(e)} onBlur={e=>stat19_23.onBlur(e)} value={stat19_23.value} name="stat19_23" type="checkbox" />
+                    <input id="pr_chbx_2" className="custom-radio" onChange={e=>stat19_23.onChange(e)} onBlur={e=>stat19_23.onBlur(e)} checked={stat19_23.checked} name="stat19_23" type="checkbox" />
                     <label htmlFor="pr_chbx_2" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
                 </div>
                 <div className="row">
-                    <input id="pr_chbx_3" className="custom-radio" onChange={e=>dis.onChange(e)} onBlur={e=>dis.onBlur(e)} value={dis.value} name="dis" type="checkbox" />
+                    <input id="pr_chbx_3" className="custom-radio" onChange={e=>dis.onChange(e)} onBlur={e=>dis.onBlur(e)} checked={dis.checked} name="dis" type="checkbox" />
                     <label htmlFor="pr_chbx_3" >Ребенок-инвалид, инвалид I, II, III гр.</label>
                 </div>
                 <div className="row">
-                    <input id="pr_chbx_4" className="custom-radio"  onChange={e=>nop.onChange(e)} onBlur={e=>nop.onBlur(e)} value={nop.value} name="nop" type="checkbox" />
+                    <input id="pr_chbx_4" className="custom-radio"  onChange={e=>nop.onChange(e)} onBlur={e=>nop.onBlur(e)} checked={nop.checked} name="nop" type="checkbox" />
                     <label htmlFor="pr_chbx_4">Сирота или ребенок, оставшийся без попечения родителей</label>
                 </div>
                 <div className="row">
-                    <input id="pr_chbx_5" className="custom-radio" onChange={e=>mil.onChange(e)} onBlur={e=>mil.onBlur(e)} value={mil.value} name="mil" type="checkbox" />
+                    <input id="pr_chbx_5" className="custom-radio" onChange={e=>mil.onChange(e)} onBlur={e=>mil.onBlur(e)} checked={mil.checked} name="mil" type="checkbox" />
                     <label htmlFor="pr_chbx_5" >Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
                 </div>
                 <div className="row">
-                    <input id="pr_chbx_6" className="custom-radio" onChange={e=>bff.onChange(e)} onBlur={e=>bff.onBlur(e)} value={bff.value} name="bff" type="checkbox"/>
+                    <input id="pr_chbx_6" className="custom-radio" onChange={e=>bff.onChange(e)} onBlur={e=>bff.onBlur(e)} checked={bff.checked} name="bff" type="checkbox"/>
                     <label htmlFor="pr_chbx_6">Из многодетной семьи</label>
                 </div>
                 <div className="row">
-                    <input id="pr_chbx_7" className="custom-radio" onChange={e=>medal.onChange(e)} onBlur={e=>medal.onBlur(e)} value={medal.value} name="medal" type="checkbox" />
+                    <input id="pr_chbx_7" className="custom-radio" onChange={e=>medal.onChange(e)} onBlur={e=>medal.onBlur(e)} checked={medal.checked} name="medal" type="checkbox" />
                     <label htmlFor="pr_chbx_7" >Имею аттестат с медалью</label>
                 </div>
                 <div className="row">
-                    <input id="pr_chbx_8" className="custom-radio" onChange={e=>diplo.onChange(e)} onBlur={e=>diplo.onBlur(e)} value={diplo.value}   name="diplo" type="checkbox" />
+                    <input id="pr_chbx_8" className="custom-radio" onChange={e=>diplo.onChange(e)} onBlur={e=>diplo.onBlur(e)} checked={diplo.checked}   name="diplo" type="checkbox" />
                     <label htmlFor="pr_chbx_8" >Имею диплом с отличием</label> 
                 </div>
                 <hr/>
@@ -705,12 +709,12 @@ function Anketa() {
                 </div>
                 <hr/>
                 <div >
-                    <input  id="agreement" className="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} value={DD.value} name="DD"type="checkbox"></input>
+                    <input  id="agreement" className="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} checked={DD.checked} name="DD"type="checkbox"></input>
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
                     <button disabled={(name.isEmpty||name.isRus)||(surname.isRus||surname.isEmpty)||second_name.isRus||(surname_lat.isEmpty||surname_lat.isEng)||(name_lat.isEng||name_lat.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)}
-                   onClick={()=>dataOut()}
+                   onClick={/*()=>dataOut()&&*/console.log(body)}
                     type="submit" className="glow-button">Отправить</button>
                 </div>
                         
