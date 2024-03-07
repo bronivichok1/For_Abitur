@@ -713,7 +713,7 @@ function Anketa() {
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(name.isEmpty||name.isRus)||(surname.isRus||surname.isEmpty)||second_name.isRus||(surname_lat.isEmpty||surname_lat.isEng)||(name_lat.isEng||name_lat.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)}
+                    <button disabled={(name.isEmpty||name.isRus)||(surname.isRus||surname.isEmpty)||second_name.isRus||(surname_lat.isEmpty||surname_lat.isEng)||(name_lat.isEng||name_lat.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
                    onClick={/*()=>dataOut()&&*/console.log(body)}
                     type="submit" className="glow-button">Отправить</button>
                 </div>
