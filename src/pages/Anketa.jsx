@@ -1,6 +1,8 @@
 import "../style/Anketa.css"
 import { useRef, useEffect, useState } from 'react'
 import ButtonForNavigate from '../components/ButtonForNavigate'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -10,7 +12,6 @@ const useValidation=(value,validations)=>{
     const[isEng,setEng]=useState(true)
     const[ismobileNum,setmobileNum]=useState(true)
     const[isemailCheck,setemailCheck]=useState(true)
-    const[inputValid,setInputValid]=useState(false)
     const[inputData,setInputData]=useState(true)
     const[Num,setInputNum]=useState(true)
 
@@ -49,12 +50,6 @@ const useValidation=(value,validations)=>{
                     num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
                 break;
             }
-            if(isEmpty||isEng||isRus||ismobileNum||isemailCheck||inputData){
-                setInputValid(true)
-            } else {
-                setInputValid(false)
-            }
-
         }
     },[value,isEmpty,isEng,isRus,inputData,isemailCheck,ismobileNum])
 
@@ -65,8 +60,7 @@ const useValidation=(value,validations)=>{
         ismobileNum,
         isemailCheck,
         inputData,
-        Num,
-        inputValid
+        Num
 
     }
 }
@@ -135,7 +129,7 @@ function Anketa() {
     const date_of_expiry=useInput('',{isEmpty:true,inputData:true})
     const authority=useInput('',{isEmpty:true})
     const postcode=useInput('',{isEmpty:true})
-    const region=useInput('',{isEmpty:true})
+    const region=useInput('1',{isEmpty:true})
     const settlement_name=useInput('',{isEmpty:true})
     const street_name=useInput('',{isEmpty:true})
     const building=useInput('',{isEmpty:true})
@@ -279,11 +273,28 @@ function Anketa() {
       stat18:stat18.checked
     }
 
+
     function dataOut(){
-               sendRequest('POST', requestURL, body)
-                .then(body => console.log(body))
-                .catch(err => console.log(err))
-            }
+        sendRequest('POST', requestURL, body)
+        .then(body => console.log(body))
+        .catch(err => console.log(err))
+    }
+    function toastsucces(){
+    toast.success('Форма отправлена', {
+       position: "top-right"
+     });}
+   
+     /*toast.error("Error Notification !", {
+       position: "top-center"
+     });
+   
+     toast.warn("Warning Notification !", {
+       position: "top-center"
+     });
+   
+     toast.info("Info Notification !", {
+       position: "top-center"
+     });*/
 
     return (
 
@@ -466,7 +477,7 @@ function Anketa() {
                         {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div  style={{color:'red'}}> Поле "Мобильный тел." должно соответствовать формату "+375XXXXXXXXX".</div>}
                         </label>
                     <label className="form-label col-sm">E-mail<span >*</span>
-                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxLength="40"/>
+                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input_w590-error":"input_w590"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxLength="40"/>
                         {(email.isDirty&&email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" обязательно для заполнения.</div>}
                         {(email.isDirty&&email.isemailCheck&&!email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" заполнено неверно.</div>}
                     </label>
@@ -713,9 +724,10 @@ function Anketa() {
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(name.isEmpty||name.isRus)||(surname.isRus||surname.isEmpty)||second_name.isRus||(surname_lat.isEmpty||surname_lat.isEng)||(name_lat.isEng||name_lat.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
-                   onClick={/*()=>dataOut()&&*/console.log(body)}
-                    type="submit" className="glow-button">Отправить</button>
+                    <button /*disabled={(name.isEmpty||name.isRus)||(surname.isRus||surname.isEmpty)||second_name.isRus||(surname_lat.isEmpty||surname_lat.isEng)||(name_lat.isEng||name_lat.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
+                    */onClick={()=>dataOut()}
+                        type="submit" className="glow-button" >Отправить</button>     
+  
                 </div>
                         
         </form>
