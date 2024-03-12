@@ -49,7 +49,9 @@ const useValidation=(value,validations)=>{
                     var num= /^\d+$/
                     num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
                 break;
+
             }
+
         }
     },[value,isEmpty,isEng,isRus,inputData,isemailCheck,ismobileNum])
 
@@ -65,6 +67,7 @@ const useValidation=(value,validations)=>{
     }
 }
 
+
 const useInput=(InitialValue,validations)=>{
     const [value,setValue]=useState(InitialValue)
     const [checked, setChecked] = useState(false);
@@ -77,6 +80,7 @@ const useInput=(InitialValue,validations)=>{
     const onBlur=(e)=>{
         setDirty(true)
     }
+    
     return{
         value,
         checked,
@@ -87,9 +91,11 @@ const useInput=(InitialValue,validations)=>{
     }
 }
 
- 
-function Anketa() {
 
+function Anketa() {
+    
+
+    
     const requestURL = 'https://jsonplaceholder.typicode.com/users'
 
     function sendRequest(method, url, body = null) {
@@ -113,7 +119,6 @@ function Anketa() {
           })
         })
       }
-
 
     const surname=useInput('',{isEmpty:true,isRus:true})
     const name=useInput('',{isEmpty:true,isRus:true})
@@ -274,16 +279,25 @@ function Anketa() {
     }
 
 
-    function dataOut(){
+const [ButtonClick,setButtonClick]=useState(false)
+useEffect(()=>{
+    if(ButtonClick==true){
+        toast.success('Форма отправлена', {
+            position: "top-right"
+        })
+        setButtonClick(false)
         sendRequest('POST', requestURL, body)
         .then(body => console.log(body))
         .catch(err => console.log(err))
     }
-    function toastsucces(){
-    toast.success('Форма отправлена', {
-       position: "top-right"
-     });}
-   
+})
+
+    function handleClick(e) {
+        setButtonClick(true)
+        e.preventDefault()
+      }
+    
+
      /*toast.error("Error Notification !", {
        position: "top-center"
      });
@@ -296,8 +310,10 @@ function Anketa() {
        position: "top-center"
      });*/
 
+
     return (
 
+            
         <form  className="form" autoComplete="off">
 <legend>Личные и паспортные данные</legend>
                     <div className="row">
@@ -724,8 +740,8 @@ function Anketa() {
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button /*disabled={(name.isEmpty||name.isRus)||(surname.isRus||surname.isEmpty)||second_name.isRus||(surname_lat.isEmpty||surname_lat.isEng)||(name_lat.isEng||name_lat.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
-                    */onClick={()=>dataOut()}
+                    <button disabled={(name.isEmpty||name.isRus)||(surname.isRus||surname.isEmpty)||second_name.isRus||(surname_lat.isEmpty||surname_lat.isEng)||(name_lat.isEng||name_lat.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
+                    onClick={handleClick}
                         type="submit" className="glow-button" >Отправить</button>     
   
                 </div>
