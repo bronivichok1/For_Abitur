@@ -1,6 +1,5 @@
 import "../style/Anketa.css"
-import { useRef, useEffect, useState } from 'react'
-import ButtonForNavigate from '../components/ButtonForNavigate'
+import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -92,7 +91,7 @@ const useInput=(InitialValue,validations)=>{
 }
 
 
-function Anketa({DataForAnketa,setDataForAnketa}) {
+function Anketa() {
     
 
     
@@ -118,6 +117,113 @@ function Anketa({DataForAnketa,setDataForAnketa}) {
             throw e
           })
         })
+      }
+    const [data, setData] = useState({
+        name: '',
+      surname: '',
+      second_name:'',
+      surname_lat:'',
+      name_lat:'',
+      date_of_birth:'',
+      citizenship:'',
+      serial:'',
+      number:'',
+      person_id:'',
+      date_of_issue:'',
+      date_of_expiry:'',
+      authority:'',
+      postcode:'',
+      region: '1',
+      settlement_name:'',
+      street_name:'',
+      building:'',
+      housing:'',
+      apartment:'',
+      stat_tel:'',
+      mobile_tel:'',
+      email:'',
+      edu_date_of_issue:'',
+      edu_serial_number:'',
+      edu_name:'',
+      edu_average:'',
+      pref_pay:'1',
+      pref_nopay:'1',
+      pref_target:'1',
+      pref_dorm:'1',
+      exp_position:'',
+      exp_years:'',
+      exp_months:'',
+      father_surname:'',
+      father_name:'',
+      father_second_name:'',
+      father_job:'',
+      father_position:'',
+      father_phone:'',
+      father_address:'',
+      mother_surname:'',
+      mother_name:'',
+      mother_second_name:'',
+      mother_job:'',
+      mother_position:'',
+      mother_phone:'',
+      mother_address:'',
+      cert_lang_serial:'',
+      cert_lang_number:'',
+      cert_lang_score:'',
+      cert_chem_serial:'',
+      cert_chem_number:'',
+      cert_chem_score:'',
+      cert_biol_serial:'',
+      cert_biol_score:'',
+      cert_biol_number:'',
+      sex:'1',
+      doc_type:'1',
+      country:'0',
+      area:'',
+      settlement_type:'',
+      street_type:'',
+      edu_foreign_lang:'',
+      pref_faculty:'',
+      awards_lang:'',
+      awards_chem:'',
+      awards_biol:'',
+      DD:'',
+      diplo:'',
+      medal:'',
+      bff:'',
+      mil:'',
+      nop:'',
+      dis:'',
+      stat19_23:'',
+      stat18:''
+    });
+    const [ButtonClick,setButtonClick]=useState(false)
+    useEffect(()=>{
+        if(ButtonClick==true){
+            toast.success('Форма отправлена', {
+                position: "top-right"
+            })
+            setButtonClick(false)
+            sendRequest('POST', requestURL, body)
+            .then(body => console.log(body))
+            .catch(err => console.log(err))
+        }
+        const fetchData = async () => {
+            try {
+              const response = await fetch(requestURL);
+              const result = await response.json();
+              setData(result);
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          };
+          console.log(data)
+          fetchData();
+        }, []);
+
+    function handleClick(e) {
+        setButtonClick(true)
+        e.preventDefault()
       }
 
     const surname=useInput('',{isEmpty:true,isRus:true})
@@ -278,29 +384,7 @@ function Anketa({DataForAnketa,setDataForAnketa}) {
       stat18:stat18.checked
     }
 
-
-const [ButtonClick,setButtonClick]=useState(false)
-useEffect(()=>{
-    if(ButtonClick==true){
-        toast.success('Форма отправлена', {
-            position: "top-right"
-        })
-        setButtonClick(false)
-        sendRequest('POST', requestURL, body)
-        .then(body => console.log(body))
-        .catch(err => console.log(err))
-    }
-    if(DataForAnketa!=null){
-        sendRequest('POST', requestURL, DataForAnketa)
-        .then(DataForAnketa => console.log(DataForAnketa))
-        .catch(err => console.log(err))
-    }
-})
-
-    function handleClick(e) {
-        setButtonClick(true)
-        e.preventDefault()
-      }
+    
     
 
      /*toast.error("Error Notification !", {

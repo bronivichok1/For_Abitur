@@ -141,7 +141,6 @@ function ForRead() {
                     <button disabled={number.Num||number.isEmpty||date_of_issue.inputData||date_of_issue.isEmpty||serial.isEmpty}
                     onClick={handleClick}
                      type="submit" className="btn btn-1 btn-sep icon-info">Далее</button>
-                     
                 </div>
               </form>
         </div>

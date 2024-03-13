@@ -5,7 +5,7 @@ export default function ButtonForNavigate(props){
 
     return(
       <div class="container">
-            <button disabled={props.off} className={props.style}  id="submit" onClick={props.function&&(() => navigate(props.adress, { replace: false }))}>
+            <button className={props.style}  id="submit" onClick={() => navigate(props.adress, { replace: false })}>
             <p>{props.title}</p>
             </button>
       </div>
