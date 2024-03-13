@@ -1,8 +1,11 @@
 import "../style/Anketa.css"
 import ButtonForNavigate from "../components/ButtonForNavigate"
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from 'react'
-import { redirect } from "react-router-dom";
+import { useEffect, useState  } from 'react'
+import Anketa from "./Anketa";
+import { useNavigate } from 'react-router-dom';
+
+
 
 
 
@@ -86,6 +89,8 @@ const requestURL = 'https://jsonplaceholder.typicode.com/users'
 
 function ForRead() {
 
+  const navigate = useNavigate();
+
 
     const serial=useInput('',{isEmpty:true})
     const number=useInput('',{isEmpty:true,Num:true})
@@ -96,11 +101,22 @@ function ForRead() {
       number: number.value,
       date_of_issue:date_of_issue.value
     }
-    function dataOut(){
-      sendRequest('POST', requestURL, body)
-       .then(data => console.log(data))
-       .catch(err => console.log(err))
-   }
+    const [ButtonClick,setButtonClick]=useState(false)
+    useEffect(()=>{
+        if(ButtonClick==true){
+            setButtonClick(false)
+            sendRequest('POST', requestURL, body)
+            .then(body => console.log(body))
+            .catch(err => console.log(err))
+            navigate("/FillData", { replace: false })
+        }
+    })
+    function handleClick(e) {
+      setButtonClick(true)
+      e.preventDefault()
+
+    }
+
     return (
  
         <div className="div">
@@ -123,8 +139,9 @@ function ForRead() {
 </label>
         <div align ="center" >
                     <button disabled={number.Num||number.isEmpty||date_of_issue.inputData||date_of_issue.isEmpty||serial.isEmpty}
-                    onClickCapture={()=>dataOut()}
+                    onClick={handleClick}
                      type="submit" className="btn btn-1 btn-sep icon-info">Далее</button>
+                     
                 </div>
               </form>
         </div>

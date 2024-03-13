@@ -92,7 +92,7 @@ const useInput=(InitialValue,validations)=>{
 }
 
 
-function Anketa() {
+function Anketa({DataForAnketa,setDataForAnketa}) {
     
 
     
@@ -288,6 +288,11 @@ useEffect(()=>{
         setButtonClick(false)
         sendRequest('POST', requestURL, body)
         .then(body => console.log(body))
+        .catch(err => console.log(err))
+    }
+    if(DataForAnketa!=null){
+        sendRequest('POST', requestURL, DataForAnketa)
+        .then(DataForAnketa => console.log(DataForAnketa))
         .catch(err => console.log(err))
     }
 })
