@@ -1,9 +1,6 @@
 import ButtonForNavigate from '../components/ButtonForNavigate'
-import { useLocation} from 'react-router-dom';
-import { useEffect } from 'react';
 
  function Home() {
-  const location = useLocation();
  
   return ( 
     <div >
