@@ -2,7 +2,7 @@ import "../style/Anketa.css"
 import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useTranslation } from 'react-i18next';
 
 
 const useValidation=(value,validations)=>{
@@ -92,7 +92,7 @@ const useInput=(InitialValue,validations)=>{
 
 
 function Anketa() {
-    
+    const { t, i18n } = useTranslation()
     const requestURL = 'https://jsonplaceholder.typicode.com/users'
 
     function sendRequest(method, url, body = null) {
@@ -118,7 +118,8 @@ function Anketa() {
       }
     const [data, setData] = useState({
         name: '',
-      surname: '',
+      /*surname: '',*/
+      surname_info:'',
       second_name:'',
       surname_lat:'',
       name_lat:'',
@@ -126,7 +127,7 @@ function Anketa() {
       citizenship:'',
       serial:'',
       number:'',
-      person_id:'',
+      PlaceOfIssue:'',
       date_of_issue:'',
       date_of_expiry:'',
       authority:'',
@@ -175,7 +176,6 @@ function Anketa() {
       cert_biol_score:'',
       cert_biol_number:'',
       sex:'1',
-      doc_type:'1',
       country:'0',
       area:'',
       settlement_type:'',
@@ -193,7 +193,13 @@ function Anketa() {
       nop:'',
       dis:'',
       stat19_23:'',
-      stat18:''
+      stat18:'',
+      religion:'',
+      DataYourPeople:'',
+      NameSurname:'',
+      PhoneRepresantative:'',
+      country_pass:'',
+      NatPassw:'',
     });
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
@@ -228,22 +234,22 @@ function Anketa() {
         e.preventDefault()
       }
 
-    const surname=useInput(data.surname,{isEmpty:true,isRus:true})
-    const name=useInput(data.name,{isEmpty:true,isRus:true})
-    const second_name=useInput(data.second_name,{isEmpty:true,isRus:true})
-    const surname_lat=useInput(data.surname_lat,{isEmpty:true,isEng:true})
-    const name_lat=useInput(data.name_lat,{isEmpty:true,isEng:true})
+    const surname=useInput(data.surname,{isEmpty:true,isEng:true})
+    const name=useInput(data.name,{isEmpty:true,isEng:true})
+    /*const second_name=useInput(data.second_name,{isEmpty:true,isRus:true})*/
+    const surname_info=useInput(data.surname_info,{})
+
     const date_of_birth=useInput(data.date_of_birt,{isEmpty:true,inputData:true})
     const citizenship=useInput(data.citizenship,{isEmpty:true})
     const serial=useInput(data.serial)
     const number=useInput(data.number,{isEmpty:true, Num:true})
-    const person_id=useInput(data.person_id,{isEmpty:true})
+    const PlaceOfIssue=useInput(data.PlaceOfIssue,{isEmpty:true})
     const date_of_issue=useInput(data.date_of_issue,{isEmpty:true,inputData:true})
     const date_of_expiry=useInput(data.date_of_expiry,{isEmpty:true,inputData:true})
     const authority=useInput(data.authority,{isEmpty:true})
     const postcode=useInput(data.postcode)
     const region=useInput(data.region)
-    const settlement_name=useInput(data.settlement_name)
+    const settlement_name=useInput(data.settlement_name,{isEmpty:true})
     const street_name=useInput(data.street_name)
     const building=useInput(data.building)
     const housing=useInput(data.housing)
@@ -286,7 +292,6 @@ function Anketa() {
     const cert_biol_score=useInput(data.cert_biol_score)
     const cert_biol_number=useInput(data.cert_biol_number)
     const sex=useInput(data.sex,{isEmpty:true})
-    const doc_type=useInput(data.doc_type)
     const country=useInput(data.country)
     const area=useInput(data.area)
     const settlement_type=useInput(data.settlement_type)
@@ -305,18 +310,23 @@ function Anketa() {
     const dis=useInput(data.dis)
     const stat19_23=useInput(data.stat19_23)
     const stat18=useInput(data.stat18)
+    const religion=useInput(data.religion) 
+    const DataYourPeople=useInput(data.DataYourPeople,{isEmpty:true})
+    const NameSurname=useInput(data.NameSurname)
+    const PhoneRepresantative=useInput(data.PhoneRepresantative,{ismobileNum:true})
+    const country_pass=useInput(data.country_pass)
+    const NatPassw=useInput(data.NatPassw)
     
     const body = {
       name: name.value,
       surname: surname.value,
-      second_name:second_name.value,
-      surname_lat:surname_lat.value,
-      name_lat:name_lat.value,
+      /*second_name:second_name.value,*/
+      surname_info:surname_info.value,
       date_of_birth:date_of_birth.value,
       citizenship:citizenship.value,
       serial:serial.value,
       number:number.value,
-      person_id:person_id.value,
+      PlaceOfIssue:PlaceOfIssue.value,
       date_of_issue:date_of_issue.value,
       date_of_expiry:date_of_expiry.value,
       authority:authority.value,
@@ -365,7 +375,6 @@ function Anketa() {
       cert_biol_score:cert_biol_score.value,
       cert_biol_number:cert_biol_number.value,
       sex:sex.value,
-      doc_type:doc_type.value,
       country:country.value,
       area:area.value,
       settlement_type:settlement_type.value,
@@ -383,7 +392,14 @@ function Anketa() {
       nop:nop.checked,
       dis:dis.checked,
       stat19_23:stat19_23.checked,
-      stat18:stat18.checked
+      stat18:stat18.checked,
+      religion:religion.value,
+      DataYourPeople:DataYourPeople.value,
+      NameSurname:NameSurname.value,
+      PhoneRepresantative:PhoneRepresantative.value,
+      country_pass:country_pass.value,
+      NatPassw:NatPassw.value,
+
     }
 
     
@@ -406,107 +422,145 @@ function Anketa() {
 
             
         <form  className="form" autoComplete="off">
-<legend>Личные и паспортные данные</legend>
+<legend>{t('AppDetails')}</legend>
+                <select onChange={(e) => i18n.changeLanguage(e.target.value)}>
+                <option>Choose language</option>
+                <option value="ru">Russian</option>
+                <option value="en">English</option>
+                </select>
+ 
                     <div className="row">
-                <label className="form-label col-sm">Фамилия<span>*</span>
-                        <input  className={surname.isDirty&&(surname.isRus||surname.isEmpty)?"input_w400-error":"input_w400"} onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}   name="surname" maxLength="40" />
-                        {(surname.isDirty&&surname.isEmpty)&&<div  style={{color:'red'}}> Поле "Фамилия" обязательно для заполнения.</div>}
-                        {(surname.isDirty&&surname.isRus&&!surname.isEmpty)&&<div  style={{color:'red'}}> В поле "Фамилия" допустима только кириллица, первая буква - заглавная.</div>}
+                <label className="form-label col-sm">{t('Surname')}<span>*</span>
+                        <input  className={surname.isDirty&&(surname.isEng||surname.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}   name="surname" maxLength="40" />
+                        {(surname.isDirty&&surname.isEmpty)&&<div  style={{color:'red'}}> {t('SurnameErrorEmpty')}</div>}
+                        {(surname.isDirty&&surname.isEng&&!surname.isEmpty)&&<div  style={{color:'red'}}> {t('SurnameError')}</div>}
                 </label> 
-                <label className="form-label col-sm" >Имя<span>*</span>
-                        <input className={name.isDirty&&(name.isRus||name.isEmpty)?"input_w400-error":"input_w400"}  onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} name="name" maxLength="40"/>
-                        {(name.isDirty&&name.isEmpty)&&<div style={{color:'red'}}> Поле "Имя" обязательно для заполнения.</div>}
-                        {(name.isDirty&&name.isRus&&!name.isEmpty)&&<div style={{color:'red'}}> В поле "Имя" допустима только кириллица, первая буква - заглавная.</div>}
-                </label>
-                <label className="form-label col-sm">Отчество
-                        <input className={second_name.isDirty&&second_name.isRus&&!second_name.isEmpty?"input_w390-error":"input_w390"}  onChange={e=>second_name.onChange(e)} onBlur={e=>second_name.onBlur(e)} value={second_name.value}  name="second_name" maxLength="40" />
-                        {(second_name.isDirty&&second_name.isRus&&!second_name.isEmpty)&&<div style={{color:'red'}}> В поле "Отчество" допустима только кириллица, первая буква - заглавная.</div>}
+                <label className="form-label col-sm" >{t('Name')}<span>*</span>
+                        <input className={name.isDirty&&(name.isEng||name.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} name="name" maxLength="40"/>
+                        {(name.isDirty&&name.isEmpty)&&<div style={{color:'red'}}> {t('NameErrorEmpty')}</div>}
+                        {(name.isDirty&&name.isEng&&!name.isEmpty)&&<div style={{color:'red'}}> {t('NameError')}</div>}
                 </label>
                     </div>
                     <div className="row">
-                <label className="form-label col-sm">Фамилия (латиница)<span >*</span>
-                        <input className={surname_lat.isDirty&&(surname_lat.isEng||surname_lat.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>surname_lat.onChange(e)} onBlur={e=>surname_lat.onBlur(e)} value={surname_lat.value} name="surname_lat" maxLength="40" />
-                        {(surname_lat.isDirty&&surname_lat.isEmpty)&&<div style={{color:'red'}}> Поле "Фамилия(латиница)" обязательно для заполнения.</div>}
-                        {(surname_lat.isDirty&&surname_lat.isEng&&!surname_lat.isEmpty)&&<div style={{color:'red'}}> В поле "Фамилия(латиница)" допустима только латиница,первая буква - заглавная .</div>}
-                </label> 
-                <label className="form-label col-sm">Имя (латиница)<span >*</span>
-                        <input className={name_lat.isDirty&&(name_lat.isEng||name_lat.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>name_lat.onChange(e)} onBlur={e=>name_lat.onBlur(e)} value={name_lat.value}  name="name_lat" maxLength="40" />
-                        {(name_lat.isDirty&&name_lat.isEmpty)&&<div style={{color:'red'}}> Поле "Имя(латиница)" обязательно для заполнения.</div>}
-                        {(name_lat.isDirty&&name_lat.isEng&&!name_lat.isEmpty)&&<div style={{color:'red'}}> В поле "Имя(латиница)" допустима только латиница,первая буква - заглавная .</div>}
+                <label className="form-label col-sm">{t('Surname_info')}<span>*</span>
+                        <input className={surname_info.isDirty&&surname_info.isRus&&!surname_info.isEmpty?"input_w1210-error":"input_w1210"}  onChange={e=>surname_info.onChange(e)} onBlur={e=>surname_info.onBlur(e)} value={surname_info.value}  name="second_name" maxLength="100" />
+                        {(surname_info.isDirty&&surname_info.isEmpty)&&<div style={{color:'red'}}>{t('Surname_infoError')}</div>}
                 </label>
                     </div>
                     <div className="row">
-                <label className="form-label col-sm">Пол<span >*</span>
+                <label className="form-label col-sm">{t('Gender')}<span >*</span>
                     <select className="select_w300 " onChange={e=>sex.onChange(e)} onBlur={e=>sex.onBlur(e)} value={sex.value}  name="sex">
-                        <option value="0">Женский</option>
-                        <option value="1">Мужской</option>
+                        <option value="0">{t('Female')}</option>
+                        <option value="1">{t('Male')}</option>
                     </select>
                 </label>
-                <label className="form-label col-sm">Дата рождения<span >*</span>
-                <input className={date_of_birth.isDirty&&(date_of_birth.inputData||date_of_birth.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value}  name="date_of_birth" placeholder="дд.мм.гггг" maxLength="10" />
-                        {(date_of_birth.isDirty&&date_of_birth.isEmpty)&&<div style={{color:'red'}}> Поле "Дата рождения" обязательно для заполнения.</div>}
-                        {(date_of_birth.isDirty&&date_of_birth.inputData&&!date_of_birth.isEmpty)&&<div style={{color:'red'}}> Поле "Дата рождения" должно соответствовать формату "дд.мм.гггг".</div>}
-
-                </label>
-                <label className="form-label col-sm-6">Тип документа<span >*</span>
-                    <select className="select_w595" onChange={e=>doc_type.onChange(e)} onBlur={e=>doc_type.onBlur(e)} value={doc_type.value}  name="doc_type">
-                        <option value="1" >паспорт гражданина РБ</option>
-                        <option value="2">паспорт иностранного гражданина</option>
-                        <option value="3">вид на жительство РБ</option>
-                        <option value="4">справка об освобождении</option>
-                        <option value="5">ид. карта гражданина РБ</option>
-                        <option value="6">биометр. ВНЖ РБ иностранного гражданина</option>
-                        <option value="7">биометр. ВНЖ РБ лица без гражданства</option>
-                        <option value="8">удостоверение беженца</option>
-                        <option value="9">проездной док. лица без гражданства</option>
-                        <option value="10">биометр. паспорт иностранного гражданина</option>
-                        <option value="11">ид. карта иностранного гражданина</option>
-                    </select>
-                </label>
-                    </div>
-                    <div className="row">
-                <label className="form-label col-sm-6">Гражданство<span >*</span>
+                <label className="form-label col-sm-6">{t('Nationality')}<span >*</span>
                         <input className={citizenship.isDirty&&citizenship.isEmpty?"input_w600-error":"input_w600"} onChange={e=>citizenship.onChange(e)} onBlur={e=>citizenship.onBlur(e)} value={citizenship.value} name="citizenship" maxLength="40" />
-                        {(citizenship.isDirty&&citizenship.isEmpty)&&<div style={{color:'red'}}> Поле "Гражданство" обязательно для заполнения.</div>}
+                        {(citizenship.isDirty&&citizenship.isEmpty)&&<div style={{color:'red'}}> {t('NationalityError')}</div>}
 
                 </label>
-                <label className="form-label col-sm-2">Серия
-                        <input className="input_w295" onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="10" />
-                
-                </label>
-                <label className="form-label col-sm-4">Номер<span >*</span>
-                        <input className={number.isDirty&&(number.isEmpty||number.Num)?"input_w295-error":"input_w295"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="15" />
-                        {(number.isDirty&&number.isEmpty)&&<div style={{color:'red'}}> Поле "Номер" обязательно для заполнения.</div>}
-                        {(number.isDirty&&number.Num&&!number.isEmpty)&&<div style={{color:'red'}}> Поле "Номер" может содержать только цифры.</div>}
-
-                </label>
-                    </div>
-                    <div className="row">
-                <label className="form-label col-sm-6">Идентификационный номер
-                        <input className="input_w600" onChange={e=>person_id.onChange(e)} onBlur={e=>person_id.onBlur(e)} value={person_id.value}  name="person_id" maxLength="20" />
-                </label>
-                <label className="form-label col-sm-3">Дата выдачи<span >*</span>
-                        <input className={date_of_issue.isDirty&&(date_of_issue.inputData||date_of_issue.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" />
-                        {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
-                        {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div style={{color:'red'}}> Поле "Дата выдачи" должно соответствовать формату "дд.мм.гггг".</div>}
-
-                </label>
-                <label className="form-label col-sm-3">Срок действия<span >*</span>
-                        <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10"/>
-                        {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}> Поле "Срок действия" обязательно для заполнения.</div>}
-                        {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div style={{color:'red'}}> Поле "Срок действия" должно соответствовать формату "дд.мм.гггг".</div>}
-
-                </label>
-                    </div>
-                    <div className="row">
-                <label className="form-label w-100">Кем выдан<span >*</span>
-                        <input className={authority.isDirty&&authority.isEmpty?"input_w1210-error":"input_w1210"} onChange={e=>authority.onChange(e)} onBlur={e=>authority.onBlur(e)} value={authority.value}  name="authority" maxLength="100" />
-                        {(authority.isDirty&&authority.isEmpty)&&<div style={{color:'red'}}> Поле "Кем выдан" обязательно для заполнения.</div>}
+                <label className="form-label col-sm">{t('DateOfBirth')}<span >*</span>
+                <input className={date_of_birth.isDirty&&(date_of_birth.inputData||date_of_birth.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value}  name="date_of_birth" placeholder="дд.мм.гггг" maxLength="10" />
+                        {(date_of_birth.isDirty&&date_of_birth.isEmpty)&&<div style={{color:'red'}}> {t('DateOfBirthErrorEmpty')}</div>}
+                        {(date_of_birth.isDirty&&date_of_birth.inputData&&!date_of_birth.isEmpty)&&<div style={{color:'red'}}> {t('DateOfBirthError')}</div>}
 
                 </label>
                 </div>
+                <div className="row">
+                <label className="form-label col-sm">{t('Town')}<span>*</span>
+                        <input className={settlement_name.isDirty&&settlement_name.isEmpty?"input_w600-error":"input_w600"}  onChange={e=>settlement_name.onChange(e)} onBlur={e=>settlement_name.onBlur(e)} value={settlement_name.value}  name="settlement_name" maxLength="40" />
+                        {(settlement_name.isDirty&&settlement_name.isEmpty)&&<div style={{color:'red'}}> {t('TownError')}</div>}
+
+                </label>
+                <label className="form-label col-sm-8">{t('Country')} <span>*</span>
+                        <select className="select_w595" onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value}  name="country">
+                        <option value="0">{t('Сou0')}</option>
+                        <option value="1">{t('Сou1')}</option>
+                        <option value="2">{t('Сou2')}</option>
+                        <option value="3">{t('Сou3')}</option>
+                        <option value="4">{t('Сou4')}</option>
+                    </select>
+                </label>
+                    </div>
+                    <div className="row">
+                    <label className="form-label col-sm-4">{t('Number')}
+                        <input className="input_w600" onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="15" />
+                    </label>
+                    <label className="form-label col-sm-4">{t('Religion')}
+                        <input className="input_w600" onChange={e=>religion.onChange(e)} onBlur={e=>religion.onBlur(e)} value={religion.value}  name="religion" maxLength="15" />
+                    </label>
+                    </div>
+                    <div className="row">
+                    <label className="form-label col-sm">{t('PhoneNumber')}<span >*</span>
+                        <input className={mobile_tel.isDirty&&(mobile_tel.ismobileNum||mobile_tel.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxLength="20"  />
+                        {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div  style={{color:'red'}}>{t('PhoneNumberErrorEmpty')} </div>}
+                        {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div  style={{color:'red'}}>{t('PhoneNumberError')} </div>}
+                        </label>
+                    <label className="form-label col-sm">{t('Email')}<span >*</span>
+                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input_w590-error":"input_w590"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxLength="40"/>
+                        {(email.isDirty&&email.isEmpty)&&<div style={{color:'red'}}>{t('EmailErrorEmpty')} </div>}
+                        {(email.isDirty&&email.isemailCheck&&!email.isEmpty)&&<div style={{color:'red'}}> {t('EmailError')}</div>}
+                    </label>
+                </div>
+                <div className="row">
+                <label className="form-label w-100">{t('DataYourPeople')}<span >*</span>
+                        <input className={DataYourPeople.isDirty&&DataYourPeople.isEmpty?"input_w1210-error":"input_w1210"} onChange={e=>DataYourPeople.onChange(e)} onBlur={e=>DataYourPeople.onBlur(e)} value={DataYourPeople.value}  name="DataYourPeople" maxLength="200" />
+                        {(DataYourPeople.isDirty&&DataYourPeople.isEmpty)&&<div style={{color:'red'}}> {t('DataYourPeopleErrorEmpty')}</div>}
+
+                </label>
+                </div>
+                <div className="row">
+                <label className="form-label col-sm">{t('NameSurname')}
+                        <input  className="input_w600" onChange={e=>NameSurname.onChange(e)} onBlur={e=>NameSurname.onBlur(e)} value={NameSurname.value}   name="NameSurname" maxLength="40" />
+                </label> 
+                <label className="form-label col-sm" >{t('PhoneRepresantative')}<span>*</span>
+                <input className={(PhoneRepresantative.isDirty&&PhoneRepresantative.ismobileNum&&!PhoneRepresantative.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>PhoneRepresantative.onChange(e)} onBlur={e=>PhoneRepresantative.onBlur(e)} value={PhoneRepresantative.value}  placeholder="+375XXXXXXXXX" name="PhoneRepresantative" maxLength="50" />
+                        {(PhoneRepresantative.isDirty&&PhoneRepresantative.ismobileNum&&!PhoneRepresantative.isEmpty)&&<div  style={{color:'red'}}> {t('PhoneRepresantativeError')}</div>}
+                        
+                </label>
+                </div>
                 <hr/>
-<legend className="text-center">Адрес места жительства в соответствии со штампом о регистрации, контактные данные</legend>
+                <legend className="text-center">{t('Passport')}</legend>
+                    <div className="row">
+                <label className="form-label col-sm-4">{t('PassNumber')}<span >*</span>
+                        <input className={number.isDirty&&number.isEmpty?"input_w295-error":"input_w295"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="15" />
+                        {(number.isDirty&&number.isEmpty)&&<div style={{color:'red'}}> {t('PassNumberErrorEmpty')}</div>}
+                </label>
+                <label className="form-label col-sm-8">{t('CountryPass')} <span>*</span>
+                        <select className="select_w900" onChange={e=>country_pass.onChange(e)} onBlur={e=>country_pass.onBlur(e)} value={country_pass.value}  name="country_pass">
+                        <option value="0">{t('Сou0')}</option>
+                        <option value="1">{t('Сou1')}</option>
+                        <option value="2">{t('Сou2')}</option>
+                        <option value="3">{t('Сou3')}</option>
+                        <option value="4">{t('Сou4')}</option>
+                    </select>
+                </label>
+                    </div>
+                    <div className="row">
+                <label className="form-label col-sm-6">{t('PlaceOfIssue')}<span>*</span>
+                        <input className="input_w600" onChange={e=>PlaceOfIssue.onChange(e)} onBlur={e=>PlaceOfIssue.onBlur(e)} value={PlaceOfIssue.value}  name="PlaceOfIssue" maxLength="20" />
+                        {(PlaceOfIssue.isDirty&&PlaceOfIssue.isEmpty)&&<div style={{color:'red'}}> {t('PlaceOfIssueErrorEmpty')}</div>}
+                </label>
+                <label className="form-label col-sm-3">{t('DataOfIssue')}<span >*</span>
+                        <input className={date_of_issue.isDirty&&(date_of_issue.inputData||date_of_issue.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" />
+                        {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div style={{color:'red'}}> {t('DataOfIssueErrorEmpty')}</div>}
+                        {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueError')}</div>}
+
+                </label>
+                <label className="form-label col-sm-3">{t('DateOfExpiry')}<span >*</span>
+                        <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10"/>
+                        {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}>  {t('DateOfExpiryErrorEmpty')}</div>}
+                        {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div style={{color:'red'}}> {t('DateOfExpiryError')}</div>}
+
+                </label>
+                    </div>
+                    <div className="row">
+                <label className="form-label w-100">{t('NatPassw')}<span >*</span>
+                        <input className={NatPassw.isDirty&&NatPassw.isEmpty?"input_w1210-error":"input_w1210"} onChange={e=>NatPassw.onChange(e)} onBlur={e=>NatPassw.onBlur(e)} value={NatPassw.value}  name="authority" maxLength="100" />
+                </label>
+                </div>
+                <hr/>
+{/*<legend className="text-center">Адрес места жительства в соответствии со штампом о регистрации, контактные данные</legend>
                 <div className="row">
                     <label className="form-label col-sm-4">Почтовый индекс
                         <input className="input_w295" onChange={e=>postcode.onChange(e)} onBlur={e=>postcode.onBlur(e)} value={postcode.value}  name="postcode" maxLength="10"/></label>
@@ -577,31 +631,20 @@ function Anketa() {
                     <label className="form-label col-sm-6">Домашний тел.
                         <input className="input_w580 " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel"  maxLength="20" /></label>
                 </div>
-                <div className="row">
-                    <label className="form-label col-sm">Мобильный тел.<span >*</span>
-                        <input className={mobile_tel.isDirty&&(mobile_tel.ismobileNum||mobile_tel.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>mobile_tel.onChange(e)} onBlur={e=>mobile_tel.onBlur(e)} value={mobile_tel.value}  placeholder="+375XXXXXXXXX" name="mobile_tel" maxLength="20"  />
-                        {(mobile_tel.isDirty&&mobile_tel.isEmpty)&&<div  style={{color:'red'}}> Поле "Мобильный тел." обязательно для заполнения.</div>}
-                        {(mobile_tel.isDirty&&mobile_tel.ismobileNum&&!mobile_tel.isEmpty)&&<div  style={{color:'red'}}> Поле "Мобильный тел." должно соответствовать формату "+375XXXXXXXXX".</div>}
-                        </label>
-                    <label className="form-label col-sm">E-mail<span >*</span>
-                        <input className={email.isDirty&&(email.isemailCheck||email.isEmpty)?"input_w590-error":"input_w590"} onChange={e=>email.onChange(e)} onBlur={e=>email.onBlur(e)} value={email.value}  name="email" maxLength="40"/>
-                        {(email.isDirty&&email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" обязательно для заполнения.</div>}
-                        {(email.isDirty&&email.isemailCheck&&!email.isEmpty)&&<div style={{color:'red'}}> Поле "E-mail" заполнено неверно.</div>}
-                    </label>
-                </div>
-                <hr/>
-<legend className="text-center">Образование, сведения документа об образовании</legend>
-                    <label className="form-label w-100">Название УО<span ></span>
+                
+    <hr/> */}
+<legend className="text-center">{t('EducationInfo')}</legend>
+                    <label className="form-label w-100">{t('EducationInst')}<span ></span>
                         <input className="input_w1210"  onChange={e=>edu_name.onChange(e)} onBlur={e=>edu_name.onBlur(e)} value={edu_name.value} name="edu_name" maxLength="150"  /></label>
                 <div className="row">
-                    <label className="form-label col-sm">Серия Номер<span ></span>
+                    <label className="form-label col-sm">{t('EduSerialNumber')}<span ></span>
                         <input className="input_w600" onChange={e=>edu_serial_number.onChange(e)} onBlur={e=>edu_serial_number.onBlur(e)} value={edu_serial_number.value}  name="edu_serial_number" maxLength="20"  /></label>
-                    <label className="form-label col-sm">Дата выдачи<span ></span>
+                    <label className="form-label col-sm">{t('DataOfIssue')}<span ></span>
                         <input className={(edu_date_of_issue.isDirty&&edu_date_of_issue.ismobileNum&&!edu_date_of_issue.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>edu_date_of_issue.onChange(e)} onBlur={e=>edu_date_of_issue.onBlur(e)} value={edu_date_of_issue.value} name="edu_date_of_issue" maxLength="10" placeholder="дд.мм.гггг" />
-                        {(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)&&<div style={{color:'red'}}> Поле "Дата выдачи" должно соответствовать формату "дд.мм.гггг".</div>}
+                        {(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueError')}</div>}
                         </label>
                 </div>
-                <div className="row">
+    {/*           <div className="row">
                     <label className="form-label col-sm">Средний балл<span ></span>
                         <input className="input_w600" onChange={e=>edu_average.onChange(e)} onBlur={e=>edu_average.onBlur(e)} value={edu_average.value} name="edu_average" maxLength="3"  /></label>
                     <label className="form-label col-sm">Иностранный язык<span></span>
@@ -614,10 +657,11 @@ function Anketa() {
                         <option value="6">Китайский</option>
                         <option value="7">другой</option>
                     </select></label>
-                </div>
+                    </div>
+    */}
                 <hr/>
-<legend className="text-center">Информация о поступлении</legend>
-                    <label className="form-label w-200">Факультет/Институт<span >*</span>
+<legend className="text-center">{t('InfoAdmission')}</legend>
+                    <label className="form-label w-200">{t('Faculty')}<span >*</span>
                     <select className="select_w1210" onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
                         <optgroup label="Факультеты">	
                             <option value="1">Лечебный</option>
@@ -648,7 +692,11 @@ function Anketa() {
                         </optgroup>
                     </select></label>
                 <div className="row">
-                    <div className="row">
+
+
+
+                    
+                    {/*<div className="row">
                             <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} checked={pref_target.checked} id="prform_chbx_1"  name="pref_target" type="checkbox" />
                         <label htmlFor="prform_chbx_1">На условиях целевой подготовки</label>
                     </div>
@@ -663,8 +711,8 @@ function Anketa() {
                 </div>
                     <div className="row">
                             <input className="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} checked={pref_dorm.checked} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
-                        <label htmlFor="prform_chbx_4">Нуждаюсь в общежитии</label>
-                    </div>
+                        <label htmlFor="prform_chbx_4">Нуждаюсь в общежитии</label>*/}
+                </div>
                     <hr/>
 <legend className="text-center">Работа и стаж</legend>
                 <label className="form-label w-100">Место работы, занимаемая должность (профессия)
@@ -831,7 +879,7 @@ function Anketa() {
 <label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(name.isEmpty||name.isRus)||(surname.isRus||surname.isEmpty)||second_name.isRus||(surname_lat.isEmpty||surname_lat.isEng)||(name_lat.isEng||name_lat.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
+                    <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >Отправить</button>     
   
