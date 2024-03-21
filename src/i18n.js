@@ -96,6 +96,49 @@ i18n
                     InfoAdmission:"Information about admission",
 
                     Faculty:"The faculty where the training is planned",
+                    
+                    FacName1:"Faculties",
+                    Fac1:"Medicinal",
+                    Fac2:"Pediatric",
+                    Fac3:"Medical and preventive",
+                    Fac4:"Dental",
+                    Fac6:"Pharmaceutical",
+                    Fac20:"Pharmaceutical (part-time)",
+                    Fac7:"Career guidance and pre-university preparation",
+                    
+                    FacName2:"Faculty of medicine for foreign students",
+                    Fac10:"Therapeutic, russian language of instruction",
+                    Fac11:"Therapeutic, english language of instruction",
+                    Fac12:"Dental, russian language of instruction",
+                    Fac13:"Dental, english language of instruction",
+                    Fac14:"Medical and preventive, russian language of instruction",
+                    Fac15:"Pharmaceutical, russian language of instruction",
+                    Fac16:"Pharmaceutical, english language of instruction",
+                    Fac21:"Pharmaceutical, russian language of instruction (correspondence)",
+                    
+                    FacName3:"Military medical Institute",
+                    Fac8:"Armed forces",
+                    Fac19:"Armed forces (female)",
+                    Fac17:"Internal troops",
+                    Fac5:"State border committee",
+                    Fac9:"Ministry of internal affairs",
+                    Fac18:"Ministry of emergency situations",
+
+                    HostelLive:"Are you planning to live in a hostel or an apartment?",
+
+                    AddDoc:"Attach documents",
+
+                    AddFile1:"1) Applicant's passport and its copy translated into russian and notarized (a page with a photo and a passport number);",
+                    AddFile2:"2) The original certificate (document) of complete secondary education (advanced level) indicating the subjects studied adn the grades (points) obtained on them, and its copy translated into russian and notarized;",
+                    AddFile3:"3) Certificate of the absence of HIV infection, issued by the official health authority of the country from which the applicant arrived and its copy, translated into russian and notarized;",
+                    AddFile4:"4) For underage (under 18 years old) applicants: the original birth certificate and its copy translated into russian and notarized or the original of another document confirming the date of birth and citizenship, and its copy translated into russian and notarized;",
+                    AddFile5:"5) For underage (under 18 years old) applicants: a power of attorney to represent the interests of a minor and its copy translated into russian and notarized - in case of submission of documents without the presens of parents/guardians;",
+                    AddFile6:"6) A document on passing a mandatory medical examination, confirming the absence of medical contraindications to study in the Republic of Belarus, issued by the official health authority of the country from which the applicant arrived and its copy, translated into russian and notarized;",
+                    AddFile7:"7) Photo",
+
+                    DD:"I give my consent to the processing, storage and use of personal data for a preliminary review of the admissions committee.",
+
+                    ButtonUpload:"Send",
 
 
                 }
@@ -187,6 +230,48 @@ i18n
 
                     Faculty:"Факультет, на котором планируете проходить обучение, или подготовительные курсы",
 
+                    FacName1:"Факультеты",
+                    Fac1:"Лечебный",
+                    Fac2:"Педиатрический",
+                    Fac3:"Медико-профилактический",
+                    Fac4:"Стоматологический",
+                    Fac6:"Фармацевтический",
+                    Fac20:"Фармацевтический (заочно)",
+                    Fac7:"Профориентации и довузовской подготовки",
+                    
+                    FacName2:"Медицинский факультет иностранных учащихся",
+                    Fac10:"Лечебный, русский язык обучения",
+                    Fac11:"Лечебный, английский язык обучения",
+                    Fac12:"Стоматологический, русский язык обучения",
+                    Fac13:"Стоматологический, английский язык обучения",
+                    Fac14:"Медико-профилактический, русский язык обучения",
+                    Fac15:"Фармацевтический, русский язык обучения",
+                    Fac16:"Фармацевтический, английский язык обучения",
+                    Fac21:"Фармацевтический, русский язык обучения (заочно)",
+                    
+                    FacName3:"Военно-медицинский институт",
+                    Fac8:"Вооруженные Силы",
+                    Fac19:"Вооруженные Силы (лица женского пола)",
+                    Fac17:"Внутренние войска",
+                    Fac5:"Государственный пограничный комитет",
+                    Fac9:"Министерство внутренних дел",
+                    Fac18:"МЧС",
+
+                    HostelLive:"Во время учёбы в БГМУ планируете жить в общежитии или снимать квартиру самостоятельно?",
+
+                    AddDoc:"Прикрепить документы",
+
+                    AddFile1:"1) Страниц паспорта, на которых имеется фото и номер паспорта, а также нотариально заверенный перевод на русский язык;",
+                    AddFile2:"2) Оригинал аттестата об общем среднем образовании, и приложения к нему (лист и оценками) и нотариально заверенный перевод на русский язык;",
+                    AddFile3:"3) Справка об отсутствии ВИЧ-инфекцииб выданная официальным органом здравоохранения страны, из которой прибыл абитуриент, и её копия, переведённая на русский язык и нотариально заверенная;",
+                    AddFile4:"4) Для несовершеннолетних (до 18 лет) абитуриентов: оригинал свидетельства о рождении и его копия, переведённая на русский язык и нотариально заверенная, или оригинал другого документа, подтверждающего дату рождения и гражданство, и его копия, переведённая на русский язык и нотариально заверенная;",
+                    AddFile5:"5) Для несовершеннолетних (до 18 лет) абитуриентов: доверенность на представление интересов несовершеннолетнего и её копия, переведённая на русский язык и нотариально заверенная - в случае подачи документов без присутствия родителей/опекунов; ",
+                    AddFile6:"6) Медицинская справка (заключение) о состоянии здоровья и пригодности к обучению в медицинском вузе, выданная официальным органом системы здравоохранения (поликлиникой, стационаром) страны проживания абитуриента (должна быть запись, что абитуриент физически здоров и пригоден к обучению), перевод её копии на русский язык, нотариально заверенный;",
+                    AddFile7:"7) Фотография",
+
+                    DD:"Я даю своё согласие на обработку, хранение и использование персональных данных для предварительного ознакомления приёмной комиссии.",
+                
+                    ButtonUpload:"Отправить",
                 }
             }
         },

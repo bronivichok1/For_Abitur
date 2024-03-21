@@ -3,7 +3,7 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
-
+import { FileUploader } from '../components/FileUploadComponent'
 
 const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)
@@ -13,6 +13,7 @@ const useValidation=(value,validations)=>{
     const[isemailCheck,setemailCheck]=useState(true)
     const[inputData,setInputData]=useState(true)
     const[Num,setInputNum]=useState(true)
+
 
 
     useEffect(()=>{
@@ -200,6 +201,7 @@ function Anketa() {
       PhoneRepresantative:'',
       country_pass:'',
       NatPassw:'',
+      HostelLive:'',
     });
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
@@ -316,6 +318,7 @@ function Anketa() {
     const PhoneRepresantative=useInput(data.PhoneRepresantative,{ismobileNum:true})
     const country_pass=useInput(data.country_pass)
     const NatPassw=useInput(data.NatPassw)
+    const HostelLive=useInput(data.HostelLive)
     
     const body = {
       name: name.value,
@@ -399,6 +402,7 @@ function Anketa() {
       PhoneRepresantative:PhoneRepresantative.value,
       country_pass:country_pass.value,
       NatPassw:NatPassw.value,
+      HostelLive:HostelLive.value,
 
     }
 
@@ -547,7 +551,7 @@ function Anketa() {
                         {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueError')}</div>}
 
                 </label>
-                <label className="form-label col-sm-3">{t('DateOfExpiry')}<span >*</span>
+                <label className="form-label col-sm-3">{t('DateOfExiry')}<span >*</span>
                         <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10"/>
                         {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}>  {t('DateOfExpiryErrorEmpty')}</div>}
                         {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div style={{color:'red'}}> {t('DateOfExpiryError')}</div>}
@@ -660,42 +664,79 @@ function Anketa() {
                     </div>
     */}
                 <hr/>
+                
 <legend className="text-center">{t('InfoAdmission')}</legend>
-                    <label className="form-label w-200">{t('Faculty')}<span >*</span>
+                    <label className="form-label w-200">{t('Faculty')}
                     <select className="select_w1210" onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
-                        <optgroup label="Факультеты">	
-                            <option value="1">Лечебный</option>
-                            <option value="2">Педиатрический</option>
-                            <option value="3">Медико-профилактический</option>
-                            <option value="4">Стоматологический</option>
-                            <option value="6">Фармацевтический</option>
-                            <option value="20">Фармацевтический (заочно)</option>
-                            <option value="7">Профориентации и довузовской подготовки</option>
+                        <optgroup label={t('FacName1')}>	
+                            <option value="1">{t('Fac1')}</option>
+                            <option value="2">{t('Fac2')}</option>
+                            <option value="3">{t('Fac3')}</option>
+                            <option value="4">{t('Fac4')}</option>
+                            <option value="6">{t('Fac6')}</option>
+                            <option value="20">{t('Fac20')}</option>
+                            <option value="7">{t('Fac7')}</option>
                         </optgroup>
-                        <optgroup label="Медицинский факультет иностранных учащихся">
-                            <option value="10">Лечебный, русский язык обучения</option>
-                            <option value="11">Лечебный, английский язык обучения</option>
-                            <option value="12">Стоматологический, русский язык обучения</option>
-                            <option value="13">Стоматологический, английский язык обучения</option>
-                            <option value="14">Медико-профилактический, русский язык обучения</option>
-                            <option value="15">Фармацевтический, русский язык обучения</option>
-                            <option value="16">Фармацевтический, английский язык обучения</option>
-                            <option value="21">Фармацевтический, русский язык обучения (заочно)</option>
+                        <optgroup label={t('FacName2')}>
+                            <option value="10">{t('Fac10')}</option>
+                            <option value="11">{t('Fac11')}</option>
+                            <option value="12">{t('Fac12')}</option>
+                            <option value="13">{t('Fac13')}</option>
+                            <option value="14">{t('Fac14')}</option>
+                            <option value="15">{t('Fac15')}</option>
+                            <option value="16">{t('Fac16')}</option>
+                            <option value="21">{t('Fac21')}</option>
                         </optgroup>
-                        <optgroup label="Военно-медицинский институт">
-                            <option value="8">Вооруженные Силы</option>
-                            <option value="19">Вооруженные Силы (лица женского пола)</option>
-                            <option value="17">Внутренние войска</option>
-                            <option value="5">Государственный пограничный комитет</option>
-                            <option value="9">Министерство внутренних дел</option>
-                            <option value="18">МЧС</option>
+                        <optgroup label={t('FacName3')}>
+                            <option value="8">{t('Fac8')}</option>
+                            <option value="19">{t('Fac19')}</option>
+                            <option value="17">{t('Fac17')}</option>
+                            <option value="5">{t('Fac5')}</option>
+                            <option value="9">{t('Fac9')}</option>
+                            <option value="18">{t('Fac18')}</option>
                         </optgroup>
                     </select></label>
+                    <label className="form-label w-200">{t('HostelLive')}
+                        <input className="input_w1210"  onChange={e=>HostelLive.onChange(e)} onBlur={e=>HostelLive.onBlur(e)} value={HostelLive.value} name="edu_name" maxLength="150"  /></label>
+                    <hr/>    
+
+<legend className="text-center">{t('AddDoc')}</legend>
                 <div className="row">
-
-
-
-                    
+                    <label className="form-label w-200">{t('AddFile1')}
+                    <FileUploader />
+                    </label>
+                </div>
+                <div className="row">
+                    <label className="form-label w-200">{t('AddFile2')}
+                    <FileUploader />
+                    </label>
+                </div>
+                <div className="row">
+                    <label className="form-label w-200">{t('AddFile3')}
+                    <FileUploader />
+                    </label>
+                </div>
+                <div className="row">
+                    <label className="form-label w-200">{t('AddFile4')}
+                    <FileUploader />
+                    </label>
+                </div>
+                <div className="row">
+                    <label className="form-label w-200">{t('AddFile5')}
+                    <FileUploader />
+                    </label>
+                </div>
+                <div className="row">
+                    <label className="form-label w-200">{t('AddFile6')}
+                    <FileUploader />
+                    </label>
+                </div>
+                <div className="row">
+                    <label className="form-label w-200">{t('AddFile7')}
+                    <FileUploader />
+                    </label>
+                </div>
+                    <hr/>
                     {/*<div className="row">
                             <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} checked={pref_target.checked} id="prform_chbx_1"  name="pref_target" type="checkbox" />
                         <label htmlFor="prform_chbx_1">На условиях целевой подготовки</label>
@@ -712,9 +753,9 @@ function Anketa() {
                     <div className="row">
                             <input className="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} checked={pref_dorm.checked} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
                         <label htmlFor="prform_chbx_4">Нуждаюсь в общежитии</label>*/}
-                </div>
-                    <hr/>
-<legend className="text-center">Работа и стаж</legend>
+
+
+{/*<legend className="text-center">Работа и стаж</legend>
                 <label className="form-label w-100">Место работы, занимаемая должность (профессия)
                     <input className="input_w1210" onChange={e=>exp_position.onChange(e)} onBlur={e=>exp_position.onBlur(e)} checked={exp_position.checked}  name="exp_position" maxLength="150" /></label>
                 <p className="lead">Трудовой стаж по профилю избранной специальности:</p>
@@ -872,18 +913,19 @@ function Anketa() {
                         <input onChange={e=>cert_biol_number.onChange(e)} onBlur={e=>cert_biol_number.onBlur(e)} value={cert_biol_number.value} className="input_w400" name="cert_biol_number" maxLength="7" /></label> 
                     <label className="form-label col-sm-2">Балл
                         <input onChange={e=>cert_biol_score.onChange(e)} onBlur={e=>cert_biol_score.onBlur(e)} value={cert_biol_score.value} className="input_w400" name="cert_biol_score" maxLength="3" /></label>
-                </div>
-                <hr/>
+                </div>*/}
+                
+
                 <div >
                     <input  id="agreement" className="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} checked={DD.checked} name="DD"type="checkbox"></input>
-<label htmlFor="agreement" >Даю согласие на обработку, хранение и использование персональных данных для участия в конкурсе на получение высшего образования I ступени и зачисления.</label>
+<label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
                     <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
                     onClick={handleClick}
-                        type="submit" className="glow-button" >Отправить</button>     
+                        type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
   
-                </div>
+                    </div>
                         
         </form>
 
