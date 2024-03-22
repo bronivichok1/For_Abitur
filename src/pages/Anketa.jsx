@@ -702,40 +702,48 @@ function Anketa() {
 
 <legend className="text-center">{t('AddDoc')}</legend>
                 <div className="row">
-                    <label className="form-label w-200">{t('AddFile1')}
-                    <FileUploader />
+                    <label  className="form-label w-200">{t('AddFile1')}
+                    <FileUploader/>
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile2')}
-                    <FileUploader />
+                    <FileUploader/>
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile3')}
-                    <FileUploader />
+                    <FileUploader/>
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile4')}
-                    <FileUploader />
+                    <FileUploader/>
+
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile5')}
-                    <FileUploader />
+                    <FileUploader/>
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile6')}
-                    <FileUploader />
+                    <FileUploader/>
+
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile7')}
-                    <FileUploader />
+                    <FileUploader/>
+
                     </label>
                 </div>
+                    <hr/>
+                    
+                    <legend className="text-center">{t('WarningMessageOne')}</legend>
+                    <legend className="text-center">{t('WarningMessageTwo')}</legend>
+                    <legend className="text-center">{t('WarningMessageThree')}</legend>
                     <hr/>
                     {/*<div className="row">
                             <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} checked={pref_target.checked} id="prform_chbx_1"  name="pref_target" type="checkbox" />
@@ -924,9 +932,10 @@ function Anketa() {
                     <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
-  
                     </div>
-                        
+
+
+
         </form>
 
     )

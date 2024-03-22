@@ -139,6 +139,12 @@ i18n
                     DD:"I give my consent to the processing, storage and use of personal data for a preliminary review of the admissions committee.",
 
                     ButtonUpload:"Send",
+                    
+                    WarningMessageOne:"After arriving in Belarus applicant will need to notarize the translation of passport in Belarus!!!",
+                    WarningMessageTwo:"After arriving in Belarus applicant must pass a mandatory medical examination, confirming the absence of medical contraindications to study in the Republic of Belarus, issued by a healthcare organization of the Republic of Belarus!!!",
+                    WarningMessageThree:"Applicants arriving for training will be interviewed on the following subjects: english language (russian language), chemisry amd biology.",
+
+                    AttFile:"Attach file",
 
 
                 }
@@ -272,6 +278,14 @@ i18n
                     DD:"Я даю своё согласие на обработку, хранение и использование персональных данных для предварительного ознакомления приёмной комиссии.",
                 
                     ButtonUpload:"Отправить",
+
+                    WarningMessageOne:"После прибытия в Республику Беларусь абитуриенту необходимо будет нотариально заверить перевод паспорта в Республике Беларусь!!!",
+                    WarningMessageTwo:"После прибытия в Республику Беларусь абитуриент должен пройти обязательное медицинское освидетельствование, подтверждающее отсутствие медицинских противопоказаний к обучению в Республике Беларусь, выданное организацией здравоохранения Республики Беларусь!!!",
+                    WarningMessageThree:"Абитуриенты, прибывающие на обучение, будут проходить собеседование по следующим предметам: английский язык (русский язык), химия и биология.",
+               
+                    AttFile:"Прикрепить файл",
+
+
                 }
             }
         },
