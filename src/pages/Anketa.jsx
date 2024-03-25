@@ -423,16 +423,14 @@ function Anketa() {
 
 
     return (
-
-            
         <form  className="form" autoComplete="off">
+
+        <div align="right"className="row">
+        <button className="btn-3 btn-sep icon-send" value="ru" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('ru'); }}>RU</button>
+        <button className="btn-3 btn-sep icon-send" value="en" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('en'); }}>EN</button>
+        </div>
 <legend>{t('AppDetails')}</legend>
-                <select onChange={(e) => i18n.changeLanguage(e.target.value)}>
-                <option>Choose language</option>
-                <option value="ru">Russian</option>
-                <option value="en">English</option>
-                </select>
- 
+                
                     <div className="row">
                 <label className="form-label col-sm">{t('Surname')}<span>*</span>
                         <input  className={surname.isDirty&&(surname.isEng||surname.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}   name="surname" maxLength="40" />
@@ -703,41 +701,37 @@ function Anketa() {
 <legend className="text-center">{t('AddDoc')}</legend>
                 <div className="row">
                     <label  className="form-label w-200">{t('AddFile1')}
-                    <FileUploader/>
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile2')}
-                    <FileUploader/>
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile3')}
-                    <FileUploader/>
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile4')}
-                    <FileUploader/>
-
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile5')}
-                    <FileUploader/>
                     </label>
                 </div>
                 <div className="row">
                     <label className="form-label w-200">{t('AddFile6')}
-                    <FileUploader/>
-
                     </label>
                 </div>
-                <div className="row">
+                <div className="row" >
                     <label className="form-label w-200">{t('AddFile7')}
-                    <FileUploader/>
-
+                    <div align="center">
+                </div >     
                     </label>
+                    
+                    <legend className="text-center">                    
+                        <FileUploader/>
+                    </legend>
                 </div>
                     <hr/>
                     
