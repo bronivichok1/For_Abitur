@@ -11,7 +11,8 @@ export const FileUploader = () => {
   const handleOnChange = (event) => {
     event.preventDefault();
     if (event.target.files && event.target.files.length) {
-      const files = Array.from(event.target.files).slice(0, 15);
+      const filesNew = Array.from(event.target.files).slice(0, 15);
+      const files=filesNew.concat(images)
       setImages(files);
       files.forEach((file) => {
         const reader = new FileReader();
@@ -25,6 +26,7 @@ export const FileUploader = () => {
 
   const removeImage = (event, index) => {
     event.stopPropagation(); // Предотвращает дальнейшее всплытие
+     event.preventDefault();
     const newImages = [...images]; // Создаем копию массива images
     const newURLs = [...imageURLs]; // Создаем копию массива imageURLs
     newImages.splice(index, 1); // Удаляем изображение по индексу
