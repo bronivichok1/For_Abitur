@@ -119,11 +119,8 @@ function Anketa() {
       }
     const [data, setData] = useState({
         name: '',
-      /*surname: '',*/
+      surname: '',
       surname_info:'',
-      second_name:'',
-      surname_lat:'',
-      name_lat:'',
       date_of_birth:'',
       citizenship:'',
       serial:'',
@@ -131,70 +128,15 @@ function Anketa() {
       PlaceOfIssue:'',
       date_of_issue:'',
       date_of_expiry:'',
-      authority:'',
-      postcode:'',
-      region: '1',
       settlement_name:'',
-      street_name:'',
-      building:'',
-      housing:'',
-      apartment:'',
-      stat_tel:'',
       mobile_tel:'+375',
       email:'',
       edu_date_of_issue:'',
       edu_serial_number:'',
       edu_name:'',
-      edu_average:'',
-      pref_pay:'1',
-      pref_nopay:'1',
-      pref_target:'1',
-      pref_dorm:'1',
-      exp_position:'',
-      exp_years:'',
-      exp_months:'',
-      father_surname:'',
-      father_name:'',
-      father_second_name:'',
-      father_job:'',
-      father_position:'',
-      father_phone:'+375',
-      father_address:'',
-      mother_surname:'',
-      mother_name:'',
-      mother_second_name:'',
-      mother_job:'',
-      mother_position:'',
-      mother_phone:'+375',
-      mother_address:'',
-      cert_lang_serial:'',
-      cert_lang_number:'',
-      cert_lang_score:'',
-      cert_chem_serial:'',
-      cert_chem_number:'',
-      cert_chem_score:'',
-      cert_biol_serial:'',
-      cert_biol_score:'',
-      cert_biol_number:'',
       sex:'1',
       country:'0',
-      area:'',
-      settlement_type:'',
-      street_type:'',
-      edu_foreign_lang:'',
-      pref_faculty:'',
-      awards_lang:'',
-      awards_chem:'',
-      awards_biol:'',
       DD:'',
-      diplo:'',
-      medal:'',
-      bff:'',
-      mil:'',
-      nop:'',
-      dis:'',
-      stat19_23:'',
-      stat18:'',
       religion:'',
       DataYourPeople:'',
       NameSurname:'',
@@ -202,6 +144,8 @@ function Anketa() {
       country_pass:'',
       NatPassw:'',
       HostelLive:'',
+      numberNational:'',
+      pref_faculty:'0',
     });
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
@@ -238,9 +182,7 @@ function Anketa() {
 
     const surname=useInput(data.surname,{isEmpty:true,isEng:true})
     const name=useInput(data.name,{isEmpty:true,isEng:true})
-    /*const second_name=useInput(data.second_name,{isEmpty:true,isRus:true})*/
-    const surname_info=useInput(data.surname_info,{})
-
+    const surname_info=useInput(data.surname_info,{isEmpty:true})
     const date_of_birth=useInput(data.date_of_birt,{isEmpty:true,inputData:true})
     const citizenship=useInput(data.citizenship,{isEmpty:true})
     const serial=useInput(data.serial)
@@ -248,82 +190,28 @@ function Anketa() {
     const PlaceOfIssue=useInput(data.PlaceOfIssue,{isEmpty:true})
     const date_of_issue=useInput(data.date_of_issue,{isEmpty:true,inputData:true})
     const date_of_expiry=useInput(data.date_of_expiry,{isEmpty:true,inputData:true})
-    const authority=useInput(data.authority,{isEmpty:true})
-    const postcode=useInput(data.postcode)
-    const region=useInput(data.region)
     const settlement_name=useInput(data.settlement_name,{isEmpty:true})
-    const street_name=useInput(data.street_name)
-    const building=useInput(data.building)
-    const housing=useInput(data.housing)
-    const apartment=useInput(data.apartment)
-    const stat_tel=useInput(data.stat_tel)
     const mobile_tel=useInput(data.mobile_tel,{isEmpty:true,ismobileNum:true})
     const email=useInput(data.email,{isEmpty:true,isemailCheck:true})
     const edu_date_of_issue=useInput(data.edu_date_of_issue,{isEmpty:true, inputData:true})
     const edu_serial_number=useInput(data.edu_serial_number)
     const edu_name=useInput(data.edu_name)
-    const edu_average=useInput(data.edu_average,{isEmpty:true})
-    const pref_pay=useInput(data.pref_pay)
-    const pref_nopay=useInput(data.pref_nopay)
-    const pref_target=useInput(data.pref_target)
-    const pref_dorm=useInput(data.pref_dorm)
-    const exp_position=useInput(data.exp_position,{isEmpty:true})
-    const exp_years=useInput(data.exp_years,{isEmpty:true})
-    const exp_months=useInput(data.exp_months,{isEmpty:true})
-    const father_surname=useInput(data.father_surname)
-    const father_name=useInput(data.father_name)
-    const father_second_name=useInput(data.father_second_name)
-    const father_job=useInput(data.father_job)
-    const father_position=useInput(data.father_position)
-    const father_phone=useInput(data.father_phone,{isEmpty:true,ismobileNum:true })
-    const father_address=useInput(data.father_address)
-    const mother_surname=useInput(data.mother_surname)
-    const mother_name=useInput(data.mother_name)
-    const mother_second_name=useInput(data.mother_second_name)
-    const mother_job=useInput(data.mother_job)
-    const mother_position=useInput(data.mother_position)
-    const mother_phone=useInput(data.mother_phone,{isEmpty:true,ismobileNum:true})
-    const mother_address=useInput(data.mother_address)
-    const cert_lang_serial=useInput(data.cert_lang_serial)
-    const cert_lang_number=useInput(data.cert_lang_number)
-    const cert_lang_score=useInput(data.cert_lang_score)
-    const cert_chem_serial=useInput(data.cert_chem_serial)
-    const cert_chem_number=useInput(data.cert_chem_number)
-    const cert_chem_score=useInput(data.cert_chem_score)
-    const cert_biol_serial=useInput(data.cert_biol_serial)
-    const cert_biol_score=useInput(data.cert_biol_score)
-    const cert_biol_number=useInput(data.cert_biol_number)
     const sex=useInput(data.sex,{isEmpty:true})
     const country=useInput(data.country)
-    const area=useInput(data.area)
-    const settlement_type=useInput(data.settlement_type)
-    const street_type=useInput(data.street_type)
-    const edu_foreign_lang=useInput(data.edu_foreign_lang)
     const pref_faculty=useInput(data.pref_faculty)
-    const awards_lang=useInput(data.awards_lang)
-    const awards_chem=useInput(data.awards_chem)
-    const awards_biol=useInput(data.awards_biol)
     const DD=useInput(data.DD)
-    const diplo=useInput(data.diplo)
-    const medal=useInput(data.medal)
-    const bff=useInput(data.bff)
-    const mil=useInput(data.mil)
-    const nop=useInput(data.nop)
-    const dis=useInput(data.dis)
-    const stat19_23=useInput(data.stat19_23)
-    const stat18=useInput(data.stat18)
     const religion=useInput(data.religion) 
     const DataYourPeople=useInput(data.DataYourPeople,{isEmpty:true})
     const NameSurname=useInput(data.NameSurname)
     const PhoneRepresantative=useInput(data.PhoneRepresantative,{ismobileNum:true})
-    const country_pass=useInput(data.country_pass)
-    const NatPassw=useInput(data.NatPassw)
+    const country_pass=useInput(data.country_pass,{isEmpty:true})
+    const NatPassw=useInput(data.NatPassw,{isEmpty:true})
     const HostelLive=useInput(data.HostelLive)
-    
+    const numberNational =useInput(data.numberNational)
+
     const body = {
       name: name.value,
       surname: surname.value,
-      /*second_name:second_name.value,*/
       surname_info:surname_info.value,
       date_of_birth:date_of_birth.value,
       citizenship:citizenship.value,
@@ -332,70 +220,15 @@ function Anketa() {
       PlaceOfIssue:PlaceOfIssue.value,
       date_of_issue:date_of_issue.value,
       date_of_expiry:date_of_expiry.value,
-      authority:authority.value,
-      postcode:postcode.value,
-      region:region.value,
       settlement_name:settlement_name.value,
-      street_name:street_name.value,
-      building:building.value,
-      housing:housing.value,
-      apartment:apartment.value,
-      stat_tel:stat_tel.value,
       mobile_tel:mobile_tel.value,
       email:email.value,
       edu_date_of_issue:edu_date_of_issue.value,
       edu_serial_number:edu_serial_number.value,
       edu_name:edu_name.value,
-      edu_average:edu_average.value,
-      pref_pay:pref_pay.checked,
-      pref_nopay:pref_nopay.checked,
-      pref_target:pref_target.checked,
-      pref_dorm:pref_dorm.checked,
-      exp_position:exp_position.value,
-      exp_years:exp_years.value,
-      exp_months:exp_months.value,
-      father_surname:father_surname.value,
-      father_name:father_name.value,
-      father_second_name:father_second_name.value,
-      father_job:father_job.value,
-      father_position:father_position.value,
-      father_phone:father_phone.value,
-      father_address:father_address.value,
-      mother_surname:mother_surname.value,
-      mother_name:mother_name.value,
-      mother_second_name:mother_second_name.value,
-      mother_job:mother_job.value,
-      mother_position:mother_position.value,
-      mother_phone:mother_phone.value,
-      mother_address:mother_address.value,
-      cert_lang_serial:cert_lang_serial.value,
-      cert_lang_number:cert_lang_number.value,
-      cert_lang_score:cert_lang_score.value,
-      cert_chem_serial:cert_chem_serial.value,
-      cert_chem_number:cert_chem_number.value,
-      cert_chem_score:cert_chem_score.value,
-      cert_biol_serial:cert_biol_serial.value,
-      cert_biol_score:cert_biol_score.value,
-      cert_biol_number:cert_biol_number.value,
       sex:sex.value,
       country:country.value,
-      area:area.value,
-      settlement_type:settlement_type.value,
-      street_type:street_type.value,
-      edu_foreign_lang:edu_foreign_lang.value,
-      pref_faculty:pref_faculty.value,
-      awards_lang:awards_lang.value,
-      awards_chem:awards_chem.value,
-      awards_biol:awards_biol.value,
       DD:DD.checked,
-      diplo:diplo.checked,
-      medal:medal.checked,
-      bff:bff.checked,
-      mil:mil.checked,
-      nop:nop.checked,
-      dis:dis.checked,
-      stat19_23:stat19_23.checked,
-      stat18:stat18.checked,
       religion:religion.value,
       DataYourPeople:DataYourPeople.value,
       NameSurname:NameSurname.value,
@@ -403,6 +236,8 @@ function Anketa() {
       country_pass:country_pass.value,
       NatPassw:NatPassw.value,
       HostelLive:HostelLive.value,
+      numberNational:numberNational.value,
+      pref_faculty:pref_faculty.value,
 
     }
 
@@ -427,7 +262,7 @@ function Anketa() {
 
         <div align="right"className="row">
         <button className="btn-3 btn-sep icon-send" value="ru" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('ru'); }}>RU</button>
-        <button className="btn-3 btn-sep icon-send" value="en" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('en'); }}>EN</button>
+        <button className="btn-11 btn-sep icon-send" value="en" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('en'); }}>EN</button>
         </div>
 <legend>{t('AppDetails')}</legend>
                 
@@ -445,7 +280,7 @@ function Anketa() {
                     </div>
                     <div className="row">
                 <label className="form-label col-sm">{t('Surname_info')}<span>*</span>
-                        <input className={surname_info.isDirty&&surname_info.isRus&&!surname_info.isEmpty?"input_w1210-error":"input_w1210"}  onChange={e=>surname_info.onChange(e)} onBlur={e=>surname_info.onBlur(e)} value={surname_info.value}  name="second_name" maxLength="100" />
+                        <input className={surname_info.isDirty&&surname_info.isEmpty?"input_w1210-error":"input_w1210"}  onChange={e=>surname_info.onChange(e)} onBlur={e=>surname_info.onBlur(e)} value={surname_info.value}  name="second_name" maxLength="100" />
                         {(surname_info.isDirty&&surname_info.isEmpty)&&<div style={{color:'red'}}>{t('Surname_infoError')}</div>}
                 </label>
                     </div>
@@ -486,7 +321,7 @@ function Anketa() {
                     </div>
                     <div className="row">
                     <label className="form-label col-sm-4">{t('Number')}
-                        <input className="input_w600" onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="15" />
+                        <input className="input_w600" onChange={e=>numberNational.onChange(e)} onBlur={e=>numberNational.onBlur(e)} value={numberNational.value}  name="numberNational" maxLength="15" />
                     </label>
                     <label className="form-label col-sm-4">{t('Religion')}
                         <input className="input_w600" onChange={e=>religion.onChange(e)} onBlur={e=>religion.onBlur(e)} value={religion.value}  name="religion" maxLength="15" />
@@ -515,7 +350,7 @@ function Anketa() {
                 <label className="form-label col-sm">{t('NameSurname')}
                         <input  className="input_w600" onChange={e=>NameSurname.onChange(e)} onBlur={e=>NameSurname.onBlur(e)} value={NameSurname.value}   name="NameSurname" maxLength="40" />
                 </label> 
-                <label className="form-label col-sm" >{t('PhoneRepresantative')}<span>*</span>
+                <label className="form-label col-sm" >{t('PhoneRepresantative')}
                 <input className={(PhoneRepresantative.isDirty&&PhoneRepresantative.ismobileNum&&!PhoneRepresantative.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>PhoneRepresantative.onChange(e)} onBlur={e=>PhoneRepresantative.onBlur(e)} value={PhoneRepresantative.value}  placeholder="+375XXXXXXXXX" name="PhoneRepresantative" maxLength="50" />
                         {(PhoneRepresantative.isDirty&&PhoneRepresantative.ismobileNum&&!PhoneRepresantative.isEmpty)&&<div  style={{color:'red'}}> {t('PhoneRepresantativeError')}</div>}
                         
@@ -540,7 +375,7 @@ function Anketa() {
                     </div>
                     <div className="row">
                 <label className="form-label col-sm-6">{t('PlaceOfIssue')}<span>*</span>
-                        <input className="input_w600" onChange={e=>PlaceOfIssue.onChange(e)} onBlur={e=>PlaceOfIssue.onBlur(e)} value={PlaceOfIssue.value}  name="PlaceOfIssue" maxLength="20" />
+                        <input className={PlaceOfIssue.isDirty&&PlaceOfIssue.isEmpty?"input_w600-error":"input_w600"}onChange={e=>PlaceOfIssue.onChange(e)} onBlur={e=>PlaceOfIssue.onBlur(e)} value={PlaceOfIssue.value}  name="PlaceOfIssue" maxLength="20" />
                         {(PlaceOfIssue.isDirty&&PlaceOfIssue.isEmpty)&&<div style={{color:'red'}}> {t('PlaceOfIssueErrorEmpty')}</div>}
                 </label>
                 <label className="form-label col-sm-3">{t('DataOfIssue')}<span >*</span>
@@ -551,14 +386,15 @@ function Anketa() {
                 </label>
                 <label className="form-label col-sm-3">{t('DateOfExiry')}<span >*</span>
                         <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10"/>
-                        {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}>  {t('DateOfExpiryErrorEmpty')}</div>}
-                        {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div style={{color:'red'}}> {t('DateOfExpiryError')}</div>}
+                        {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}>  {t('DateOfExiryErrorEmpty')}</div>}
+                        {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div style={{color:'red'}}> {t('DateOfExiryError')}</div>}
 
                 </label>
                     </div>
                     <div className="row">
                 <label className="form-label w-100">{t('NatPassw')}<span >*</span>
-                        <input className={NatPassw.isDirty&&NatPassw.isEmpty?"input_w1210-error":"input_w1210"} onChange={e=>NatPassw.onChange(e)} onBlur={e=>NatPassw.onBlur(e)} value={NatPassw.value}  name="authority" maxLength="100" />
+                        <input className={NatPassw.isDirty&&NatPassw.isEmpty?"input_w1210-error":"input_w1210"} onChange={e=>NatPassw.onChange(e)} onBlur={e=>NatPassw.onBlur(e)} value={NatPassw.value}  name="NatPassw" maxLength="100" />
+                        {(NatPassw.isDirty&&NatPassw.isEmpty)&&<div style={{color:'red'}}>  {t('PassNumberErrorEmpty')}</div>}
                 </label>
                 </div>
                 <hr/>
@@ -641,9 +477,9 @@ function Anketa() {
                 <div className="row">
                     <label className="form-label col-sm">{t('EduSerialNumber')}<span ></span>
                         <input className="input_w600" onChange={e=>edu_serial_number.onChange(e)} onBlur={e=>edu_serial_number.onBlur(e)} value={edu_serial_number.value}  name="edu_serial_number" maxLength="20"  /></label>
-                    <label className="form-label col-sm">{t('DataOfIssue')}<span ></span>
-                        <input className={(edu_date_of_issue.isDirty&&edu_date_of_issue.ismobileNum&&!edu_date_of_issue.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>edu_date_of_issue.onChange(e)} onBlur={e=>edu_date_of_issue.onBlur(e)} value={edu_date_of_issue.value} name="edu_date_of_issue" maxLength="10" placeholder="дд.мм.гггг" />
-                        {(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueError')}</div>}
+                    <label className="form-label col-sm">{t('DataOfIssueEdu')}<span ></span>
+                        <input className={(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>edu_date_of_issue.onChange(e)} onBlur={e=>edu_date_of_issue.onBlur(e)} value={edu_date_of_issue.value} name="edu_date_of_issue" maxLength="10" placeholder="дд.мм.гггг" />
+                        {(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueEduError')}</div>}
                         </label>
                 </div>
     {/*           <div className="row">
@@ -726,13 +562,15 @@ function Anketa() {
                 <div className="row" >
                     <label className="form-label w-200">{t('AddFile7')}
                     <div align="center">
-                </div >     
+                    </div >     
                     </label>
-                    
-                    <legend className="text-center">                    
+                </div>
+
+                    <legend className="text-center"> 
+                                       
                         <FileUploader/>
                     </legend>
-                </div>
+                
                     <hr/>
                     
                     <legend className="text-center">{t('WarningMessageOne')}</legend>
@@ -923,7 +761,7 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_birth.inputData||date_of_birth.isEmpty)||citizenship.isEmpty||(number.Num||number.isEmpty)||(date_of_issue.isEmpty||date_of_issue.inputData)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||authority.isEmpty||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||!DD.checked}
+                    <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>

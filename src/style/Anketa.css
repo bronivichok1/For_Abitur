@@ -624,11 +624,32 @@
     
     .file-uploader__custom-button {
       cursor: pointer;
-      background-color: rgb(202, 202, 198);
-      border: 1px solid black;
+      background-color: rgb(255, 255, 0);
+      border: 1px solid rgb(255, 0, 0);
       border-radius: 12px;
       padding: 10px;
+    } /*Кнопка загрузки файлов*/
+    .btn-9 {
+      background: #3498db;
+                font-size: 20px;
+                color: white;
+                border-radius: 7px;
+                box-shadow: 0 7px 0px #3498db86;
+                display: inline-block;
+                transition: all .2s;
+                position: relative;
+                padding: 20px 25px;
+                position: relative;
+                top: 0;
+                cursor: pointer;
+      margin:0 20px;
     }
+    
+     .btn-9:active {
+                top: 3px;
+                box-shadow: 0 2px 0px rgba(56, 119, 150, 0.322);
+                transition: all .2s;
+            }
     
     .file-uploader {
       display: flex;
@@ -642,3 +663,26 @@
       border: 1px dashed gray;
       border-radius: 12px;
     }
+
+    .file-uploader__remove-button{
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-image:url('ImageDelete2.png');
+      background-size: 100%;
+      border-color: none;
+      border: 0;
+      padding: 0;
+      margin-right: 30px;
+      cursor: pointer;
+
+
+    }
+    .file-uploader__filename{
+      font-size: 12px;
+      padding: 0;
+      margin: 0;
+      padding-right: 40px;
+      flex-direction: column;
+
+        }
