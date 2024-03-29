@@ -13,17 +13,18 @@ export const FileUploader = () => {
  const handleOnChange = (event) => {
    event.preventDefault();
    if (event.target.files && event.target.files.length) {
-     const filesNew = Array.from(event.target.files).slice(0, 14);
+     const filesNew = Array.from(event.target.files).slice(0, 20);
      const files = filesNew.concat(images);
      setImages(files);
      files.forEach((file) => {
        const reader = new FileReader();
        reader.onloadend = () => {
-         if (file.type === 'image/png') {
-           setImageURLs((prevURLs) => [...prevURLs, reader.result]);
-         } else {
-           setImageURLs((prevURLs) => [...prevURLs, defaultImageURL]);
-         }
+        if (file.type === 'image/png') {
+          setImageURLs((prevURLs) => [...prevURLs, reader.result]);
+        } else {
+          setImageURLs((prevURLs) => [...prevURLs, defaultImageURL]);
+        }
+         
          setFileNames((prevNames) => [...prevNames, file.name]); // Добавление имени файла
        };
        reader.readAsDataURL(file);
@@ -48,8 +49,9 @@ export const FileUploader = () => {
  };
 
  return (
-   <div align="center" className="file-uploader">
-     <label align="center" htmlFor="file-loader-button" className="btn-9">
+  <div className="col">
+  <div className="file-uploader_button">
+<label align="center" htmlFor="file-loader-button" className="btn-9">
        {t('AttFile')}
      </label>
      <input
@@ -57,9 +59,10 @@ export const FileUploader = () => {
        type="file"
        className="file-uploader__upload-button"
        onChange={handleOnChange}
-       multiple
-       
+       multiple 
      />
+     </div>
+   <div align="center" className="file-uploader">
      <div align="center" className="row">
        {images.map((image, index) => (
         <div className="row" align="center">
@@ -70,16 +73,15 @@ export const FileUploader = () => {
              className="file-uploader__preview"
              alt={`preview-${index}`}
            />
-           
            <button onClick={(event) => removeImage(event, index)} className="file-uploader__remove-button"></button>
            </div>
            <p className="file-uploader__filename">{fileNames[index]}</p>
-
          </div>
         </div>
        ))}
-       
      </div>
    </div>
+   </div>
+
  );
 };
