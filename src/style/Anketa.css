@@ -631,25 +631,25 @@
     } /*Кнопка загрузки файлов*/
     .btn-9 {
       background: #3498db;
-                font-size: 20px;
-                color: white;
-                border-radius: 7px;
-                box-shadow: 0 7px 0px #3498db86;
-                display: inline-block;
-                transition: all .2s;
-                position: relative;
-                padding: 20px 25px;
-                position: relative;
-                top: 0;
-                cursor: pointer;
+      font-size: 20px;
+      color: white;
+      border-radius: 7px;
+      box-shadow: 0 7px 0px #3498db86;
+      display: inline-block;
+      transition: all .2s;
+      position: relative;
+      padding: 20px 25px;
+      position: relative;
+      top: 0;
+      cursor: pointer;
       margin:0 20px;
     }
     
      .btn-9:active {
-                top: 3px;
-                box-shadow: 0 2px 0px rgba(56, 119, 150, 0.322);
-                transition: all .2s;
-            }
+      top: 3px;
+      box-shadow: 0 2px 0px rgba(56, 119, 150, 0.322);
+      transition: all .2s;
+    }
     
     .file-uploader {
       display: flex;
@@ -683,20 +683,7 @@
 
     }
 
-    .file-uploader__remove-button{
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-image:url('ImageDelete2.png');
-      background-size: 100%;
-      border-color: none;
-      border: 0;
-      padding: 0;
-      margin-right: 30px;
-      cursor: pointer;
-      box-sizing: content-box;
 
-    }
 
     .file-uploader__filename{
       font-size: 12px;
@@ -711,3 +698,118 @@
       box-sizing: content-box;
 
         }
+
+      .wrapper{
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 16px;
+        background: #edf3d807;
+        padding-bottom: 100px;
+
+      }
+      h1{
+        margin-bottom: 24px;
+        font-size: 32px;
+        color:#0a749f;
+      }
+
+      h2,p{
+        font-size: 24px;
+        font-weight: 400;
+        color: #007195;
+        text-align: center;
+      }
+      p{
+        margin-top: 15px;
+        margin-bottom: 22px;
+      }
+      .form-drag{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 50px 20px;
+        background-color: #ededed;
+        border: 2px dashed rgb(186,191,195);
+        border-radius: 10px;
+        box-shadow: 0 0 4px 4px rgba(255,255,255,0.5);
+        transition: border-color 0.3s, background-color 0.3s;
+        height: auto;
+
+      }
+      .form-drag2{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 50px 20px;
+        background-color: #ededed;
+        border: 2px dashed rgb(186,191,195);
+        border-radius: 10px;
+        box-shadow: 0 0 4px 4px rgba(255,255,255,0.5);
+        transition: border-color 0.3s, background-color 0.3s;
+        border-color: rgb(62,201,80);
+        background-color: #e6ffe3;
+        height: auto;
+
+      }
+      .label-drag{
+        padding: 5px 10px;
+        background-color: #0998d3;
+        border-radius: 5px;
+        font-size: 16px;
+        color:#fff;
+        cursor: pointer;
+      }
+      .input_drag{
+        margin: 0;
+        padding: 0;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+      }
+      .file-list{
+        margin-top: 1.25rem;
+        width: 100%;
+        padding:0;
+        list-style-type: none;
+      }
+      .file-list li{
+        width: 100%;
+        text-align: center;
+        padding:  6px 16px;
+        border: 1px dashed rgb(187,183,183);
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 1;
+        color:#515151;
+
+      }
+      .file-uploader__remove-button{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-image:url('ImageDelete2.png');
+        background-size: 100%;
+        border-color: none;
+        border: 0;
+        padding: 0;
+        margin-right: 30px;
+        cursor: pointer;
+        box-sizing: content-box;
+  
+      }
+      .file-list li:nth-child(n+2){
+        margin-top: 4px;
+      }
+
+      .span-drag{
+        color:#fff;
+      }

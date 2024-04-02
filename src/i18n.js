@@ -148,9 +148,10 @@ i18n
                     WarningMessageTwo:"After arriving in Belarus applicant must pass a mandatory medical examination, confirming the absence of medical contraindications to study in the Republic of Belarus, issued by a healthcare organization of the Republic of Belarus!!!",
                     WarningMessageThree:"Applicants arriving for training will be interviewed on the following subjects: english language (russian language), chemisry amd biology.",
 
-                    AttFile:"Attach file",
-
-
+                    AttFile:"Drag files here or",
+                    DowFile:"Upload file",
+                    Send:"Send",
+                    Cancel:"Cancel",
                 }
             },
             ru: {
@@ -294,8 +295,10 @@ i18n
                     WarningMessageTwo:"После прибытия в Республику Беларусь абитуриент должен пройти обязательное медицинское освидетельствование, подтверждающее отсутствие медицинских противопоказаний к обучению в Республике Беларусь, выданное организацией здравоохранения Республики Беларусь!!!",
                     WarningMessageThree:"Абитуриенты, прибывающие на обучение, будут проходить собеседование по следующим предметам: английский язык (русский язык), химия и биология.",
                
-                    AttFile:"Прикрепить файл",
-
+                    AttFile:"Перетащите файлы сюда или ",
+                    DowFile:"Загрузите файл",
+                    Send:"Отправить",
+                    Cancel:"Отменить",
 
                 }
             }

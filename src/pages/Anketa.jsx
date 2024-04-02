@@ -96,6 +96,7 @@ function Anketa() {
     const { t, i18n } = useTranslation()
     const requestURL = 'https://jsonplaceholder.typicode.com/users'
 
+
     function sendRequest(method, url, body = null) {
         const headers = {
           'Content-Type': 'application/json'
@@ -241,6 +242,7 @@ function Anketa() {
 
     }
 
+     
     
     
 
@@ -256,6 +258,40 @@ function Anketa() {
        position: "top-center"
      });*/
 
+    const[files,setFiles]=useState([])
+    const handleChange=(e)=>{
+        e.preventDefault();
+        if(e.target.files&&e.target.files[0]){
+            setFiles([...e.target.files])
+        }
+    }
+    const[dragActive,setDragActive]=useState(false)
+
+    const handleDrag=(e)=>{
+        e.preventDefault();
+        setDragActive(true)
+    }
+    const handleLeave=(e)=>{
+        e.preventDefault();
+        setDragActive(false)
+    }
+    const handleDrop=(e)=>{
+        e.preventDefault();
+        setDragActive(false)
+        if (e.dataTransfer.files && e.dataTransfer.files[0]){
+            setFiles([...e.dataTransfer.files])
+        }
+    }
+    const handleReset=(e)=>{
+        setFiles([])
+    }
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        const data=new FormData()
+        files.forEach((file)=>{
+            data.append("file",file)
+        })
+    }
 
     return (
         <form  className="form" autoComplete="off">
@@ -567,8 +603,42 @@ function Anketa() {
                 </div>
 
                     <legend className="text-center"> 
-                                       
-                        <FileUploader/>
+                    <div className="wrapper">
+                    <form className={`form-drag${dragActive?"2":""}`}
+                    
+                    onDragEnter={handleDrag}
+                    onDragOver={handleDrag}
+                    onDragLeave={handleLeave}
+                    onDrop={handleDrop}
+                    onReset={handleReset}
+                    onSubmit={handleSubmit}
+                    >
+                        <h1>{t('AttFile')}</h1>
+                                
+                                    <label className="btn-9">
+                                        <span className="span-drag">{t('DowFile')}</span>
+                                        <input type='file' 
+                                        className="input_drag" 
+                                        multiple={true} 
+                                        onChange={handleChange}/>
+                                    </label>
+                                    {files.length>0&&(
+                                        <>                            
+
+                                            <ul className="file-list">
+                                            {files.map(({name},id)=>(
+                                                <li key={id}>{name}
+                                                    <button className="file-uploader__remove-button" type="reset"></button>
+                                                </li>
+                                                ))}
+                                            </ul>
+                                            <button className="button-reset" type="reset">{t('Cancel')}</button>
+                                            <button className="button-submit" type="submit" >{t('Send')}</button>
+                                        </>
+                                            )}
+                                
+                    </form> 
+                    </div>      
                     </legend>
                 
                     <hr/>
@@ -761,8 +831,8 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
-                    onClick={handleClick}
+                    <button /*disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                    */onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>
 
