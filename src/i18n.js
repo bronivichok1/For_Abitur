@@ -149,7 +149,7 @@ i18n
                     WarningMessageThree:"Applicants arriving for training will be interviewed on the following subjects: english language (russian language), chemisry amd biology.",
 
                     AttFile:"Drag files here or",
-                    DowFile:"Upload file",
+                    DowFile:"Upload files",
                     Send:"Send",
                     Cancel:"Cancel",
                 }
@@ -296,7 +296,7 @@ i18n
                     WarningMessageThree:"Абитуриенты, прибывающие на обучение, будут проходить собеседование по следующим предметам: английский язык (русский язык), химия и биология.",
                
                     AttFile:"Перетащите файлы сюда или ",
-                    DowFile:"Загрузите файл",
+                    DowFile:"Загрузите файлы",
                     Send:"Отправить",
                     Cancel:"Отменить",
 
