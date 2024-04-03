@@ -6,7 +6,7 @@ export default function ButtonForNavigate(props){
     return(
       <div class="container">
             <button className={props.style}  id="submit" onClick={() => navigate(props.adress, { replace: false })}>
-            <p>{props.title}</p>
+            <h4>{props.title}</h4>
             </button>
       </div>
 

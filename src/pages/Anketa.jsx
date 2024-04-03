@@ -572,12 +572,12 @@ function Anketa() {
                     <legend className="text-center"> 
                     <div className="wrapper">
                     <form className={`form-drag${dragActive?"2":""}`}
-                    onDragEnter={handleDrag}
-                    onDragOver={handleDrag}
-                    onDragLeave={handleLeave}
-                    onDrop={handleDrop}
-                    onReset={handleReset}
-                    onSubmit={handleSubmit}>
+                        onDragEnter={handleDrag}
+                        onDragOver={handleDrag}
+                        onDragLeave={handleLeave}
+                        onDrop={handleDrop}
+                        onReset={handleReset}
+                        onSubmit={handleSubmit}>
                         <h1>{t('AttFile')}</h1>
                                     <label className="btn-9">
                                         <span className="span-drag">{t('DowFile')}</span>
