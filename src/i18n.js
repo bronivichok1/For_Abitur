@@ -153,6 +153,7 @@ i18n
                     Send:"Send",
                     Cancel:"Cancel",
                     ErrorFileMessage:"Please select a file in png, jpg, jpeg or pdf format and up to 5 MB in size.",
+                    FinalMessage: "Your data has been processed"
                 }
             },
             ru: {
@@ -301,6 +302,7 @@ i18n
                     Send:"Отправить",
                     Cancel:"Отменить",
                     ErrorFileMessage:"Пожалуйста, выберите файл в формате png, jpg, jpeg или pdf и размером до 5 МБ.",
+                    FinalMessage:"Ваши данные приняты к обработке",
 
                 }
             }

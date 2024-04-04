@@ -13,13 +13,9 @@ const useValidation=(value,validations)=>{
     const[inputData,setInputData]=useState(true)
     const[Num,setInputNum]=useState(true)
 
-
-
     useEffect(()=>{
         for(const validation in validations){
-
             switch(validation){
-
                 case 'isEmpty':
                     value?setEmpty(false):setEmpty(true)  //work
                 break;
@@ -48,9 +44,7 @@ const useValidation=(value,validations)=>{
                     var num= /^\d+$/
                     num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
                 break;
-
             }
-
         }
     },[value,isEmpty,isEng,isRus,inputData,isemailCheck,ismobileNum])
 
@@ -65,7 +59,6 @@ const useValidation=(value,validations)=>{
 
     }
 }
-
 
 const useInput=(InitialValue,validations)=>{
     const [value,setValue]=useState(InitialValue)
@@ -90,7 +83,6 @@ const useInput=(InitialValue,validations)=>{
         ...valid
     }
 }
-
 
 function Anketa() {
     const { t, i18n } = useTranslation()
@@ -120,10 +112,41 @@ function Anketa() {
         })
       }
 
+      const [data, setData] = useState({
+        name:'',
+        surname: '',
+        surname_info:'',
+        date_of_birth:'',
+        citizenship:'',
+        serial:'',
+        number:'',
+        PlaceOfIssue:'',
+        date_of_issue:'',
+        date_of_expiry:'',
+        settlement_name:'',
+        mobile_tel:'+375',
+        email:'',
+        edu_date_of_issue:'',
+        edu_serial_number:'',
+        edu_name:'',
+        sex:'1',
+        country:'1',
+        DD:'',
+        religion:'',
+        DataYourPeople:'',
+        NameSurname:'',
+        PhoneRepresantative:'',
+        country_pass:'',
+        NatPassw:'',
+        HostelLive:'',
+        numberNational:'',
+        pref_faculty:'',
+    });
+
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
         if(ButtonClick==true){
-            toast.success('Форма отправлена', {
+            toast.success(t('FinalMessage'), {
                 position: "top-right"
             })
             setButtonClick(false)
@@ -133,6 +156,20 @@ function Anketa() {
             setFiles([])
 
         }
+        const fetchData = async () => {
+            try {
+              const response = await fetch(requestURL);
+              const result = await response.json();
+              setData(result);
+            } catch (error) {
+                toast.error("Что-то пошло не так, поробуйте позже", {
+                position: "top-right"
+                });
+              console.error('Error fetching data:', error);
+            }
+          };
+          console.log(data)
+          fetchData();
         }, [ButtonClick]);
 
     function handleClick(e) {
@@ -140,34 +177,34 @@ function Anketa() {
         e.preventDefault()
       }
 
-    const surname=useInput('',{isEmpty:true,isEng:true})
-    const name=useInput('',{isEmpty:true,isEng:true})
-    const surname_info=useInput('',{isEmpty:true})
-    const date_of_birth=useInput('',{isEmpty:true,inputData:true})
-    const citizenship=useInput('',{isEmpty:true})
-    const serial=useInput('')
-    const number=useInput('',{isEmpty:true, Num:true})
-    const PlaceOfIssue=useInput('',{isEmpty:true})
-    const date_of_issue=useInput('',{isEmpty:true,inputData:true})
-    const date_of_expiry=useInput('',{isEmpty:true,inputData:true})
-    const settlement_name=useInput('',{isEmpty:true})
-    const mobile_tel=useInput('+375',{isEmpty:true,ismobileNum:true})
-    const email=useInput('',{isEmpty:true,isemailCheck:true})
-    const edu_date_of_issue=useInput('',{isEmpty:true, inputData:true})
-    const edu_serial_number=useInput('')
-    const edu_name=useInput('')
-    const sex=useInput('1',{isEmpty:true})
-    const country=useInput('0')
-    const pref_faculty=useInput('0')
-    const DD=useInput('')
-    const religion=useInput('') 
-    const DataYourPeople=useInput('',{isEmpty:true})
-    const NameSurname=useInput('')
-    const PhoneRepresantative=useInput('',{ismobileNum:true})
-    const country_pass=useInput('',{isEmpty:true})
-    const NatPassw=useInput('',{isEmpty:true})
-    const HostelLive=useInput('')
-    const numberNational =useInput('')
+    const surname=useInput(data.surname,{isEmpty:true,isEng:true})
+    const name=useInput(data.name,{isEmpty:true,isEng:true})
+    const surname_info=useInput(data.surname_info,{isEmpty:true})
+    const date_of_birth=useInput(data.date_of_birth,{isEmpty:true,inputData:true})
+    const citizenship=useInput(data.citizenship,{isEmpty:true})
+    const serial=useInput(data.serial)
+    const number=useInput(data.number,{isEmpty:true, Num:true})
+    const PlaceOfIssue=useInput(data.PlaceOfIssue,{isEmpty:true})
+    const date_of_issue=useInput(data.date_of_issue,{isEmpty:true,inputData:true})
+    const date_of_expiry=useInput(data.date_of_expiry,{isEmpty:true,inputData:true})
+    const settlement_name=useInput(data.settlement_name,{isEmpty:true})
+    const mobile_tel=useInput(data.mobile_tel,{isEmpty:true,ismobileNum:true})
+    const email=useInput(data.email,{isEmpty:true,isemailCheck:true})
+    const edu_date_of_issue=useInput(data.edu_date_of_issue,{isEmpty:true, inputData:true})
+    const edu_serial_number=useInput(data.edu_serial_number)
+    const edu_name=useInput(data.edu_name)
+    const sex=useInput(data.sex,{isEmpty:true})
+    const country=useInput(data.country)
+    const pref_faculty=useInput(data.pref_faculty)
+    const DD=useInput(data.DD)
+    const religion=useInput(data.religion) 
+    const DataYourPeople=useInput(data.DataYourPeople,{isEmpty:true})
+    const NameSurname=useInput(data.NameSurname)
+    const PhoneRepresantative=useInput(data.PhoneRepresantative,{ismobileNum:true})
+    const country_pass=useInput(data.country_pass,{isEmpty:true})
+    const NatPassw=useInput(data.NatPassw,{isEmpty:true})
+    const HostelLive=useInput(data.HostelLive)
+    const numberNational =useInput(data.numberNational)
 
     const body = {
       name: name.value,
@@ -200,10 +237,6 @@ function Anketa() {
       pref_faculty:pref_faculty.value,
       files:files,
     }
-
-     
-    
-    
 
      /*toast.error("Error Notification !", {
        position: "top-center"
@@ -259,7 +292,7 @@ function Anketa() {
     const handleReset=(e,id)=>{
         e.stopPropagation();
         e.preventDefault();
-       
+
         const newFiles = [...files];
         if (id < files.length) {
             newFiles.splice(id, 1);
@@ -485,7 +518,6 @@ function Anketa() {
                     <label className="form-label col-sm-6">Домашний тел.
                         <input className="input_w580 " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel"  maxLength="20" /></label>
                 </div>
-                
     <hr/> */}
 <legend className="text-center">{t('EducationInfo')}</legend>
                     <label className="form-label w-100">{t('EducationInst')}<span ></span>
@@ -514,7 +546,6 @@ function Anketa() {
                     </div>
     */}
                 <hr/>
-                
 <legend className="text-center">{t('InfoAdmission')}</legend>
                     <label className="form-label w-200">{t('Faculty')}
                     <select className="select_w1210" onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
@@ -581,7 +612,6 @@ function Anketa() {
                     </div >     
                     </label>
                 </div>
-
                     <legend className="text-center"> 
                             <div className="wrapper">
                                 <form className={`form-drag${dragActive?"2":""}`}
@@ -616,7 +646,6 @@ function Anketa() {
                             </div>      
                         </legend>
                     <hr/>
-                    
                     <legend className="text-center">{t('WarningMessageOne')}</legend>
                     <legend className="text-center">{t('WarningMessageTwo')}</legend>
                     <legend className="text-center">{t('WarningMessageThree')}</legend>
@@ -637,8 +666,6 @@ function Anketa() {
                     <div className="row">
                             <input className="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} checked={pref_dorm.checked} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
                         <label htmlFor="prform_chbx_4">Нуждаюсь в общежитии</label>*/}
-
-
 {/*<legend className="text-center">Работа и стаж</legend>
                 <label className="form-label w-100">Место работы, занимаемая должность (профессия)
                     <input className="input_w1210" onChange={e=>exp_position.onChange(e)} onBlur={e=>exp_position.onBlur(e)} checked={exp_position.checked}  name="exp_position" maxLength="150" /></label>
@@ -694,7 +721,6 @@ function Anketa() {
                     <label className="form-label w-100">Полный адрес
                         <input className="input_w1210" onChange={e=>mother_address.onChange(e)} onBlur={e=>mother_address.onBlur(e)} value={mother_address.value}  name="mother_address" maxLength="150" /></label>
                         <hr/>
-
 <legend className="text-center">Льготы</legend>
                 <div className="row">
                     <input id="pr_chbx_1" className="custom-radio" onChange={e=>stat18.onChange(e)} onBlur={e=>stat18.onBlur(e)} checked={stat18.checked} name="stat18" type="checkbox" />
@@ -798,8 +824,6 @@ function Anketa() {
                     <label className="form-label col-sm-2">Балл
                         <input onChange={e=>cert_biol_score.onChange(e)} onBlur={e=>cert_biol_score.onBlur(e)} value={cert_biol_score.value} className="input_w400" name="cert_biol_score" maxLength="3" /></label>
                 </div>*/}
-                
-
                 <div >
                     <input  id="agreement" className="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} checked={DD.checked} name="DD"type="checkbox"></input>
 <label htmlFor="agreement" >{t('DD')}</label>
@@ -809,11 +833,7 @@ function Anketa() {
                     */onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>
-
-
-
         </form>
-
     )
   }
   export default Anketa

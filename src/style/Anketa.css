@@ -215,7 +215,7 @@
      }
      .input_w590-error{
       border: 1px solid #ced4da;
-      color: black;
+      color: rgb(0, 0, 0);
       width: 600px;
       height: 40px;
       margin-top: 0px;
