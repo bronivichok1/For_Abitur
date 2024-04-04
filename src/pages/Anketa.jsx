@@ -3,7 +3,6 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
-import { FileUploader } from '../components/FileUploadComponent'
 
 const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)
@@ -218,12 +217,19 @@ function Anketa() {
        position: "top-center"
      });*/
 
-    const handleChange=(e)=>{
+     const handleChange = (e) => {
         e.preventDefault();
-        if(e.target.files&&e.target.files[0]){
-            setFiles(files.concat([...e.target.files]))
+        if (e.target.files && e.target.files[0]) {
+          Array.from(e.target.files).forEach((file) => {
+            if (file.size <= 5 * 1024 * 1024 && 
+              (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
+              setFiles([...files, file]);
+            } else {
+              alert(t('ErrorFileMessage'));
+            }
+          });
         }
-    }
+      };
     const[dragActive,setDragActive]=useState(false)
 
     const handleDrag=(e)=>{
@@ -234,13 +240,22 @@ function Anketa() {
         e.preventDefault();
         setDragActive(false)
     }
-    const handleDrop=(e)=>{
+    const handleDrop = (e) => {
         e.preventDefault();
-        setDragActive(false)
-        if (e.dataTransfer.files && e.dataTransfer.files[0]){
-            setFiles(files.concat([...e.dataTransfer.files]))        
+        setDragActive(false);
+        
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          Array.from(e.dataTransfer.files).forEach((file) => {
+            if (file.size <= 5 * 1024 * 1024 && 
+              (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
+              setFiles([...files, file]);
+            } else {
+              alert('Пожалуйста, выберите файл в формате png, jpg, jpeg или pdf и размером до 5 МБ.');
+            }
+          });      
         }
-    }
+      }
+
     const handleReset=(e,id)=>{
         e.stopPropagation();
         e.preventDefault();
@@ -262,13 +277,11 @@ function Anketa() {
 
     return (
         <form  className="form" autoComplete="off">
-
         <div align="right"className="row">
-        <button className="btn-3 btn-sep icon-send" value="ru" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('ru'); }}>RU</button>
-        <button className="btn-11 btn-sep icon-send" value="en" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('en'); }}>EN</button>
+            <button className="btn-3 btn-sep icon-send" value="ru" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('ru'); }}>RU</button>
+            <button className="btn-11 btn-sep icon-send" value="en" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('en'); }}>EN</button>
         </div>
-<legend>{t('AppDetails')}</legend>
-                
+<legend>{t('AppDetails')}</legend>        
                     <div className="row">
                 <label className="form-label col-sm">{t('Surname')}<span>*</span>
                         <input  className={surname.isDirty&&(surname.isEng||surname.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}   name="surname" maxLength="40" />
@@ -395,11 +408,11 @@ function Anketa() {
                 </label>
                     </div>
                     <div className="row">
-                <label className="form-label w-100">{t('NatPassw')}<span >*</span>
-                        <input className={NatPassw.isDirty&&NatPassw.isEmpty?"input_w1210-error":"input_w1210"} onChange={e=>NatPassw.onChange(e)} onBlur={e=>NatPassw.onBlur(e)} value={NatPassw.value}  name="NatPassw" maxLength="100" />
-                        {(NatPassw.isDirty&&NatPassw.isEmpty)&&<div style={{color:'red'}}>  {t('PassNumberErrorEmpty')}</div>}
-                </label>
-                </div>
+                        <label className="form-label w-100">{t('NatPassw')}<span >*</span>
+                                <input className={NatPassw.isDirty&&NatPassw.isEmpty?"input_w1210-error":"input_w1210"} onChange={e=>NatPassw.onChange(e)} onBlur={e=>NatPassw.onBlur(e)} value={NatPassw.value}  name="NatPassw" maxLength="100" />
+                                {(NatPassw.isDirty&&NatPassw.isEmpty)&&<div style={{color:'red'}}>  {t('PassNumberErrorEmpty')}</div>}
+                        </label>
+                    </div>
                 <hr/>
 {/*<legend className="text-center">Адрес места жительства в соответствии со штампом о регистрации, контактные данные</legend>
                 <div className="row">
@@ -570,37 +583,38 @@ function Anketa() {
                 </div>
 
                     <legend className="text-center"> 
-                    <div className="wrapper">
-                    <form className={`form-drag${dragActive?"2":""}`}
-                        onDragEnter={handleDrag}
-                        onDragOver={handleDrag}
-                        onDragLeave={handleLeave}
-                        onDrop={handleDrop}
-                        onReset={handleReset}
-                        onSubmit={handleSubmit}>
-                        <h1>{t('AttFile')}</h1>
-                                    <label className="btn-9">
-                                        <span className="span-drag">{t('DowFile')}</span>
-                                        <input type='file' 
-                                        className="input_drag" 
-                                        multiple={true} 
-                                        onChange={handleChange}/>
-                                    </label>
-                                    {files.length>0&&(
-                                        <>                            
-                                            <ul className="file-list">
-                                            {files.map(({name},id)=>(
-                                                <li key={id}>{name}
-                                                    <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, id)}></button>
-                                                </li>
-                                                ))}
-                                            </ul>
-                                        </>
-                                            )}
-                    </form> 
-                    </div>      
-                    </legend>
-                
+                            <div className="wrapper">
+                                <form className={`form-drag${dragActive?"2":""}`}
+                                    onDragEnter={handleDrag}
+                                    onDragOver={handleDrag}
+                                    onDragLeave={handleLeave}
+                                    onDrop={handleDrop}
+                                    onReset={handleReset}
+                                    onSubmit={handleSubmit}>
+                                        <h1>{t('AttFile')}</h1>
+                                                <label className="btn-9">
+                                                    <span className="span-drag">{t('DowFile')}</span>
+                                                        <input type="file" 
+                                                        accept=".jpg, .jpeg, .png, .pdf" 
+                                                        className="input_drag" 
+                                                        multiple={true} 
+                                                        onChange={handleChange}/>
+                                                </label>
+                                                {files.length>0&&(
+                                                    <>                            
+                                                        <ul className="file-list">
+                                                        
+                                                        {files.map(({name},id)=>(
+                                                            <li key={id}>{name}
+                                                                <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, id)}></button>
+                                                            </li>
+                                                            ))}
+                                                        </ul>
+                                                    </>
+                                                        )}
+                                </form> 
+                            </div>      
+                        </legend>
                     <hr/>
                     
                     <legend className="text-center">{t('WarningMessageOne')}</legend>
