@@ -61,7 +61,7 @@ return{
 }
 }
 
-const requestURL = 'https://jsonplaceholder.typicode.com/users'
+const requestURL = 'http://localhost:3001/api/edit-data'
 
     function sendRequest(method, url, body = null) {
         const headers = {
@@ -92,23 +92,22 @@ function ForRead() {
   const navigate = useNavigate();
 
 
-    const serial=useInput('',{isEmpty:true})
-    const number=useInput('',{isEmpty:true,Num:true})
-    const date_of_issue=useInput('',{isEmpty:true,inputData:true})
+    const number=useInput('',{isEmpty:true})
+    const date_of_expiry=useInput('',{isEmpty:true,inputData:true})
 
     const body = {
-      serial: serial.value,
       number: number.value,
-      date_of_issue:date_of_issue.value
+      date_of_expiry:date_of_expiry.value
     }
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
         if(ButtonClick==true){
             setButtonClick(false)
-            sendRequest('POST', requestURL, body)
+            sendRequest('Post', requestURL, body)
             .then(body => console.log(body))
             .catch(err => console.log(err))
-            navigate("/FillData", { replace: false })
+            /*
+            navigate("/FillData", { replace: false })*/
         }
     })
     function handleClick(e) {
@@ -122,23 +121,22 @@ function ForRead() {
         <div className="div">
           <form className="form-ForRead" >
             <legend className="lead" >Введите данные документа:</legend>
-<label className="form-label w-100">Серия
+{/*<label className="form-label w-100">Серия
             <input className={serial.isDirty&&serial.isEmpty?"input_w600-error":"input_w600"} onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="15" autoComplete="off"/>
             {(serial.isDirty&&serial.isEmpty)&&<div  style={{color:'red'}}> Поле "Серия" обязательно для заполнения.</div>}
-</label>
+    </label>*/}
 <label className="form-label w-100">Номер
-            <input className={number.isDirty&&(number.isEmpty||number.Num)?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  autoComplete="off"/>
+            <input className={number.isDirty&&number.isEmpty?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  autoComplete="off"/>
             {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> Поле "Номер" обязательно для заполнения.</div>}
-            {(number.isDirty&&number.Num&&!number.isEmpty)&&<div style={{color:'red'}}> Поле "Номер" может содержать только цифры.</div>}
 </label>
 <label className="form-label w-100">Дата выдачи
-            <input className={date_of_issue.isDirty&&(date_of_issue.isEmpty||date_of_issue.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" autoComplete="off"/>
-            {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
-            {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div  style={{color:'red'}}>Поле "Дата выдачи" заполнено неверно.</div>}
+            <input className={date_of_expiry.isDirty&&(date_of_expiry.isEmpty||date_of_expiry.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value} name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10" autoComplete="off"/>
+            {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div  style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
+            {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div  style={{color:'red'}}>Поле "Дата выдачи" заполнено неверно.</div>}
 
 </label>
         <div align ="center" >
-                    <button disabled={number.Num||number.isEmpty||date_of_issue.inputData||date_of_issue.isEmpty||serial.isEmpty}
+                    <button disabled={number.isEmpty||date_of_expiry.inputData||date_of_expiry.isEmpty}
                     onClick={handleClick}
                      type="submit" className="btn btn-1 btn-sep icon-info">Далее</button>
                 </div>

@@ -141,6 +141,7 @@ function Anketa() {
         HostelLive:'',
         numberNational:'',
         pref_faculty:'',
+        files:'',
     });
 
     const [ButtonClick,setButtonClick]=useState(false)
