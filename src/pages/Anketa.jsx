@@ -3,6 +3,8 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
+import {Data} from '../data/DataForRead'
+import {data} from '../data/DataForInput'
 
 const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)
@@ -86,8 +88,10 @@ const useInput=(InitialValue,validations)=>{
 
 function Anketa() {
     const { t, i18n } = useTranslation()
-    const requestURL = 'https://jsonplaceholder.typicode.com/users'
+    const requestURL = 'http://localhost:3001/api/user'
     const[files,setFiles]=useState([])
+
+    
 
 
     function sendRequest(method, url, body = null) {
@@ -101,48 +105,21 @@ function Anketa() {
           headers: headers
         }).then(response => {
           if (response.ok) {
-            return response.json()
-          }
-      
+            return  response.json()
+          }else{
           return response.json().then(error => {
             const e = new Error('Что-то пошло не так')
-            e.data = error
+            e.dataAbitur = error
             throw e
-          })
+          })}
         })
+        /*.then(dataAbitur=>{
+            data=dataAbitur;
+            console.log(data)
+                })*/
       }
 
-      const [data, setData] = useState({
-        name:'',
-        surname: '',
-        surname_info:'',
-        date_of_birth:'',
-        citizenship:'',
-        serial:'',
-        number:'',
-        PlaceOfIssue:'',
-        date_of_issue:'',
-        date_of_expiry:'',
-        settlement_name:'',
-        mobile_tel:'+375',
-        email:'',
-        edu_date_of_issue:'',
-        edu_serial_number:'',
-        edu_name:'',
-        sex:'1',
-        country:'1',
-        DD:'',
-        religion:'',
-        DataYourPeople:'',
-        NameSurname:'',
-        PhoneRepresantative:'',
-        country_pass:'',
-        NatPassw:'',
-        HostelLive:'',
-        numberNational:'',
-        pref_faculty:'',
-        files:'',
-    });
+
 
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
@@ -155,13 +132,15 @@ function Anketa() {
             .then(body => console.log(body))
             .catch(err => console.log(err))
             setFiles([])
-
         }
         const fetchData = async () => {
+            if(Data.number!=''&&Data.date_of_expiry!=''){
             try {
-              const response = await fetch(requestURL);
-              const result = await response.json();
-              setData(result);
+                sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
+
+              /*const response = await fetch( 'POST', 'http://localhost:3001/api/auth/login', Data);
+              const data = await response.json();
+              setData(data);*/
             } catch (error) {
                 toast.error("Что-то пошло не так, поробуйте позже", {
                 position: "top-right"
@@ -169,8 +148,9 @@ function Anketa() {
               console.error('Error fetching data:', error);
             }
           };
-          console.log(data)
+        }
           fetchData();
+          console.log(Data)
         }, [ButtonClick]);
 
     function handleClick(e) {
