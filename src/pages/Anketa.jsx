@@ -131,14 +131,14 @@ function Anketa() {
             sendRequest('POST', requestURL, body)
             .then(body => console.log(body))
             .catch(err => console.log(err))
+            sendRequest('POST','http://localhost:3001/api/file',body2)
             setFiles([])
         }
         const fetchData = async () => {
             if(Data.number!=''&&Data.date_of_expiry!=''){
             try {
-                sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
-
-              /*const response = await fetch( 'POST', 'http://localhost:3001/api/auth/login', Data);
+                /*sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
+              const response = await fetch( 'POST', 'http://localhost:3001/api/auth/login', Data);
               const data = await response.json();
               setData(data);*/
             } catch (error) {
@@ -149,7 +149,6 @@ function Anketa() {
             }
           };
         }
-          fetchData();
           console.log(Data)
         }, [ButtonClick]);
 
@@ -216,7 +215,9 @@ function Anketa() {
       HostelLive:HostelLive.value,
       numberNational:numberNational.value,
       pref_faculty:pref_faculty.value,
-      files:files,
+    }
+    const body2={
+        files:files,
     }
 
      /*toast.error("Error Notification !", {
@@ -233,17 +234,20 @@ function Anketa() {
 
      const handleChange = (e) => {
         e.preventDefault();
-        if (e.target.files && e.target.files[0]) {
+        if (e.target.files && e.target.files.length > 0) {
+          const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.target.files).forEach((file) => {
             if (file.size <= 5 * 1024 * 1024 && 
-              (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
-              setFiles([...files, file]);
+                (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
+              newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
               alert(t('ErrorFileMessage'));
             }
           });
+          setFiles(newFiles); // Устанавливаем новое состояние массива файлов
         }
       };
+
     const[dragActive,setDragActive]=useState(false)
 
     const handleDrag=(e)=>{
@@ -257,18 +261,19 @@ function Anketa() {
     const handleDrop = (e) => {
         e.preventDefault();
         setDragActive(false);
-        
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.dataTransfer.files).forEach((file) => {
             if (file.size <= 5 * 1024 * 1024 && 
-              (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
-              setFiles([...files, file]);
+                (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
+              newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
-              alert('Пожалуйста, выберите файл в формате png, jpg, jpeg или pdf и размером до 5 МБ.');
+              alert(t('ErrorFileMessage'));
             }
-          });      
+          });
+          setFiles(newFiles); // Устанавливаем новое состояние массива файлов
         }
-      }
+       }
 
     const handleReset=(e,id)=>{
         e.stopPropagation();
