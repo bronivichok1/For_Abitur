@@ -118,8 +118,27 @@ function Anketa() {
             console.log(data)
                 })*/
       }
+      function sendRequestFormData(method, url, body = null) {
 
-
+      
+        return fetch(url, {
+          method: method,
+          body: body,
+        }).then(response => {
+          if (response.ok) {
+            return  response
+          }else{
+          return response.then(error => {
+            const e = new Error('Что-то пошло не так')
+            e.dataAbitur = error
+            throw e
+          })}
+        })
+        /*.then(dataAbitur=>{
+            data=dataAbitur;
+            console.log(data)
+                })*/
+      }
 
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
@@ -131,7 +150,15 @@ function Anketa() {
             sendRequest('POST', requestURL, body)
             .then(body => console.log(body))
             .catch(err => console.log(err))
-            sendRequest('POST','http://localhost:3001/api/file',body2)
+ const body2=new FormData()
+            const nameFolder=number.value+date_of_expiry.value
+            body2.append("name",nameFolder)
+            files.forEach((files)=>{
+            body2.append("file",files)
+            
+        })
+        console.log(body2)
+        sendRequestFormData('POST','http://localhost:3001/api/files',body2)
             setFiles([])
         }
         const fetchData = async () => {
@@ -215,10 +242,9 @@ function Anketa() {
       HostelLive:HostelLive.value,
       numberNational:numberNational.value,
       pref_faculty:pref_faculty.value,
+      nameFolder:number.value+date_of_expiry.value
     }
-    const body2={
-        files:files,
-    }
+
 
      /*toast.error("Error Notification !", {
        position: "top-center"
@@ -288,9 +314,11 @@ function Anketa() {
   
     const handleSubmit=(e)=>{
         e.preventDefault();
-        const data=new FormData()
-        files.forEach((file)=>{
-            data.append("file",file)
+       const body2=new FormData()
+            const nameFolder=number.value+date_of_expiry.value
+            body2.append("name",nameFolder)
+            files.forEach((file)=>{
+            body2.append("file",file)
         })
     }
 
