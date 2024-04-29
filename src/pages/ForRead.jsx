@@ -7,10 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import {Data} from '../data/DataForRead'
 import {data} from '../data/DataForInput'
 
-
-
-
-
 const useValidation=(value,validations)=>{
   const[isEmpty,setEmpty]=useState(true)
   const[inputData,setInputData]=useState(true)
@@ -34,7 +30,6 @@ const useValidation=(value,validations)=>{
         }      
     }
 },[value])
-
 
 return{
   isEmpty,
@@ -60,9 +55,7 @@ return{
   onBlur,
   isDirty,
   ...valid
-}
-}
-
+}}
 
 function ForRead() {
 
@@ -71,7 +64,6 @@ function ForRead() {
     const headers = {
       'Content-Type': 'application/json'
     }
-  
     return fetch(url, {
       method: method,
       body: JSON.stringify(body),
@@ -119,16 +111,12 @@ function ForRead() {
         data.Files=Jsondata.Files
         console.log(data)
         navigate("/FillData", { replace: false })
-
       })
   }
 
-  const navigate = useNavigate();
-
-
+    const navigate = useNavigate();
     const number=useInput('',{isEmpty:true})
     const date_of_expiry=useInput('',{isEmpty:true,inputData:true})
-
     const body = {
       number: number.value,
       date_of_expiry:date_of_expiry.value
@@ -140,19 +128,14 @@ function ForRead() {
             Data.date_of_expiry=date_of_expiry.value
             if(Data.number!=''&&Data.date_of_expiry!=''){
                   sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
-
             }
-            
-        }
+          }
     })
     function handleClick(e) {
       setButtonClick(true)
       e.preventDefault()
-
     }
-
     return (
- 
         <div className="div">
           <form className="form-ForRead" >
             <legend className="lead" >Введите данные документа:</legend>
@@ -168,7 +151,6 @@ function ForRead() {
             <input className={date_of_expiry.isDirty&&(date_of_expiry.isEmpty||date_of_expiry.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value} name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10" autoComplete="off"/>
             {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div  style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
             {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div  style={{color:'red'}}>Поле "Дата выдачи" заполнено неверно.</div>}
-
 </label>
         <div align ="center" >
                     <button disabled={number.isEmpty||date_of_expiry.inputData||date_of_expiry.isEmpty}
@@ -177,7 +159,6 @@ function ForRead() {
                 </div>
               </form>
         </div>
-        
     )
   }
   export default ForRead

@@ -32,7 +32,6 @@ const useValidation=(value,validations)=>{
                 case'ismobileNum':
                     var num=/^\+375\d{9}$/
                     num.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true) //work
-
                 break;
                 case'isemailCheck':
                     var mail=/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
@@ -49,7 +48,6 @@ const useValidation=(value,validations)=>{
             }
         }
     },[value,isEmpty,isEng,isRus,inputData,isemailCheck,ismobileNum])
-
     return{
         isEmpty,
         isRus,
@@ -58,7 +56,6 @@ const useValidation=(value,validations)=>{
         isemailCheck,
         inputData,
         Num
-
     }
 }
 
@@ -66,7 +63,6 @@ const useInput=(InitialValue,validations)=>{
     const [value,setValue]=useState(InitialValue)
     const [checked, setChecked] = useState(false);
     const [isDirty,setDirty]=useState(false)
-    
     const valid=useValidation(value,validations)
     const onChange=(e)=>{
         setValue(e.target.value)
@@ -75,7 +71,6 @@ const useInput=(InitialValue,validations)=>{
     const onBlur=(e)=>{
         setDirty(true)
     }
-    
     return{
         value,
         checked,
@@ -90,9 +85,6 @@ function Anketa() {
     const { t, i18n } = useTranslation()
     const requestURL = 'http://localhost:3001/api/user'
     const[files,setFiles]=useState([])
-
-    
-
 
     function sendRequest(method, url, body = null) {
         const headers = {
@@ -118,9 +110,8 @@ function Anketa() {
             console.log(data)
                 })*/
       }
-      function sendRequestFormData(method, url, body = null) {
 
-      
+      function sendRequestFormData(method, url, body = null) {
         return fetch(url, {
           method: method,
           body: body,
@@ -151,18 +142,17 @@ function Anketa() {
             .then(body => console.log(body))
             .catch(err => console.log(err))
  const body2=new FormData()
-            const nameFolder=number.value+date_of_expiry.value
+            const nameFolder=number.value+date_of_issue.value
             body2.append("name",nameFolder)
             files.forEach((files)=>{
             body2.append("file",files)
-            
         })
         console.log(body2)
         sendRequestFormData('POST','http://localhost:3001/api/files',body2)
             setFiles([])
         }
         const fetchData = async () => {
-            if(Data.number!=''&&Data.date_of_expiry!=''){
+            if(Data.number!=''&&Data.date_of_issue!=''){
             try {
                 /*sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
               const response = await fetch( 'POST', 'http://localhost:3001/api/auth/login', Data);
@@ -245,7 +235,6 @@ function Anketa() {
       nameFolder:number.value+date_of_expiry.value
     }
 
-
      /*toast.error("Error Notification !", {
        position: "top-center"
      });
@@ -273,7 +262,7 @@ function Anketa() {
           setFiles(newFiles); // Устанавливаем новое состояние массива файлов
         }
       };
-
+      
     const[dragActive,setDragActive]=useState(false)
 
     const handleDrag=(e)=>{
