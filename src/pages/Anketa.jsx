@@ -99,7 +99,9 @@ function Anketa() {
             return  response.json()
           }else{
           return response.json().then(error => {
-            const e = new Error('Что-то пошло не так')
+            const e = toast.success(t('FinalMessage'), {
+                position: "top-right"
+            })
             e.dataAbitur = error
             throw e
           })}
@@ -119,7 +121,9 @@ function Anketa() {
             return  response
           }else{
           return response.then(error => {
-            const e = new Error('Что-то пошло не так')
+            const e = toast.success(t('FinalMessage'), {
+                position: "top-right"
+            })
             e.dataAbitur = error
             throw e
           })}
@@ -139,8 +143,10 @@ function Anketa() {
             setButtonClick(false)
             sendRequest('POST', requestURL, body)
             .then(body => console.log(body))
-            .catch(err => console.log(err))
- const body2=new FormData()
+            .catch(toast.error("Что-то пошло не так, поробуйте позже", {
+                position: "top-right"
+                }))
+        const body2=new FormData()
             const nameFolder=number.value+date_of_issue.value
             body2.append("name",nameFolder)
             files.forEach((files)=>{
@@ -150,13 +156,13 @@ function Anketa() {
         sendRequestFormData('POST','http://localhost:3001/api/files',body2)
             setFiles([])
         }
-        const fetchData = async () => {
+        /*const fetchData = async () => {
             if(Data.number!=''&&Data.date_of_issue!=''){
             try {
-                /*sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
+                sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
               const response = await fetch( 'POST', 'http://localhost:3001/api/auth/login', Data);
               const data = await response.json();
-              setData(data);*/
+              setData(data);
             } catch (error) {
                 toast.error("Что-то пошло не так, поробуйте позже", {
                 position: "top-right"
@@ -164,7 +170,7 @@ function Anketa() {
               console.error('Error fetching data:', error);
             }
           };
-        }
+        }*/
           console.log(Data)
         }, [ButtonClick]);
 
@@ -237,11 +243,9 @@ function Anketa() {
      /*toast.error("Error Notification !", {
        position: "top-center"
      });
-   
      toast.warn("Warning Notification !", {
        position: "top-center"
      });
-   
      toast.info("Info Notification !", {
        position: "top-center"
      });*/
