@@ -1,11 +1,8 @@
 import "../style/Anketa.css"
-import ButtonForNavigate from "../components/ButtonForNavigate"
-import { useLocation } from "react-router-dom";
 import { useEffect, useState  } from 'react'
-import Anketa from "./Anketa";
 import { useNavigate } from 'react-router-dom';
-import {Data} from '../data/DataForRead'
-import {data} from '../data/DataForInput'
+import {data,Data,edit} from '../data/DataForInput'
+
 
 const useValidation=(value,validations)=>{
   const[isEmpty,setEmpty]=useState(true)
@@ -126,6 +123,7 @@ function ForRead() {
         if(ButtonClick==true){
             Data.number=number.value
             Data.date_of_expiry=date_of_expiry.value
+            edit.Edit=1
             if(Data.number!=''&&Data.date_of_expiry!=''){
                   sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
             }

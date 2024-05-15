@@ -3,8 +3,7 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
-import {Data} from '../data/DataForRead'
-import {data} from '../data/DataForInput'
+import {data,Data,edit} from '../data/DataForInput'
 
 const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)

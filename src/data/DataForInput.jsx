@@ -29,3 +29,10 @@ export const data={
     pref_faculty:'',
     Files:''
 }
+export const Data = {
+    number: '',
+    date_of_expiry:''
+  }
+export const edit={
+    Edit:''
+}

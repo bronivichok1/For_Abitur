@@ -33,7 +33,7 @@
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
-        color: #ced4da;
+        color: #ced4dae1;
         border: 1px solid #ced4da;
         appearance: none;
         border-radius: 0.25rem;
@@ -88,7 +88,7 @@
       font-family: var(--bs-body-font-family);
       font-family: 'Roboto', Arial, sans-serif;
       font-size: 16px;
-      background-color: #edf3d825;
+      background-color: #edf3d88a;
       box-sizing: border-box;
       }
 
