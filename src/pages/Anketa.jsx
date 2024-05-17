@@ -99,10 +99,8 @@ function Anketa() {
             return  response.json()
           }else{
           return response.json().then(error => {
-            const e = toast.success(t('FinalMessage'), {
-                position: "top-right"
-            })
-            e.dataAbitur = error
+            const e = error
+            e.dataAbitur = new Error('Что-то пошло не так')
             throw e
           })}
         })
@@ -121,9 +119,7 @@ function Anketa() {
             return  response
           }else{
           return response.then(error => {
-            const e = toast.success(t('FinalMessage'), {
-                position: "top-right"
-            })
+            const e = new Error('Что-то пошло не так')
             e.dataAbitur = error
             throw e
           })}
@@ -143,9 +139,7 @@ function Anketa() {
             setButtonClick(false)
             sendRequest('POST', requestURL, body)
             .then(body => console.log(body))
-            .catch(toast.error("Что-то пошло не так, поробуйте позже", {
-                position: "top-right"
-                }))
+
         const body2=new FormData()
             const nameFolder=number.value+date_of_issue.value
             body2.append("name",nameFolder)
@@ -185,7 +179,6 @@ function Anketa() {
     const surname_info=useInput(data.surname_info,{isEmpty:true})
     const date_of_birth=useInput(data.date_of_birth,{isEmpty:true,inputData:true})
     const citizenship=useInput(data.citizenship,{isEmpty:true})
-    const serial=useInput(data.serial)
     const number=useInput(data.number,{isEmpty:true, Num:true})
     const PlaceOfIssue=useInput(data.PlaceOfIssue,{isEmpty:true})
     const date_of_issue=useInput(data.date_of_issue,{isEmpty:true,inputData:true})
@@ -215,7 +208,6 @@ function Anketa() {
       surname_info:surname_info.value,
       date_of_birth:date_of_birth.value,
       citizenship:citizenship.value,
-      serial:serial.value,
       number:number.value,
       PlaceOfIssue:PlaceOfIssue.value,
       date_of_issue:date_of_issue.value,
@@ -1212,8 +1204,8 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button /*disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
-                    */onClick={handleClick}
+                    <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                    onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>
         </form>
