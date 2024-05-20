@@ -3,7 +3,7 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
-import {data,Data,edit} from '../data/DataForInput'
+import {data,Data,edit,errorCod} from '../data/DataForInput'
 
 const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)
@@ -96,17 +96,34 @@ function Anketa() {
           headers: headers
         }).then(response => {
           if (response.ok) {
-            return  response.json()
-          }else{
-          return response.json().then(error => {
-            const e = error
-            e.dataAbitur = new Error('Что-то пошло не так')
-            throw e
-          })}
+            const body2=new FormData()
+            const nameFolder=number.value+date_of_issue.value
+            body2.append("name",nameFolder)
+            files.forEach((files)=>{
+            body2.append("file",files)
         })
-        /*.then(dataAbitur=>{
-            data=dataAbitur;
-            console.log(data)
+
+        sendRequestFormData('POST','http://localhost:3001/api/files',body2)
+            setFiles([])
+            return  response.json()
+            toast.success(t('FinalMessage'), {
+                position: "top-right"
+            })
+          }else{
+          if(errorCod.error=='1'){
+            toast.error(t('Error1'), {
+                position: "top-right"
+              });
+          }else{
+            toast.error(t('ErrorIDK'), {
+                position: "top-right"
+              });
+          }
+        }
+        })
+        /*.then(errorCod=>{
+            JsonError=errorCod;
+            errorCod.error=JsonError.error
                 })*/
       }
 
@@ -118,11 +135,8 @@ function Anketa() {
           if (response.ok) {
             return  response
           }else{
-          return response.then(error => {
-            const e = new Error('Что-то пошло не так')
-            e.dataAbitur = error
-            throw e
-          })}
+
+ }
         })
         /*.then(dataAbitur=>{
             data=dataAbitur;
@@ -133,22 +147,9 @@ function Anketa() {
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
         if(ButtonClick==true){
-            toast.success(t('FinalMessage'), {
-                position: "top-right"
-            })
+
             setButtonClick(false)
             sendRequest('POST', requestURL, body)
-            .then(body => console.log(body))
-
-        const body2=new FormData()
-            const nameFolder=number.value+date_of_issue.value
-            body2.append("name",nameFolder)
-            files.forEach((files)=>{
-            body2.append("file",files)
-        })
-        console.log(body2)
-        sendRequestFormData('POST','http://localhost:3001/api/files',body2)
-            setFiles([])
         }
         edit.Edit=0
         /*const fetchData = async () => {
@@ -166,7 +167,6 @@ function Anketa() {
             }
           };
         }*/
-          console.log(Data)
         }, [ButtonClick]);
 
     function handleClick(e) {
@@ -1204,8 +1204,8 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
-                    onClick={handleClick}
+                    <button /*disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                   */ onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>
         </form>

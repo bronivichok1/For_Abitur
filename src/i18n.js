@@ -345,6 +345,19 @@ i18n
 
                     But1:"Fill out the application for applicants",
                     But2:"Correct/delete the applicant's application",
+
+                    ForReadData: "Enter document data:",
+                    ForReadDataNum: "Number",
+                    ForReadDataNumErr: "The 'Number' field is required.",
+
+                    ForReadDataVid: "Date of issue",
+                    ForReadDataVidErr1: "The 'Issue Date' field is required.",
+                    ForReadDataVidErr2: "The 'Issue Date' field is not filled in correctly.",
+
+                    Next: "Next",
+
+                    Error1: "An application for this passport number already exists",
+                    ErrorIDK: "An error occurred, form later",
                 }
             },
             ru: {
@@ -684,6 +697,19 @@ i18n
                     But1:"Заполнить заявление абитуриента",
                     But2:"Исправить/удалить заявление абитуриента",
 
+
+                    ForReadData:"Введите данные документа:",
+                    ForReadDataNum:"Номер",
+                    ForReadDataNumErr:"Поле 'Номер' обязательно для заполнения.",
+
+                    ForReadDataVid:"Дата выдачи",
+                    ForReadDataVidErr1:"Поле 'Дата выдачи' обязательно для заполнения.",
+                    ForReadDataVidErr2:"Поле 'Дата выдачи' заполнено неверно.",
+
+                    Next:"Далее",
+
+                    Error1:"Заявление для этого номер апасспорта уже существует",
+                    ErrorIDK:"Произошла ошибка, попробуйте позже",
                 }
             }
         },

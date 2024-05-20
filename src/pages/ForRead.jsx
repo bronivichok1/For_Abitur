@@ -2,6 +2,9 @@ import "../style/Anketa.css"
 import { useEffect, useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {data,Data,edit} from '../data/DataForInput'
+import { useTranslation } from 'react-i18next';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 const useValidation=(value,validations)=>{
@@ -56,6 +59,8 @@ return{
 
 function ForRead() {
 
+  const { t, i18n } = useTranslation()
+
   let Jsondata={}
   function sendRequest(method, url, body = null) {
     const headers = {
@@ -69,11 +74,10 @@ function ForRead() {
       if (response.ok) {
         return  response.json()
       }else{
-      return response.json().then(error => {
-        const e = new Error('Что-то пошло не так')
-        e.dataAbitur = error
-        throw e
-      })}
+      toast.error(t('ErrorIDK'), {
+        position: "top-right"
+      });
+      }
     })
     .then(dataAbitur=>{
         Jsondata=dataAbitur
@@ -134,26 +138,31 @@ function ForRead() {
       e.preventDefault()
     }
     return (
+      
         <div className="div">
           <form className="form-ForRead" >
-            <legend className="lead" >Введите данные документа:</legend>
+          <div align="right"className="row">
+            <button className="btn-3 btn-sep icon-send" value="ru" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('ru'); }}>RU</button>
+            <button className="btn-11 btn-sep icon-send" value="en" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('en'); }}>EN</button>
+        </div>
+            <legend className="lead" >{t('ForReadData')}</legend>
 {/*<label className="form-label w-100">Серия
             <input className={serial.isDirty&&serial.isEmpty?"input_w600-error":"input_w600"} onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="15" autoComplete="off"/>
             {(serial.isDirty&&serial.isEmpty)&&<div  style={{color:'red'}}> Поле "Серия" обязательно для заполнения.</div>}
     </label>*/}
-<label className="form-label w-100">Номер
+<label className="form-label w-100">{t('ForReadDataNum')}
             <input className={number.isDirty&&number.isEmpty?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  autoComplete="off"/>
-            {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> Поле "Номер" обязательно для заполнения.</div>}
+            {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataNumErr')}</div>}
 </label>
-<label className="form-label w-100">Дата выдачи
+<label className="form-label w-100">{t('ForReadDataVid')}
             <input className={date_of_expiry.isDirty&&(date_of_expiry.isEmpty||date_of_expiry.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value} name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10" autoComplete="off"/>
-            {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div  style={{color:'red'}}> Поле "Дата выдачи" обязательно для заполнения.</div>}
-            {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div  style={{color:'red'}}>Поле "Дата выдачи" заполнено неверно.</div>}
+            {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataVidErr1')}</div>}
+            {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div  style={{color:'red'}}>{t('ForReadDataVidErr2')}</div>}
 </label>
         <div align ="center" >
                     <button disabled={number.isEmpty||date_of_expiry.inputData||date_of_expiry.isEmpty}
                     onClick={handleClick}
-                     type="submit" className="btn btn-1 btn-sep icon-info">Далее</button>
+                     type="submit" className="btn btn-1 btn-sep icon-info">{t('Next')}</button>
                 </div>
               </form>
         </div>

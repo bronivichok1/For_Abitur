@@ -4,7 +4,6 @@ export const data={
     surname_info:'',
     date_of_birth:'',
     citizenship:'',
-    serial:'',
     number:'',
     PlaceOfIssue:'',
     date_of_issue:'',
@@ -35,4 +34,7 @@ export const Data = {
   }
 export const edit={
     Edit:''
+}
+export const errorCod={
+    error:''
 }
