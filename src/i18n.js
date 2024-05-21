@@ -355,7 +355,7 @@ i18n
                     ForReadDataVidErr2: "The 'Issue Date' field is not filled in correctly.",
 
                     Next: "Next",
-
+                    
                     Error1: "An application for this passport number already exists",
                     ErrorIDK: "An error occurred, form later",
                     Error2:"Statement does not exist"

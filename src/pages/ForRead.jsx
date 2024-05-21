@@ -1,7 +1,7 @@
 import "../style/Anketa.css"
 import { useEffect, useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {data,Data,edit} from '../data/DataForInput'
+import {data,Data,edit, errorCod} from '../data/DataForInput'
 import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -61,7 +61,6 @@ function ForRead() {
 
   const { t, i18n } = useTranslation()
 
-  let Jsondata={}
   function sendRequest(method, url, body = null) {
     const headers = {
       'Content-Type': 'application/json'
@@ -74,61 +73,64 @@ function ForRead() {
       if (response.ok) {
         return  response.json()
       }else{
-      toast.error(t('ErrorIDK'), {
-        position: "top-right"
-      });
+        if(errorCod=3){
+        toast.error(t('ErrorIDK'), {
+          position: "top-right"
+        });
       }
-    })
+      }
+    }) 
     .then(dataAbitur=>{
-        Jsondata=dataAbitur
-        data.surname=Jsondata.surname
-        data.name=Jsondata.name
-        data.surname_info=Jsondata.surname_info
-        data.date_of_birth=Jsondata.date_of_birth
-        data.citizenship=Jsondata.citizenship
-        data.number=Jsondata.number
-        data.PlaceOfIssue=Jsondata.PlaceOfIssue
-        data.date_of_issue=Jsondata.date_of_issue
-        data.date_of_expiry=Jsondata.date_of_expiry
-        data.settlement_name=Jsondata.settlement_name
-        data.mobile_tel=Jsondata.mobile_tel
-        data.email=Jsondata.email
-        data.edu_date_of_issue=Jsondata.edu_date_of_issue
-        data.edu_serial_number=Jsondata.edu_serial_number
-        data.edu_name=Jsondata.edu_name
-        data.sex=Jsondata.sex
-        data.country=Jsondata.country
-        data.DD=Jsondata.DD
-        data.religion=Jsondata.religion
-        data.DataYourPeople=Jsondata.DataYourPeople
-        data.NameSurname=Jsondata.NameSurname
-        data.PhoneRepresantative=Jsondata.PhoneRepresantative
-        data.country_pass=Jsondata.country_pass
-        data.NatPassw=Jsondata.NatPassw
-        data.HostelLive=Jsondata.HostelLive
-        data.numberNational=Jsondata.numberNational
-        data.pref_faculty=Jsondata.pref_faculty
-        data.Files=Jsondata.Files
+        data.surname=dataAbitur.surname
+        data.name=dataAbitur.name
+        data.surname_info=dataAbitur.surname_info
+        data.date_of_birth=dataAbitur.date_of_birth
+        data.citizenship=dataAbitur.citizenship
+        data.number=dataAbitur.number
+        data.PlaceOfIssue=dataAbitur.PlaceOfIssue
+        data.date_of_issue=dataAbitur.date_of_issue
+        data.date_of_expiry=dataAbitur.date_of_expiry
+        data.settlement_name=dataAbitur.settlement_name
+        data.mobile_tel=dataAbitur.mobile_tel
+        data.email=dataAbitur.email
+        data.edu_date_of_issue=dataAbitur.edu_date_of_issue
+        data.edu_serial_number=dataAbitur.edu_serial_number
+        data.edu_name=dataAbitur.edu_name
+        data.sex=dataAbitur.sex
+        data.country=dataAbitur.country
+        data.DD=dataAbitur.DD
+        data.religion=dataAbitur.religion
+        data.DataYourPeople=dataAbitur.DataYourPeople
+        data.NameSurname=dataAbitur.NameSurname
+        data.PhoneRepresantative=dataAbitur.PhoneRepresantative
+        data.country_pass=dataAbitur.country_pass
+        data.NatPassw=dataAbitur.NatPassw
+        data.HostelLive=dataAbitur.HostelLive
+        data.numberNational=dataAbitur.numberNational
+        data.pref_faculty=dataAbitur.pref_faculty
+        data.Files=dataAbitur.Files
+        edit.Edit=1
         navigate("/FillData", { replace: false })
+      })
+      .catch(error=>{
+        toast.error(t('ErrorIDK'), {
+          position: "top-right"
+        });
       })
   }
 
     const navigate = useNavigate();
     const number=useInput('',{isEmpty:true})
-    const date_of_expiry=useInput('',{isEmpty:true,inputData:true})
-    const body = {
-      number: number.value,
-      date_of_expiry:date_of_expiry.value
-    }
+    const date_of_issue=useInput('',{isEmpty:true,inputData:true})
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
         if(ButtonClick==true){
             Data.number=number.value
-            Data.date_of_expiry=date_of_expiry.value
-            edit.Edit=1
-            if(Data.number!=''&&Data.date_of_expiry!=''){
+            Data.date_of_issue=date_of_issue.value
+            if(Data.number!=''&&Data.date_of_issue!=''){
                   sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
             }
+            setButtonClick(false)
           }
     })
     function handleClick(e) {
@@ -153,12 +155,12 @@ function ForRead() {
             {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataNumErr')}</div>}
 </label>
 <label className="form-label w-100">{t('ForReadDataVid')}
-            <input className={date_of_expiry.isDirty&&(date_of_expiry.isEmpty||date_of_expiry.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value} name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10" autoComplete="off"/>
-            {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataVidErr1')}</div>}
-            {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div  style={{color:'red'}}>{t('ForReadDataVidErr2')}</div>}
+            <input className={date_of_issue.isDirty&&(date_of_issue.isEmpty||date_of_issue.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" autoComplete="off"/>
+            {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataVidErr1')}</div>}
+            {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div  style={{color:'red'}}>{t('ForReadDataVidErr2')}</div>}
 </label>
         <div align ="center" >
-                    <button disabled={number.isEmpty||date_of_expiry.inputData||date_of_expiry.isEmpty}
+                    <button disabled={number.isEmpty||date_of_issue.inputData||date_of_issue.isEmpty}
                     onClick={handleClick}
                      type="submit" className="btn btn-1 btn-sep icon-info">{t('Next')}</button>
                 </div>
