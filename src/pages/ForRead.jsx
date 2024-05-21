@@ -86,7 +86,6 @@ function ForRead() {
         data.surname_info=Jsondata.surname_info
         data.date_of_birth=Jsondata.date_of_birth
         data.citizenship=Jsondata.citizenship
-        data.serial=Jsondata.serial
         data.number=Jsondata.number
         data.PlaceOfIssue=Jsondata.PlaceOfIssue
         data.date_of_issue=Jsondata.date_of_issue
@@ -110,7 +109,6 @@ function ForRead() {
         data.numberNational=Jsondata.numberNational
         data.pref_faculty=Jsondata.pref_faculty
         data.Files=Jsondata.Files
-        console.log(data)
         navigate("/FillData", { replace: false })
       })
   }

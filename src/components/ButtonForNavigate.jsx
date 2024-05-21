@@ -4,7 +4,7 @@ export default function ButtonForNavigate(props){
   const navigate = useNavigate();
 
     return(
-      <div class="container">
+      <div className="container">
             <button className={props.style}  id="submit" onClick={() => navigate(props.adress, { replace: false })}>
             <h4>{props.title}</h4>
             </button>
