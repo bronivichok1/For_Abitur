@@ -105,10 +105,10 @@ function Anketa() {
 
         sendRequestFormData('POST','http://localhost:3001/api/files',body2)
             setFiles([])
-            return  response.json()
             toast.success(t('FinalMessage'), {
                 position: "top-right"
             })
+            return  response.json()
           }else{
           if(errorCod.error=='1'){
             toast.error(t('Error1'), {
@@ -136,7 +136,7 @@ function Anketa() {
             return  response
           }else{
 
- }
+    }
         })
         /*.then(dataAbitur=>{
             data=dataAbitur;
@@ -989,7 +989,7 @@ function Anketa() {
                 </div>
                     <legend className="text-center"> 
                             <div className="wrapper">
-                                <form className={`form-drag${dragActive?"2":""}`}
+                                <div className={`form-drag${dragActive?"2":""}`}
                                     onDragEnter={handleDrag}
                                     onDragOver={handleDrag}
                                     onDragLeave={handleLeave}
@@ -1017,7 +1017,7 @@ function Anketa() {
                                                         </ul>
                                                     </>
                                                         )}
-                                </form> 
+                                </div> 
                             </div>      
                         </legend>
                     <hr/>
