@@ -82,12 +82,10 @@ const useInput=(InitialValue,validations)=>{
 }
 
 function Anketa() {
-    const HOST = process.env.REACT_APP_HOST;
-    const PORT = process.env.REACT_APP_PORT;
-    const PATH=process.env.REACT_APP_PATH;
+    const PATH = process.env.REACT_APP_PATH;
 
     const { t, i18n } = useTranslation()
-    const requestURL = 'http://'+HOST+':'+PORT+'/'+PATH+'/user'
+    const requestURL = PATH +'/user'
     const[files,setFiles]=useState([])
 
    
@@ -110,7 +108,7 @@ function Anketa() {
             body2.append("file",files)
         })
 
-        sendRequestFormData('POST','http://'+HOST+':'+PORT+'/'+PATH+'/files',body2)
+        sendRequestFormData('POST',PATH +'/files',body2)
             setFiles([])
             toast.success(t('FinalMessage'), {
                 position: "top-right"

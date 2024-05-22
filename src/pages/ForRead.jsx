@@ -59,11 +59,9 @@ return{
 function ForRead() {
 
   const { t, i18n } = useTranslation()
-  const HOST = process.env.REACT_APP_HOST;
-  const PORT = process.env.REACT_APP_PORT;
-  const PATH=process.env.REACT_APP_PATH;
+  const PATH = process.env.REACT_APP_PATH;
 
-  const RequestURL='http://'+HOST+':'+PORT+'/'+PATH+'/auth/login';
+  const RequestURL=PATH+'/auth/login';
 
   function sendRequest(method, url, body = null) {
     const headers = {
