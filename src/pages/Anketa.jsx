@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
 import {data,Data,edit,errorCod} from '../data/DataForInput'
 
+
 const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)
     const[isRus,setRus]=useState(true)
@@ -81,9 +82,15 @@ const useInput=(InitialValue,validations)=>{
 }
 
 function Anketa() {
+    const HOST = process.env.REACT_APP_HOST;
+    const PORT = process.env.REACT_APP_PORT;
+    const PATH=process.env.REACT_APP_PATH;
+
     const { t, i18n } = useTranslation()
-    const requestURL = 'http://localhost:3001/api/user'
+    const requestURL = 'http://'+HOST+':'+PORT+'/'+PATH+'/user'
     const[files,setFiles]=useState([])
+
+   
 
     function sendRequest(method, url, body = null) {
         const headers = {
@@ -103,7 +110,7 @@ function Anketa() {
             body2.append("file",files)
         })
 
-        sendRequestFormData('POST','http://localhost:3001/api/files',body2)
+        sendRequestFormData('POST','http://'+HOST+':'+PORT+'/'+PATH+'/files',body2)
             setFiles([])
             toast.success(t('FinalMessage'), {
                 position: "top-right"
@@ -152,21 +159,7 @@ function Anketa() {
             sendRequest('POST', requestURL, body)
         }
         edit.Edit=0
-        /*const fetchData = async () => {
-            if(Data.number!=''&&Data.date_of_issue!=''){
-            try {
-                sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
-              const response = await fetch( 'POST', 'http://localhost:3001/api/auth/login', Data);
-              const data = await response.json();
-              setData(data);
-            } catch (error) {
-                toast.error("Что-то пошло не так, поробуйте позже", {
-                position: "top-right"
-                });
-              console.error('Error fetching data:', error);
-            }
-          };
-        }*/
+
         }, [ButtonClick]);
 
     function handleClick(e) {

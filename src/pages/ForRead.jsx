@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
 
 
-
 const useValidation=(value,validations)=>{
   const[isEmpty,setEmpty]=useState(true)
   const[inputData,setInputData]=useState(true)
@@ -60,6 +59,11 @@ return{
 function ForRead() {
 
   const { t, i18n } = useTranslation()
+  const HOST = process.env.REACT_APP_HOST;
+  const PORT = process.env.REACT_APP_PORT;
+  const PATH=process.env.REACT_APP_PATH;
+
+  const RequestURL='http://'+HOST+':'+PORT+'/'+PATH+'/auth/login';
 
   function sendRequest(method, url, body = null) {
     const headers = {
@@ -128,7 +132,7 @@ function ForRead() {
             Data.number=number.value
             Data.date_of_issue=date_of_issue.value
             if(Data.number!=''&&Data.date_of_issue!=''){
-                  sendRequest('POST', 'http://localhost:3001/api/auth/login', Data)
+                  sendRequest('POST', RequestURL, Data)
             }
             setButtonClick(false)
           }
