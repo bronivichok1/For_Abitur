@@ -115,7 +115,7 @@ function Anketa() {
             })
             return  response.json()
           }else{
-          if(errorCod.error=='1'){
+          if(response.status=='404'||errorCod.error=='1'){
             toast.error(t('Error1'), {
                 position: "top-right"
               });
@@ -123,6 +123,7 @@ function Anketa() {
             toast.error(t('ErrorIDK'), {
                 position: "top-right"
               });
+
           }
         }
         })
