@@ -358,7 +358,9 @@ i18n
                     
                     Error1: "An application for this passport number already exists",
                     ErrorIDK: "An error occurred, form later",
-                    Error2:"Statement does not exist"
+                    Error2:"Statement does not exist",
+
+                    Ready:"Ok",
                 }
             },
             ru: {
@@ -712,6 +714,8 @@ i18n
                     Error1:"Заявление для этого номер апасспорта уже существует",
                     ErrorIDK:"Произошла ошибка, попробуйте позже",
                     Error2:"Заявления не существует",
+
+                    Ready:"Ок",
 
                 }
             }

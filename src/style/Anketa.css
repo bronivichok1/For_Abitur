@@ -1,6 +1,4 @@
-    *, ::after, ::before {
-        box-sizing: border-box;
-    }
+
 
     span {
         color: red;
@@ -42,9 +40,7 @@
         box-sizing: border-box;
     }
       
-    label{
-      color:black;
-    }
+
 
     select {
         margin-top: 10px;
@@ -758,4 +754,9 @@
 
       .span-drag{
         color:#fff;
+      }
+      h5{
+        color:black;
+        font-size: 24px;
+        align-items: center;
       }

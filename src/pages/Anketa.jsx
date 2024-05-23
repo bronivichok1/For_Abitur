@@ -4,6 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
 import {data,Data,edit,errorCod} from '../data/DataForInput'
+import Modal from "../components/Modal";
+import '../style/Button_language.css'
 
 
 const useValidation=(value,validations)=>{
@@ -63,6 +65,7 @@ const useInput=(InitialValue,validations)=>{
     const [value,setValue]=useState(InitialValue)
     const [checked, setChecked] = useState(false);
     const [isDirty,setDirty]=useState(false)
+    
     const valid=useValidation(value,validations)
     const onChange=(e)=>{
         setValue(e.target.value)
@@ -83,11 +86,12 @@ const useInput=(InitialValue,validations)=>{
 
 function Anketa() {
     const PATH = process.env.REACT_APP_PATH;
-
+    const [modalActive,setModalActive]=useState(false)
+    const [lan,setLan]=useState(false)
     const { t, i18n } = useTranslation()
     const requestURL = PATH +'/user'
     const[files,setFiles]=useState([])
-
+    const[ModalClick,setModalClick]=useState(false)
    
 
     function sendRequest(method, url, body = null) {
@@ -110,9 +114,10 @@ function Anketa() {
 
         sendRequestFormData('POST',PATH +'/files',body2)
             setFiles([])
-            toast.success(t('FinalMessage'), {
+            /*toast.success(t('FinalMessage'), {
                 position: "top-right"
-            })
+            })*/
+            setModalActive(true)
             return  response.json()
           }else{
           if(response.status=='404'||errorCod.error=='1'){
@@ -156,10 +161,20 @@ function Anketa() {
 
             setButtonClick(false)
             sendRequest('POST', requestURL, body)
+        }       
+        if(lan==true){
+            i18n.changeLanguage('en');
         }
+        else{
+            i18n.changeLanguage('ru');
+        }
+       /* if(ModalClick=true){
+            handleShow()
+        }*/
+    
         edit.Edit=0
 
-        }, [ButtonClick]);
+        }, [ButtonClick,ModalClick,lan]);
 
     function handleClick(e) {
         setButtonClick(true)
@@ -224,7 +239,7 @@ function Anketa() {
       pref_faculty:pref_faculty.value,
       nameFolder:number.value+date_of_expiry.value
     }
-
+  
      /*toast.error("Error Notification !", {
        position: "top-center"
      });
@@ -252,6 +267,8 @@ function Anketa() {
       };
       
     const[dragActive,setDragActive]=useState(false)
+    
+
 
     const handleDrag=(e)=>{
         e.preventDefault();
@@ -299,12 +316,46 @@ function Anketa() {
         })
     }
 
+    /*const Modal = ({ show, handleClose }) => {
+        const showHideClassName = show ? "modal display-block" : "modal display-none";
+      
+        return (
+          <div className={showHideClassName}>
+            <section className="modal-main">
+              <button onClick={handleClose}>Закрыть</button>
+              Содержимое модального окна...
+            </section>
+          </div>
+        );
+      };
+
+        const [showModal, setShowModal] = useState(false);
+      
+        const handleShow = () => {
+          setShowModal(true);
+        };
+      
+        const handleClose = () => {
+          setShowModal(false);
+        };*/
+        const handleToggleChange = () => {
+            setLan(!lan); // Инвертируем значение lan при каждом изменении состояния переключателя
+          };
+
     return (
-        <form  className="form" autoComplete="off">
-        <div align="right"className="row">
-            <button className="btn-3 btn-sep icon-send" value="ru" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('ru'); }}>RU</button>
-            <button className="btn-11 btn-sep icon-send" value="en" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('en'); }}>EN</button>
+        <div>
+                    <div className="btn-container">
+            <label className="switch btn-color-mode-switch">
+                <input value="1" id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
+                <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" for="color_mode" ></label>
+            </label>
         </div>
+        <form  className="form" autoComplete="off">
+
+
+        <Modal active={modalActive} setActive={setModalActive}>
+            <h5>{t('FinalMessage')}</h5>
+        </Modal>
 <legend>{t('AppDetails')}</legend>        
                     <div className="row">
                 <label className="form-label col-sm">{t('Surname')}<span>*</span>
@@ -1201,6 +1252,7 @@ function Anketa() {
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>
         </form>
+        </div>
     )
   }
   export default Anketa

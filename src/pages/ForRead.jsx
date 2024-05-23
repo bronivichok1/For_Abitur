@@ -60,6 +60,7 @@ function ForRead() {
 
   const { t, i18n } = useTranslation()
   const PATH = process.env.REACT_APP_PATH;
+  const [lan,setLan]=useState(false)
 
   const RequestURL=PATH+'/auth/login';
 
@@ -134,19 +135,31 @@ function ForRead() {
             }
             setButtonClick(false)
           }
-    })
+          if(lan==true){
+            i18n.changeLanguage('en');
+        }
+        else{
+            i18n.changeLanguage('ru');
+        }
+    },[lan])
     function handleClick(e) {
       setButtonClick(true)
       e.preventDefault()
     }
+    const handleToggleChange = () => {
+      setLan(!lan); // Инвертируем значение lan при каждом изменении состояния переключателя
+    };
     return (
       
         <div className="div">
-          <form className="form-ForRead" >
-          <div align="right"className="row">
-            <button className="btn-3 btn-sep icon-send" value="ru" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('ru'); }}>RU</button>
-            <button className="btn-11 btn-sep icon-send" value="en" onClick={(event) => { event.preventDefault(); i18n.changeLanguage('en'); }}>EN</button>
+                  <div className="btn-container">
+            <label className="switch btn-color-mode-switch">
+                <input value="1" id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
+                <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" for="color_mode" ></label>
+            </label>
         </div>
+          <form className="form-ForRead" >
+
             <legend className="lead" >{t('ForReadData')}</legend>
 {/*<label className="form-label w-100">Серия
             <input className={serial.isDirty&&serial.isEmpty?"input_w600-error":"input_w600"} onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="15" autoComplete="off"/>
