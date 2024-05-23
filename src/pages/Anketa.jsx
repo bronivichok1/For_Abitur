@@ -106,7 +106,7 @@ function Anketa() {
         }).then(response => {
           if (response.ok) {
             const body2=new FormData()
-            const nameFolder=number.value+date_of_issue.value
+            const nameFolder=number.value+'_'+date_of_issue.value
             body2.append("name",nameFolder)
             files.forEach((files)=>{
             body2.append("file",files)
