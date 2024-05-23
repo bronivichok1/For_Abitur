@@ -82,8 +82,8 @@
 
     body{
       font-family: var(--bs-body-font-family);
-      font-family: 'Roboto', Arial, sans-serif;
-      font-size: 16px;
+      font-family: Verdana,'Roboto', sans-serif;
+      font-size: 14.5px;
       background-color: #edf3d8c0;
       box-sizing: border-box;
       }
