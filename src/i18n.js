@@ -334,7 +334,7 @@ i18n
                     
                     WarningMessageOne:"After arriving in Belarus applicant will need to notarize the translation of passport in Belarus!!!",
                     WarningMessageTwo:"After arriving in Belarus applicant must pass a mandatory medical examination, confirming the absence of medical contraindications to study in the Republic of Belarus, issued by a healthcare organization of the Republic of Belarus!!!",
-                    WarningMessageThree:"Applicants arriving for training will be interviewed on the following subjects: english language (russian language), chemisry amd biology.",
+                    WarningMessageThree:"Applicants arriving for training will be interviewed on the following subjects: english language (russian language), chemisry and biology.",
 
                     AttFile:"Drag files here or",
                     DowFile:"Upload files",

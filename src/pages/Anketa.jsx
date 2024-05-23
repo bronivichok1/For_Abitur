@@ -1064,9 +1064,9 @@ function Anketa() {
                             </div>      
                         </legend>
                     <hr/>
-                    <legend className="text-center">{t('WarningMessageOne')}</legend>
-                    <legend className="text-center">{t('WarningMessageTwo')}</legend>
-                    <legend className="text-center">{t('WarningMessageThree')}</legend>
+                    <div className="customText">{t('WarningMessageOne')}</div>
+                    <div className="customText">{t('WarningMessageTwo')}</div>
+                    <div className="customText">{t('WarningMessageThree')}</div>
                     <hr/>
                     {/*<div className="row">
                             <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} checked={pref_target.checked} id="prform_chbx_1"  name="pref_target" type="checkbox" />
