@@ -255,7 +255,7 @@ function Anketa() {
         if (e.target.files && e.target.files.length > 0) {
           const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.target.files).forEach((file) => {
-            if (file.size <= 5 * 1024 * 1024 && 
+            if (file.size <= 2 * 1024 * 1024 && 
                 (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
               newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
@@ -284,7 +284,7 @@ function Anketa() {
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
           const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.dataTransfer.files).forEach((file) => {
-            if (file.size <= 5 * 1024 * 1024 && 
+            if (file.size <= 2 * 1024 * 1024 && 
                 (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
               newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {

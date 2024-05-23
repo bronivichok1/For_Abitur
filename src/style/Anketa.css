@@ -726,7 +726,7 @@
       .file-list li{
         width: 100%;
         text-align: center;
-        padding:  6px 16px;
+        padding:  6px 2px;
         border: 1px dashed rgb(187,183,183);
         border-radius: 4px;
         font-size: 14px;
