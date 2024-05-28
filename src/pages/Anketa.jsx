@@ -3,7 +3,7 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
-import {data,Data,edit,errorCod} from '../data/DataForInput'
+import {dataEdit,Data,edit,errorCod,dataID} from '../data/DataForInput'
 import Modal from "../components/Modal";
 import '../style/Button_language.css'
 
@@ -89,54 +89,44 @@ function Anketa() {
     const [modalActive,setModalActive]=useState(false)
     const [lan,setLan]=useState(false)
     const { t, i18n } = useTranslation()
-    const requestURL = PATH +'/user'
     const[files,setFiles]=useState([])
     const[ModalClick,setModalClick]=useState(false)
-   
+    const[resp,setResp]=useState({})
+    
 
     function sendRequest(method, url, body = null) {
-        const headers = {
-          'Content-Type': 'application/json'
-        }
-      
+        const headers = {'Content-Type': 'application/json'}
         return fetch(url, {
           method: method,
           body: JSON.stringify(body),
           headers: headers
-        }).then(response => {
-          if (response.ok) {
-            const body2=new FormData()
-            const nameFolder=number.value+'_'+date_of_issue.value
-            body2.append("name",nameFolder)
-            files.forEach((files)=>{
-            body2.append("file",files)
         })
+            .then(response => {                       
 
-        sendRequestFormData('POST',PATH +'/files',body2)
-            setFiles([])
-            /*toast.success(t('FinalMessage'), {
-                position: "top-right"
-            })*/
-            setModalActive(true)
-            return  response.json()
-          }else{
-          if(response.status=='404'||errorCod.error=='1'){
-            toast.error(t('Error1'), {
-                position: "top-right"
-              });
-          }else{
-            toast.error(t('ErrorIDK'), {
-                position: "top-right"
-              });
-
-          }
-        }
-        })
-        /*.then(errorCod=>{
-            JsonError=errorCod;
-            errorCod.error=JsonError.error
-                })*/
-      }
+                 setResp(response.json())
+                })
+                  .then((data)=>{
+                    dataID.id=data.id
+                    console.log(dataID.id)
+                        const nameFolder=dataID.id
+                        body.append("name",nameFolder)
+                        files.forEach((files)=>{
+                        body.append("file",files)})
+                        console.log(data)
+                    sendRequestFormData('POST',PATH +'/files',body)
+                        setFiles([])
+                        setModalActive(true)
+                      
+                      if(resp.status=='404'){
+                        toast.error(t('Error1'), {
+                            position: "top-right"
+                          });
+                      }/*if(resp.status!=='ok'){
+                        toast.error(t('ErrorIDK'), {
+                            position: "top-right"
+                          });
+                        }*/
+                })}
 
       function sendRequestFormData(method, url, body = null) {
         return fetch(url, {
@@ -145,22 +135,14 @@ function Anketa() {
         }).then(response => {
           if (response.ok) {
             return  response
-          }else{
+          }else{ }})}
 
-    }
-        })
-        /*.then(dataAbitur=>{
-            data=dataAbitur;
-            console.log(data)
-                })*/
-      }
 
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
         if(ButtonClick==true){
-
             setButtonClick(false)
-            sendRequest('POST', requestURL, body)
+            sendRequest('POST', PATH +'/user', body)
         }       
         if(lan==true){
             i18n.changeLanguage('en');
@@ -168,12 +150,7 @@ function Anketa() {
         else{
             i18n.changeLanguage('ru');
         }
-       /* if(ModalClick=true){
-            handleShow()
-        }*/
-    
         edit.Edit=0
-
         }, [ButtonClick,ModalClick,lan]);
 
     function handleClick(e) {
@@ -181,37 +158,41 @@ function Anketa() {
         e.preventDefault()
       }
 
-    const surname=useInput(data.surname,{isEmpty:true,isEng:true})
-    const name=useInput(data.name,{isEmpty:true,isEng:true})
-    const surname_info=useInput(data.surname_info,{isEmpty:true})
-    const date_of_birth=useInput(data.date_of_birth,{isEmpty:true,inputData:true})
-    const citizenship=useInput(data.citizenship,{isEmpty:true})
-    const number=useInput(data.number,{isEmpty:true, Num:true})
-    const PlaceOfIssue=useInput(data.PlaceOfIssue,{isEmpty:true})
-    const date_of_issue=useInput(data.date_of_issue,{isEmpty:true,inputData:true})
-    const date_of_expiry=useInput(data.date_of_expiry,{isEmpty:true,inputData:true})
-    const settlement_name=useInput(data.settlement_name,{isEmpty:true})
-    const mobile_tel=useInput(data.mobile_tel,{isEmpty:true,ismobileNum:true})
-    const email=useInput(data.email,{isEmpty:true,isemailCheck:true})
-    const edu_date_of_issue=useInput(data.edu_date_of_issue,{isEmpty:true, inputData:true})
-    const edu_serial_number=useInput(data.edu_serial_number)
-    const edu_name=useInput(data.edu_name)
-    const sex=useInput(data.sex,{isEmpty:true})
-    const country=useInput(data.country)
-    const pref_faculty=useInput(data.pref_faculty)
-    const DD=useInput(data.DD)
-    const religion=useInput(data.religion) 
-    const DataYourPeople=useInput(data.DataYourPeople,{isEmpty:true})
-    const NameSurname=useInput(data.NameSurname)
-    const PhoneRepresantative=useInput(data.PhoneRepresantative,{ismobileNum:true})
-    const country_pass=useInput(data.country_pass,{isEmpty:true})
-    const NatPassw=useInput(data.NatPassw,{isEmpty:true})
-    const HostelLive=useInput(data.HostelLive)
-    const numberNational =useInput(data.numberNational)
+    const surname=useInput(dataEdit.surname,{isEmpty:true,isEng:true})
+    const name=useInput(dataEdit.name,{isEmpty:true,isEng:true})
+    const surnamerus=useInput(dataEdit.surnamerus,{isEmpty:true,isRus:true})
+    const namerus=useInput(dataEdit.namerus,{isEmpty:true,isRus:true})
+    const surname_info=useInput(dataEdit.surname_info,{isEmpty:true})
+    const date_of_birth=useInput(dataEdit.date_of_birth,{isEmpty:true,inputData:true})
+    const citizenship=useInput(dataEdit.citizenship,{isEmpty:true})
+    const number=useInput(dataEdit.number,{isEmpty:true, Num:true})
+    const PlaceOfIssue=useInput(dataEdit.PlaceOfIssue,{isEmpty:true})
+    const date_of_issue=useInput(dataEdit.date_of_issue,{isEmpty:true,inputData:true})
+    const date_of_expiry=useInput(dataEdit.date_of_expiry,{isEmpty:true,inputData:true})
+    const settlement_name=useInput(dataEdit.settlement_name,{isEmpty:true})
+    const mobile_tel=useInput(dataEdit.mobile_tel,{isEmpty:true,ismobileNum:true})
+    const email=useInput(dataEdit.email,{isEmpty:true,isemailCheck:true})
+    const edu_date_of_issue=useInput(dataEdit.edu_date_of_issue,{isEmpty:true, inputData:true})
+    const edu_serial_number=useInput(dataEdit.edu_serial_number)
+    const edu_name=useInput(dataEdit.edu_name)
+    const sex=useInput(dataEdit.sex,{isEmpty:true})
+    const country=useInput(dataEdit.country)
+    const pref_faculty=useInput(dataEdit.pref_faculty)
+    const DD=useInput(dataEdit.DD)
+    const religion=useInput(dataEdit.religion) 
+    const DataYourPeople=useInput(dataEdit.DataYourPeople,{isEmpty:true})
+    const NameSurname=useInput(dataEdit.NameSurname)
+    const PhoneRepresantative=useInput(dataEdit.PhoneRepresantative,{ismobileNum:true})
+    const country_pass=useInput(dataEdit.country_pass,{isEmpty:true})
+    const NatPassw=useInput(dataEdit.NatPassw,{isEmpty:true})
+    const HostelLive=useInput(dataEdit.HostelLive)
+    const numberNational =useInput(dataEdit.numberNational)
 
     const body = {
       name: name.value,
       surname: surname.value,
+      namerus:namerus.value,
+      surnamerus:surnamerus.value,
       surname_info:surname_info.value,
       date_of_birth:date_of_birth.value,
       citizenship:citizenship.value,
@@ -307,13 +288,13 @@ function Anketa() {
         };
   
     const handleSubmit=(e)=>{
-        e.preventDefault();
+       e.preventDefault();/* 
        const body2=new FormData()
             const nameFolder=number.value+date_of_expiry.value
-            body2.append("name",nameFolder)
+            body2.append("id",nameFolder)
             files.forEach((file)=>{
             body2.append("file",file)
-        })
+        })*/
     }
 
     /*const Modal = ({ show, handleClose }) => {
@@ -367,6 +348,18 @@ function Anketa() {
                         <input className={name.isDirty&&(name.isEng||name.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>name.onChange(e)} onBlur={e=>name.onBlur(e)} value={name.value} name="name" maxLength="40"/>
                         {(name.isDirty&&name.isEmpty)&&<div style={{color:'red'}}> {t('NameErrorEmpty')}</div>}
                         {(name.isDirty&&name.isEng&&!name.isEmpty)&&<div style={{color:'red'}}> {t('NameError')}</div>}
+                </label>
+                    </div>
+                    <div className="row">
+                <label className="form-label col-sm">{t('SurnameRus')}<span>*</span>
+                        <input  className={surnamerus.isDirty&&(surnamerus.isRus||surnamerus.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>surnamerus.onChange(e)} onBlur={e=>surnamerus.onBlur(e)} value={surnamerus.value}   name="surnamerus" maxLength="40" />
+                        {(surnamerus.isDirty&&surnamerus.isEmpty)&&<div  style={{color:'red'}}> {t('SurnameErrorEmpty')}</div>}
+                        {(surnamerus.isDirty&&surnamerus.isRus&&!surnamerus.isEmpty)&&<div  style={{color:'red'}}> {t('SurnameErrorRus')}</div>}
+                </label> 
+                <label className="form-label col-sm" >{t('NameRus')}<span>*</span>
+                        <input className={namerus.isDirty&&(namerus.isRus||namerus.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>namerus.onChange(e)} onBlur={e=>namerus.onBlur(e)} value={namerus.value} name="namerus" maxLength="40"/>
+                        {(namerus.isDirty&&namerus.isEmpty)&&<div style={{color:'red'}}> {t('NameErrorEmpty')}</div>}
+                        {(namerus.isDirty&&namerus.isRus&&!namerus.isEmpty)&&<div style={{color:'red'}}> {t('NameErrorRus')}</div>}
                 </label>
                     </div>
                     <div className="row">
@@ -1247,7 +1240,7 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                    <button disabled={(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>

@@ -1,6 +1,9 @@
-export const data={       
+export const dataEdit={  
+    id:'' ,    
     name:'',
     surname: '',
+    namerus:'',
+    surnamerus:'',
     surname_info:'',
     date_of_birth:'',
     citizenship:'',
@@ -37,4 +40,7 @@ export const edit={
 }
 export const errorCod={
     error:''
+}
+export const dataID={
+    id:''
 }

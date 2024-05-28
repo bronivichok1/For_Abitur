@@ -1,7 +1,7 @@
 import "../style/Anketa.css"
 import { useEffect, useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {data,Data,edit, errorCod} from '../data/DataForInput'
+import {dataEdit,Data,edit, errorCod} from '../data/DataForInput'
 import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -84,36 +84,40 @@ function ForRead() {
       }
     }) 
     .then(dataAbitur=>{
-        data.surname=dataAbitur.surname
-        data.name=dataAbitur.name
-        data.surname_info=dataAbitur.surname_info
-        data.date_of_birth=dataAbitur.date_of_birth
-        data.citizenship=dataAbitur.citizenship
-        data.number=dataAbitur.number
-        data.PlaceOfIssue=dataAbitur.PlaceOfIssue
-        data.date_of_issue=dataAbitur.date_of_issue
-        data.date_of_expiry=dataAbitur.date_of_expiry
-        data.settlement_name=dataAbitur.settlement_name
-        data.mobile_tel=dataAbitur.mobile_tel
-        data.email=dataAbitur.email
-        data.edu_date_of_issue=dataAbitur.edu_date_of_issue
-        data.edu_serial_number=dataAbitur.edu_serial_number
-        data.edu_name=dataAbitur.edu_name
-        data.sex=dataAbitur.sex
-        data.country=dataAbitur.country
-        data.DD=dataAbitur.DD
-        data.religion=dataAbitur.religion
-        data.DataYourPeople=dataAbitur.DataYourPeople
-        data.NameSurname=dataAbitur.NameSurname
-        data.PhoneRepresantative=dataAbitur.PhoneRepresantative
-        data.country_pass=dataAbitur.country_pass
-        data.NatPassw=dataAbitur.NatPassw
-        data.HostelLive=dataAbitur.HostelLive
-        data.numberNational=dataAbitur.numberNational
-        data.pref_faculty=dataAbitur.pref_faculty
-        data.Files=dataAbitur.Files
+      dataEdit.id=dataAbitur.id
+      dataEdit.surname=dataAbitur.surname
+      dataEdit.name=dataAbitur.name
+      dataEdit.namerus=dataAbitur.namerus
+      dataEdit.surnamerus=dataAbitur.surnamerus
+      dataEdit.surname_info=dataAbitur.surname_info
+      dataEdit.date_of_birth=dataAbitur.date_of_birth
+        dataEdit.citizenship=dataAbitur.citizenship
+        dataEdit.number=dataAbitur.number
+        dataEdit.PlaceOfIssue=dataAbitur.PlaceOfIssue
+        dataEdit.date_of_issue=dataAbitur.date_of_issue
+        dataEdit.date_of_expiry=dataAbitur.date_of_expiry
+        dataEdit.settlement_name=dataAbitur.settlement_name
+        dataEdit.mobile_tel=dataAbitur.mobile_tel
+        dataEdit.email=dataAbitur.email
+        dataEdit.edu_date_of_issue=dataAbitur.edu_date_of_issue
+        dataEdit.edu_serial_number=dataAbitur.edu_serial_number
+        dataEdit.edu_name=dataAbitur.edu_name
+        dataEdit.sex=dataAbitur.sex
+        dataEdit.country=dataAbitur.country
+        dataEdit.DD=dataAbitur.DD
+        dataEdit.religion=dataAbitur.religion
+        dataEdit.DataYourPeople=dataAbitur.DataYourPeople
+        dataEdit.NameSurname=dataAbitur.NameSurname
+        dataEdit.PhoneRepresantative=dataAbitur.PhoneRepresantative
+        dataEdit.country_pass=dataAbitur.country_pass
+        dataEdit.NatPassw=dataAbitur.NatPassw
+        dataEdit.HostelLive=dataAbitur.HostelLive
+        dataEdit.numberNational=dataAbitur.numberNational
+        dataEdit.pref_faculty=dataAbitur.pref_faculty
+        dataEdit.Files=dataAbitur.Files
         edit.Edit=1
         navigate("/FillData", { replace: false })
+        console.log(dataEdit)
       })
       .catch(error=>{
         toast.error(t('ErrorIDK'), {
@@ -141,7 +145,7 @@ function ForRead() {
         else{
             i18n.changeLanguage('ru');
         }
-    },[lan])
+    },[lan,ButtonClick])
     function handleClick(e) {
       setButtonClick(true)
       e.preventDefault()
