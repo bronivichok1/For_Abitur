@@ -175,6 +175,7 @@ function Anketa() {
     const date_of_birth=useInput(dataEdit.date_of_birth,{isEmpty:true,inputData:true})
     const citizenship=useInput(dataEdit.citizenship,{isEmpty:true})
     const number=useInput(dataEdit.number,{isEmpty:true, Num:true})
+    const serialPass=useInput(dataEdit.serialPass,{})
     const PlaceOfIssue=useInput(dataEdit.PlaceOfIssue,{isEmpty:true})
     const date_of_issue=useInput(dataEdit.date_of_issue,{isEmpty:true,inputData:true})
     const date_of_expiry=useInput(dataEdit.date_of_expiry,{isEmpty:true,inputData:true})
@@ -206,6 +207,7 @@ function Anketa() {
       date_of_birth:date_of_birth.value,
       citizenship:citizenship.value,
       number:number.value,
+      serialPass:serialPass.value,
       PlaceOfIssue:PlaceOfIssue.value,
       date_of_issue:date_of_issue.value,
       date_of_expiry:date_of_expiry.value,
@@ -660,12 +662,16 @@ function Anketa() {
                 <hr/>
                 <legend className="text-center">{t('Passport')}</legend>
                     <div className="row">
+                <label className="form-label col-sm-4">{t('serialPass')}<span >*</span>
+                        <input className="input_w295" onChange={e=>serialPass.onChange(e)} onBlur={e=>serialPass.onBlur(e)} value={serialPass.value}  name="serialPass" maxLength="15" />
+                        {(serialPass.isDirty&&serialPass.isEmpty)&&<div style={{color:'red'}}> {t('PassNumberErrorEmpty')}</div>}
+                </label>
                 <label className="form-label col-sm-4">{t('PassNumber')}<span >*</span>
                         <input className={number.isDirty&&number.isEmpty?"input_w295-error":"input_w295"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="15" />
                         {(number.isDirty&&number.isEmpty)&&<div style={{color:'red'}}> {t('PassNumberErrorEmpty')}</div>}
                 </label>
                 <label className="form-label col-sm-8">{t('CountryPass')} <span>*</span>
-                        <select className="select_w900" onChange={e=>country_pass.onChange(e)} onBlur={e=>country_pass.onBlur(e)} value={country_pass.value}  name="country_pass">
+                        <select className="select_w595" onChange={e=>country_pass.onChange(e)} onBlur={e=>country_pass.onBlur(e)} value={country_pass.value}  name="country_pass">
                         <option value='1'></option>
                         <option value={t('Cou0')}>{t('Cou0')}</option>
                         <option value={t('Cou1')}>{t('Cou1')}</option>
@@ -990,6 +996,7 @@ function Anketa() {
                     <label className="form-label w-200">{t('Faculty')}
                     <select className="select_w1210" onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
                         <optgroup label={t('FacName2')}>
+                            <option value='1'></option>
                             <option value={t('Fac10')}>{t('Fac10')}</option>
                             <option value={t('Fac11')}>{t('Fac11')}</option>
                             <option value={t('Fac12')}>{t('Fac12')}</option>
@@ -1000,6 +1007,7 @@ function Anketa() {
                     </select></label>
                     <label className="form-label w-200">{t('HostelLive')}
                         <select className="select_w1210"  onChange={e=>HostelLive.onChange(e)} onBlur={e=>HostelLive.onBlur(e)} value={HostelLive.value} name="edu_name" maxLength="150"  >
+                        <option value='1'></option>
                         <option value={t('HostelLiveNo')}>{t('HostelLiveNo')}</option>
                         <option value={t('HostelLiveYes')}>{t('HostelLiveYes')}</option>
 
@@ -1255,7 +1263,7 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||!showInput&&surname_info.isEmpty||!showInputDataPeople&&DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                    <button disabled={(pref_faculty.value=='1'||HostelLive.value=='1'||country_pass=='1'||country.value=='1')||(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||!showInput&&surname_info.isEmpty||!showInputDataPeople&&DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>

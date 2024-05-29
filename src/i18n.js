@@ -376,6 +376,7 @@ i18n
                     No:"No",
                     Yes:"Yes",
                     DataInp:"dd.мм.yyyy",
+                    serialPass:"Seria",
 
                 }
             },
@@ -747,6 +748,8 @@ i18n
                     Yes:"Да",
                     DataInp:"дд.мм.гггг",
                     Touch:"Выберите",
+
+                    serialPass:"Серия",
                 }
             }
         },
