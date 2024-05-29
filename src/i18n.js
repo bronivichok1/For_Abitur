@@ -16,15 +16,24 @@ i18n
                     
                     AppDetails:"Applicant Details",
 
-                    Surname: "Surname (exactly as in your Passport)",
-                    SurnameErrorEmpty:"The 'Last Name' field is required.",
-                    SurnameError:"In the 'Last name' field, only the Latin alphabet is allowed, the first letter is capitalized.",
-                    
-                    Name:"Given Name/s (exactly as in your Passport)",
-                    NameErrorEmpty:"The 'Name' field is required.",
-                    NameError:"In the 'Name' field, only Cyrillic is allowed, the first letter is capitalized.",
+                    Surname: "Surname (Latin, as in passport)",
+                    SurnameErrorEmpty: "The 'Surname (Latin)' field is mandatory.",
+                    SurnameError: "Only Latin characters are allowed in the 'Surname (Latin)' field, the first letter is capitalised.",
 
-                    Surname_info:"Have you ever changed your name? If yes, give details.",
+                    SurnameRus: "Surname (Cyrillic, as in passport)",
+                    SurnameErrorEmptyRus: "The 'Surname (Cyrillic)' field is mandatory.",
+                    SurnameErrorRus: "Only Cyrillic characters are allowed in the 'Surname (Cyrillic)' field, the first letter is capitalised.",
+                    
+                    Name: "Name (Latin, as in passport)",
+                    NameErrorEmpty: "The 'Name (Latin)' field is mandatory.",
+                    NameError: "Only Latin characters are allowed in the 'Name (Latin)' field, the first letter is capitalised.",
+
+                    NameRus: "Name (Cyrillic, as in passport)",
+                    NameErrorEmptyRus: "The 'Name (Cyrillic)' field is mandatory.",
+                    NameErrorRus: "Only Cyrillic characters are allowed in the 'Name (Cyrillic)' field, the first letter is capitalised.",
+
+                    Surname_info:"Have you ever changed your name? ",
+                    Surname_infoNext:"If yes, give details.",
                     Surname_infoError:"Required field.",
 
                     Gender:"Gender",
@@ -248,7 +257,8 @@ i18n
                     EmailErrorEmpty:"The 'Email ID' field is required.",
                     EmailError:"The 'Email ID' field is filled in incorrectly.",
 
-                    DataYourPeople:"Do you have relatives in the Republic of Belarus? If yes, give details.",
+                    DataYourPeople:"Do you have relatives in the Republic of Belarus? ",
+                    DataYourPeopleNext:"If yes, then write the last name, first name, patronymic, and telephone number for each.",
                     DataYourPeopleErrorEmpty:"Required field.",
 
                     NameSurname:"Name and surname of your representative.",
@@ -317,6 +327,8 @@ i18n
                     Fac18:"Ministry of emergency situations",
 
                     HostelLive:"Are you planning to live in a hostel or an apartment?",
+                    HostelLiveYes:"Live in a hostel",
+                    HostelLiveNo:"Live in an apartment",
 
                     AddDoc:"Attach documents",
 
@@ -361,6 +373,10 @@ i18n
                     Error2:"Statement does not exist",
 
                     Ready:"Ok",
+                    No:"No",
+                    Yes:"Yes",
+                    DataInp:"dd.мм.yyyy",
+
                 }
             },
             ru: {
@@ -370,15 +386,24 @@ i18n
                     
                     AppDetails:"Данные абитуриента",
 
-                    Surname: "Фамилия (точно так, как в паспорте)",
-                    SurnameErrorEmpty:"Поле 'Фамилия' обязательно для заполнения.",
-                    SurnameError:"В поле 'Фамилия' допустима только латиница, первая буква - заглавная.",
-                    
-                    Name:"Имя (точно так, как в паспорте)",
-                    NameErrorEmpty:"Поле 'Имя' обязательно для заполнения.",
-                    NameError:"В поле 'Имя' допустима только латиница, первая буква — заглавная.",
+                    Surname: "Фамилия (латиница, как в паспорте)",
+                    SurnameErrorEmpty:"Поле 'Фамилия (латиница)' обязательно для заполнения.",
+                    SurnameError:"В поле 'Фамилия (латиница)' допустима только латиница, первая буква - заглавная.",
 
-                    Surname_info:"Изменяли ли Вы своё имя, фамилию? Если да, то предоставьте информацию: когда и в связи с чем.",
+                    SurnameRus: "Фамилия (кириллица, как в паспорте)",
+                    SurnameErrorEmptyRus:"Поле 'Фамилия (кириллица)' обязательно для заполнения.",
+                    SurnameErrorRus:"В поле 'Фамилия (кириллица)' допустима только кириллица, первая буква - заглавная.",
+                    
+                    Name:"Имя (латиница, как в паспорте)",
+                    NameErrorEmpty:"Поле 'Имя (латиница)' обязательно для заполнения.",
+                    NameError:"В поле 'Имя (латиница)' допустима только латиница, первая буква — заглавная.",
+
+                    NameRus:"Имя (кириллица, как в паспорте)",
+                    NameErrorEmptyRus:"Поле 'Имя (кириллица)' обязательно для заполнения.",
+                    NameErrorRus:"В поле 'Имя (кириллица)' допустима только кириллица, первая буква — заглавная.",
+
+                    Surname_info:"Изменяли ли Вы своё имя, фамилию? ",
+                    Surname_infoNext:"Если да, то предоставьте информацию: когда и в связи с чем.",
                     Surname_infoError:"Поле обязательно для заполнения.",
                     
 
@@ -602,7 +627,8 @@ i18n
                     EmailErrorEmpty:"Поле 'Электронная почта' обязательно для заполнения.",
                     EmailError:"Поле 'Электронная почта' заполнено неверно.",
 
-                    DataYourPeople:"Имеются ли у Вас родственники в Республике Беларусь Если да, то напишите фамилию, имя, отчество, номер телефона для каждого.",
+                    DataYourPeople:"Имеются ли у Вас родственники в Республике Беларусь",
+                    DataYourPeopleNext:"Если да, то напишите фамилию, имя, отчество, номер телефона для каждого.",
                     DataYourPeopleErrorEmpty:"Поле обязательно для заполнения.",
 
                     NameSurname:"Имя и фамилия Вашего представителя в Республике Беларусь.",
@@ -671,7 +697,8 @@ i18n
                     Fac18:"МЧС",
 
                     HostelLive:"Во время учёбы в БГМУ планируете жить в общежитии или снимать квартиру самостоятельно?",
-
+                    HostelLiveYes:"Жить в общежитии",
+                    HostelLiveNo:"Снимать квартиру самостоятельно",
                     AddDoc:"Прикрепить документы",
 
                     AddFile1:"1) Страниц паспорта, на которых имеется фото и номер паспорта, а также нотариально заверенный перевод на русский язык;",
@@ -716,7 +743,10 @@ i18n
                     Error2:"Заявления не существует",
 
                     Ready:"Ок",
-
+                    No:"Нет",
+                    Yes:"Да",
+                    DataInp:"дд.мм.гггг",
+                    Touch:"Выберите",
                 }
             }
         },

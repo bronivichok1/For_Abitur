@@ -18,17 +18,17 @@ export const dataEdit={
     edu_serial_number:'',
     edu_name:'',
     sex:'1',
-    country:'82',
+    country:'1',//t('Cou156'),
     DD:'',
     religion:'',
     DataYourPeople:'',
     NameSurname:'',
     PhoneRepresantative:'',
-    country_pass:'82',
+    country_pass:'1',//t('Cou156'),
     NatPassw:'',
-    HostelLive:'',
+    HostelLive:'',//t('HostelLiveNo'),
     numberNational:'',
-    pref_faculty:'',
+    pref_faculty:'',//t('Fac10'),
     Files:''
 }
 export const Data = {
@@ -40,7 +40,4 @@ export const edit={
 }
 export const errorCod={
     error:''
-}
-export const dataID={
-    id:''
 }

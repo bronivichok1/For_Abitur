@@ -90,9 +90,10 @@ function Anketa() {
     const [lan,setLan]=useState(false)
     const { t, i18n } = useTranslation()
     const[files,setFiles]=useState([])
-    const[ModalClick,setModalClick]=useState(false)
     const[resp,setResp]=useState({})
-    
+    const [showInput, setShowInput] = useState(false);
+    const [showInputDataPeople, setShowInputDataPeople] = useState(false);
+
 
     function sendRequest(method, url, body = null) {
         const headers = {'Content-Type': 'application/json'}
@@ -101,32 +102,40 @@ function Anketa() {
           body: JSON.stringify(body),
           headers: headers
         })
-            .then(response => {                       
-
-                 setResp(response.json())
-                })
-                  .then((data)=>{
-                    dataID.id=data.id
-                    console.log(dataID.id)
-                        const nameFolder=dataID.id
-                        body.append("name",nameFolder)
-                        files.forEach((files)=>{
-                        body.append("file",files)})
-                        console.log(data)
-                    sendRequestFormData('POST',PATH +'/files',body)
-                        setFiles([])
-                        setModalActive(true)
-                      
-                      if(resp.status=='404'){
-                        toast.error(t('Error1'), {
-                            position: "top-right"
-                          });
-                      }/*if(resp.status!=='ok'){
-                        toast.error(t('ErrorIDK'), {
-                            position: "top-right"
-                          });
-                        }*/
-                })}
+        .then((response) => {
+            setResp(response)
+            //console.log(resp)
+            return response.json()
+          }).then((data) => {
+              console.log(data)
+              if (data.id) {
+                  const body2=new FormData()
+                  const nameFolder=data.id
+                  body2.append("name",nameFolder)
+                  files.forEach((files)=>{
+                  body2.append("file",files)
+              })
+      
+              sendRequestFormData('POST',PATH +'/files',body2)
+                  setFiles([])
+                  /*toast.success(t('FinalMessage'), {
+                      position: "top-right"
+                  })*/
+                  setModalActive(true)
+                  //return  resp.json()
+                }else{
+                if(resp.status=='404'||errorCod.error=='1'){
+                  toast.error(t('Error1'), {
+                      position: "top-right"
+                    });
+                }else{
+                  toast.error(t('ErrorIDK'), {
+                      position: "top-right"
+                    });
+      
+                }
+              }
+          })}
 
       function sendRequestFormData(method, url, body = null) {
         return fetch(url, {
@@ -142,7 +151,7 @@ function Anketa() {
     useEffect(()=>{
         if(ButtonClick==true){
             setButtonClick(false)
-            sendRequest('POST', PATH +'/user', body)
+            sendRequest('POST', PATH +'/user', body2)
         }       
         if(lan==true){
             i18n.changeLanguage('en');
@@ -151,7 +160,7 @@ function Anketa() {
             i18n.changeLanguage('ru');
         }
         edit.Edit=0
-        }, [ButtonClick,ModalClick,lan]);
+        }, [ButtonClick,lan]);
 
     function handleClick(e) {
         setButtonClick(true)
@@ -188,7 +197,7 @@ function Anketa() {
     const HostelLive=useInput(dataEdit.HostelLive)
     const numberNational =useInput(dataEdit.numberNational)
 
-    const body = {
+    const body2 = {
       name: name.value,
       surname: surname.value,
       namerus:namerus.value,
@@ -322,6 +331,15 @@ function Anketa() {
         const handleToggleChange = () => {
             setLan(!lan); // Инвертируем значение lan при каждом изменении состояния переключателя
           };
+          const handleSelectChange = (e) => {
+            setShowInput(e.target.value === 'yes');
+          };
+          const handleSelectChangeDataPeople = (e) => {
+            setShowInputDataPeople(e.target.value === 'yes');
+          };
+        
+
+
 
     return (
         <div>
@@ -353,19 +371,25 @@ function Anketa() {
                     <div className="row">
                 <label className="form-label col-sm">{t('SurnameRus')}<span>*</span>
                         <input  className={surnamerus.isDirty&&(surnamerus.isRus||surnamerus.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>surnamerus.onChange(e)} onBlur={e=>surnamerus.onBlur(e)} value={surnamerus.value}   name="surnamerus" maxLength="40" />
-                        {(surnamerus.isDirty&&surnamerus.isEmpty)&&<div  style={{color:'red'}}> {t('SurnameErrorEmpty')}</div>}
+                        {(surnamerus.isDirty&&surnamerus.isEmpty)&&<div  style={{color:'red'}}> {t('SurnameErrorEmptyRus')}</div>}
                         {(surnamerus.isDirty&&surnamerus.isRus&&!surnamerus.isEmpty)&&<div  style={{color:'red'}}> {t('SurnameErrorRus')}</div>}
                 </label> 
                 <label className="form-label col-sm" >{t('NameRus')}<span>*</span>
                         <input className={namerus.isDirty&&(namerus.isRus||namerus.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>namerus.onChange(e)} onBlur={e=>namerus.onBlur(e)} value={namerus.value} name="namerus" maxLength="40"/>
-                        {(namerus.isDirty&&namerus.isEmpty)&&<div style={{color:'red'}}> {t('NameErrorEmpty')}</div>}
+                        {(namerus.isDirty&&namerus.isEmpty)&&<div style={{color:'red'}}> {t('NameErrorEmptyRus')}</div>}
                         {(namerus.isDirty&&namerus.isRus&&!namerus.isEmpty)&&<div style={{color:'red'}}> {t('NameErrorRus')}</div>}
                 </label>
                     </div>
                     <div className="row">
-                <label className="form-label col-sm">{t('Surname_info')}<span>*</span>
-                        <input className={surname_info.isDirty&&surname_info.isEmpty?"input_w1210-error":"input_w1210"}  onChange={e=>surname_info.onChange(e)} onBlur={e=>surname_info.onBlur(e)} value={surname_info.value}  name="second_name" maxLength="100" />
-                        {(surname_info.isDirty&&surname_info.isEmpty)&&<div style={{color:'red'}}>{t('Surname_infoError')}</div>}
+                <label className="form-label col-sm">{!showInput&&t('Surname_info')}{showInput&&t('Surname_infoNext')}<span>*</span>
+                <select className="select_show" onChange={handleSelectChange}> 
+                                            <option value="no">{t('No')}</option>
+                                            <option value="yes">{t('Yes')}</option>
+                                        </select>
+                                        {showInput && (                                       
+  
+                        <input className={showInput&&surname_info.isDirty&&surname_info.isEmpty?"input_w1210-error":"input_w1210"}  onChange={e=>surname_info.onChange(e)} onBlur={e=>surname_info.onBlur(e)} value={surname_info.value}  name="second_name" maxLength="100" />)}
+                        {(showInput&&surname_info.isDirty&&surname_info.isEmpty)&&<div style={{color:'red'}}>{t('Surname_infoError')}</div>}
                 </label>
                     </div>
                     <div className="row">
@@ -381,7 +405,7 @@ function Anketa() {
 
                 </label>
                 <label className="form-label col-sm">{t('DateOfBirth')}<span >*</span>
-                <input className={date_of_birth.isDirty&&(date_of_birth.inputData||date_of_birth.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value}  name="date_of_birth" placeholder="дд.мм.гггг" maxLength="10" />
+                <input className={date_of_birth.isDirty&&(date_of_birth.inputData||date_of_birth.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value}  name="date_of_birth" placeholder={t('DataInp')} maxLength="10" />
                         {(date_of_birth.isDirty&&date_of_birth.isEmpty)&&<div style={{color:'red'}}> {t('DateOfBirthErrorEmpty')}</div>}
                         {(date_of_birth.isDirty&&date_of_birth.inputData&&!date_of_birth.isEmpty)&&<div style={{color:'red'}}> {t('DateOfBirthError')}</div>}
 
@@ -395,199 +419,199 @@ function Anketa() {
                 </label>
                 <label className="form-label col-sm-8">{t('Country')} <span>*</span>
                         <select className="select_w595" onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value}  name="country">
-                        <option value="0">{t('Cou0')}</option>
-                        <option value="1">{t('Cou1')}</option>
-                        <option value="2">{t('Cou2')}</option>
-                        <option value="3">{t('Cou3')}</option>
-                        <option value="4">{t('Cou4')}</option>
-                        <option value="5">{t('Cou5')}</option>
-                        <option value="6">{t('Cou6')}</option>
-                        <option value="7">{t('Cou7')}</option>
-                        <option value="8">{t('Cou8')}</option>
-                        <option value="9">{t('Cou9')}</option>
-                        <option value="10">{t('Cou10')}</option>
-                        <option value="11">{t('Cou11')}</option>
-                        <option value="12">{t('Cou12')}</option>
-                        <option value="13">{t('Cou13')}</option>
-                        <option value="14">{t('Cou14')}</option>
-                        <option value="15">{t('Cou15')}</option>
-                        <option value="16">{t('Cou16')}</option>
-                        <option value="17">{t('Cou17')}</option>
-                        <option value="18">{t('Cou18')}</option>
-                        <option value="19">{t('Cou19')}</option>
-                        <option value="20">{t('Cou20')}</option>
-                        <option value="21">{t('Cou21')}</option>
-                        <option value="22">{t('Cou22')}</option>
-                        <option value="23">{t('Cou23')}</option>
-                        <option value="24">{t('Cou24')}</option>
-                        <option value="25">{t('Cou25')}</option>
-                        <option value="26">{t('Cou26')}</option>
-                        <option value="27">{t('Cou27')}</option>
-                        <option value="28">{t('Cou28')}</option>
-                        <option value="29">{t('Cou29')}</option>
-                        <option value="30">{t('Cou30')}</option>
-                        <option value="31">{t('Cou31')}</option>
-                        <option value="32">{t('Cou32')}</option>
-                        <option value="33">{t('Cou33')}</option>
-                        <option value="34">{t('Cou34')}</option>
-                        <option value="35">{t('Cou35')}</option>
-                        <option value="36">{t('Cou36')}</option>
-                        <option value="37">{t('Cou37')}</option>
-                        <option value="38">{t('Cou38')}</option>
-                        <option value="39">{t('Cou39')}</option>
-                        <option value="40">{t('Cou40')}</option>
-                        <option value="41">{t('Cou41')}</option>
-                        <option value="42">{t('Cou42')}</option>
-                        <option value="43">{t('Cou43')}</option>
-                        <option value="44">{t('Cou44')}</option>
-                        <option value="45">{t('Cou45')}</option>
-                        <option value="46">{t('Cou46')}</option>
-                        <option value="47">{t('Cou47')}</option>
-                        <option value="48">{t('Cou48')}</option>
-                        <option value="49">{t('Cou49')}</option>
-                        <option value="50">{t('Cou50')}</option>
-                        <option value="51">{t('Cou51')}</option>
-                        <option value="52">{t('Cou52')}</option>
-                        <option value="53">{t('Cou53')}</option>
-                        <option value="54">{t('Cou54')}</option>
-                        <option value="55">{t('Cou55')}</option>
-                        <option value="56">{t('Cou56')}</option>
-                        <option value="57">{t('Cou57')}</option>
-                        <option value="58">{t('Cou58')}</option>
-                        <option value="59">{t('Cou59')}</option>
-                        <option value="60">{t('Cou60')}</option>
-                        <option value="61">{t('Cou61')}</option>
-                        <option value="62">{t('Cou62')}</option>
-                        <option value="63">{t('Cou63')}</option>
-                        <option value="64">{t('Cou64')}</option>
-                        <option value="65">{t('Cou65')}</option>
-                        <option value="66">{t('Cou66')}</option>
-                        <option value="67">{t('Cou67')}</option>
-                        <option value="68">{t('Cou68')}</option>
-                        <option value="69">{t('Cou69')}</option>
-                        <option value="70">{t('Cou70')}</option>
-                        <option value="71">{t('Cou71')}</option>
-                        <option value="72">{t('Cou72')}</option>
-                        <option value="73">{t('Cou73')}</option>
-                        <option value="74">{t('Cou74')}</option>
-                        <option value="75">{t('Cou75')}</option>
-                        <option value="76">{t('Cou76')}</option>
-                        <option value="77">{t('Cou77')}</option>
-                        <option value="78">{t('Cou78')}</option>
-                        <option value="79">{t('Cou79')}</option>
-                        <option value="80">{t('Cou80')}</option>
-                        <option value="81">{t('Cou81')}</option>
-                        <option value="82">{t('Cou82')}</option>
-                        <option value="83">{t('Cou83')}</option>
-                        <option value="84">{t('Cou84')}</option>
-                        <option value="85">{t('Cou85')}</option>
-                        <option value="86">{t('Cou86')}</option>
-                        <option value="87">{t('Cou87')}</option>
-                        <option value="88">{t('Cou88')}</option>
-                        <option value="89">{t('Cou89')}</option>
-                        <option value="90">{t('Cou90')}</option>
-                        <option value="91">{t('Cou91')}</option>
-                        <option value="92">{t('Cou92')}</option>
-                        <option value="93">{t('Cou93')}</option>
-                        <option value="94">{t('Cou94')}</option>
-                        <option value="95">{t('Cou95')}</option>
-                        <option value="96">{t('Cou96')}</option>
-                        <option value="97">{t('Cou97')}</option>
-                        <option value="98">{t('Cou98')}</option>
-                        <option value="99">{t('Cou99')}</option>
-                        <option value="100">{t('Cou100')}</option>
-                        <option value="101">{t('Cou101')}</option>
-                        <option value="102">{t('Cou102')}</option>
-                        <option value="103">{t('Cou103')}</option>
-                        <option value="104">{t('Cou104')}</option>
-                        <option value="105">{t('Cou105')}</option>
-                        <option value="106">{t('Cou106')}</option>
-                        <option value="107">{t('Cou107')}</option>
-                        <option value="108">{t('Cou108')}</option>
-                        <option value="109">{t('Cou109')}</option>
-                        <option value="110">{t('Cou110')}</option>
-                        <option value="111">{t('Cou111')}</option>
-                        <option value="112">{t('Cou112')}</option>
-                        <option value="113">{t('Cou113')}</option>
-                        <option value="114">{t('Cou114')}</option>
-                        <option value="115">{t('Cou115')}</option>
-                        <option value="116">{t('Cou116')}</option>
-                        <option value="117">{t('Cou117')}</option>
-                        <option value="118">{t('Cou118')}</option>
-                        <option value="119">{t('Cou119')}</option>
-                        <option value="120">{t('Cou120')}</option>
-                        <option value="121">{t('Cou121')}</option>
-                        <option value="122">{t('Cou122')}</option>
-                        <option value="123">{t('Cou123')}</option>
-                        <option value="124">{t('Cou124')}</option>
-                        <option value="125">{t('Cou125')}</option>
-                        <option value="126">{t('Cou126')}</option>
-                        <option value="127">{t('Cou127')}</option>
-                        <option value="128">{t('Cou128')}</option>
-                        <option value="129">{t('Cou129')}</option>
-                        <option value="130">{t('Cou130')}</option>
-                        <option value="131">{t('Cou131')}</option>
-                        <option value="132">{t('Cou132')}</option>
-                        <option value="133">{t('Cou133')}</option>
-                        <option value="134">{t('Cou134')}</option>
-                        <option value="135">{t('Cou135')}</option>
-                        <option value="136">{t('Cou136')}</option>
-                        <option value="137">{t('Cou137')}</option>
-                        <option value="138">{t('Cou138')}</option>
-                        <option value="139">{t('Cou139')}</option>
-                        <option value="140">{t('Cou140')}</option>
-                        <option value="141">{t('Cou141')}</option>
-                        <option value="142">{t('Cou142')}</option>
-                        <option value="143">{t('Cou143')}</option>
-                        <option value="144">{t('Cou144')}</option>
-                        <option value="145">{t('Cou145')}</option>
-                        <option value="146">{t('Cou146')}</option>
-                        <option value="147">{t('Cou147')}</option>
-                        <option value="148">{t('Cou148')}</option>
-                        <option value="149">{t('Cou149')}</option>
-                        <option value="150">{t('Cou150')}</option>
-                        <option value="151">{t('Cou151')}</option>
-                        <option value="152">{t('Cou152')}</option>
-                        <option value="153">{t('Cou153')}</option>
-                        <option value="154">{t('Cou154')}</option>
-                        <option value="155">{t('Cou155')}</option>
-                        <option value="156">{t('Cou156')}</option>
-                        <option value="157">{t('Cou157')}</option>
-                        <option value="158">{t('Cou158')}</option>
-                        <option value="159">{t('Cou159')}</option>
-                        <option value="160">{t('Cou160')}</option>
-                        <option value="161">{t('Cou161')}</option>
-                        <option value="162">{t('Cou162')}</option>
-                        <option value="163">{t('Cou163')}</option>
-                        <option value="164">{t('Cou164')}</option>
-                        <option value="165">{t('Cou165')}</option>
-                        <option value="166">{t('Cou166')}</option>
-                        <option value="167">{t('Cou167')}</option>
-                        <option value="168">{t('Cou168')}</option>
-                        <option value="169">{t('Cou169')}</option>
-                        <option value="170">{t('Cou170')}</option>
-                        <option value="171">{t('Cou171')}</option>
-                        <option value="172">{t('Cou172')}</option>
-                        <option value="173">{t('Cou173')}</option>
-                        <option value="174">{t('Cou174')}</option>
-                        <option value="175">{t('Cou175')}</option>
-                        <option value="176">{t('Cou176')}</option>
-                        <option value="177">{t('Cou177')}</option>
-                        <option value="178">{t('Cou178')}</option>
-                        <option value="179">{t('Cou179')}</option>
-                        <option value="180">{t('Cou180')}</option>
-                        <option value="181">{t('Cou181')}</option>
-                        <option value="182">{t('Cou182')}</option>
-                        <option value="183">{t('Cou183')}</option>
-                        <option value="184">{t('Cou184')}</option>
-                        <option value="185">{t('Cou185')}</option>
-                        <option value="186">{t('Cou186')}</option>
-                        <option value="187">{t('Cou187')}</option>
-                        <option value="188">{t('Cou188')}</option>
-                        <option value="189">{t('Cou189')}</option>
-                        <option value="190">{t('Cou190')}</option>
-                        <option value="191">{t('Cou191')}</option>
-                        <option value="192">{t('Cou192')}</option>
+                        <option value='1'></option>
+                        <option value={t('Cou0')}>{t('Cou0')}</option>
+                        <option value={t('Cou1')}>{t('Cou1')}</option>
+                        <option value={t('Cou2')}>{t('Cou2')}</option>
+                        <option value={t('Cou3')}>{t('Cou3')}</option>
+                        <option value={t('Cou4')}>{t('Cou4')}</option>
+                        <option value={t('Cou5')}>{t('Cou5')}</option>
+                        <option value={t('Cou6')}>{t('Cou6')}</option>
+                        <option value={t('Cou7')}>{t('Cou7')}</option>
+                        <option value={t('Cou8')}>{t('Cou8')}</option>
+                        <option value={t('Cou9')}>{t('Cou9')}</option>
+                        <option value={t('Cou10')}>{t('Cou10')}</option>
+                        <option value={t('Cou11')}>{t('Cou11')}</option>
+                        <option value={t('Cou12')}>{t('Cou12')}</option>
+                        <option value={t('Cou13')}>{t('Cou13')}</option>
+                        <option value={t('Cou14')}>{t('Cou14')}</option>
+                        <option value={t('Cou15')}>{t('Cou15')}</option>
+                        <option value={t('Cou16')}>{t('Cou16')}</option>
+                        <option value={t('Cou17')}>{t('Cou17')}</option>
+                        <option value={t('Cou18')}>{t('Cou18')}</option>
+                        <option value={t('Cou19')}>{t('Cou19')}</option>
+                        <option value={t('Cou20')}>{t('Cou20')}</option>
+                        <option value={t('Cou21')}>{t('Cou21')}</option>
+                        <option value={t('Cou22')}>{t('Cou22')}</option>
+                        <option value={t('Cou23')}>{t('Cou23')}</option>
+                        <option value={t('Cou24')}>{t('Cou24')}</option>
+                        <option value={t('Cou25')}>{t('Cou25')}</option>
+                        <option value={t('Cou26')}>{t('Cou26')}</option>
+                        <option value={t('Cou27')}>{t('Cou27')}</option>
+                        <option value={t('Cou28')}>{t('Cou28')}</option>
+                        <option value={t('Cou29')}>{t('Cou29')}</option>
+                        <option value={t('Cou30')}>{t('Cou30')}</option>
+                        <option value={t('Cou31')}>{t('Cou31')}</option>
+                        <option value={t('Cou32')}>{t('Cou32')}</option>
+                        <option value={t('Cou33')}>{t('Cou33')}</option>
+                        <option value={t('Cou34')}>{t('Cou34')}</option>
+                        <option value={t('Cou35')}>{t('Cou35')}</option>
+                        <option value={t('Cou36')}>{t('Cou36')}</option>
+                        <option value={t('Cou37')}>{t('Cou37')}</option>
+                        <option value={t('Cou38')}>{t('Cou38')}</option>
+                        <option value={t('Cou39')}>{t('Cou39')}</option>
+                        <option value={t('Cou40')}>{t('Cou40')}</option>
+                        <option value={t('Cou41')}>{t('Cou41')}</option>
+                        <option value={t('Cou42')}>{t('Cou42')}</option>
+                        <option value={t('Cou43')}>{t('Cou43')}</option>
+                        <option value={t('Cou44')}>{t('Cou44')}</option>
+                        <option value={t('Cou45')}>{t('Cou45')}</option>
+                        <option value={t('Cou46')}>{t('Cou46')}</option>
+                        <option value={t('Cou47')}>{t('Cou47')}</option>
+                        <option value={t('Cou48')}>{t('Cou48')}</option>
+                        <option value={t('Cou49')}>{t('Cou49')}</option>
+                        <option value={t('Cou50')}>{t('Cou50')}</option>
+                        <option value={t('Cou51')}>{t('Cou51')}</option>
+                        <option value={t('Cou52')}>{t('Cou52')}</option>
+                        <option value={t('Cou53')}>{t('Cou53')}</option>
+                        <option value={t('Cou54')}>{t('Cou54')}</option>
+                        <option value={t('Cou55')}>{t('Cou55')}</option>
+                        <option value={t('Cou56')}>{t('Cou56')}</option>
+                        <option value={t('Cou57')}>{t('Cou57')}</option>
+                        <option value={t('Cou58')}>{t('Cou58')}</option>
+                        <option value={t('Cou59')}>{t('Cou59')}</option>
+                        <option value={t('Cou60')}>{t('Cou60')}</option>
+                        <option value={t('Cou61')}>{t('Cou61')}</option>
+                        <option value={t('Cou62')}>{t('Cou62')}</option>
+                        <option value={t('Cou63')}>{t('Cou63')}</option>
+                        <option value={t('Cou64')}>{t('Cou64')}</option>
+                        <option value={t('Cou65')}>{t('Cou65')}</option>
+                        <option value={t('Cou66')}>{t('Cou66')}</option>
+                        <option value={t('Cou67')}>{t('Cou67')}</option>
+                        <option value={t('Cou68')}>{t('Cou68')}</option>
+                        <option value={t('Cou69')}>{t('Cou69')}</option>
+                        <option value={t('Cou70')}>{t('Cou70')}</option>
+                        <option value={t('Cou71')}>{t('Cou71')}</option>
+                        <option value={t('Cou72')}>{t('Cou72')}</option>
+                        <option value={t('Cou73')}>{t('Cou73')}</option>
+                        <option value={t('Cou74')}>{t('Cou74')}</option>
+                        <option value={t('Cou75')}>{t('Cou75')}</option>
+                        <option value={t('Cou76')}>{t('Cou76')}</option>
+                        <option value={t('Cou77')}>{t('Cou77')}</option>
+                        <option value={t('Cou78')}>{t('Cou78')}</option>
+                        <option value={t('Cou79')}>{t('Cou79')}</option>
+                        <option value={t('Cou80')}>{t('Cou80')}</option>
+                        <option value={t('Cou81')}>{t('Cou81')}</option>
+                        <option value={t('Cou83')}>{t('Cou83')}</option>
+                        <option value={t('Cou84')}>{t('Cou84')}</option>
+                        <option value={t('Cou85')}>{t('Cou85')}</option>
+                        <option value={t('Cou86')}>{t('Cou86')}</option>
+                        <option value={t('Cou87')}>{t('Cou87')}</option>
+                        <option value={t('Cou88')}>{t('Cou88')}</option>
+                        <option value={t('Cou89')}>{t('Cou89')}</option>
+                        <option value={t('Cou90')}>{t('Cou90')}</option>
+                        <option value={t('Cou91')}>{t('Cou91')}</option>
+                        <option value={t('Cou92')}>{t('Cou92')}</option>
+                        <option value={t('Cou93')}>{t('Cou93')}</option>
+                        <option value={t('Cou94')}>{t('Cou94')}</option>
+                        <option value={t('Cou95')}>{t('Cou95')}</option>
+                        <option value={t('Cou96')}>{t('Cou96')}</option>
+                        <option value={t('Cou97')}>{t('Cou97')}</option>
+                        <option value={t('Cou98')}>{t('Cou98')}</option>
+                        <option value={t('Cou99')}>{t('Cou99')}</option>
+                        <option value={t('Cou100')}>{t('Cou100')}</option>
+                        <option value={t('Cou101')}>{t('Cou101')}</option>
+                        <option value={t('Cou102')}>{t('Cou102')}</option>
+                        <option value={t('Cou103')}>{t('Cou103')}</option>
+                        <option value={t('Cou104')}>{t('Cou104')}</option>
+                        <option value={t('Cou105')}>{t('Cou105')}</option>
+                        <option value={t('Cou106')}>{t('Cou106')}</option>
+                        <option value={t('Cou107')}>{t('Cou107')}</option>
+                        <option value={t('Cou108')}>{t('Cou108')}</option>
+                        <option value={t('Cou109')}>{t('Cou109')}</option>
+                        <option value={t('Cou110')}>{t('Cou110')}</option>
+                        <option value={t('Cou111')}>{t('Cou111')}</option>
+                        <option value={t('Cou112')}>{t('Cou112')}</option>
+                        <option value={t('Cou113')}>{t('Cou113')}</option>
+                        <option value={t('Cou114')}>{t('Cou114')}</option>
+                        <option value={t('Cou115')}>{t('Cou115')}</option>
+                        <option value={t('Cou116')}>{t('Cou116')}</option>
+                        <option value={t('Cou117')}>{t('Cou117')}</option>
+                        <option value={t('Cou118')}>{t('Cou118')}</option>
+                        <option value={t('Cou119')}>{t('Cou119')}</option>
+                        <option value={t('Cou120')}>{t('Cou120')}</option>
+                        <option value={t('Cou121')}>{t('Cou121')}</option>
+                        <option value={t('Cou122')}>{t('Cou122')}</option>
+                        <option value={t('Cou123')}>{t('Cou123')}</option>
+                        <option value={t('Cou124')}>{t('Cou124')}</option>
+                        <option value={t('Cou125')}>{t('Cou125')}</option>
+                        <option value={t('Cou126')}>{t('Cou126')}</option>
+                        <option value={t('Cou127')}>{t('Cou127')}</option>
+                        <option value={t('Cou128')}>{t('Cou128')}</option>
+                        <option value={t('Cou129')}>{t('Cou129')}</option>
+                        <option value={t('Cou130')}>{t('Cou130')}</option>
+                        <option value={t('Cou131')}>{t('Cou131')}</option>
+                        <option value={t('Cou132')}>{t('Cou132')}</option>
+                        <option value={t('Cou133')}>{t('Cou133')}</option>
+                        <option value={t('Cou134')}>{t('Cou134')}</option>
+                        <option value={t('Cou135')}>{t('Cou135')}</option>
+                        <option value={t('Cou136')}>{t('Cou136')}</option>
+                        <option value={t('Cou137')}>{t('Cou137')}</option>
+                        <option value={t('Cou138')}>{t('Cou138')}</option>
+                        <option value={t('Cou139')}>{t('Cou139')}</option>
+                        <option value={t('Cou140')}>{t('Cou140')}</option>
+                        <option value={t('Cou141')}>{t('Cou141')}</option>
+                        <option value={t('Cou142')}>{t('Cou142')}</option>
+                        <option value={t('Cou143')}>{t('Cou143')}</option>
+                        <option value={t('Cou144')}>{t('Cou144')}</option>
+                        <option value={t('Cou145')}>{t('Cou145')}</option>
+                        <option value={t('Cou146')}>{t('Cou146')}</option>
+                        <option value={t('Cou147')}>{t('Cou147')}</option>
+                        <option value={t('Cou148')}>{t('Cou148')}</option>
+                        <option value={t('Cou149')}>{t('Cou149')}</option>
+                        <option value={t('Cou150')}>{t('Cou150')}</option>
+                        <option value={t('Cou151')}>{t('Cou151')}</option>
+                        <option value={t('Cou152')}>{t('Cou152')}</option>
+                        <option value={t('Cou153')}>{t('Cou153')}</option>
+                        <option value={t('Cou154')}>{t('Cou154')}</option>
+                        <option value={t('Cou155')}>{t('Cou155')}</option>
+                        <option value={t('Cou156')}>{t('Cou156')}</option>
+                        <option value={t('Cou157')}>{t('Cou157')}</option>
+                        <option value={t('Cou158')}>{t('Cou158')}</option>
+                        <option value={t('Cou159')}>{t('Cou159')}</option>
+                        <option value={t('Cou160')}>{t('Cou160')}</option>
+                        <option value={t('Cou161')}>{t('Cou161')}</option>
+                        <option value={t('Cou162')}>{t('Cou162')}</option>
+                        <option value={t('Cou163')}>{t('Cou163')}</option>
+                        <option value={t('Cou164')}>{t('Cou164')}</option>
+                        <option value={t('Cou165')}>{t('Cou165')}</option>
+                        <option value={t('Cou166')}>{t('Cou166')}</option>
+                        <option value={t('Cou167')}>{t('Cou167')}</option>
+                        <option value={t('Cou168')}>{t('Cou168')}</option>
+                        <option value={t('Cou169')}>{t('Cou169')}</option>
+                        <option value={t('Cou170')}>{t('Cou170')}</option>
+                        <option value={t('Cou171')}>{t('Cou171')}</option>
+                        <option value={t('Cou172')}>{t('Cou172')}</option>
+                        <option value={t('Cou173')}>{t('Cou173')}</option>
+                        <option value={t('Cou174')}>{t('Cou174')}</option>
+                        <option value={t('Cou175')}>{t('Cou175')}</option>
+                        <option value={t('Cou176')}>{t('Cou176')}</option>
+                        <option value={t('Cou177')}>{t('Cou177')}</option>
+                        <option value={t('Cou178')}>{t('Cou178')}</option>
+                        <option value={t('Cou179')}>{t('Cou179')}</option>
+                        <option value={t('Cou180')}>{t('Cou180')}</option>
+                        <option value={t('Cou181')}>{t('Cou181')}</option>
+                        <option value={t('Cou182')}>{t('Cou182')}</option>
+                        <option value={t('Cou183')}>{t('Cou183')}</option>
+                        <option value={t('Cou184')}>{t('Cou184')}</option>
+                        <option value={t('Cou185')}>{t('Cou185')}</option>
+                        <option value={t('Cou186')}>{t('Cou186')}</option>
+                        <option value={t('Cou187')}>{t('Cou187')}</option>
+                        <option value={t('Cou188')}>{t('Cou188')}</option>
+                        <option value={t('Cou189')}>{t('Cou189')}</option>
+                        <option value={t('Cou190')}>{t('Cou190')}</option>
+                        <option value={t('Cou191')}>{t('Cou191')}</option>
+                        <option value={t('Cou192')}>{t('Cou192')}</option>
                     </select>
                 </label>
                     </div>
@@ -612,9 +636,14 @@ function Anketa() {
                     </label>
                 </div>
                 <div className="row">
-                <label className="form-label w-100">{t('DataYourPeople')}<span >*</span>
-                        <input className={DataYourPeople.isDirty&&DataYourPeople.isEmpty?"input_w1210-error":"input_w1210"} onChange={e=>DataYourPeople.onChange(e)} onBlur={e=>DataYourPeople.onBlur(e)} value={DataYourPeople.value}  name="DataYourPeople" maxLength="200" />
-                        {(DataYourPeople.isDirty&&DataYourPeople.isEmpty)&&<div style={{color:'red'}}> {t('DataYourPeopleErrorEmpty')}</div>}
+                <label className="form-label w-100">{!showInputDataPeople&&t('DataYourPeople')}{showInputDataPeople&&t('DataYourPeopleNext')}<span >*</span>
+                <select className="select_show" onChange={handleSelectChangeDataPeople}> 
+                                            <option value="no">{t('No')}</option>
+                                            <option value="yes">{t('Yes')}</option>
+                                        </select>
+                                        {showInputDataPeople && (  
+                        <textarea className={showInputDataPeople&&DataYourPeople.isDirty&&DataYourPeople.isEmpty?"textarea_show_error":"textarea_show"} onChange={e=>DataYourPeople.onChange(e)} onBlur={e=>DataYourPeople.onBlur(e)} value={DataYourPeople.value}  name="DataYourPeople" maxLength="200" />)}
+                        {(showInputDataPeople&&DataYourPeople.isDirty&&DataYourPeople.isEmpty)&&<div style={{color:'red'}}> {t('DataYourPeopleErrorEmpty')}</div>}
 
                 </label>
                 </div>
@@ -637,215 +666,215 @@ function Anketa() {
                 </label>
                 <label className="form-label col-sm-8">{t('CountryPass')} <span>*</span>
                         <select className="select_w900" onChange={e=>country_pass.onChange(e)} onBlur={e=>country_pass.onBlur(e)} value={country_pass.value}  name="country_pass">
-                        <option value="0">{t('Cou0')}</option>
-                        <option value="1">{t('Cou1')}</option>
-                        <option value="2">{t('Cou2')}</option>
-                        <option value="3">{t('Cou3')}</option>
-                        <option value="4">{t('Cou4')}</option>
-                        <option value="5">{t('Cou5')}</option>
-                        <option value="6">{t('Cou6')}</option>
-                        <option value="7">{t('Cou7')}</option>
-                        <option value="8">{t('Cou8')}</option>
-                        <option value="9">{t('Cou9')}</option>
-                        <option value="10">{t('Cou10')}</option>
-                        <option value="11">{t('Cou11')}</option>
-                        <option value="12">{t('Cou12')}</option>
-                        <option value="13">{t('Cou13')}</option>
-                        <option value="14">{t('Cou14')}</option>
-                        <option value="15">{t('Cou15')}</option>
-                        <option value="16">{t('Cou16')}</option>
-                        <option value="17">{t('Cou17')}</option>
-                        <option value="18">{t('Cou18')}</option>
-                        <option value="19">{t('Cou19')}</option>
-                        <option value="20">{t('Cou20')}</option>
-                        <option value="21">{t('Cou21')}</option>
-                        <option value="22">{t('Cou22')}</option>
-                        <option value="23">{t('Cou23')}</option>
-                        <option value="24">{t('Cou24')}</option>
-                        <option value="25">{t('Cou25')}</option>
-                        <option value="26">{t('Cou26')}</option>
-                        <option value="27">{t('Cou27')}</option>
-                        <option value="28">{t('Cou28')}</option>
-                        <option value="29">{t('Cou29')}</option>
-                        <option value="30">{t('Cou30')}</option>
-                        <option value="31">{t('Cou31')}</option>
-                        <option value="32">{t('Cou32')}</option>
-                        <option value="33">{t('Cou33')}</option>
-                        <option value="34">{t('Cou34')}</option>
-                        <option value="35">{t('Cou35')}</option>
-                        <option value="36">{t('Cou36')}</option>
-                        <option value="37">{t('Cou37')}</option>
-                        <option value="38">{t('Cou38')}</option>
-                        <option value="39">{t('Cou39')}</option>
-                        <option value="40">{t('Cou40')}</option>
-                        <option value="41">{t('Cou41')}</option>
-                        <option value="42">{t('Cou42')}</option>
-                        <option value="43">{t('Cou43')}</option>
-                        <option value="44">{t('Cou44')}</option>
-                        <option value="45">{t('Cou45')}</option>
-                        <option value="46">{t('Cou46')}</option>
-                        <option value="47">{t('Cou47')}</option>
-                        <option value="48">{t('Cou48')}</option>
-                        <option value="49">{t('Cou49')}</option>
-                        <option value="50">{t('Cou50')}</option>
-                        <option value="51">{t('Cou51')}</option>
-                        <option value="52">{t('Cou52')}</option>
-                        <option value="53">{t('Cou53')}</option>
-                        <option value="54">{t('Cou54')}</option>
-                        <option value="55">{t('Cou55')}</option>
-                        <option value="56">{t('Cou56')}</option>
-                        <option value="57">{t('Cou57')}</option>
-                        <option value="58">{t('Cou58')}</option>
-                        <option value="59">{t('Cou59')}</option>
-                        <option value="60">{t('Cou60')}</option>
-                        <option value="61">{t('Cou61')}</option>
-                        <option value="62">{t('Cou62')}</option>
-                        <option value="63">{t('Cou63')}</option>
-                        <option value="64">{t('Cou64')}</option>
-                        <option value="65">{t('Cou65')}</option>
-                        <option value="66">{t('Cou66')}</option>
-                        <option value="67">{t('Cou67')}</option>
-                        <option value="68">{t('Cou68')}</option>
-                        <option value="69">{t('Cou69')}</option>
-                        <option value="70">{t('Cou70')}</option>
-                        <option value="71">{t('Cou71')}</option>
-                        <option value="72">{t('Cou72')}</option>
-                        <option value="73">{t('Cou73')}</option>
-                        <option value="74">{t('Cou74')}</option>
-                        <option value="75">{t('Cou75')}</option>
-                        <option value="76">{t('Cou76')}</option>
-                        <option value="77">{t('Cou77')}</option>
-                        <option value="78">{t('Cou78')}</option>
-                        <option value="79">{t('Cou79')}</option>
-                        <option value="80">{t('Cou80')}</option>
-                        <option value="81">{t('Cou81')}</option>
-                        <option value="82">{t('Cou82')}</option>
-                        <option value="83">{t('Cou83')}</option>
-                        <option value="84">{t('Cou84')}</option>
-                        <option value="85">{t('Cou85')}</option>
-                        <option value="86">{t('Cou86')}</option>
-                        <option value="87">{t('Cou87')}</option>
-                        <option value="88">{t('Cou88')}</option>
-                        <option value="89">{t('Cou89')}</option>
-                        <option value="90">{t('Cou90')}</option>
-                        <option value="91">{t('Cou91')}</option>
-                        <option value="92">{t('Cou92')}</option>
-                        <option value="93">{t('Cou93')}</option>
-                        <option value="94">{t('Cou94')}</option>
-                        <option value="95">{t('Cou95')}</option>
-                        <option value="96">{t('Cou96')}</option>
-                        <option value="97">{t('Cou97')}</option>
-                        <option value="98">{t('Cou98')}</option>
-                        <option value="99">{t('Cou99')}</option>
-                        <option value="100">{t('Cou100')}</option>
-                        <option value="101">{t('Cou101')}</option>
-                        <option value="102">{t('Cou102')}</option>
-                        <option value="103">{t('Cou103')}</option>
-                        <option value="104">{t('Cou104')}</option>
-                        <option value="105">{t('Cou105')}</option>
-                        <option value="106">{t('Cou106')}</option>
-                        <option value="107">{t('Cou107')}</option>
-                        <option value="108">{t('Cou108')}</option>
-                        <option value="109">{t('Cou109')}</option>
-                        <option value="110">{t('Cou110')}</option>
-                        <option value="111">{t('Cou111')}</option>
-                        <option value="112">{t('Cou112')}</option>
-                        <option value="113">{t('Cou113')}</option>
-                        <option value="114">{t('Cou114')}</option>
-                        <option value="115">{t('Cou115')}</option>
-                        <option value="116">{t('Cou116')}</option>
-                        <option value="117">{t('Cou117')}</option>
-                        <option value="118">{t('Cou118')}</option>
-                        <option value="119">{t('Cou119')}</option>
-                        <option value="120">{t('Cou120')}</option>
-                        <option value="121">{t('Cou121')}</option>
-                        <option value="122">{t('Cou122')}</option>
-                        <option value="123">{t('Cou123')}</option>
-                        <option value="124">{t('Cou124')}</option>
-                        <option value="125">{t('Cou125')}</option>
-                        <option value="126">{t('Cou126')}</option>
-                        <option value="127">{t('Cou127')}</option>
-                        <option value="128">{t('Cou128')}</option>
-                        <option value="129">{t('Cou129')}</option>
-                        <option value="130">{t('Cou130')}</option>
-                        <option value="131">{t('Cou131')}</option>
-                        <option value="132">{t('Cou132')}</option>
-                        <option value="133">{t('Cou133')}</option>
-                        <option value="134">{t('Cou134')}</option>
-                        <option value="135">{t('Cou135')}</option>
-                        <option value="136">{t('Cou136')}</option>
-                        <option value="137">{t('Cou137')}</option>
-                        <option value="138">{t('Cou138')}</option>
-                        <option value="139">{t('Cou139')}</option>
-                        <option value="140">{t('Cou140')}</option>
-                        <option value="141">{t('Cou141')}</option>
-                        <option value="142">{t('Cou142')}</option>
-                        <option value="143">{t('Cou143')}</option>
-                        <option value="144">{t('Cou144')}</option>
-                        <option value="145">{t('Cou145')}</option>
-                        <option value="146">{t('Cou146')}</option>
-                        <option value="147">{t('Cou147')}</option>
-                        <option value="148">{t('Cou148')}</option>
-                        <option value="149">{t('Cou149')}</option>
-                        <option value="150">{t('Cou150')}</option>
-                        <option value="151">{t('Cou151')}</option>
-                        <option value="152">{t('Cou152')}</option>
-                        <option value="153">{t('Cou153')}</option>
-                        <option value="154">{t('Cou154')}</option>
-                        <option value="155">{t('Cou155')}</option>
-                        <option value="156">{t('Cou156')}</option>
-                        <option value="157">{t('Cou157')}</option>
-                        <option value="158">{t('Cou158')}</option>
-                        <option value="159">{t('Cou159')}</option>
-                        <option value="160">{t('Cou160')}</option>
-                        <option value="161">{t('Cou161')}</option>
-                        <option value="162">{t('Cou162')}</option>
-                        <option value="163">{t('Cou163')}</option>
-                        <option value="164">{t('Cou164')}</option>
-                        <option value="165">{t('Cou165')}</option>
-                        <option value="166">{t('Cou166')}</option>
-                        <option value="167">{t('Cou167')}</option>
-                        <option value="168">{t('Cou168')}</option>
-                        <option value="169">{t('Cou169')}</option>
-                        <option value="170">{t('Cou170')}</option>
-                        <option value="171">{t('Cou171')}</option>
-                        <option value="172">{t('Cou172')}</option>
-                        <option value="173">{t('Cou173')}</option>
-                        <option value="174">{t('Cou174')}</option>
-                        <option value="175">{t('Cou175')}</option>
-                        <option value="176">{t('Cou176')}</option>
-                        <option value="177">{t('Cou177')}</option>
-                        <option value="178">{t('Cou178')}</option>
-                        <option value="179">{t('Cou179')}</option>
-                        <option value="180">{t('Cou180')}</option>
-                        <option value="181">{t('Cou181')}</option>
-                        <option value="182">{t('Cou182')}</option>
-                        <option value="183">{t('Cou183')}</option>
-                        <option value="184">{t('Cou184')}</option>
-                        <option value="185">{t('Cou185')}</option>
-                        <option value="186">{t('Cou186')}</option>
-                        <option value="187">{t('Cou187')}</option>
-                        <option value="188">{t('Cou188')}</option>
-                        <option value="189">{t('Cou189')}</option>
-                        <option value="190">{t('Cou190')}</option>
-                        <option value="191">{t('Cou191')}</option>
-                        <option value="192">{t('Cou192')}</option>
+                        <option value='1'></option>
+                        <option value={t('Cou0')}>{t('Cou0')}</option>
+                        <option value={t('Cou1')}>{t('Cou1')}</option>
+                        <option value={t('Cou2')}>{t('Cou2')}</option>
+                        <option value={t('Cou3')}>{t('Cou3')}</option>
+                        <option value={t('Cou4')}>{t('Cou4')}</option>
+                        <option value={t('Cou5')}>{t('Cou5')}</option>
+                        <option value={t('Cou6')}>{t('Cou6')}</option>
+                        <option value={t('Cou7')}>{t('Cou7')}</option>
+                        <option value={t('Cou8')}>{t('Cou8')}</option>
+                        <option value={t('Cou9')}>{t('Cou9')}</option>
+                        <option value={t('Cou10')}>{t('Cou10')}</option>
+                        <option value={t('Cou11')}>{t('Cou11')}</option>
+                        <option value={t('Cou12')}>{t('Cou12')}</option>
+                        <option value={t('Cou13')}>{t('Cou13')}</option>
+                        <option value={t('Cou14')}>{t('Cou14')}</option>
+                        <option value={t('Cou15')}>{t('Cou15')}</option>
+                        <option value={t('Cou16')}>{t('Cou16')}</option>
+                        <option value={t('Cou17')}>{t('Cou17')}</option>
+                        <option value={t('Cou18')}>{t('Cou18')}</option>
+                        <option value={t('Cou19')}>{t('Cou19')}</option>
+                        <option value={t('Cou20')}>{t('Cou20')}</option>
+                        <option value={t('Cou21')}>{t('Cou21')}</option>
+                        <option value={t('Cou22')}>{t('Cou22')}</option>
+                        <option value={t('Cou23')}>{t('Cou23')}</option>
+                        <option value={t('Cou24')}>{t('Cou24')}</option>
+                        <option value={t('Cou25')}>{t('Cou25')}</option>
+                        <option value={t('Cou26')}>{t('Cou26')}</option>
+                        <option value={t('Cou27')}>{t('Cou27')}</option>
+                        <option value={t('Cou28')}>{t('Cou28')}</option>
+                        <option value={t('Cou29')}>{t('Cou29')}</option>
+                        <option value={t('Cou30')}>{t('Cou30')}</option>
+                        <option value={t('Cou31')}>{t('Cou31')}</option>
+                        <option value={t('Cou32')}>{t('Cou32')}</option>
+                        <option value={t('Cou33')}>{t('Cou33')}</option>
+                        <option value={t('Cou34')}>{t('Cou34')}</option>
+                        <option value={t('Cou35')}>{t('Cou35')}</option>
+                        <option value={t('Cou36')}>{t('Cou36')}</option>
+                        <option value={t('Cou37')}>{t('Cou37')}</option>
+                        <option value={t('Cou38')}>{t('Cou38')}</option>
+                        <option value={t('Cou39')}>{t('Cou39')}</option>
+                        <option value={t('Cou40')}>{t('Cou40')}</option>
+                        <option value={t('Cou41')}>{t('Cou41')}</option>
+                        <option value={t('Cou42')}>{t('Cou42')}</option>
+                        <option value={t('Cou43')}>{t('Cou43')}</option>
+                        <option value={t('Cou44')}>{t('Cou44')}</option>
+                        <option value={t('Cou45')}>{t('Cou45')}</option>
+                        <option value={t('Cou46')}>{t('Cou46')}</option>
+                        <option value={t('Cou47')}>{t('Cou47')}</option>
+                        <option value={t('Cou48')}>{t('Cou48')}</option>
+                        <option value={t('Cou49')}>{t('Cou49')}</option>
+                        <option value={t('Cou50')}>{t('Cou50')}</option>
+                        <option value={t('Cou51')}>{t('Cou51')}</option>
+                        <option value={t('Cou52')}>{t('Cou52')}</option>
+                        <option value={t('Cou53')}>{t('Cou53')}</option>
+                        <option value={t('Cou54')}>{t('Cou54')}</option>
+                        <option value={t('Cou55')}>{t('Cou55')}</option>
+                        <option value={t('Cou56')}>{t('Cou56')}</option>
+                        <option value={t('Cou57')}>{t('Cou57')}</option>
+                        <option value={t('Cou58')}>{t('Cou58')}</option>
+                        <option value={t('Cou59')}>{t('Cou59')}</option>
+                        <option value={t('Cou60')}>{t('Cou60')}</option>
+                        <option value={t('Cou61')}>{t('Cou61')}</option>
+                        <option value={t('Cou62')}>{t('Cou62')}</option>
+                        <option value={t('Cou63')}>{t('Cou63')}</option>
+                        <option value={t('Cou64')}>{t('Cou64')}</option>
+                        <option value={t('Cou65')}>{t('Cou65')}</option>
+                        <option value={t('Cou66')}>{t('Cou66')}</option>
+                        <option value={t('Cou67')}>{t('Cou67')}</option>
+                        <option value={t('Cou68')}>{t('Cou68')}</option>
+                        <option value={t('Cou69')}>{t('Cou69')}</option>
+                        <option value={t('Cou70')}>{t('Cou70')}</option>
+                        <option value={t('Cou71')}>{t('Cou71')}</option>
+                        <option value={t('Cou72')}>{t('Cou72')}</option>
+                        <option value={t('Cou73')}>{t('Cou73')}</option>
+                        <option value={t('Cou74')}>{t('Cou74')}</option>
+                        <option value={t('Cou75')}>{t('Cou75')}</option>
+                        <option value={t('Cou76')}>{t('Cou76')}</option>
+                        <option value={t('Cou77')}>{t('Cou77')}</option>
+                        <option value={t('Cou78')}>{t('Cou78')}</option>
+                        <option value={t('Cou79')}>{t('Cou79')}</option>
+                        <option value={t('Cou80')}>{t('Cou80')}</option>
+                        <option value={t('Cou81')}>{t('Cou81')}</option>
+                        <option value={t('Cou83')}>{t('Cou83')}</option>
+                        <option value={t('Cou84')}>{t('Cou84')}</option>
+                        <option value={t('Cou85')}>{t('Cou85')}</option>
+                        <option value={t('Cou86')}>{t('Cou86')}</option>
+                        <option value={t('Cou87')}>{t('Cou87')}</option>
+                        <option value={t('Cou88')}>{t('Cou88')}</option>
+                        <option value={t('Cou89')}>{t('Cou89')}</option>
+                        <option value={t('Cou90')}>{t('Cou90')}</option>
+                        <option value={t('Cou91')}>{t('Cou91')}</option>
+                        <option value={t('Cou92')}>{t('Cou92')}</option>
+                        <option value={t('Cou93')}>{t('Cou93')}</option>
+                        <option value={t('Cou94')}>{t('Cou94')}</option>
+                        <option value={t('Cou95')}>{t('Cou95')}</option>
+                        <option value={t('Cou96')}>{t('Cou96')}</option>
+                        <option value={t('Cou97')}>{t('Cou97')}</option>
+                        <option value={t('Cou98')}>{t('Cou98')}</option>
+                        <option value={t('Cou99')}>{t('Cou99')}</option>
+                        <option value={t('Cou100')}>{t('Cou100')}</option>
+                        <option value={t('Cou101')}>{t('Cou101')}</option>
+                        <option value={t('Cou102')}>{t('Cou102')}</option>
+                        <option value={t('Cou103')}>{t('Cou103')}</option>
+                        <option value={t('Cou104')}>{t('Cou104')}</option>
+                        <option value={t('Cou105')}>{t('Cou105')}</option>
+                        <option value={t('Cou106')}>{t('Cou106')}</option>
+                        <option value={t('Cou107')}>{t('Cou107')}</option>
+                        <option value={t('Cou108')}>{t('Cou108')}</option>
+                        <option value={t('Cou109')}>{t('Cou109')}</option>
+                        <option value={t('Cou110')}>{t('Cou110')}</option>
+                        <option value={t('Cou111')}>{t('Cou111')}</option>
+                        <option value={t('Cou112')}>{t('Cou112')}</option>
+                        <option value={t('Cou113')}>{t('Cou113')}</option>
+                        <option value={t('Cou114')}>{t('Cou114')}</option>
+                        <option value={t('Cou115')}>{t('Cou115')}</option>
+                        <option value={t('Cou116')}>{t('Cou116')}</option>
+                        <option value={t('Cou117')}>{t('Cou117')}</option>
+                        <option value={t('Cou118')}>{t('Cou118')}</option>
+                        <option value={t('Cou119')}>{t('Cou119')}</option>
+                        <option value={t('Cou120')}>{t('Cou120')}</option>
+                        <option value={t('Cou121')}>{t('Cou121')}</option>
+                        <option value={t('Cou122')}>{t('Cou122')}</option>
+                        <option value={t('Cou123')}>{t('Cou123')}</option>
+                        <option value={t('Cou124')}>{t('Cou124')}</option>
+                        <option value={t('Cou125')}>{t('Cou125')}</option>
+                        <option value={t('Cou126')}>{t('Cou126')}</option>
+                        <option value={t('Cou127')}>{t('Cou127')}</option>
+                        <option value={t('Cou128')}>{t('Cou128')}</option>
+                        <option value={t('Cou129')}>{t('Cou129')}</option>
+                        <option value={t('Cou130')}>{t('Cou130')}</option>
+                        <option value={t('Cou131')}>{t('Cou131')}</option>
+                        <option value={t('Cou132')}>{t('Cou132')}</option>
+                        <option value={t('Cou133')}>{t('Cou133')}</option>
+                        <option value={t('Cou134')}>{t('Cou134')}</option>
+                        <option value={t('Cou135')}>{t('Cou135')}</option>
+                        <option value={t('Cou136')}>{t('Cou136')}</option>
+                        <option value={t('Cou137')}>{t('Cou137')}</option>
+                        <option value={t('Cou138')}>{t('Cou138')}</option>
+                        <option value={t('Cou139')}>{t('Cou139')}</option>
+                        <option value={t('Cou140')}>{t('Cou140')}</option>
+                        <option value={t('Cou141')}>{t('Cou141')}</option>
+                        <option value={t('Cou142')}>{t('Cou142')}</option>
+                        <option value={t('Cou143')}>{t('Cou143')}</option>
+                        <option value={t('Cou144')}>{t('Cou144')}</option>
+                        <option value={t('Cou145')}>{t('Cou145')}</option>
+                        <option value={t('Cou146')}>{t('Cou146')}</option>
+                        <option value={t('Cou147')}>{t('Cou147')}</option>
+                        <option value={t('Cou148')}>{t('Cou148')}</option>
+                        <option value={t('Cou149')}>{t('Cou149')}</option>
+                        <option value={t('Cou150')}>{t('Cou150')}</option>
+                        <option value={t('Cou151')}>{t('Cou151')}</option>
+                        <option value={t('Cou152')}>{t('Cou152')}</option>
+                        <option value={t('Cou153')}>{t('Cou153')}</option>
+                        <option value={t('Cou154')}>{t('Cou154')}</option>
+                        <option value={t('Cou155')}>{t('Cou155')}</option>
+                        <option value={t('Cou156')}>{t('Cou156')}</option>
+                        <option value={t('Cou157')}>{t('Cou157')}</option>
+                        <option value={t('Cou158')}>{t('Cou158')}</option>
+                        <option value={t('Cou159')}>{t('Cou159')}</option>
+                        <option value={t('Cou160')}>{t('Cou160')}</option>
+                        <option value={t('Cou161')}>{t('Cou161')}</option>
+                        <option value={t('Cou162')}>{t('Cou162')}</option>
+                        <option value={t('Cou163')}>{t('Cou163')}</option>
+                        <option value={t('Cou164')}>{t('Cou164')}</option>
+                        <option value={t('Cou165')}>{t('Cou165')}</option>
+                        <option value={t('Cou166')}>{t('Cou166')}</option>
+                        <option value={t('Cou167')}>{t('Cou167')}</option>
+                        <option value={t('Cou168')}>{t('Cou168')}</option>
+                        <option value={t('Cou169')}>{t('Cou169')}</option>
+                        <option value={t('Cou170')}>{t('Cou170')}</option>
+                        <option value={t('Cou171')}>{t('Cou171')}</option>
+                        <option value={t('Cou172')}>{t('Cou172')}</option>
+                        <option value={t('Cou173')}>{t('Cou173')}</option>
+                        <option value={t('Cou174')}>{t('Cou174')}</option>
+                        <option value={t('Cou175')}>{t('Cou175')}</option>
+                        <option value={t('Cou176')}>{t('Cou176')}</option>
+                        <option value={t('Cou177')}>{t('Cou177')}</option>
+                        <option value={t('Cou178')}>{t('Cou178')}</option>
+                        <option value={t('Cou179')}>{t('Cou179')}</option>
+                        <option value={t('Cou180')}>{t('Cou180')}</option>
+                        <option value={t('Cou181')}>{t('Cou181')}</option>
+                        <option value={t('Cou182')}>{t('Cou182')}</option>
+                        <option value={t('Cou183')}>{t('Cou183')}</option>
+                        <option value={t('Cou184')}>{t('Cou184')}</option>
+                        <option value={t('Cou185')}>{t('Cou185')}</option>
+                        <option value={t('Cou186')}>{t('Cou186')}</option>
+                        <option value={t('Cou187')}>{t('Cou187')}</option>
+                        <option value={t('Cou188')}>{t('Cou188')}</option>
+                        <option value={t('Cou189')}>{t('Cou189')}</option>
+                        <option value={t('Cou190')}>{t('Cou190')}</option>
+                        <option value={t('Cou191')}>{t('Cou191')}</option>
+                        <option value={t('Cou192')}>{t('Cou192')}</option>
                     </select>
                 </label>
                     </div>
                     <div className="row">
                 <label className="form-label col-sm-6">{t('PlaceOfIssue')}<span>*</span>
-                        <input className={PlaceOfIssue.isDirty&&PlaceOfIssue.isEmpty?"input_w600-error":"input_w600"}onChange={e=>PlaceOfIssue.onChange(e)} onBlur={e=>PlaceOfIssue.onBlur(e)} value={PlaceOfIssue.value}  name="PlaceOfIssue" maxLength="20" />
+                        <input className={PlaceOfIssue.isDirty&&PlaceOfIssue.isEmpty?"input_w600-error":"input_w600"}onChange={e=>PlaceOfIssue.onChange(e)} onBlur={e=>PlaceOfIssue.onBlur(e)} value={PlaceOfIssue.value}  name="PlaceOfIssue" maxLength="120" />
                         {(PlaceOfIssue.isDirty&&PlaceOfIssue.isEmpty)&&<div style={{color:'red'}}> {t('PlaceOfIssueErrorEmpty')}</div>}
                 </label>
                 <label className="form-label col-sm-3">{t('DataOfIssue')}<span >*</span>
-                        <input className={date_of_issue.isDirty&&(date_of_issue.inputData||date_of_issue.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" />
+                        <input className={date_of_issue.isDirty&&(date_of_issue.inputData||date_of_issue.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder={t('DataInp')} maxLength="10" />
                         {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div style={{color:'red'}}> {t('DataOfIssueErrorEmpty')}</div>}
                         {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueError')}</div>}
 
                 </label>
                 <label className="form-label col-sm-3">{t('DateOfExiry')}<span >*</span>
-                        <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder="дд.мм.гггг" maxLength="10"/>
+                        <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder={t('DataInp')} maxLength="10"/>
                         {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}>  {t('DateOfExiryErrorEmpty')}</div>}
                         {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div style={{color:'red'}}> {t('DateOfExiryError')}</div>}
 
@@ -937,7 +966,7 @@ function Anketa() {
                     <label className="form-label col-sm">{t('EduSerialNumber')}<span ></span>
                         <input className="input_w600" onChange={e=>edu_serial_number.onChange(e)} onBlur={e=>edu_serial_number.onBlur(e)} value={edu_serial_number.value}  name="edu_serial_number" maxLength="20"  /></label>
                     <label className="form-label col-sm">{t('DataOfIssueEdu')}<span ></span>
-                        <input className={(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>edu_date_of_issue.onChange(e)} onBlur={e=>edu_date_of_issue.onBlur(e)} value={edu_date_of_issue.value} name="edu_date_of_issue" maxLength="10" placeholder="дд.мм.гггг" />
+                        <input className={(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>edu_date_of_issue.onChange(e)} onBlur={e=>edu_date_of_issue.onBlur(e)} value={edu_date_of_issue.value} name="edu_date_of_issue" maxLength="10" placeholder={t('DataInp')} />
                         {(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueEduError')}</div>}
                         </label>
                 </div>
@@ -960,36 +989,22 @@ function Anketa() {
 <legend className="text-center">{t('InfoAdmission')}</legend>
                     <label className="form-label w-200">{t('Faculty')}
                     <select className="select_w1210" onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
-                        <optgroup label={t('FacName1')}>	
-                            <option value="1">{t('Fac1')}</option>
-                            <option value="2">{t('Fac2')}</option>
-                            <option value="3">{t('Fac3')}</option>
-                            <option value="4">{t('Fac4')}</option>
-                            <option value="6">{t('Fac6')}</option>
-                            <option value="20">{t('Fac20')}</option>
-                            <option value="7">{t('Fac7')}</option>
-                        </optgroup>
                         <optgroup label={t('FacName2')}>
-                            <option value="10">{t('Fac10')}</option>
-                            <option value="11">{t('Fac11')}</option>
-                            <option value="12">{t('Fac12')}</option>
-                            <option value="13">{t('Fac13')}</option>
-                            <option value="14">{t('Fac14')}</option>
-                            <option value="15">{t('Fac15')}</option>
-                            <option value="16">{t('Fac16')}</option>
-                            <option value="21">{t('Fac21')}</option>
-                        </optgroup>
-                        <optgroup label={t('FacName3')}>
-                            <option value="8">{t('Fac8')}</option>
-                            <option value="19">{t('Fac19')}</option>
-                            <option value="17">{t('Fac17')}</option>
-                            <option value="5">{t('Fac5')}</option>
-                            <option value="9">{t('Fac9')}</option>
-                            <option value="18">{t('Fac18')}</option>
+                            <option value={t('Fac10')}>{t('Fac10')}</option>
+                            <option value={t('Fac11')}>{t('Fac11')}</option>
+                            <option value={t('Fac12')}>{t('Fac12')}</option>
+                            <option value={t('Fac13')}>{t('Fac13')}</option>
+                            <option value={t('Fac15')}>{t('Fac15')}</option>
+                            <option value={t('Fac16')}>{t('Fac16')}</option>
                         </optgroup>
                     </select></label>
                     <label className="form-label w-200">{t('HostelLive')}
-                        <input className="input_w1210"  onChange={e=>HostelLive.onChange(e)} onBlur={e=>HostelLive.onBlur(e)} value={HostelLive.value} name="edu_name" maxLength="150"  /></label>
+                        <select className="select_w1210"  onChange={e=>HostelLive.onChange(e)} onBlur={e=>HostelLive.onBlur(e)} value={HostelLive.value} name="edu_name" maxLength="150"  >
+                        <option value={t('HostelLiveNo')}>{t('HostelLiveNo')}</option>
+                        <option value={t('HostelLiveYes')}>{t('HostelLiveYes')}</option>
+
+                        </select>
+                        </label>
                     <hr/>    
 
 <legend className="text-center">{t('AddDoc')}</legend>
@@ -1240,7 +1255,7 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||surname_info.isEmpty||DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                    <button disabled={(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||!showInput&&surname_info.isEmpty||!showInputDataPeople&&DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>

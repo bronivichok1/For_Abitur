@@ -88,6 +88,47 @@
       box-sizing: border-box;
       }
 
+      .textarea_show{
+        border: 1px solid #ced4da;
+        color: black;
+        margin-top: 10px;
+        margin-left: 0px;
+        margin-right: 10px;
+        border-color: #ced4da;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+        font-size: 16px;
+        padding: 0px;
+        padding-left: 10px;
+        width: 1210px;
+        height: 200px;
+        background-color: #fff;
+        padding-right: 1em;
+      }
+      .textarea_show_error{
+        border: 1px solid #ced4da;
+        color: black;
+        margin-top: 10px;
+        margin-left: 0px;
+        margin-right: 10px;
+        border-color: #e26647;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+        font-size: 16px;
+        padding: 0px;
+        padding-left: 10px;
+        width: 1210px;
+        height: 200px;
+        background-color: #fff;
+        padding-right: 1em;
+      }
+      .textarea_show_error:focus{
+        border-color: #e26647;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(231, 46, 46, 0.075),0 0 8px rgba(233, 43, 43, 0.6);
+        box-shadow: inset 0 1px 1px rgba(228, 26, 26, 0.075),0 0 8px rgba(226, 32, 32, 0.6);
+      }
+
      .input_w400{
       border: 1px solid #ced4da;
       color: black;
@@ -253,6 +294,23 @@
       height: 40px;
       margin-top: 0px;
       margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 0;
+      padding-left: 10px;
+     }
+     .select_show{
+      border: 1px solid #ced4da;
+      color: black;
+      width: 100px;
+      height: 40px;
+      margin-top: 0px;
+      margin-left: 20px;
       margin-right: 10px;
       border-radius: 0.25rem;
       border-color: #ced4da;
@@ -469,7 +527,8 @@
      .select_w400:focus,
      .input_w390:focus,
      .input_w580:focus,
-     .input_w590:focus {
+     .input_w590:focus,
+     .textarea_show:focus {
         border-color: #66afe9;
         outline: 0;
         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
@@ -495,7 +554,9 @@
       .input_w390-error:-webkit-autofill,
       .input_w580:-webkit-autofill,
       .input_w590-error:-webkit-autofill,
-      .input_w590:-webkit-autofill{
+      .input_w590:-webkit-autofill,
+      .textarea_show_error:-webkit-autofill,
+      .textarea_show:-webkit-autofill{
           -webkit-box-shadow: 0 0 0 1000px white inset; /* Добавьте свойство box-shadow с нужным цветом фона */
           transition: background-color 5000s ease-in-out 0s;
           box-shadow: 0 0 0 30px white inset;

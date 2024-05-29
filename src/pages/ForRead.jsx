@@ -117,7 +117,6 @@ function ForRead() {
         dataEdit.Files=dataAbitur.Files
         edit.Edit=1
         navigate("/FillData", { replace: false })
-        console.log(dataEdit)
       })
       .catch(error=>{
         toast.error(t('ErrorIDK'), {
