@@ -20,7 +20,7 @@ i18n
                     SurnameErrorEmpty: "The 'Surname (Latin)' field is mandatory.",
                     SurnameError: "Only Latin characters are allowed in the 'Surname (Latin)' field, the first letter is capitalised.",
 
-                    SurnameRus: "Surname (Cyrillic, as in passport)",
+                    SurnameRus: "Surname (Cyrillic, as in passport translation)",
                     SurnameErrorEmptyRus: "The 'Surname (Cyrillic)' field is mandatory.",
                     SurnameErrorRus: "Only Cyrillic characters are allowed in the 'Surname (Cyrillic)' field, the first letter is capitalised.",
                     
@@ -28,7 +28,7 @@ i18n
                     NameErrorEmpty: "The 'Name (Latin)' field is mandatory.",
                     NameError: "Only Latin characters are allowed in the 'Name (Latin)' field, the first letter is capitalised.",
 
-                    NameRus: "Name (Cyrillic, as in passport)",
+                    NameRus: "Name (Cyrillic, as in passport translation)",
                     NameErrorEmptyRus: "The 'Name (Cyrillic)' field is mandatory.",
                     NameErrorRus: "Only Cyrillic characters are allowed in the 'Name (Cyrillic)' field, the first letter is capitalised.",
 
@@ -353,7 +353,7 @@ i18n
                     DowFile:"Upload files",
                     Send:"Send",
                     Cancel:"Cancel",
-                    ErrorFileMessage:"Please select a file in jpg, jpeg or pdf format and up to 5 MB in size.",
+                    ErrorFileMessage:"Please select a file in jpg, jpeg or pdf format and up to 10 MB in size.",
                     FinalMessage: "Your data has been processed",
 
                     But1:"Fill out the application for applicants",
@@ -392,7 +392,7 @@ i18n
                     SurnameErrorEmpty:"Поле 'Фамилия (латиница)' обязательно для заполнения.",
                     SurnameError:"В поле 'Фамилия (латиница)' допустима только латиница, первая буква - заглавная.",
 
-                    SurnameRus: "Фамилия (кириллица, как в паспорте)",
+                    SurnameRus: "Фамилия (кириллица, как в переводе паспорта)",
                     SurnameErrorEmptyRus:"Поле 'Фамилия (кириллица)' обязательно для заполнения.",
                     SurnameErrorRus:"В поле 'Фамилия (кириллица)' допустима только кириллица, первая буква - заглавная.",
                     
@@ -400,7 +400,7 @@ i18n
                     NameErrorEmpty:"Поле 'Имя (латиница)' обязательно для заполнения.",
                     NameError:"В поле 'Имя (латиница)' допустима только латиница, первая буква — заглавная.",
 
-                    NameRus:"Имя (кириллица, как в паспорте)",
+                    NameRus:"Имя (кириллица, как в переводе паспорта)",
                     NameErrorEmptyRus:"Поле 'Имя (кириллица)' обязательно для заполнения.",
                     NameErrorRus:"В поле 'Имя (кириллица)' допустима только кириллица, первая буква — заглавная.",
 
@@ -704,7 +704,7 @@ i18n
                     AddDoc:"Прикрепить документы",
 
                     AddFile1:"1) Страниц паспорта, на которых имеется фото и номер паспорта, а также нотариально заверенный перевод на русский язык;",
-                    AddFile2:"2) Оригинал аттестата об общем среднем образовании, и приложения к нему (лист и оценками) и нотариально заверенный перевод на русский язык;",
+                    AddFile2:"2) Оригинал аттестата об общем среднем образовании, и приложения к нему (лист c оценками) и нотариально заверенный перевод на русский язык;",
                     AddFile3:"3) Справка об отсутствии ВИЧ-инфекции, выданная официальным органом здравоохранения страны, из которой прибыл абитуриент, и её копия, переведённая на русский язык и нотариально заверенная;",
                     AddFile4:"4) Для несовершеннолетних (до 18 лет) абитуриентов: оригинал свидетельства о рождении и его копия, переведённая на русский язык и нотариально заверенная, или оригинал другого документа, подтверждающего дату рождения и гражданство, и его копия, переведённая на русский язык и нотариально заверенная;",
                     AddFile5:"5) Для несовершеннолетних (до 18 лет) абитуриентов: доверенность на представление интересов несовершеннолетнего и её копия, переведённая на русский язык и нотариально заверенная - в случае подачи документов без присутствия родителей/опекунов; ",
@@ -723,7 +723,7 @@ i18n
                     DowFile:"Загрузите файлы",
                     Send:"Отправить",
                     Cancel:"Отменить",
-                    ErrorFileMessage:"Пожалуйста, выберите файл в формате jpg, jpeg или pdf и размером до 5 МБ.",
+                    ErrorFileMessage:"Пожалуйста, выберите файл в формате jpg, jpeg или pdf и размером до 10 МБ.",
                     FinalMessage:"Ваши данные приняты к обработке",
 
                     But1:"Заполнить заявление абитуриента",

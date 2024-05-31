@@ -32,7 +32,7 @@ const useValidation=(value,validations)=>{
                     eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //work
                 break;
                 case'ismobileNum':
-                    var num=/^\+375\d{9}$/
+                    var num= /^\d*\+?\d*$/
                     num.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true) //work
                 break;
                 case'isemailCheck':
@@ -111,37 +111,37 @@ function Anketa() {
               if (data.id) {
                   const body2=new FormData()
                   const nameFolder=data.id
-                  body2.append("name",nameFolder)
+                  body2.append('name',nameFolder)
                   files.forEach((files)=>{
-                  body2.append("file",files)
+                  body2.append('file',files)
               })
       
               sendRequestFormData('POST',PATH +'/files',body2)
-                  setFiles([])
+              setFiles([])
                   setModalActive(true)
                 }else{
-
                 if(edit.Edit==true){
                     const body2=new FormData()
                     const nameFolder=dataEdit.id
-                    body2.append("name",nameFolder)
+                    body2.append('name',nameFolder)
                     files.forEach((files)=>{
-                    body2.append("file",files)})
+                    body2.append('file',files)})
                     sendRequestFormData('POST',PATH +'/files',body2)
                     setFiles([])
                     setModalActive(true)
                     edit.Edit=false
                 }                
-                if(resp.status=='404'||errorCod.error=='1'){
-                    toast.error(t('Error1'), {
-                        position: "top-right"
-                      });
-                  }
+                
                 else{
+                    if(resp.status=='404'||errorCod.error=='1'){
+                        toast.error(t('Error1'), {
+                            position: "top-right"
+                          });
+                      } else{
                   toast.error(t('ErrorIDK'), {
                       position: "top-right"
                     });
-      
+                }
                 }
               }
           })}
@@ -163,7 +163,6 @@ function Anketa() {
              let Metod=''
             if(edit.Edit==true){
                 Metod='PATCH'
-                //body2.id=parseInt(dataEdit.id,10)
                 sendRequest(Metod, PATH +'/user'+'/'+dataEdit.id, body2)
                 console.log(body2)
             }else{
@@ -203,20 +202,19 @@ function Anketa() {
     const edu_serial_number=useInput(dataEdit.edu_serial_number)
     const edu_name=useInput(dataEdit.edu_name)
     const sex=useInput(dataEdit.sex,{isEmpty:true})
-    const country=useInput(dataEdit.country)
-    const pref_faculty=useInput(dataEdit.pref_faculty)
+    const country=useInput(edit.Edit&&dataEdit.country||!edit.Edit&&t('Cou33'))
+    const pref_faculty=useInput(edit.Edit&&dataEdit.pref_faculty||!edit.Edit&&t('Fac10'))
     const DD=useInput(dataEdit.DD)
     const religion=useInput(dataEdit.religion) 
     const DataYourPeople=useInput(dataEdit.DataYourPeople,{isEmpty:true})
     const NameSurname=useInput(dataEdit.NameSurname)
     const PhoneRepresantative=useInput(dataEdit.PhoneRepresantative,{ismobileNum:true})
-    const country_pass=useInput(dataEdit.country_pass,{isEmpty:true})
+    const country_pass=useInput((edit.Edit&&dataEdit.country_pass)||(!edit.Edit&&t('Cou33')),{isEmpty:true})
     const NatPassw=useInput(dataEdit.NatPassw,{isEmpty:true})
     const HostelLive=useInput(dataEdit.HostelLive)
     const numberNational =useInput(dataEdit.numberNational)
 
     const body2 = {
-//      id:dataEdit.id,
       name: name.value,
       surname: surname.value,
       namerus:namerus.value,
@@ -317,9 +315,9 @@ function Anketa() {
         };
   
     const handleSubmit=(e)=>{
-       e.preventDefault();/* 
-       const body2=new FormData()
-            const nameFolder=number.value+date_of_expiry.value
+       e.preventDefault();
+       /*const body2=new FormData()
+         const nameFolder=number.value+date_of_expiry.value
             body2.append("id",nameFolder)
             files.forEach((file)=>{
             body2.append("file",file)
@@ -439,7 +437,7 @@ function Anketa() {
                 </label>
                 <label className="form-label col-sm-8">{t('Country')} <span>*</span>
                         <select className="select_w595" onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value}  name="country">
-                        <option value='1'></option>
+                        <option value={t('Cou33')}>{t('Cou33')}</option>
                         <option value={t('Cou0')}>{t('Cou0')}</option>
                         <option value={t('Cou1')}>{t('Cou1')}</option>
                         <option value={t('Cou2')}>{t('Cou2')}</option>
@@ -473,7 +471,6 @@ function Anketa() {
                         <option value={t('Cou30')}>{t('Cou30')}</option>
                         <option value={t('Cou31')}>{t('Cou31')}</option>
                         <option value={t('Cou32')}>{t('Cou32')}</option>
-                        <option value={t('Cou33')}>{t('Cou33')}</option>
                         <option value={t('Cou34')}>{t('Cou34')}</option>
                         <option value={t('Cou35')}>{t('Cou35')}</option>
                         <option value={t('Cou36')}>{t('Cou36')}</option>
@@ -691,7 +688,7 @@ function Anketa() {
                 </label>
                 <label className="form-label col-sm-8">{t('CountryPass')} <span>*</span>
                         <select className="select_w595" onChange={e=>country_pass.onChange(e)} onBlur={e=>country_pass.onBlur(e)} value={country_pass.value}  name="country_pass">
-                        <option value='1'></option>
+                        <option value={t('Cou33')}>{t('Cou33')}</option>
                         <option value={t('Cou0')}>{t('Cou0')}</option>
                         <option value={t('Cou1')}>{t('Cou1')}</option>
                         <option value={t('Cou2')}>{t('Cou2')}</option>
@@ -725,7 +722,6 @@ function Anketa() {
                         <option value={t('Cou30')}>{t('Cou30')}</option>
                         <option value={t('Cou31')}>{t('Cou31')}</option>
                         <option value={t('Cou32')}>{t('Cou32')}</option>
-                        <option value={t('Cou33')}>{t('Cou33')}</option>
                         <option value={t('Cou34')}>{t('Cou34')}</option>
                         <option value={t('Cou35')}>{t('Cou35')}</option>
                         <option value={t('Cou36')}>{t('Cou36')}</option>
@@ -1015,7 +1011,6 @@ function Anketa() {
                     <label className="form-label w-200">{t('Faculty')}
                     <select className="select_w1210" onChange={e=>pref_faculty.onChange(e)} onBlur={e=>pref_faculty.onBlur(e)} value={pref_faculty.value} name="pref_faculty" >
                         <optgroup label={t('FacName2')}>
-                            <option value='1'></option>
                             <option value={t('Fac10')}>{t('Fac10')}</option>
                             <option value={t('Fac11')}>{t('Fac11')}</option>
                             <option value={t('Fac12')}>{t('Fac12')}</option>
@@ -1286,7 +1281,7 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(pref_faculty.value=='1'||HostelLive.value=='1'||country_pass=='1'||country.value=='1')||(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||/*(showInput&&surname_info.isEmpty)||(showInputDataPeople&&DataYourPeople.isEmpty)||*/(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                    <button disabled={(HostelLive.value=='1')||(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>

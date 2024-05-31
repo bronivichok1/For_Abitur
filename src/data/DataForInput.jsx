@@ -13,7 +13,7 @@ export const dataEdit={
     date_of_issue:'',
     date_of_expiry:'',
     settlement_name:'',
-    mobile_tel:'+375',
+    mobile_tel:'',
     email:'',
     edu_date_of_issue:'',
     edu_serial_number:'',
