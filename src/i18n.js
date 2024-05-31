@@ -353,7 +353,7 @@ i18n
                     DowFile:"Upload files",
                     Send:"Send",
                     Cancel:"Cancel",
-                    ErrorFileMessage:"Please select a file in png, jpg, jpeg or pdf format and up to 5 MB in size.",
+                    ErrorFileMessage:"Please select a file in jpg, jpeg or pdf format and up to 5 MB in size.",
                     FinalMessage: "Your data has been processed",
 
                     But1:"Fill out the application for applicants",
@@ -723,7 +723,7 @@ i18n
                     DowFile:"Загрузите файлы",
                     Send:"Отправить",
                     Cancel:"Отменить",
-                    ErrorFileMessage:"Пожалуйста, выберите файл в формате png, jpg, jpeg или pdf и размером до 5 МБ.",
+                    ErrorFileMessage:"Пожалуйста, выберите файл в формате jpg, jpeg или pdf и размером до 5 МБ.",
                     FinalMessage:"Ваши данные приняты к обработке",
 
                     But1:"Заполнить заявление абитуриента",

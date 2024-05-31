@@ -1082,7 +1082,7 @@ function Anketa() {
                                                 <label className="btn-9">
                                                     <span className="span-drag">{t('DowFile')}</span>
                                                         <input type="file" 
-                                                        accept=".jpg, .jpeg, .png, .pdf" 
+                                                        accept=".jpg, .jpeg, .pdf" 
                                                         className="input_drag" 
                                                         multiple={true} 
                                                         onChange={handleChange}/>
