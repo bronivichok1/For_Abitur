@@ -310,14 +310,15 @@ i18n
                     Fac7:"Career guidance and pre-university preparation",
                     
                     FacName2:"Faculty of medicine for foreign students",
-                    Fac10:"Therapeutic, russian language of instruction",
-                    Fac11:"Therapeutic, english language of instruction",
-                    Fac12:"Dental, russian language of instruction",
-                    Fac13:"Dental, english language of instruction",
-                    Fac14:"Medical and preventive, russian language of instruction",
-                    Fac15:"Pharmaceutical, russian language of instruction",
-                    Fac16:"Pharmaceutical, english language of instruction",
-                    Fac21:"Pharmaceutical, russian language of instruction (correspondence)",
+                    Fac10:"General medicine, russian language of studying",
+                    Fac11:"General medicine, english language of studying",
+                    Fac12:"Dentistry, russian language of studying",
+                    Fac13:"Dentistry, english language of studying",
+                    Fac14:"Medical and preventive, russian language of studying",
+                    Fac15:"Pharmacy, russian language of studying",
+                    Fac16:"Pharmacy, english language of studying",
+
+                    Fac21:"Pharmaceutical, russian language of studying (correspondence)",
                     
                     FacName3:"Military medical Institute",
                     Fac8:"Armed forces",
