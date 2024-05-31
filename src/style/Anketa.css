@@ -827,3 +827,10 @@
         text-align: center;
         margin-bottom: 15px;
       }
+      .typeFiles{
+        font-weight: bold; /* Устанавливаем жирное начертание текста */
+        font-size: 15px; /* Устанавливаем размер текста 24 пикселя */
+        text-align: center;
+        color:red;
+        margin-left: 200px;
+      }

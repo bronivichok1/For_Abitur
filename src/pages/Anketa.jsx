@@ -44,7 +44,7 @@ const useValidation=(value,validations)=>{
                     data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //work
                 break;
                 case'Num':
-                    var num= /^\d+$/
+                    var num= /^[a-zA-Z0-9-]*$/
                     num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
                 break;
             }
@@ -118,17 +118,26 @@ function Anketa() {
       
               sendRequestFormData('POST',PATH +'/files',body2)
                   setFiles([])
-                  /*toast.success(t('FinalMessage'), {
-                      position: "top-right"
-                  })*/
                   setModalActive(true)
-                  //return  resp.json()
                 }else{
+
+                if(edit.Edit==true){
+                    const body2=new FormData()
+                    const nameFolder=dataEdit.id
+                    body2.append("name",nameFolder)
+                    files.forEach((files)=>{
+                    body2.append("file",files)})
+                    sendRequestFormData('POST',PATH +'/files',body2)
+                    setFiles([])
+                    setModalActive(true)
+                    edit.Edit=false
+                }                
                 if(resp.status=='404'||errorCod.error=='1'){
-                  toast.error(t('Error1'), {
-                      position: "top-right"
-                    });
-                }else{
+                    toast.error(t('Error1'), {
+                        position: "top-right"
+                      });
+                  }
+                else{
                   toast.error(t('ErrorIDK'), {
                       position: "top-right"
                     });
@@ -151,7 +160,16 @@ function Anketa() {
     useEffect(()=>{
         if(ButtonClick==true){
             setButtonClick(false)
-            sendRequest('POST', PATH +'/user', body2)
+             let Metod=''
+            if(edit.Edit==true){
+                Metod='PATCH'
+                //body2.id=parseInt(dataEdit.id,10)
+                sendRequest(Metod, PATH +'/user'+'/'+dataEdit.id, body2)
+                console.log(body2)
+            }else{
+                Metod='POST'
+                sendRequest(Metod, PATH +'/user', body2)
+            }
         }       
         if(lan==true){
             i18n.changeLanguage('en');
@@ -159,8 +177,7 @@ function Anketa() {
         else{
             i18n.changeLanguage('ru');
         }
-        edit.Edit=0
-        }, [ButtonClick,lan]);
+        }, [ButtonClick,lan,edit]);
 
     function handleClick(e) {
         setButtonClick(true)
@@ -175,7 +192,7 @@ function Anketa() {
     const date_of_birth=useInput(dataEdit.date_of_birth,{isEmpty:true,inputData:true})
     const citizenship=useInput(dataEdit.citizenship,{isEmpty:true})
     const number=useInput(dataEdit.number,{isEmpty:true, Num:true})
-    const serialPass=useInput(dataEdit.serialPass,{})
+    const serialPass=useInput(dataEdit.serialPass,{Num:true})
     const PlaceOfIssue=useInput(dataEdit.PlaceOfIssue,{isEmpty:true})
     const date_of_issue=useInput(dataEdit.date_of_issue,{isEmpty:true,inputData:true})
     const date_of_expiry=useInput(dataEdit.date_of_expiry,{isEmpty:true,inputData:true})
@@ -199,6 +216,7 @@ function Anketa() {
     const numberNational =useInput(dataEdit.numberNational)
 
     const body2 = {
+//      id:dataEdit.id,
       name: name.value,
       surname: surname.value,
       namerus:namerus.value,
@@ -247,8 +265,8 @@ function Anketa() {
         if (e.target.files && e.target.files.length > 0) {
           const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.target.files).forEach((file) => {
-            if (file.size <= 2 * 1024 * 1024 && 
-                (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
+            if (file.size <= 10 * 1024 * 1024 && 
+                ( file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
               newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
               alert(t('ErrorFileMessage'));
@@ -276,8 +294,8 @@ function Anketa() {
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
           const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.dataTransfer.files).forEach((file) => {
-            if (file.size <= 2 * 1024 * 1024 && 
-                (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
+            if (file.size <= 10 * 1024 * 1024 && 
+                ( file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
               newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
               alert(t('ErrorFileMessage'));
@@ -383,14 +401,14 @@ function Anketa() {
                 </label>
                     </div>
                     <div className="row">
-                <label className="form-label col-sm">{!showInput&&t('Surname_info')}{showInput&&t('Surname_infoNext')}<span>*</span>
+                <label className="form-label col-sm">{!showInput&&t('Surname_info')}{showInput&&t('Surname_infoNext')}
                 <select className="select_show" onChange={handleSelectChange}> 
                                             <option value="no">{t('No')}</option>
                                             <option value="yes">{t('Yes')}</option>
                                         </select>
                                         {showInput && (                                       
   
-                        <input className={showInput&&surname_info.isDirty&&surname_info.isEmpty?"input_w1210-error":"input_w1210"}  onChange={e=>surname_info.onChange(e)} onBlur={e=>surname_info.onBlur(e)} value={surname_info.value}  name="second_name" maxLength="100" />)}
+                        <input className={showInput&&surname_info.isDirty&&surname_info.isEmpty?"input_w1210-error":"input_w1210"}  onChange={e=>surname_info.onChange(e)} onBlur={e=>surname_info.onBlur(e)} value={surname_info.value}  name="surname_info" maxLength="100" />)}
                         {(showInput&&surname_info.isDirty&&surname_info.isEmpty)&&<div style={{color:'red'}}>{t('Surname_infoError')}</div>}
                 </label>
                     </div>
@@ -638,7 +656,7 @@ function Anketa() {
                     </label>
                 </div>
                 <div className="row">
-                <label className="form-label w-100">{!showInputDataPeople&&t('DataYourPeople')}{showInputDataPeople&&t('DataYourPeopleNext')}<span >*</span>
+                <label className="form-label w-100">{!showInputDataPeople&&t('DataYourPeople')}{showInputDataPeople&&t('DataYourPeopleNext')}
                 <select className="select_show" onChange={handleSelectChangeDataPeople}> 
                                             <option value="no">{t('No')}</option>
                                             <option value="yes">{t('Yes')}</option>
@@ -662,13 +680,14 @@ function Anketa() {
                 <hr/>
                 <legend className="text-center">{t('Passport')}</legend>
                     <div className="row">
-                <label className="form-label col-sm-4">{t('serialPass')}<span >*</span>
-                        <input className="input_w295" onChange={e=>serialPass.onChange(e)} onBlur={e=>serialPass.onBlur(e)} value={serialPass.value}  name="serialPass" maxLength="15" />
-                        {(serialPass.isDirty&&serialPass.isEmpty)&&<div style={{color:'red'}}> {t('PassNumberErrorEmpty')}</div>}
+                <label className="form-label col-sm-4">{t('serialPass')}
+                        <input className={serialPass.isDirty&&serialPass.Num?"input_w295-error":"input_w295"} onChange={e=>serialPass.onChange(e)} onBlur={e=>serialPass.onBlur(e)} value={serialPass.value}  name="serialPass" maxLength="15" />
+                        {(serialPass.isDirty&&serialPass.Num)&&<div style={{color:'red'}}> {t('PassNumberError')}</div>}
                 </label>
                 <label className="form-label col-sm-4">{t('PassNumber')}<span >*</span>
-                        <input className={number.isDirty&&number.isEmpty?"input_w295-error":"input_w295"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="15" />
+                        <input className={number.isDirty&&(number.isEmpty||number.Num)?"input_w295-error":"input_w295"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value}  name="number" maxLength="20" />
                         {(number.isDirty&&number.isEmpty)&&<div style={{color:'red'}}> {t('PassNumberErrorEmpty')}</div>}
+                        {(number.isDirty&&number.Num)&&<div style={{color:'red'}}> {t('PassNumberError')}</div>}
                 </label>
                 <label className="form-label col-sm-8">{t('CountryPass')} <span>*</span>
                         <select className="select_w595" onChange={e=>country_pass.onChange(e)} onBlur={e=>country_pass.onBlur(e)} value={country_pass.value}  name="country_pass">
@@ -1017,6 +1036,10 @@ function Anketa() {
 
 <legend className="text-center">{t('AddDoc')}</legend>
                 <div className="row">
+                    <label  className="typeFiles">{t('TypeFiles')}
+                    </label>
+                </div>
+                <div className="row">
                     <label  className="form-label w-200">{t('AddFile1')}
                     </label>
                 </div>
@@ -1263,7 +1286,7 @@ function Anketa() {
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(pref_faculty.value=='1'||HostelLive.value=='1'||country_pass=='1'||country.value=='1')||(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||!showInput&&surname_info.isEmpty||!showInputDataPeople&&DataYourPeople.isEmpty||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                    <button disabled={(pref_faculty.value=='1'||HostelLive.value=='1'||country_pass=='1'||country.value=='1')||(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||/*(showInput&&surname_info.isEmpty)||(showInputDataPeople&&DataYourPeople.isEmpty)||*/(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>

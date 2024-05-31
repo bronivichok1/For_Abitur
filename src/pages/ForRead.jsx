@@ -115,7 +115,7 @@ function ForRead() {
         dataEdit.numberNational=dataAbitur.numberNational
         dataEdit.pref_faculty=dataAbitur.pref_faculty
         dataEdit.Files=dataAbitur.Files
-        edit.Edit=1
+        edit.Edit=true
         navigate("/FillData", { replace: false })
       })
       .catch(error=>{
@@ -173,7 +173,7 @@ function ForRead() {
             {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataNumErr')}</div>}
 </label>
 <label className="form-label w-100">{t('ForReadDataVid')}
-            <input className={date_of_issue.isDirty&&(date_of_issue.isEmpty||date_of_issue.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder="дд.мм.гггг" maxLength="10" autoComplete="off"/>
+            <input className={date_of_issue.isDirty&&(date_of_issue.isEmpty||date_of_issue.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder={t('DataInp')} maxLength="10" autoComplete="off"/>
             {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataVidErr1')}</div>}
             {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div  style={{color:'red'}}>{t('ForReadDataVidErr2')}</div>}
 </label>

@@ -1,5 +1,5 @@
 export const dataEdit={  
-    id:'' ,    
+    id:0,    
     name:'',
     surname: '',
     namerus:'',
@@ -37,7 +37,7 @@ export const Data = {
     date_of_expiry:''
   }
 export const edit={
-    Edit:''
+    Edit:false
 }
 export const errorCod={
     error:''

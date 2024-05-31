@@ -269,6 +269,7 @@ i18n
 
                     PassNumber:"Passport Number",
                     PassNumberErrorEmpty:"Required field.",
+                    PassNumberError: "The field is filled in incorrectly",
 
                     CountryPass:"County of Issue",
 
@@ -377,7 +378,7 @@ i18n
                     Yes:"Yes",
                     DataInp:"dd.мм.yyyy",
                     serialPass:"Seria",
-
+                    TypeFiles: "Acceptable formats for attached files: jpg/jpeg/pdf up to 10 megabytes in size.",
                 }
             },
             ru: {
@@ -638,9 +639,9 @@ i18n
 
                     Passport:"Паспортные данные",
 
-                    PassNumber:"Серия(при наличии), номер паспорта",
+                    PassNumber:"Номер паспорта",
                     PassNumberErrorEmpty:"Поле обязательно для заполнения.",
-
+                    PassNumberError:"Поле заполнено некорректно",
 
                     CountryPass:"Страна выдачи паспорта",
                     PlaceOfIssue:"Орган, выдавший паспорт",
@@ -750,6 +751,7 @@ i18n
                     Touch:"Выберите",
 
                     serialPass:"Серия",
+                    TypeFiles:"Допустимые форматы прикрепляемых файлов: jpg/jpeg/pdf размером до 10 мегабайт.",
                 }
             }
         },

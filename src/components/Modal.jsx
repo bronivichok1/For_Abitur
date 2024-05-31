@@ -10,8 +10,9 @@ const Modal=({active,setActive,children})=>{
 
 return (
 
-<div className={active?"modal active":"modal"} onClick={()=>setActive(false)}>
-    <div className={active?"modal_content active":"modal_content"} onClick={e=>e.stopPropagation()}>
+<div className={active?"modal active":"modal"} onClick={()=>navigate("/", { replace: false })
+}>
+    <div className={active?"modal_content active":"modal_content"} onClick={e=>e.stopPropagation() }>
         {children}
         <button className="button_modal" onClick={()=>navigate("/", { replace: false })
 }>{t('Ready')}</button>
