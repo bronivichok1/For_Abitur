@@ -3,7 +3,7 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
-import {dataEdit,Data,edit,errorCod,dataID} from '../data/DataForInput'
+import {dataEdit,Data,edit,errorCod,dataID, ForLan} from '../data/DataForInput'
 import Modal from "../components/Modal";
 import '../style/Button_language.css'
 
@@ -87,7 +87,8 @@ const useInput=(InitialValue,validations)=>{
 function Anketa() {
     const PATH = process.env.REACT_APP_PATH;
     const [modalActive,setModalActive]=useState(false)
-    const [lan,setLan]=useState(false)
+    const [lan,setLan]=useState(ForLan.lan)
+    
     const { t, i18n } = useTranslation()
     const[files,setFiles]=useState([])
     const[resp,setResp]=useState({})
@@ -131,7 +132,6 @@ function Anketa() {
                     setModalActive(true)
                     edit.Edit=false
                 }                
-                
                 else{
                     if(resp.status=='404'||errorCod.error=='1'){
                         toast.error(t('Error1'), {
@@ -140,8 +140,10 @@ function Anketa() {
                       } else{
                   toast.error(t('ErrorIDK'), {
                       position: "top-right"
-                    });
+                    }
+                    );
                 }
+                edit.Edit=false
                 }
               }
           })}
@@ -171,7 +173,7 @@ function Anketa() {
             }
         }       
         if(lan==true){
-            i18n.changeLanguage('en');
+            i18n.changeLanguage('en');  
         }
         else{
             i18n.changeLanguage('ru');
@@ -264,7 +266,7 @@ function Anketa() {
           const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.target.files).forEach((file) => {
             if (file.size <= 10 * 1024 * 1024 && 
-                ( file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
+                ( file.type === 'image/JPG' ||file.type === 'image/jpg' || file.type === 'image/jpeg'|| file.type === 'image/JPEG' || file.type === 'application/pdf'|| file.type === 'application/PDF')) {
               newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
               alert(t('ErrorFileMessage'));
@@ -293,7 +295,7 @@ function Anketa() {
           const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.dataTransfer.files).forEach((file) => {
             if (file.size <= 10 * 1024 * 1024 && 
-                ( file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'application/pdf')) {
+                ( file.type === 'image/JPG' ||file.type === 'image/jpg' || file.type === 'image/jpeg'|| file.type === 'image/JPEG' || file.type === 'application/pdf'|| file.type === 'application/PDF')) {
               newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
               alert(t('ErrorFileMessage'));
@@ -347,7 +349,9 @@ function Anketa() {
           setShowModal(false);
         };*/
         const handleToggleChange = () => {
-            setLan(!lan); // Инвертируем значение lan при каждом изменении состояния переключателя
+            ForLan.lan=!lan; 
+            setLan(!lan);
+                      // Инвертируем значение lan при каждом изменении состояния переключателя
           };
           const handleSelectChange = (e) => {
             setShowInput(e.target.value === 'yes');
@@ -363,7 +367,7 @@ function Anketa() {
         <div>
                     <div className="btn-container">
             <label className="switch btn-color-mode-switch">
-                <input value="1" id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
+                <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
                 <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" for="color_mode" ></label>
             </label>
         </div>

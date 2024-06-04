@@ -1,20 +1,23 @@
 import ButtonForNavigate from '../components/ButtonForNavigate'
 import { useTranslation } from 'react-i18next';
 import { useEffect,useState } from 'react';
+import { ForLan } from '../data/DataForInput';
 
  function Home() {
-  const [lan,setLan]=useState(false)
-
+  const [lan,setLan]=useState(ForLan.lan)
   const { t, i18n } = useTranslation()
+
   const handleToggleChange = () => {
-    setLan(!lan); // Инвертируем значение lan при каждом изменении состояния переключателя
+    ForLan.lan=!lan;
+    setLan(!lan);
   };
   useEffect(()=>{
       if(lan==true){
         i18n.changeLanguage('en');
+
       }
       else{
-          i18n.changeLanguage('ru');
+        i18n.changeLanguage('ru');
       }
 },[lan])
 
@@ -23,7 +26,7 @@ import { useEffect,useState } from 'react';
       <main>
       <div className="btn-container">
             <label className="switch btn-color-mode-switch">
-                <input value="1" id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
+                <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
                 <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" for="color_mode" ></label>
             </label>
         </div>

@@ -1,7 +1,7 @@
 import "../style/Anketa.css"
 import { useEffect, useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {dataEdit,Data,edit, errorCod} from '../data/DataForInput'
+import {dataEdit,Data,edit, errorCod, ForLan} from '../data/DataForInput'
 import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -60,7 +60,7 @@ function ForRead() {
 
   const { t, i18n } = useTranslation()
   const PATH = process.env.REACT_APP_PATH;
-  const [lan,setLan]=useState(false)
+  const [lan,setLan]=useState(ForLan.lan)
 
   const RequestURL=PATH+'/auth/login';
 
@@ -150,14 +150,16 @@ function ForRead() {
       e.preventDefault()
     }
     const handleToggleChange = () => {
-      setLan(!lan); // Инвертируем значение lan при каждом изменении состояния переключателя
+      ForLan.lan=!lan; 
+      setLan(!lan);
+            // Инвертируем значение lan при каждом изменении состояния переключателя
     };
     return (
       
         <div className="div">
                   <div className="btn-container">
             <label className="switch btn-color-mode-switch">
-                <input value="1" id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
+                <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
                 <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" for="color_mode" ></label>
             </label>
         </div>
