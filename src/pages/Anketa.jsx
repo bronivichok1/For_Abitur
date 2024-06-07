@@ -1078,17 +1078,16 @@ function Anketa() {
                                                 {files.length>0&&(
                                                     <>                          
                                                         <ul className="file-list">
-                                                        <div>
+                                            <div>
                                                 <ul className="file-list">
-                                                    { filesName.map(( index) => (
-                                                        <li key={index} >{index}
-                                                        <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, index)}></button>
+                                                    { filesName.map((name, index) => (
+                                                        <li key={name}>{name[index]}
+                                                        <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, name)}></button>
                                                         </li>
                                                     ))}
                                                 </ul>
                                             </div>
-                                                        {files.map(({name},id)=>(
-                                                             
+                                                        {files.map(({name},id)=>(   
                                                             <li key={id}>{name}  
                                                                 <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, id)}></button>
                                                             </li>
