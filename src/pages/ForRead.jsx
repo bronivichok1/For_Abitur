@@ -1,7 +1,7 @@
 import "../style/Anketa.css"
 import { useEffect, useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {dataEdit,Data,edit, errorCod, ForLan} from '../data/DataForInput'
+import {dataEdit,Data,edit, errorCod, ForLan,filesName} from '../data/DataForInput'
 import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -26,7 +26,7 @@ const useValidation=(value,validations)=>{
             var num= /^\d+$/
             num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
           break;
-        }      
+        }       
     }
 },[value])
 
@@ -61,8 +61,27 @@ function ForRead() {
   const { t, i18n } = useTranslation()
   const PATH = process.env.REACT_APP_PATH;
   const [lan,setLan]=useState(ForLan.lan)
-
+  const [files,setFiles]=useState([])
   const RequestURL=PATH+'/auth/login';
+  
+  function sendRequestFiles(method, url, body = null) {
+    const headers = {
+      'Content-Type': 'application/json'
+        }
+    return fetch(url, {
+      method: method,
+      body: body,
+      headers:headers
+    }).then(async response => {
+      if (!response.ok) {
+        throw new Error('Ошибка получения файлов');
+    }
+    const data = await response.json();
+    setFiles(data);
+    filesName.push(Object.values(data));
+    console.log(filesName)
+    // предположим, что сервер возвращает список файлов 
+  })}
 
   function sendRequest(method, url, body = null) {
     const headers = {
@@ -74,9 +93,10 @@ function ForRead() {
       headers: headers
     }).then(response => {
       if (response.ok) {
+        
         return  response.json()
       }else{
-        if(errorCod=3){
+        if(errorCod==3){
         toast.error(t('ErrorIDK'), {
           position: "top-right"
         });
@@ -116,8 +136,10 @@ function ForRead() {
         dataEdit.pref_faculty=dataAbitur.pref_faculty
         dataEdit.Files=dataAbitur.Files
         edit.Edit=true
+        sendRequestFiles('GET',PATH+'/auth/'+dataEdit.id)
         navigate("/FillData", { replace: false })
-      })
+      }
+      )
       .catch(error=>{
         toast.error(t('ErrorIDK'), {
           position: "top-right"

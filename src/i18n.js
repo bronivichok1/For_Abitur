@@ -358,7 +358,7 @@ i18n
                     FinalMessage: "Your data has been processed",
 
                     But1:"Fill out the application for applicants",
-                    But2:"Correct/delete the applicant's application",
+                    But2:"Correct the applicant's application",
 
                     ForReadData: "Enter document data:",
                     ForReadDataNum: "Number",
@@ -728,7 +728,7 @@ i18n
                     FinalMessage:"Ваши данные приняты к обработке",
 
                     But1:"Заполнить заявление абитуриента",
-                    But2:"Исправить/удалить заявление абитуриента",
+                    But2:"Исправить заявление абитуриента",
 
 
                     ForReadData:"Введите данные документа:",
@@ -741,7 +741,7 @@ i18n
 
                     Next:"Далее",
 
-                    Error1:"Заявление для этого номер апасспорта уже существует",
+                    Error1:"Заявление для этого номера пасспорта уже существует",
                     ErrorIDK:"Произошла ошибка, попробуйте позже",
                     Error2:"Заявления не существует",
 

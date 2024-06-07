@@ -3,7 +3,7 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
-import {dataEdit,Data,edit,errorCod,dataID, ForLan} from '../data/DataForInput'
+import {dataEdit,Data,edit,errorCod,dataID, ForLan,filesName} from '../data/DataForInput'
 import Modal from "../components/Modal";
 import '../style/Button_language.css'
 
@@ -160,12 +160,13 @@ function Anketa() {
 
     const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
+
         if(ButtonClick==true){
             setButtonClick(false)
              let Metod=''
             if(edit.Edit==true){
                 Metod='PATCH'
-                sendRequest(Metod, PATH +'/user'+'/'+dataEdit.id, body2)
+                sendRequest(Metod, PATH +'/user/'+dataEdit.id, body2)
                 console.log(body2)
             }else{
                 Metod='POST'
@@ -178,7 +179,7 @@ function Anketa() {
         else{
             i18n.changeLanguage('ru');
         }
-        }, [ButtonClick,lan,edit]);
+        }, [ButtonClick,lan,edit,filesName]);
 
     function handleClick(e) {
         setButtonClick(true)
@@ -249,16 +250,6 @@ function Anketa() {
       pref_faculty:pref_faculty.value,
       nameFolder:number.value+date_of_expiry.value
     }
-  
-     /*toast.error("Error Notification !", {
-       position: "top-center"
-     });
-     toast.warn("Warning Notification !", {
-       position: "top-center"
-     });
-     toast.info("Info Notification !", {
-       position: "top-center"
-     });*/
 
      const handleChange = (e) => {
         e.preventDefault();
@@ -277,8 +268,6 @@ function Anketa() {
       };
       
     const[dragActive,setDragActive]=useState(false)
-    
-
 
     const handleDrag=(e)=>{
         e.preventDefault();
@@ -360,7 +349,6 @@ function Anketa() {
             setShowInputDataPeople(e.target.value === 'yes');
           };
         
-
 
 
     return (
@@ -1086,12 +1074,22 @@ function Anketa() {
                                                         multiple={true} 
                                                         onChange={handleChange}/>
                                                 </label>
+                                                
                                                 {files.length>0&&(
-                                                    <>                            
+                                                    <>                          
                                                         <ul className="file-list">
-                                                        
+                                                        <div>
+                                                <ul className="file-list">
+                                                    { filesName.map(( index) => (
+                                                        <li key={index} >{index}
+                                                        <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, index)}></button>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
                                                         {files.map(({name},id)=>(
-                                                            <li key={id}>{name}
+                                                             
+                                                            <li key={id}>{name}  
                                                                 <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, id)}></button>
                                                             </li>
                                                             ))}
