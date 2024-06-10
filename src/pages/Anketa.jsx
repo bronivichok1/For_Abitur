@@ -92,10 +92,10 @@ function Anketa() {
     const { t, i18n } = useTranslation()
     const[files,setFiles]=useState([])
     const[resp,setResp]=useState({})
-    const [showInput, setShowInput] = useState(false);
-    const [showInputDataPeople, setShowInputDataPeople] = useState(false);
-
-
+    const[showInput, setShowInput] = useState(false);
+    const[showInputDataPeople, setShowInputDataPeople] = useState(false);
+    const[oldFiles,setOldFiles]=useState(filesName[0])
+    
     function sendRequest(method, url, body = null) {
         const headers = {'Content-Type': 'application/json'}
         return fetch(url, {
@@ -1080,9 +1080,9 @@ function Anketa() {
                                                         <ul className="file-list">
                                             <div>
                                                 <ul className="file-list">
-                                                    { filesName.map((name, index) => (
-                                                        <li key={name}>{name[index]}
-                                                        <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, name)}></button>
+                                                    {oldFiles.map((name,index) => (
+                                                        <li key={index}>{name}
+                                                            <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, name)}></button>
                                                         </li>
                                                     ))}
                                                 </ul>

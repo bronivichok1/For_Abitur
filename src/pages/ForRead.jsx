@@ -77,10 +77,7 @@ function ForRead() {
         throw new Error('Ошибка получения файлов');
     }
     const data = await response.json();
-    setFiles(data);
     filesName.push(Object.values(data));
-    console.log(filesName)
-    // предположим, что сервер возвращает список файлов 
   })}
 
   function sendRequest(method, url, body = null) {
