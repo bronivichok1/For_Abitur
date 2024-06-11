@@ -46,4 +46,6 @@ export const errorCod={
 export const ForLan={
     lan:false
 }
-export let filesName=[];
+export let filesName={
+    filesArr:[]
+};

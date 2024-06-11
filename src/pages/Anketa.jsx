@@ -94,7 +94,7 @@ function Anketa() {
     const[resp,setResp]=useState({})
     const[showInput, setShowInput] = useState(false);
     const[showInputDataPeople, setShowInputDataPeople] = useState(false);
-    const[oldFiles,setOldFiles]=useState(filesName[0])
+    const[oldFiles,setOldFiles]=useState([])
     
     function sendRequest(method, url, body = null) {
         const headers = {'Content-Type': 'application/json'}
@@ -123,12 +123,21 @@ function Anketa() {
                 }else{
                 if(edit.Edit==true){
                     const body2=new FormData()
-                    const nameFolder=dataEdit.id
-                    body2.append('name',nameFolder)
+                    body2.append('name',dataEdit.id)
+
                     files.forEach((files)=>{
                     body2.append('file',files)})
+
+                    if(oldFiles){
+                    oldFiles.forEach((oldFiles)=>{
+                        body2.append('oldFiles',oldFiles)})
+                    } else{
+                        body2.append('oldFiles','')
+                    }
+
                     sendRequestFormData('POST',PATH +'/files',body2)
                     setFiles([])
+                    setOldFiles([])
                     setModalActive(true)
                     edit.Edit=false
                 }                
@@ -178,6 +187,9 @@ function Anketa() {
         }
         else{
             i18n.changeLanguage('ru');
+        }
+        if(edit.Edit==true){
+            setOldFiles(filesName.filesArr.fileNames)
         }
         }, [ButtonClick,lan,edit,filesName]);
 
@@ -304,6 +316,18 @@ function Anketa() {
         }
         setFiles(newFiles);
         };
+
+        const handleResetOld=(e,id)=>{
+            e.stopPropagation();
+            e.preventDefault();
+    
+            const newOldFiles = [...oldFiles];
+            if (id < oldFiles.length) {
+                newOldFiles.splice(id, 1);
+            }
+            setOldFiles(newOldFiles);
+            filesName.filesArr=oldFiles;
+            };
   
     const handleSubmit=(e)=>{
        e.preventDefault();
@@ -1075,18 +1099,20 @@ function Anketa() {
                                                         onChange={handleChange}/>
                                                 </label>
                                                 
+                                                {oldFiles.length>0&&(
+                                                        <>
+                                                        <ul className="file-list">
+                                                        {oldFiles.map((name,id, oldFiles) => (
+                                                            <li key={id}>{name}
+                                                                <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleResetOld(e, id )}></button>
+                                                            </li>
+                                                        ))}
+                                                        </ul>
+                                                    </>
+                                                    )}
                                                 {files.length>0&&(
                                                     <>                          
                                                         <ul className="file-list">
-                                            <div>
-                                                <ul className="file-list">
-                                                    {oldFiles.map((name,index) => (
-                                                        <li key={index}>{name}
-                                                            <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, name)}></button>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
                                                         {files.map(({name},id)=>(   
                                                             <li key={id}>{name}  
                                                                 <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, id)}></button>

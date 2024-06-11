@@ -77,7 +77,7 @@ function ForRead() {
         throw new Error('Ошибка получения файлов');
     }
     const data = await response.json();
-    filesName.push(Object.values(data));
+    filesName.filesArr=data;
   })}
 
   function sendRequest(method, url, body = null) {
