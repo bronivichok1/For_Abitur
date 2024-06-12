@@ -78,6 +78,8 @@ function ForRead() {
     }
     const data = await response.json();
     filesName.filesArr=data;
+    navigate("/FillData", { replace: false })
+
   })}
 
   function sendRequest(method, url, body = null) {
@@ -134,7 +136,6 @@ function ForRead() {
         dataEdit.Files=dataAbitur.Files
         edit.Edit=true
         sendRequestFiles('GET',PATH+'/auth/'+dataEdit.id)
-        navigate("/FillData", { replace: false })
       }
       )
       .catch(error=>{

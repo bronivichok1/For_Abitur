@@ -128,13 +128,6 @@ function Anketa() {
                     files.forEach((files)=>{
                     body2.append('file',files)})
 
-                    if(oldFiles){
-                    oldFiles.forEach((oldFiles)=>{
-                        body2.append('oldFiles',oldFiles)})
-                    } else{
-                        body2.append('oldFiles','')
-                    }
-
                     sendRequestFormData('POST',PATH +'/files',body2)
                     setFiles([])
                     setOldFiles([])
@@ -322,9 +315,10 @@ function Anketa() {
             e.preventDefault();
     
             const newOldFiles = [...oldFiles];
-            if (id < oldFiles.length) {
-                newOldFiles.splice(id, 1);
-            }
+            const DeleteBody=new FormData()
+            sendRequestFormData('POST',PATH+'/files/delete/'+dataEdit.id+'/'+newOldFiles[id],DeleteBody)
+
+            newOldFiles.splice(id, 1);
             setOldFiles(newOldFiles);
             filesName.filesArr=oldFiles;
             };
@@ -1099,7 +1093,7 @@ function Anketa() {
                                                         onChange={handleChange}/>
                                                 </label>
                                                 
-                                                {oldFiles.length>0&&(
+                                                {oldFiles && oldFiles.length > 0&&(
                                                         <>
                                                         <ul className="file-list">
                                                         {oldFiles.map((name,id, oldFiles) => (
@@ -1110,7 +1104,7 @@ function Anketa() {
                                                         </ul>
                                                     </>
                                                     )}
-                                                {files.length>0&&(
+                                                {files&&files.length>0&&(
                                                     <>                          
                                                         <ul className="file-list">
                                                         {files.map(({name},id)=>(   
