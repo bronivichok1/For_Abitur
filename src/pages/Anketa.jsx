@@ -333,28 +333,6 @@ function Anketa() {
         })*/
     }
 
-    /*const Modal = ({ show, handleClose }) => {
-        const showHideClassName = show ? "modal display-block" : "modal display-none";
-      
-        return (
-          <div className={showHideClassName}>
-            <section className="modal-main">
-              <button onClick={handleClose}>Закрыть</button>
-              Содержимое модального окна...
-            </section>
-          </div>
-        );
-      };
-
-        const [showModal, setShowModal] = useState(false);
-      
-        const handleShow = () => {
-          setShowModal(true);
-        };
-      
-        const handleClose = () => {
-          setShowModal(false);
-        };*/
         const handleToggleChange = () => {
             ForLan.lan=!lan; 
             setLan(!lan);
