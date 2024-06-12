@@ -352,7 +352,7 @@ function Anketa() {
                     <div className="btn-container">
             <label className="switch btn-color-mode-switch">
                 <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
-                <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" for="color_mode" ></label>
+                <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
             </label>
         </div>
         <form  className="form" autoComplete="off">
