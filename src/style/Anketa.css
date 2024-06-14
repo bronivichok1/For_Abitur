@@ -834,3 +834,16 @@
         color:red;
         margin-left: 200px;
       }
+      .progress-container {
+        margin: 0 auto; /* Центрируем контейнер по горизонтали */
+        border: 1px solid #ccc;
+        width: 50%; 
+        align-items: center;
+        border-radius: 0.25rem;
+    }
+    
+    .progress-bar {
+      align-items: center;
+        height: 10px; 
+        background-color: rgb(101, 157, 241); 
+    }

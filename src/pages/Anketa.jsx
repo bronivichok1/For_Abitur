@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import {dataEdit,Data,edit,errorCod,dataID, ForLan,filesName} from '../data/DataForInput'
 import Modal from "../components/Modal";
 import '../style/Button_language.css'
-
+import axios from "axios";
 
 const useValidation=(value,validations)=>{
     const[isEmpty,setEmpty]=useState(true)
@@ -85,17 +85,21 @@ const useInput=(InitialValue,validations)=>{
 }
 
 function Anketa() {
-    const PATH = process.env.REACT_APP_PATH;
     const [modalActive,setModalActive]=useState(false)
     const [lan,setLan]=useState(ForLan.lan)
-    
+    const [ButtonClick,setButtonClick]=useState(false)
     const { t, i18n } = useTranslation()
     const[files,setFiles]=useState([])
     const[resp,setResp]=useState({})
     const[showInput, setShowInput] = useState(false);
     const[showInputDataPeople, setShowInputDataPeople] = useState(false);
     const[oldFiles,setOldFiles]=useState([])
-    
+    const [progress, setProgress] = useState(0);
+    const[barActive,setBarActive]=useState(false)
+    const[dragActive,setDragActive]=useState(false)
+
+    const PATH = process.env.REACT_APP_PATH;
+
     function sendRequest(method, url, body = null) {
         const headers = {'Content-Type': 'application/json'}
         return fetch(url, {
@@ -105,10 +109,9 @@ function Anketa() {
         })
         .then((response) => {
             setResp(response)
-            //console.log(resp)
+
             return response.json()
           }).then((data) => {
-              console.log(data)
               if (data.id) {
                   const body2=new FormData()
                   const nameFolder=data.id
@@ -117,21 +120,18 @@ function Anketa() {
                   body2.append('file',files)
               })
       
-              sendRequestFormData('POST',PATH +'/files',body2)
+              sendFormDataToServer(PATH +'/files',body2,setProgress)
               setFiles([])
-                  setModalActive(true)
                 }else{
                 if(edit.Edit==true){
                     const body2=new FormData()
                     body2.append('name',dataEdit.id)
-
                     files.forEach((files)=>{
                     body2.append('file',files)})
 
-                    sendRequestFormData('POST',PATH +'/files',body2)
+                    sendFormDataToServer(PATH +'/files',body2,setProgress)
                     setFiles([])
                     setOldFiles([])
-                    setModalActive(true)
                     edit.Edit=false
                 }                
                 else{
@@ -158,18 +158,32 @@ function Anketa() {
           if (response.ok) {
             return  response
           }else{ }})}
+    
 
+          function sendFormDataToServer(url, formData,setProgress) {
+            return axios.post(url, formData, {
+              onUploadProgress: (progressEvent) => { 
+                if (progressEvent.lengthComputable) {
+                  const percentComplete = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+                  setProgress(percentComplete);
+                }
+              }
+            }).then(() => {
+                setProgress(100);
+                setModalActive(true);
+                setBarActive(false)
+            });
+          }
+          
 
-    const [ButtonClick,setButtonClick]=useState(false)
     useEffect(()=>{
-
         if(ButtonClick==true){
+            setBarActive(true)
             setButtonClick(false)
              let Metod=''
             if(edit.Edit==true){
                 Metod='PATCH'
                 sendRequest(Metod, PATH +'/user/'+dataEdit.id, body2)
-                console.log(body2)
             }else{
                 Metod='POST'
                 sendRequest(Metod, PATH +'/user', body2)
@@ -261,7 +275,7 @@ function Anketa() {
         if (e.target.files && e.target.files.length > 0) {
           const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.target.files).forEach((file) => {
-            if (file.size <= 10 * 1024 * 1024 && 
+            if (file.size <= 1000 * 1024 * 1024 && 
                 ( file.type === 'image/JPG' ||file.type === 'image/jpg' || file.type === 'image/jpeg'|| file.type === 'image/JPEG' || file.type === 'application/pdf'|| file.type === 'application/PDF')) {
               newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
@@ -272,8 +286,6 @@ function Anketa() {
         }
       };
       
-    const[dragActive,setDragActive]=useState(false)
-
     const handleDrag=(e)=>{
         e.preventDefault();
         setDragActive(true)
@@ -288,7 +300,7 @@ function Anketa() {
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
           const newFiles = [...files]; // Создаем копию массива файлов
           Array.from(e.dataTransfer.files).forEach((file) => {
-            if (file.size <= 10 * 1024 * 1024 && 
+            if (file.size <= 1000 * 1024 * 1024 && 
                 ( file.type === 'image/JPG' ||file.type === 'image/jpg' || file.type === 'image/jpeg'|| file.type === 'image/JPEG' || file.type === 'application/pdf'|| file.type === 'application/PDF')) {
               newFiles.push(file); // Добавляем каждый файл в копию массива файлов
             } else {
@@ -345,6 +357,14 @@ function Anketa() {
             setShowInputDataPeople(e.target.value === 'yes');
           };
         
+          const ProgressBar = ({ percent }) => {
+            const width = percent + '%';
+            return (
+                <div className="progress-container">
+                    <div className="progress-bar" style={{ width }}></div>
+                </div>
+            );
+        };
 
 
     return (
@@ -1074,7 +1094,7 @@ function Anketa() {
                                                 {oldFiles && oldFiles.length > 0&&(
                                                         <>
                                                         <ul className="file-list">
-                                                        {oldFiles.map((name,id, oldFiles) => (
+                                                        {oldFiles.map((name,id) => (
                                                             <li key={id}>{name}
                                                                 <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleResetOld(e, id )}></button>
                                                             </li>
@@ -1083,11 +1103,12 @@ function Anketa() {
                                                     </>
                                                     )}
                                                 {files&&files.length>0&&(
-                                                    <>                          
+                                                    <>             
                                                         <ul className="file-list">
                                                         {files.map(({name},id)=>(   
-                                                            <li key={id}>{name}  
+                                                            <li key={id}>{name}        
                                                                 <button className="file-uploader__remove-button" type="reset" onClick={(e) => handleReset(e, id)}></button>
+                                                                {barActive&&<ProgressBar percent={progress} />}
                                                             </li>
                                                             ))}
                                                         </ul>
