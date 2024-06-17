@@ -3,7 +3,7 @@ import {useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
-import {dataEdit,Data,edit,errorCod,dataID, ForLan,filesName} from '../data/DataForInput'
+import {dataEdit,edit,errorCod, ForLan,filesName} from '../data/DataForInput'
 import Modal from "../components/Modal";
 import '../style/Button_language.css'
 import axios from "axios";
@@ -21,35 +21,36 @@ const useValidation=(value,validations)=>{
         for(const validation in validations){
             switch(validation){
                 case 'isEmpty':
-                    value?setEmpty(false):setEmpty(true)  //work
+                    value?setEmpty(false):setEmpty(true)  
                 break;
                 case 'isRus':
                     var ru =/^[А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?( [А-ЯЁ]{1}[а-яё]+(-[А-ЯЁ]{1}[а-яё]+)?)?$/i
-                    ru.test(String(value).toLowerCase())?setRus(false):setRus(true) //work
+                    ru.test(String(value).toLowerCase())?setRus(false):setRus(true)
                 break;
                 case'isEng':
                     var eng=/^[A-Z]{1}[a-z]+(-[A-Z]{1}[a-z]+)?( [A-Z]{1}[-a-z]+(-[A-Z]{1}[a-z]+)?)?$/i
-                    eng.test(String(value).toLowerCase())?setEng(false):setEng(true)   //work
+                    eng.test(String(value).toLowerCase())?setEng(false):setEng(true)  
                 break;
                 case'ismobileNum':
                     var num= /^\d*\+?\d*$/
-                    num.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true) //work
+                    num.test(String(value).toLowerCase())?setmobileNum(false):setmobileNum(true) 
                 break;
                 case'isemailCheck':
                     var mail=/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
-                    mail.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true) //work
+                    mail.test(String(value).toLowerCase())?setemailCheck(false):setemailCheck(true) 
                 break;
                 case'inputData':
                     var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
-                    data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //work
+                    data.test(String(value).toLowerCase())?setInputData(false):setInputData(true) 
                 break;
                 case'Num':
-                    var num= /^[a-zA-Z0-9-]*$/
-                    num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
+                    var number= /^[a-zA-Z0-9-]*$/
+                    number.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true) 
                 break;
+                default:
             }
         }
-    },[value,isEmpty,isEng,isRus,inputData,isemailCheck,ismobileNum])
+    },[value,validations,isEmpty,isEng,isRus,inputData,isemailCheck,ismobileNum])
     return{
         isEmpty,
         isRus,
@@ -85,18 +86,18 @@ const useInput=(InitialValue,validations)=>{
 }
 
 function Anketa() {
-    const [modalActive,setModalActive]=useState(false)
-    const [lan,setLan]=useState(ForLan.lan)
-    const [ButtonClick,setButtonClick]=useState(false)
-    const { t, i18n } = useTranslation()
+    const[modalActive,setModalActive]=useState(false)
+    const[lan,setLan]=useState(ForLan.lan)
+    const[ButtonClick,setButtonClick]=useState(false)
     const[files,setFiles]=useState([])
     const[resp,setResp]=useState({})
     const[showInput, setShowInput] = useState(false);
     const[showInputDataPeople, setShowInputDataPeople] = useState(false);
     const[oldFiles,setOldFiles]=useState([])
-    const [progress, setProgress] = useState(0);
+    const[progress, setProgress] = useState(0);
     const[barActive,setBarActive]=useState(false)
     const[dragActive,setDragActive]=useState(false)
+    const{ t, i18n } = useTranslation()
 
     const PATH = process.env.REACT_APP_PATH;
 
@@ -109,7 +110,6 @@ function Anketa() {
         })
         .then((response) => {
             setResp(response)
-
             return response.json()
           }).then((data) => {
               if (data.id) {
@@ -123,19 +123,18 @@ function Anketa() {
               sendFormDataToServer(PATH +'/files',body2,setProgress)
               setFiles([])
                 }else{
-                if(edit.Edit==true){
+                if(edit.Edit===true){
                     const body2=new FormData()
                     body2.append('name',dataEdit.id)
                     files.forEach((files)=>{
                     body2.append('file',files)})
-
                     sendFormDataToServer(PATH +'/files',body2,setProgress)
                     setFiles([])
                     setOldFiles([])
                     edit.Edit=false
                 }                
                 else{
-                    if(resp.status=='404'||errorCod.error=='1'){
+                    if(resp.status==='404'||errorCod.error==='1'){
                         toast.error(t('Error1'), {
                             position: "top-right"
                           });
@@ -146,11 +145,9 @@ function Anketa() {
                     );
                 }
                 edit.Edit=false
-                }
-              }
-          })}
+                }}})}
 
-      function sendRequestFormData(method, url, body = null) {
+    function sendRequestFormData(method, url, body = null) {
         return fetch(url, {
           method: method,
           body: body,
@@ -159,8 +156,7 @@ function Anketa() {
             return  response
           }else{ }})}
     
-
-          function sendFormDataToServer(url, formData,setProgress) {
+    function sendFormDataToServer(url, formData,setProgress) {
             return axios.post(url, formData, {
               onUploadProgress: (progressEvent) => { 
                 if (progressEvent.lengthComputable) {
@@ -169,19 +165,16 @@ function Anketa() {
                 }
               }
             }).then(() => {
-                setProgress(100);
                 setModalActive(true);
                 setBarActive(false)
-            });
-          }
-          
+            });}
 
     useEffect(()=>{
-        if(ButtonClick==true){
+        if(ButtonClick===true){
             setBarActive(true)
             setButtonClick(false)
              let Metod=''
-            if(edit.Edit==true){
+            if(edit.Edit===true){
                 Metod='PATCH'
                 sendRequest(Metod, PATH +'/user/'+dataEdit.id, body2)
             }else{
@@ -189,16 +182,16 @@ function Anketa() {
                 sendRequest(Metod, PATH +'/user', body2)
             }
         }       
-        if(lan==true){
+        if(lan===true){
             i18n.changeLanguage('en');  
         }
         else{
             i18n.changeLanguage('ru');
         }
-        if(edit.Edit==true){
+        if(edit.Edit===true){
             setOldFiles(filesName.filesArr.fileNames)
         }
-        }, [ButtonClick,lan,edit,filesName]);
+        }, [ButtonClick,lan,PATH,i18n]);
 
     function handleClick(e) {
         setButtonClick(true)
@@ -224,8 +217,8 @@ function Anketa() {
     const edu_serial_number=useInput(dataEdit.edu_serial_number)
     const edu_name=useInput(dataEdit.edu_name)
     const sex=useInput(dataEdit.sex,{isEmpty:true})
-    const country=useInput(edit.Edit&&dataEdit.country||!edit.Edit&&t('Cou33'))
-    const pref_faculty=useInput(edit.Edit&&dataEdit.pref_faculty||!edit.Edit&&t('Fac10'))
+    const country=useInput((edit.Edit&&dataEdit.country)||(!edit.Edit&&t('Cou33')))
+    const pref_faculty=useInput((edit.Edit&&dataEdit.pref_faculty)||(!edit.Edit&&t('Fac10')))
     const DD=useInput(dataEdit.DD)
     const religion=useInput(dataEdit.religion) 
     const DataYourPeople=useInput(dataEdit.DataYourPeople,{isEmpty:true})
@@ -273,16 +266,16 @@ function Anketa() {
      const handleChange = (e) => {
         e.preventDefault();
         if (e.target.files && e.target.files.length > 0) {
-          const newFiles = [...files]; // Создаем копию массива файлов
+          const newFiles = [...files]; 
           Array.from(e.target.files).forEach((file) => {
-            if (file.size <= 1000 * 1024 * 1024 && 
+            if (file.size <= 10 * 1024 * 1024 && 
                 ( file.type === 'image/JPG' ||file.type === 'image/jpg' || file.type === 'image/jpeg'|| file.type === 'image/JPEG' || file.type === 'application/pdf'|| file.type === 'application/PDF')) {
-              newFiles.push(file); // Добавляем каждый файл в копию массива файлов
+              newFiles.push(file); 
             } else {
               alert(t('ErrorFileMessage'));
             }
           });
-          setFiles(newFiles); // Устанавливаем новое состояние массива файлов
+          setFiles(newFiles);
         }
       };
       
@@ -298,67 +291,59 @@ function Anketa() {
         e.preventDefault();
         setDragActive(false);
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-          const newFiles = [...files]; // Создаем копию массива файлов
+          const newFiles = [...files]; 
           Array.from(e.dataTransfer.files).forEach((file) => {
-            if (file.size <= 1000 * 1024 * 1024 && 
+            if (file.size <= 10 * 1024 * 1024 && 
                 ( file.type === 'image/JPG' ||file.type === 'image/jpg' || file.type === 'image/jpeg'|| file.type === 'image/JPEG' || file.type === 'application/pdf'|| file.type === 'application/PDF')) {
-              newFiles.push(file); // Добавляем каждый файл в копию массива файлов
+              newFiles.push(file); 
             } else {
               alert(t('ErrorFileMessage'));
             }
           });
-          setFiles(newFiles); // Устанавливаем новое состояние массива файлов
+          setFiles(newFiles);
         }
        }
 
-    const handleReset=(e,id)=>{
-        e.stopPropagation();
-        e.preventDefault();
-
-        const newFiles = [...files];
-        if (id < files.length) {
-            newFiles.splice(id, 1);
-        }
-        setFiles(newFiles);
+        const handleReset=(e,id)=>{
+            e.stopPropagation();
+            e.preventDefault();
+            const newFiles = [...files];
+            if (id < files.length) {
+                newFiles.splice(id, 1);
+            }
+            setFiles(newFiles);
         };
 
         const handleResetOld=(e,id)=>{
             e.stopPropagation();
             e.preventDefault();
-    
             const newOldFiles = [...oldFiles];
             const DeleteBody=new FormData()
             sendRequestFormData('POST',PATH+'/files/delete/'+dataEdit.id+'/'+newOldFiles[id],DeleteBody)
-
             newOldFiles.splice(id, 1);
             setOldFiles(newOldFiles);
             filesName.filesArr=oldFiles;
-            };
+        };
   
-    const handleSubmit=(e)=>{
-       e.preventDefault();
-       /*const body2=new FormData()
-         const nameFolder=number.value+date_of_expiry.value
-            body2.append("id",nameFolder)
-            files.forEach((file)=>{
-            body2.append("file",file)
-        })*/
-    }
+        const handleSubmit=(e)=>{
+            e.preventDefault();
+        }
 
         const handleToggleChange = () => {
             ForLan.lan=!lan; 
             setLan(!lan);
-                      // Инвертируем значение lan при каждом изменении состояния переключателя
           };
-          const handleSelectChange = (e) => {
+
+        const handleSelectChange = (e) => {
             setShowInput(e.target.value === 'yes');
           };
-          const handleSelectChangeDataPeople = (e) => {
+
+        const handleSelectChangeDataPeople = (e) => {
             setShowInputDataPeople(e.target.value === 'yes');
           };
         
-          const ProgressBar = ({ percent }) => {
-            const width = percent + '%';
+        const ProgressBar = ({ percent }) => {
+        const width = percent + '%';
             return (
                 <div className="progress-container">
                     <div className="progress-bar" style={{ width }}></div>
@@ -376,8 +361,6 @@ function Anketa() {
             </label>
         </div>
         <form  className="form" autoComplete="off">
-
-
         <Modal active={modalActive} setActive={setModalActive}>
             <h5>{t('FinalMessage')}</h5>
         </Modal>
@@ -412,8 +395,7 @@ function Anketa() {
                                             <option value="no">{t('No')}</option>
                                             <option value="yes">{t('Yes')}</option>
                                         </select>
-                                        {showInput && (                                       
-  
+                                        {showInput && (
                         <input className={showInput&&surname_info.isDirty&&surname_info.isEmpty?"input_w1210-error":"input_w1210"}  onChange={e=>surname_info.onChange(e)} onBlur={e=>surname_info.onBlur(e)} value={surname_info.value}  name="surname_info" maxLength="100" />)}
                         {(showInput&&surname_info.isDirty&&surname_info.isEmpty)&&<div style={{color:'red'}}>{t('Surname_infoError')}</div>}
                 </label>
@@ -428,20 +410,17 @@ function Anketa() {
                 <label className="form-label col-sm-6">{t('Nationality')}<span >*</span>
                         <input className={citizenship.isDirty&&citizenship.isEmpty?"input_w600-error":"input_w600"} onChange={e=>citizenship.onChange(e)} onBlur={e=>citizenship.onBlur(e)} value={citizenship.value} name="citizenship" maxLength="40" />
                         {(citizenship.isDirty&&citizenship.isEmpty)&&<div style={{color:'red'}}> {t('NationalityError')}</div>}
-
                 </label>
                 <label className="form-label col-sm">{t('DateOfBirth')}<span >*</span>
                 <input className={date_of_birth.isDirty&&(date_of_birth.inputData||date_of_birth.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_birth.onChange(e)} onBlur={e=>date_of_birth.onBlur(e)} value={date_of_birth.value}  name="date_of_birth" placeholder={t('DataInp')} maxLength="10" />
                         {(date_of_birth.isDirty&&date_of_birth.isEmpty)&&<div style={{color:'red'}}> {t('DateOfBirthErrorEmpty')}</div>}
                         {(date_of_birth.isDirty&&date_of_birth.inputData&&!date_of_birth.isEmpty)&&<div style={{color:'red'}}> {t('DateOfBirthError')}</div>}
-
                 </label>
                 </div>
                 <div className="row">
                 <label className="form-label col-sm">{t('Town')}<span>*</span>
                         <input className={settlement_name.isDirty&&settlement_name.isEmpty?"input_w600-error":"input_w600"}  onChange={e=>settlement_name.onChange(e)} onBlur={e=>settlement_name.onBlur(e)} value={settlement_name.value}  name="settlement_name" maxLength="40" />
                         {(settlement_name.isDirty&&settlement_name.isEmpty)&&<div style={{color:'red'}}> {t('TownError')}</div>}
-
                 </label>
                 <label className="form-label col-sm-8">{t('Country')} <span>*</span>
                         <select className="select_w595" onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value}  name="country">
@@ -669,7 +648,6 @@ function Anketa() {
                                         {showInputDataPeople && (  
                         <textarea className={showInputDataPeople&&DataYourPeople.isDirty&&DataYourPeople.isEmpty?"textarea_show_error":"textarea_show"} onChange={e=>DataYourPeople.onChange(e)} onBlur={e=>DataYourPeople.onBlur(e)} value={DataYourPeople.value}  name="DataYourPeople" maxLength="200" />)}
                         {(showInputDataPeople&&DataYourPeople.isDirty&&DataYourPeople.isEmpty)&&<div style={{color:'red'}}> {t('DataYourPeopleErrorEmpty')}</div>}
-
                 </label>
                 </div>
                 <div className="row">
@@ -678,8 +656,7 @@ function Anketa() {
                 </label> 
                 <label className="form-label col-sm" >{t('PhoneRepresantative')}
                 <input className={(PhoneRepresantative.isDirty&&PhoneRepresantative.ismobileNum&&!PhoneRepresantative.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>PhoneRepresantative.onChange(e)} onBlur={e=>PhoneRepresantative.onBlur(e)} value={PhoneRepresantative.value}  placeholder="+375XXXXXXXXX" name="PhoneRepresantative" maxLength="50" />
-                        {(PhoneRepresantative.isDirty&&PhoneRepresantative.ismobileNum&&!PhoneRepresantative.isEmpty)&&<div  style={{color:'red'}}> {t('PhoneRepresantativeError')}</div>}
-                        
+                        {(PhoneRepresantative.isDirty&&PhoneRepresantative.ismobileNum&&!PhoneRepresantative.isEmpty)&&<div  style={{color:'red'}}> {t('PhoneRepresantativeError')}</div>}     
                 </label>
                 </div>
                 <hr/>
@@ -900,13 +877,11 @@ function Anketa() {
                         <input className={date_of_issue.isDirty&&(date_of_issue.inputData||date_of_issue.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value}  name="date_of_issue" placeholder={t('DataInp')} maxLength="10" />
                         {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div style={{color:'red'}}> {t('DataOfIssueErrorEmpty')}</div>}
                         {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueError')}</div>}
-
                 </label>
                 <label className="form-label col-sm-3">{t('DateOfExiry')}<span >*</span>
                         <input className={date_of_expiry.isDirty&&(date_of_expiry.inputData||date_of_expiry.isEmpty)?"input_w295-error":"input_w295"} onChange={e=>date_of_expiry.onChange(e)} onBlur={e=>date_of_expiry.onBlur(e)} value={date_of_expiry.value}  name="date_of_expiry" placeholder={t('DataInp')} maxLength="10"/>
                         {(date_of_expiry.isDirty&&date_of_expiry.isEmpty)&&<div style={{color:'red'}}>  {t('DateOfExiryErrorEmpty')}</div>}
                         {(date_of_expiry.isDirty&&date_of_expiry.inputData&&!date_of_expiry.isEmpty)&&<div style={{color:'red'}}> {t('DateOfExiryError')}</div>}
-
                 </label>
                     </div>
                     <div className="row">
@@ -916,78 +891,6 @@ function Anketa() {
                         </label>
                     </div>
                 <hr/>
-{/*<legend className="text-center">Адрес места жительства в соответствии со штампом о регистрации, контактные данные</legend>
-                <div className="row">
-                    <label className="form-label col-sm-4">Почтовый индекс
-                        <input className="input_w295" onChange={e=>postcode.onChange(e)} onBlur={e=>postcode.onBlur(e)} value={postcode.value}  name="postcode" maxLength="10"/></label>
-                    <label className="form-label col-sm-8">Страна
-                        <select className="select_w900" onChange={e=>country.onChange(e)} onBlur={e=>country.onBlur(e)} value={country.value}  name="country">
-                        <option value="0">Республика Беларусь</option>
-                        <option value="1">Российская Федерация</option>
-                        <option value="2">Республика Казахстан</option>
-                        <option value="3">Республика Таджикистан</option>
-                        <option value="4">Кыргызская Республика</option>
-                    </select>
-                    </label>
-                </div>
-                <div className="row">
-                    <label className="form-label col-sm">Область
-                        <select className="select_w595" onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value} name="region" hidden={country.value!="0"}>
-                        <option value="1">г. Минск</option>
-                        <option value="2">Брестская область</option>
-                        <option value="3">Витебская область</option>
-                        <option value="4">Гродненская область</option>
-                        <option value="5">Гомельская область</option>
-                        <option value="6">Минская область</option>
-                        <option value="7">Могилевская область</option>
-                    </select>
-                        <input className="input_w600" onChange={e=>region.onChange(e)} onBlur={e=>region.onBlur(e)} value={region.value}  name="region" maxLength="40" hidden={country.value=="0"}/></label>
-                    <label >Район
-                        <input className="input_w600" onChange={e=>area.onChange(e)} onBlur={e=>area.onBlur(e)} value={area.value} name="area" maxLength="40" /></label>
-                </div>
-                <div className="row">
-                    <label className="form-label col-sm">Тип насел. пункта
-                    <select className="select_w595"onChange={e=>settlement_type.onChange(e)} onBlur={e=>settlement_type.onBlur(e)} value={settlement_type.value} name="settlement_type">
-                        <option value="1">Город</option>
-                        <option value="2">Городской поселок</option>
-                        <option value="3">Агрогородок</option>
-                        <option value="4">Поселок</option>
-                        <option value="5">Деревня</option>
-                        <option value="6">иное</option>
-                    </select>
-                    </label>
-                    <label className="form-label col-sm">Населенный пункт
-                        <input className="input_w600" onChange={e=>settlement_name.onChange(e)} onBlur={e=>settlement_name.onBlur(e)} value={settlement_name.value}  name="settlement_name" maxLength="40" />
-                    </label>
-                </div>
-                <div className="row">
-                    <label className="form-label col-sm-3">Тип улицы
-                    <select  className="select_w595" onChange={e=>street_type.onChange(e)} onBlur={e=>street_type.onBlur(e)} value={street_type.value} name="м">
-                        <option value="1">улица</option>
-                        <option value="2">проспект</option>
-                        <option value="3">бульвар</option>
-                        <option value="4">проезд</option>
-                        <option value="5">тупик</option>
-                        <option value="6">площадь</option>
-                        <option value="7">переулок</option>
-                        <option value="9">микрорайон</option>
-                        <option value="8">иное (указать в названии)</option>
-                    </select>
-                    </label>
-                    <label className="form-label col-sm-5">Название улицы
-                    <input className="input_w600" onChange={e=>street_name.onChange(e)} onBlur={e=>street_name.onBlur(e)} value={street_name.value}  name="street_name" maxLength="40" /></label>
-                </div>
-                <div className="row">
-                    <label className="form-label col-sm-2">Дом
-                        <input className="input_w200" onChange={e=>building.onChange(e)} onBlur={e=>building.onBlur(e)} value={building.value}  name="building" maxLength="10" /></label>
-                    <label className="form-label col-sm-2">Корпус
-                        <input className="input_w200" onChange={e=>housing.onChange(e)} onBlur={e=>housing.onBlur(e)} value={housing.value}  name="housing" maxLength="10" /></label>
-                    <label className="form-label col-sm-2">Квартира
-                        <input className="input_w200" onChange={e=>apartment.onChange(e)} onBlur={e=>apartment.onBlur(e)} value={apartment.value}  name="apartment" maxLength="10" /></label>
-                    <label className="form-label col-sm-6">Домашний тел.
-                        <input className="input_w580 " onChange={e=>stat_tel.onChange(e)} onBlur={e=>stat_tel.onBlur(e)} value={stat_tel.value}  name="stat_tel"  maxLength="20" /></label>
-                </div>
-    <hr/> */}
 <legend className="text-center">{t('EducationInfo')}</legend>
                     <label className="form-label w-100">{t('EducationInst')}<span ></span>
                         <input className="input_w1210"  onChange={e=>edu_name.onChange(e)} onBlur={e=>edu_name.onBlur(e)} value={edu_name.value} name="edu_name" maxLength="150"  /></label>
@@ -999,21 +902,6 @@ function Anketa() {
                         {(edu_date_of_issue.isDirty&&edu_date_of_issue.inputData&&!edu_date_of_issue.isEmpty)&&<div style={{color:'red'}}>{t('DataOfIssueEduError')}</div>}
                         </label>
                 </div>
-    {/*           <div className="row">
-                    <label className="form-label col-sm">Средний балл<span ></span>
-                        <input className="input_w600" onChange={e=>edu_average.onChange(e)} onBlur={e=>edu_average.onBlur(e)} value={edu_average.value} name="edu_average" maxLength="3"  /></label>
-                    <label className="form-label col-sm">Иностранный язык<span></span>
-                    <select className="select_w595" onChange={e=>edu_foreign_lang.onChange(e)} onBlur={e=>edu_foreign_lang.onBlur(e)} value={edu_foreign_lang.value} name="edu_foreign_lang" >
-                        <option value="1">Английский</option>
-                        <option value="2">Немецкий</option>
-                        <option value="3">Французcкий</option>
-                        <option value="4">Итальянский</option>
-                        <option value="5">Испанский</option>
-                        <option value="6">Китайский</option>
-                        <option value="7">другой</option>
-                    </select></label>
-                    </div>
-    */}
                 <hr/>
 <legend className="text-center">{t('InfoAdmission')}</legend>
                     <label className="form-label w-200">{t('Faculty')}
@@ -1032,11 +920,9 @@ function Anketa() {
                         <option value='1'></option>
                         <option value={t('HostelLiveNo')}>{t('HostelLiveNo')}</option>
                         <option value={t('HostelLiveYes')}>{t('HostelLiveYes')}</option>
-
                         </select>
                         </label>
                     <hr/>    
-
 <legend className="text-center">{t('AddDoc')}</legend>
                 <div className="row">
                     <label  className="typeFiles">{t('TypeFiles')}
@@ -1117,191 +1003,17 @@ function Anketa() {
                                 </div> 
                             </div>      
                         </legend>
-                    <hr/>
-                    <div className="customText">{t('WarningMessageOne')}</div>
-                    <div className="customText">{t('WarningMessageTwo')}</div>
-                    <div className="customText">{t('WarningMessageThree')}</div>
-                    <hr/>
-                    {/*<div className="row">
-                            <input className="custom-radio" onChange={e=>pref_target.onChange(e)} onBlur={e=>pref_target.onBlur(e)} checked={pref_target.checked} id="prform_chbx_1"  name="pref_target" type="checkbox" />
-                        <label htmlFor="prform_chbx_1">На условиях целевой подготовки</label>
-                    </div>
-                    <div className="row">
-                            <input className="custom-radio" onChange={e=>pref_nopay.onChange(e)} onBlur={e=>pref_nopay.onBlur(e)} checked={pref_nopay.checked} id="prform_chbx_2" name="pref_nopay" type="checkbox" />
-                        <label htmlFor="prform_chbx_2" >За счет средств бюджета</label>
-                    </div>
-                    <div className="row">
-                            <input className="custom-radio" onChange={e=>pref_pay.onChange(e)} onBlur={e=>pref_pay.onBlur(e)} checked={pref_pay.checked} id="prform_chbx_3"  name="pref_pay" type="checkbox" />
-                        <label htmlFor="prform_chbx_3" >На платной основе</label>
-                    </div>
-                </div>
-                    <div className="row">
-                            <input className="custom-radio" onChange={e=>pref_dorm.onChange(e)} onBlur={e=>pref_dorm.onBlur(e)} checked={pref_dorm.checked} id="prform_chbx_4"  name="pref_dorm" type="checkbox" />
-                        <label htmlFor="prform_chbx_4">Нуждаюсь в общежитии</label>
-<legend className="text-center">Работа и стаж</legend>
-                <label className="form-label w-100">Место работы, занимаемая должность (профессия)
-                    <input className="input_w1210" onChange={e=>exp_position.onChange(e)} onBlur={e=>exp_position.onBlur(e)} checked={exp_position.checked}  name="exp_position" maxLength="150" /></label>
-                <p className="lead">Трудовой стаж по профилю избранной специальности:</p>
-                <div className="row">
-                    <label className="form-label col-sm">Полных лет
-                        <input className="input_w600"  onChange={e=>exp_years.onChange(e)} onBlur={e=>exp_years.onBlur(e)} checked={exp_years.checked} name="exp_years" maxLength="2" /></label>
-                    <label className="form-label col-sm">Полных месяцев
-                        <input className="input_w600" onChange={e=>exp_months.onChange(e)} onBlur={e=>exp_months.onBlur(e)} checked={exp_months.checked}  name="exp_months" maxLength="2" /></label>
-                </div>
-                <hr/>
-<legend className="text-center">Родители</legend>
-                <p className="lead">Отец</p>
-                <div className="row">
-                    <label className="form-label col-sm">Фамилия
-                        <input className="input_w400"  onChange={e=>father_surname.onChange(e)} onBlur={e=>father_surname.onBlur(e)} value={father_surname.value} name="father_surname" maxLength="40" /></label>
-                    <label className="form-label col-sm">Имя
-                        <input className="input_w400"  onChange={e=>father_name.onChange(e)} onBlur={e=>father_name.onBlur(e)} value={father_name.value}  name="father_name" maxLength="40" /></label> 
-                    <label className="form-label col-sm">Отчество
-                        <input className="input_w390"  onChange={e=>father_second_name.onChange(e)} onBlur={e=>father_second_name.onBlur(e)} value={father_second_name.value} name="father_second_name" maxLength="40" /></label>
-                </div>
-                <label className="form-label w-100">Место работы
-                    <input className="input_w1210" onChange={e=>father_job.onChange(e)} onBlur={e=>father_job.onBlur(e)} value={father_job.value} name="father_job" maxLength="150" /></label>
-                <div className="row">
-                    <label className="form-label col-sm">Должность
-                        <input className="input_w600" onChange={e=>father_position.onChange(e)} onBlur={e=>father_position.onBlur(e)} value={father_position.value}  name="father_position" maxLength="40" /></label>
-                    <label className="form-label col-sm">Моб. телефон
-                        <input className={(father_phone.isDirty&&father_phone.ismobileNum&&!father_phone.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>father_phone.onChange(e)} onBlur={e=>father_phone.onBlur(e)} value={father_phone.value}  name="father_phone" placeholder="+375XXXXXXXXX" maxLength="50" />
-                        {(father_phone.isDirty&&father_phone.ismobileNum&&!father_phone.isEmpty)&&<div  style={{color:'red'}}> Поле "Моб. тел." должно соответствовать формату "+375XXXXXXXXX".</div>}
-                        </label>
-                </div>
-                    <label className="form-label w-100">Полный адрес
-                        <input className="input_w1210" onChange={e=>father_address.onChange(e)} onBlur={e=>father_address.onBlur(e)} value={father_address.value}  name="father_address" maxLength="150" /></label>
-                <p className="lead">Мать</p>
-                <div className="row">
-                    <label className="form-label col-sm">Фамилия
-                        <input className="input_w400"  onChange={e=>mother_surname.onChange(e)} onBlur={e=>mother_surname.onBlur(e)} value={mother_surname.value}  name="mother_surname" maxLength="40" /></label>
-                    <label className="form-label col-sm">Имя
-                        <input className="input_w400"  onChange={e=>mother_name.onChange(e)} onBlur={e=>mother_name.onBlur(e)} value={mother_name.value} name="mother_name" maxLength="40" /></label> 
-                    <label className="form-label col-sm">Отчество
-                        <input className="input_w390"   onChange={e=>mother_second_name.onChange(e)} onBlur={e=>mother_second_name.onBlur(e)} value={mother_second_name.value}  name="mother_second_name" maxLength="40" /></label>
-                </div>
-                    <label className="form-label w-100">Место работы
-                        <input className="input_w1210"  onChange={e=>mother_job.onChange(e)} onBlur={e=>mother_job.onBlur(e)} value={mother_job.value} name="mother_job" maxLength="150" /></label>
-                <div className="row">
-                    <label className="form-label col-sm">Должность
-                        <input className="input_w600"  onChange={e=>mother_position.onChange(e)} onBlur={e=>mother_position.onBlur(e)} value={mother_position.value} name="mother_position" maxLength="40" /></label>
-                    <label className="form-label col-sm">Моб. телефон
-                        <input className={(mother_phone.isDirty&&mother_phone.ismobileNum&&!mother_phone.isEmpty)?"input_w600-error":"input_w600"}  onChange={e=>mother_phone.onChange(e)} onBlur={e=>mother_phone.onBlur(e)} value={mother_phone.value}  placeholder="+375XXXXXXXXX" name="mother_phone" maxLength="50" />
-                        {(mother_phone.isDirty&&mother_phone.ismobileNum&&!mother_phone.isEmpty)&&<div  style={{color:'red'}}> Поле "Моб. тел." должно соответствовать формату "+375XXXXXXXXX".</div>}
-                        </label>
-                </div>
-                    <label className="form-label w-100">Полный адрес
-                        <input className="input_w1210" onChange={e=>mother_address.onChange(e)} onBlur={e=>mother_address.onBlur(e)} value={mother_address.value}  name="mother_address" maxLength="150" /></label>
-                        <hr/>
-<legend className="text-center">Льготы</legend>
-                <div className="row">
-                    <input id="pr_chbx_1" className="custom-radio" onChange={e=>stat18.onChange(e)} onBlur={e=>stat18.onBlur(e)} checked={stat18.checked} name="stat18" type="checkbox" />
-                    <label htmlFor="pr_chbx_1" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статья Ч18)</label>
-                </div>
-                <div className="row">
-                    <input id="pr_chbx_2" className="custom-radio" onChange={e=>stat19_23.onChange(e)} onBlur={e=>stat19_23.onBlur(e)} checked={stat19_23.checked} name="stat19_23" type="checkbox" />
-                    <label htmlFor="pr_chbx_2" >Пострадавший от катастрофы на ЧАЭС, иных рад. аварий (статьи Ч19, Ч20, Ч21, Ч22, Ч23)</label>
-                </div>
-                <div className="row">
-                    <input id="pr_chbx_3" className="custom-radio" onChange={e=>dis.onChange(e)} onBlur={e=>dis.onBlur(e)} checked={dis.checked} name="dis" type="checkbox" />
-                    <label htmlFor="pr_chbx_3" >Ребенок-инвалид, инвалид I, II, III гр.</label>
-                </div>
-                <div className="row">
-                    <input id="pr_chbx_4" className="custom-radio"  onChange={e=>nop.onChange(e)} onBlur={e=>nop.onBlur(e)} checked={nop.checked} name="nop" type="checkbox" />
-                    <label htmlFor="pr_chbx_4">Сирота или ребенок, оставшийся без попечения родителей</label>
-                </div>
-                <div className="row">
-                    <input id="pr_chbx_5" className="custom-radio" onChange={e=>mil.onChange(e)} onBlur={e=>mil.onBlur(e)} checked={mil.checked} name="mil" type="checkbox" />
-                    <label htmlFor="pr_chbx_5" >Ребенок лица, погибшего (получившего ранения, инвалидность) при исполнении воинского долга (служебной обязанности)</label>
-                </div>
-                <div className="row">
-                    <input id="pr_chbx_6" className="custom-radio" onChange={e=>bff.onChange(e)} onBlur={e=>bff.onBlur(e)} checked={bff.checked} name="bff" type="checkbox"/>
-                    <label htmlFor="pr_chbx_6">Из многодетной семьи</label>
-                </div>
-                <div className="row">
-                    <input id="pr_chbx_7" className="custom-radio" onChange={e=>medal.onChange(e)} onBlur={e=>medal.onBlur(e)} checked={medal.checked} name="medal" type="checkbox" />
-                    <label htmlFor="pr_chbx_7" >Имею аттестат с медалью</label>
-                </div>
-                <div className="row">
-                    <input id="pr_chbx_8" className="custom-radio" onChange={e=>diplo.onChange(e)} onBlur={e=>diplo.onBlur(e)} checked={diplo.checked}   name="diplo" type="checkbox" />
-                    <label htmlFor="pr_chbx_8" >Имею диплом с отличием</label> 
-                </div>
-                <hr/>
-<legend className="text-center">Награды по предметам</legend>
-                <div className="row">
-                    <label className="form-label col-lg">Язык
-                    <select className="select_w400" onChange={e=>awards_lang.onChange(e)} onBlur={e=>awards_lang.onBlur(e)} value={awards_lang.value} name="awards_lang">
-                        <option value="0">Нет наград</option>
-                        <option value="1">Международная I cт.</option>
-                        <option value="2">Международная II cт.</option>
-                        <option value="3">Международная III cт.</option>
-                        <option value="4">Республиканская I cт.</option>
-                        <option value="5">Республиканская II cт.</option>
-                        <option value="6">Республиканская III cт.</option>
-                        <option value="7">Областная (Минск. гор.) I cт.</option>
-                        <option value="9">Лауреат СФП РБ по предмету</option>
-                    </select></label>
-                    <label className="form-label col-lg">Химия
-                    <select className="select_w400" onChange={e=>awards_chem.onChange(e)} onBlur={e=>awards_chem.onBlur(e)} value={awards_chem.value} name="awards_chem">
-                        <option value="0">Нет наград</option>
-                        <option value="1">Международная I cт.</option>
-                        <option value="2">Международная II cт.</option>
-                        <option value="3">Международная III cт.</option>
-                        <option value="4">Республиканская I cт.</option>
-                        <option value="5">Республиканская II cт.</option>
-                        <option value="6">Республиканская III cт.</option>
-                        <option value="7">Областная (Минск. гор.) I cт.</option>
-                        <option value="9">Лауреат СФП РБ по предмету</option>
-                    </select></label>
-                    <label className="form-label col-lg">Биология
-                    <select className="select_w400" onChange={e=>awards_biol.onChange(e)} onBlur={e=>awards_biol.onBlur(e)} value={awards_biol.value} name="awards_biol">
-                        <option value="0">Нет наград</option>
-                        <option value="1">Международная I cт.</option>
-                        <option value="2">Международная II cт.</option>
-                        <option value="3">Международная III cт.</option>
-                        <option value="4">Республиканская I cт.</option>
-                        <option value="5">Республиканская II cт.</option>
-                        <option value="6">Республиканская III cт.</option>
-                        <option value="7">Областная (Минск. гор.) I cт.</option>
-                        <option value="8">Диплом с отличием медколледжа</option>
-                        <option value="9">Лауреат СФП РБ по предмету</option>
-                    </select></label>
-                </div>
-                <hr/>
-<legend className="text-center">ЦТ и баллы</legend>
-                <p className="lead">Язык</p>
-                <div className="row">
-                    <label className="form-label col-sm">Серия
-                        <input onChange={e=>cert_lang_serial.onChange(e)} onBlur={e=>cert_lang_serial.onBlur(e)} value={cert_lang_serial.value} className="input_w400 " name="cert_lang_serial" maxLength="8" /></label>
-                    <label className="form-label col-sm">Номер
-                        <input onChange={e=>cert_lang_number.onChange(e)} onBlur={e=>cert_lang_number.onBlur(e)} value={cert_lang_number.value} className="input_w400" name="cert_lang_number" maxLength="7" /></label> 
-                    <label className="form-label col-sm-2">Балл
-                        <input onChange={e=>cert_lang_score.onChange(e)} onBlur={e=>cert_lang_score.onBlur(e)} value={cert_lang_score.value} className="input_w400 "name="cert_lang_score" maxLength="3" /></label>
-                </div>
-                <p className="lead">Химия</p>
-                <div className="row">
-                    <label className="form-label col-sm">Серия
-                        <input onChange={e=>cert_chem_serial.onChange(e)} onBlur={e=>cert_chem_serial.onBlur(e)} value={cert_chem_serial.value} className="input_w400" name="cert_chem_serial" maxLength="8" /></label>
-                    <label className="form-label col-sm">Номер
-                        <input onChange={e=>cert_chem_number.onChange(e)} onBlur={e=>cert_chem_number.onBlur(e)} value={cert_chem_number.value} className="input_w400" name="cert_chem_number" maxLength="7" /></label> 
-                    <label className="form-label col-sm-2">Балл
-                        <input onChange={e=>cert_chem_score.onChange(e)} onBlur={e=>cert_chem_score.onBlur(e)} value={cert_chem_score.value} className="input_w400" name="cert_chem_score" maxLength="3" /></label>
-                </div>
-                <p className="lead">Биология</p>
-                <div className="row">
-                    <label className="form-label col-sm">Серия
-                        <input onChange={e=>cert_biol_serial.onChange(e)} onBlur={e=>cert_biol_serial.onBlur(e)} value={cert_biol_serial.value} className="input_w400" name="cert_biol_serial" maxLength="8" /></label>
-                    <label className="form-label col-sm">Номер
-                        <input onChange={e=>cert_biol_number.onChange(e)} onBlur={e=>cert_biol_number.onBlur(e)} value={cert_biol_number.value} className="input_w400" name="cert_biol_number" maxLength="7" /></label> 
-                    <label className="form-label col-sm-2">Балл
-                        <input onChange={e=>cert_biol_score.onChange(e)} onBlur={e=>cert_biol_score.onBlur(e)} value={cert_biol_score.value} className="input_w400" name="cert_biol_score" maxLength="3" /></label>
-                </div>*/}
+        <hr/>
+            <div className="customText">{t('WarningMessageOne')}</div>
+            <div className="customText">{t('WarningMessageTwo')}</div>
+            <div className="customText">{t('WarningMessageThree')}</div>
+        <hr/>
                 <div >
                     <input  id="agreement" className="custom-radio" onChange={e=>DD.onChange(e)} onBlur={e=>DD.onBlur(e)} checked={DD.checked} name="DD"type="checkbox"></input>
 <label htmlFor="agreement" >{t('DD')}</label>
                 </div>
                 <div align ="center" >
-                    <button disabled={(HostelLive.value=='1')||(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
+                    <button disabled={(HostelLive.value==='1')||(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
                     onClick={handleClick}
                         type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>

@@ -2,24 +2,42 @@ import ButtonForNavigate from '../components/ButtonForNavigate'
 import { useTranslation } from 'react-i18next';
 import { useEffect,useState } from 'react';
 import { ForLan } from '../data/DataForInput';
-
+import { useLocation } from 'react-router-dom';
+import "../style/ButtonForNavigate.css"
+ 
  function Home() {
   const [lan,setLan]=useState(ForLan.lan)
   const { t, i18n } = useTranslation()
+  const location = useLocation()
+  const [parameter, setParameter] = useState('')
+  const [checkLanguage,setCheckLanguage]=useState(true)
 
   const handleToggleChange = () => {
     ForLan.lan=!lan;
     setLan(!lan);
   };
+  
   useEffect(()=>{
-      if(lan==true){
-        i18n.changeLanguage('en');
+    const searchParams = new URLSearchParams(location.search);
+    const paramValue = searchParams.get('Language');
 
+      if (paramValue) {
+        setParameter(paramValue);
+      }
+      if(checkLanguage===true&&parameter==='en'){
+        i18n.changeLanguage('en');
+        setLan(true)
+        ForLan.lan=true
+        setParameter('')
+        setCheckLanguage(false)
+      }
+      if(lan===true){
+        i18n.changeLanguage('en');
       }
       else{
         i18n.changeLanguage('ru');
       }
-},[lan])
+},[lan,location.search,parameter,i18n,checkLanguage])
 
   return ( 
     <div >
@@ -31,8 +49,8 @@ import { ForLan } from '../data/DataForInput';
             </label>
         </div>
         <div align="center">
-          <ButtonForNavigate title={t('But1')} adress='FillData' style="btn btn-1 btn-sep icon-info"/>
-          <ButtonForNavigate title={t('But2')} adress='FindData' style="btn btn-4 btn-sep icon-send"/>
+          <ButtonForNavigate title={t('But1')} adress='FillData' style={'btn btn-1 btn-sep'}/>
+          <ButtonForNavigate title={t('But2')} adress='FindData' style={'btn btn-4 btn-sep'}/>
         </div>
       </main>
     </div>

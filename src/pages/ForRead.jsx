@@ -16,38 +16,41 @@ const useValidation=(value,validations)=>{
 
         switch(validation){
           case 'isEmpty':
-              value?setEmpty(false):setEmpty(true)  //work
+              value?setEmpty(false):setEmpty(true)
           break;
           case'inputData':
             var data=/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$/
-            data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)  //work
+            data.test(String(value).toLowerCase())?setInputData(false):setInputData(true)
           break;
           case'Num':
             var num= /^\d+$/
-            num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)  //work
+            num.test(String(value).toLowerCase())?setInputNum(false):setInputNum(true)
           break;
+          default:
+
         }       
     }
-},[value])
+},[value,validations,isEmpty,inputData,Num])
 
 return{
   isEmpty,
   inputData,
-  Num
-  
-}
-}
+  Num 
+}}
+
 const useInput=(InitialValue,validations)=>{
 const [value,setValue]=useState(InitialValue)
 const[isDirty,setDirty]=useState(false)
 const valid=useValidation(value,validations)
+
 const onChange=(e)=>{
   setValue(e.target.value)
 }
+
 const onBlur=(e)=>{
   setDirty(true)
-
 }
+
 return{
   value,
   onChange,
@@ -61,7 +64,6 @@ function ForRead() {
   const { t, i18n } = useTranslation()
   const PATH = process.env.REACT_APP_PATH;
   const [lan,setLan]=useState(ForLan.lan)
-  const [files,setFiles]=useState([])
   const RequestURL=PATH+'/auth/login';
   
   function sendRequestFiles(method, url, body = null) {
@@ -74,12 +76,13 @@ function ForRead() {
       headers:headers
     }).then(async response => {
       if (!response.ok) {
-        throw new Error('Ошибка получения файлов');
+        throw  toast.error(t('ErrorFiles'), {
+          position: "top-right"
+        }); 
     }
     const data = await response.json();
     filesName.filesArr=data;
     navigate("/FillData", { replace: false })
-
   })}
 
   function sendRequest(method, url, body = null) {
@@ -92,24 +95,20 @@ function ForRead() {
       headers: headers
     }).then(response => {
       if (response.ok) {
-        
         return  response.json()
       }else{
-        if(errorCod==3){
+        if(errorCod===3){
         toast.error(t('ErrorIDK'), {
           position: "top-right"
-        });
-      }
-      }
-    }) 
+        });}}}) 
     .then(dataAbitur=>{
-      dataEdit.id=dataAbitur.id
-      dataEdit.surname=dataAbitur.surname
-      dataEdit.name=dataAbitur.name
-      dataEdit.namerus=dataAbitur.namerus
-      dataEdit.surnamerus=dataAbitur.surnamerus
-      dataEdit.surname_info=dataAbitur.surname_info
-      dataEdit.date_of_birth=dataAbitur.date_of_birth
+        dataEdit.id=dataAbitur.id
+        dataEdit.surname=dataAbitur.surname
+        dataEdit.name=dataAbitur.name
+        dataEdit.namerus=dataAbitur.namerus
+        dataEdit.surnamerus=dataAbitur.surnamerus
+        dataEdit.surname_info=dataAbitur.surname_info
+        dataEdit.date_of_birth=dataAbitur.date_of_birth
         dataEdit.citizenship=dataAbitur.citizenship
         dataEdit.number=dataAbitur.number
         dataEdit.PlaceOfIssue=dataAbitur.PlaceOfIssue
@@ -136,46 +135,46 @@ function ForRead() {
         dataEdit.Files=dataAbitur.Files
         edit.Edit=true
         sendRequestFiles('GET',PATH+'/auth/'+dataEdit.id)
-      }
-      )
+      })
       .catch(error=>{
         toast.error(t('ErrorIDK'), {
           position: "top-right"
-        });
-      })
+        });})
   }
 
     const navigate = useNavigate();
     const number=useInput('',{isEmpty:true})
     const date_of_issue=useInput('',{isEmpty:true,inputData:true})
     const [ButtonClick,setButtonClick]=useState(false)
+
     useEffect(()=>{
-        if(ButtonClick==true){
+        if(ButtonClick===true){
             Data.number=number.value
             Data.date_of_issue=date_of_issue.value
-            if(Data.number!=''&&Data.date_of_issue!=''){
+            if(Data.number!==''&&Data.date_of_issue!==''){
                   sendRequest('POST', RequestURL, Data)
             }
             setButtonClick(false)
           }
-          if(lan==true){
+        if(lan===true){
             i18n.changeLanguage('en');
         }
         else{
             i18n.changeLanguage('ru');
         }
-    },[lan,ButtonClick])
+    },[lan,ButtonClick,RequestURL,date_of_issue.value,i18n,number.value])
+
     function handleClick(e) {
       setButtonClick(true)
       e.preventDefault()
     }
+
     const handleToggleChange = () => {
       ForLan.lan=!lan; 
       setLan(!lan);
-            // Инвертируем значение lan при каждом изменении состояния переключателя
     };
+
     return (
-      
         <div className="div">
                   <div className="btn-container">
             <label className="switch btn-color-mode-switch">
@@ -184,12 +183,7 @@ function ForRead() {
             </label>
         </div>
           <form className="form-ForRead" >
-
             <legend className="lead" >{t('ForReadData')}</legend>
-{/*<label className="form-label w-100">Серия
-            <input className={serial.isDirty&&serial.isEmpty?"input_w600-error":"input_w600"} onChange={e=>serial.onChange(e)} onBlur={e=>serial.onBlur(e)} value={serial.value} name="serial" maxLength="15" autoComplete="off"/>
-            {(serial.isDirty&&serial.isEmpty)&&<div  style={{color:'red'}}> Поле "Серия" обязательно для заполнения.</div>}
-    </label>*/}
 <label className="form-label w-100">{t('ForReadDataNum')}
             <input className={number.isDirty&&number.isEmpty?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  autoComplete="off"/>
             {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataNumErr')}</div>}
@@ -207,5 +201,5 @@ function ForRead() {
               </form>
         </div>
     )
-  }
+}
   export default ForRead

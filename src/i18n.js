@@ -373,6 +373,7 @@ i18n
                     Error1: "An application for this passport number already exists",
                     ErrorIDK: "An error occurred, form later",
                     Error2:"Statement does not exist",
+                    ErrorFiles:"Retrieving Error Files",
 
                     Ready:"Ok",
                     No:"No",
@@ -744,6 +745,7 @@ i18n
                     Error1:"Заявление для этого номера пасспорта уже существует",
                     ErrorIDK:"Произошла ошибка, попробуйте позже",
                     Error2:"Заявления не существует",
+                    ErrorFiles:"Ошибка получения файлов",
 
                     Ready:"Ок",
                     No:"Нет",
