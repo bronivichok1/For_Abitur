@@ -42,15 +42,15 @@ import "../style/ButtonForNavigate.css"
   return ( 
     <div >
       <main>
-      <div className="btn-container">
-            <label className="switch btn-color-mode-switch">
-                <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
-                <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
-            </label>
+        <div className="btn-container">
+              <label className="switch btn-color-mode-switch">
+                  <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
+                  <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
+              </label>
         </div>
         <div align="center">
-          <ButtonForNavigate title={t('But1')} adress='FillData' style={'btn btn-1 btn-sep'}/>
-          <ButtonForNavigate title={t('But2')} adress='FindData' style={'btn btn-4 btn-sep'}/>
+            <ButtonForNavigate title={t('But1')} adress='FillData' style={'btn btn-1 btn-sep'}/>
+            <ButtonForNavigate title={t('But2')} adress='FindData' style={'btn btn-4 btn-sep'}/>
         </div>
       </main>
     </div>

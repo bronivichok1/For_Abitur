@@ -6,8 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 
 function App() {
-  return (
 
+  return (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Main/>} />
@@ -15,10 +15,8 @@ function App() {
               <Route path="FindData" element={<ForRead/>} />
               <Route path="FindData/FillData" element={<Anketa/>} />
             </Routes>
-            <ToastContainer />
-          </BrowserRouter>
-          
-          
+            <ToastContainer/>
+          </BrowserRouter>   
   )
 }
 

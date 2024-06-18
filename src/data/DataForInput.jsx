@@ -42,7 +42,6 @@ export const edit={
 export const errorCod={
     error:''
 }
-
 export const ForLan={
     lan:false
 }

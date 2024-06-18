@@ -68,13 +68,16 @@ const useInput=(InitialValue,validations)=>{
     const [isDirty,setDirty]=useState(false)
     
     const valid=useValidation(value,validations)
+
     const onChange=(e)=>{
         setValue(e.target.value)
         setChecked(e.target.checked)
     }
+
     const onBlur=(e)=>{
         setDirty(true)
     }
+    
     return{
         value,
         checked,
@@ -283,10 +286,12 @@ function Anketa() {
         e.preventDefault();
         setDragActive(true)
     }
+
     const handleLeave=(e)=>{
         e.preventDefault();
         setDragActive(false)
     }
+
     const handleDrop = (e) => {
         e.preventDefault();
         setDragActive(false);
@@ -361,9 +366,9 @@ function Anketa() {
             </label>
         </div>
         <form  className="form" autoComplete="off">
-        <Modal active={modalActive} setActive={setModalActive}>
-            <h5>{t('FinalMessage')}</h5>
-        </Modal>
+            <Modal active={modalActive} setActive={setModalActive}>
+                <h5>{t('FinalMessage')}</h5>
+            </Modal>
 <legend>{t('AppDetails')}</legend>        
                     <div className="row">
                 <label className="form-label col-sm">{t('Surname')}<span>*</span>
@@ -916,7 +921,7 @@ function Anketa() {
                         </optgroup>
                     </select></label>
                     <label className="form-label w-200">{t('HostelLive')}
-                        <select className="select_w1210"  onChange={e=>HostelLive.onChange(e)} onBlur={e=>HostelLive.onBlur(e)} value={HostelLive.value} name="edu_name" maxLength="150"  >
+                        <select className="select_w1210"  onChange={e=>HostelLive.onChange(e)} onBlur={e=>HostelLive.onBlur(e)} value={HostelLive.value} name="HostelLive" maxLength="150"  >
                         <option value='1'></option>
                         <option value={t('HostelLiveNo')}>{t('HostelLiveNo')}</option>
                         <option value={t('HostelLiveYes')}>{t('HostelLiveYes')}</option>

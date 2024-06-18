@@ -5,7 +5,6 @@ import {dataEdit,Data,edit, errorCod, ForLan,filesName} from '../data/DataForInp
 import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
 
-
 const useValidation=(value,validations)=>{
   const[isEmpty,setEmpty]=useState(true)
   const[inputData,setInputData]=useState(true)
@@ -97,10 +96,16 @@ function ForRead() {
       if (response.ok) {
         return  response.json()
       }else{
-        if(errorCod===3){
-        toast.error(t('ErrorIDK'), {
+        if(errorCod==='3'||response.status===404){
+          toast.error(t('Error2'), {
           position: "top-right"
-        });}}}) 
+        });
+      }else{
+          toast.error(t('ErrorIDK'), {
+          position: "top-right"
+        });
+      }
+      }}) 
     .then(dataAbitur=>{
         dataEdit.id=dataAbitur.id
         dataEdit.surname=dataAbitur.surname
@@ -137,9 +142,7 @@ function ForRead() {
         sendRequestFiles('GET',PATH+'/auth/'+dataEdit.id)
       })
       .catch(error=>{
-        toast.error(t('ErrorIDK'), {
-          position: "top-right"
-        });})
+        })
   }
 
     const navigate = useNavigate();
@@ -177,28 +180,28 @@ function ForRead() {
     return (
         <div className="div">
                   <div className="btn-container">
-            <label className="switch btn-color-mode-switch">
+          <label className="switch btn-color-mode-switch">
                 <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
                 <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
-            </label>
+          </label>
         </div>
           <form className="form-ForRead" >
-            <legend className="lead" >{t('ForReadData')}</legend>
-<label className="form-label w-100">{t('ForReadDataNum')}
-            <input className={number.isDirty&&number.isEmpty?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  autoComplete="off"/>
-            {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataNumErr')}</div>}
-</label>
-<label className="form-label w-100">{t('ForReadDataVid')}
-            <input className={date_of_issue.isDirty&&(date_of_issue.isEmpty||date_of_issue.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder={t('DataInp')} maxLength="10" autoComplete="off"/>
-            {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataVidErr1')}</div>}
-            {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div  style={{color:'red'}}>{t('ForReadDataVidErr2')}</div>}
-</label>
-        <div align ="center" >
-                    <button disabled={number.isEmpty||date_of_issue.inputData||date_of_issue.isEmpty}
-                    onClick={handleClick}
-                     type="submit" className="btn btn-1 btn-sep icon-info">{t('Next')}</button>
-                </div>
-              </form>
+<legend className="lead" >{t('ForReadData')}</legend>
+            <label className="form-label w-100">{t('ForReadDataNum')}
+                        <input className={number.isDirty&&number.isEmpty?"input_w600-error":"input_w600"} onChange={e=>number.onChange(e)} onBlur={e=>number.onBlur(e)} value={number.value} name="number" maxLength="15"  autoComplete="off"/>
+                        {(number.isDirty&&number.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataNumErr')}</div>}
+            </label>
+            <label className="form-label w-100">{t('ForReadDataVid')}
+                        <input className={date_of_issue.isDirty&&(date_of_issue.isEmpty||date_of_issue.inputData)?"input_w600-error":"input_w600"} onChange={e=>date_of_issue.onChange(e)} onBlur={e=>date_of_issue.onBlur(e)} value={date_of_issue.value} name="date_of_issue" placeholder={t('DataInp')} maxLength="10" autoComplete="off"/>
+                        {(date_of_issue.isDirty&&date_of_issue.isEmpty)&&<div  style={{color:'red'}}> {t('ForReadDataVidErr1')}</div>}
+                        {(date_of_issue.isDirty&&date_of_issue.inputData&&!date_of_issue.isEmpty)&&<div  style={{color:'red'}}>{t('ForReadDataVidErr2')}</div>}
+            </label>
+            <div align ="center" >
+                        <button disabled={number.isEmpty||date_of_issue.inputData||date_of_issue.isEmpty}
+                        onClick={handleClick}
+                        type="submit" className="btn btn-1 btn-sep icon-info">{t('Next')}</button>
+            </div>
+          </form>
         </div>
     )
 }
