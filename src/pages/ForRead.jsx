@@ -155,9 +155,9 @@ function ForRead() {
             Data.number=number.value
             Data.date_of_issue=date_of_issue.value
             if(Data.number!==''&&Data.date_of_issue!==''){
-                  sendRequest('POST', RequestURL, Data)
+              sendRequest('POST', RequestURL, Data)
             }
-            setButtonClick(false)
+              setButtonClick(false)
           }
         if(lan===true){
             i18n.changeLanguage('en');
@@ -179,12 +179,12 @@ function ForRead() {
 
     return (
         <div className="div">
-                  <div className="btn-container">
-          <label className="switch btn-color-mode-switch">
-                <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
-                <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
-          </label>
-        </div>
+          <div className="btn-container">
+            <label className="switch btn-color-mode-switch">
+                  <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
+                  <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
+            </label>
+          </div>
           <form className="form-ForRead" >
 <legend className="lead" >{t('ForReadData')}</legend>
             <label className="form-label w-100">{t('ForReadDataNum')}
@@ -199,7 +199,7 @@ function ForRead() {
             <div align ="center" >
                         <button disabled={number.isEmpty||date_of_issue.inputData||date_of_issue.isEmpty}
                         onClick={handleClick}
-                        type="submit" className="btn btn-1 btn-sep icon-info">{t('Next')}</button>
+                        type="submit" className="btn btn-1 btn-sep">{t('Next')}</button>
             </div>
           </form>
         </div>
