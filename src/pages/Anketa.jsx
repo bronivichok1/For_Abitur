@@ -1,5 +1,6 @@
 import "../style/Anketa.css"
 import {useEffect, useState } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
@@ -148,8 +149,8 @@ function Anketa() {
                     }
                     );
                 }
-                edit.Edit=false
-                }}})}
+        edit.Edit=false
+    }}})}
 
     function sendRequestFormData(method, url, body = null) {
         return fetch(url, {
@@ -158,7 +159,9 @@ function Anketa() {
         }).then(response => {
           if (response.ok) {
             return  response
-          }else{ }})}
+          }else{ 
+        
+    }})}
     
     function sendFormDataToServer(url, formData,setProgress) {
             return axios.post(url, formData, {
@@ -171,8 +174,8 @@ function Anketa() {
             }).then(() => {
                 setModalActive(true);
                 setBarActive(false);
-            });}
-
+    });}
+// eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
         if(ButtonClick===true){
             setBarActive(true)
@@ -195,12 +198,13 @@ function Anketa() {
         if(edit.Edit===true){
             setOldFiles(filesName.filesArr.fileNames)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [ButtonClick,lan,PATH,i18n]);
 
     function handleClick(e) {
         e.preventDefault()
         setButtonClick(true)
-      }
+    }
 
     const surname=useInput(dataEdit.surname,{isEmpty:true,isEng:true})
     const name=useInput(dataEdit.name,{isEmpty:true,isEng:true})
@@ -267,7 +271,7 @@ function Anketa() {
       nameFolder:number.value+date_of_expiry.value
     }
 
-     const handleChange = (e) => {
+    const handleChange = (e) => {
         e.preventDefault();
         if (e.target.files && e.target.files.length > 0) {
           const newFiles = [...files]; 
@@ -281,7 +285,7 @@ function Anketa() {
           });
           setFiles(newFiles);
         }
-      };
+    };
       
     const handleDrag=(e)=>{
         e.preventDefault();
@@ -308,55 +312,54 @@ function Anketa() {
           });
           setFiles(newFiles);
         }
-       }
+    }
 
-        const handleReset=(e,id)=>{
-            e.stopPropagation();
-            e.preventDefault();
-            const newFiles = [...files];
-            if (id < files.length) {
-                newFiles.splice(id, 1);
-            }
-            setFiles(newFiles);
-        };
-
-        const handleResetOld=(e,id)=>{
-            e.stopPropagation();
-            e.preventDefault();
-            const newOldFiles = [...oldFiles];
-            const DeleteBody=new FormData()
-            sendRequestFormData('POST',PATH+'/files/delete/'+dataEdit.id+'/'+newOldFiles[id],DeleteBody)
-            newOldFiles.splice(id, 1);
-            setOldFiles(newOldFiles);
-            filesName.filesArr=oldFiles;
-        };
-  
-        const handleSubmit=(e)=>{
-            e.preventDefault();
+    const handleReset=(e,id)=>{
+        e.stopPropagation();
+        e.preventDefault();
+        const newFiles = [...files];
+        if (id < files.length) {
+            newFiles.splice(id, 1);
         }
+        setFiles(newFiles);
+    };
 
-        const handleToggleChange = () => {
-            ForLan.lan=!lan; 
-            setLan(!lan);
-          };
+    const handleResetOld=(e,id)=>{
+        e.stopPropagation();
+        e.preventDefault();
+        const newOldFiles = [...oldFiles];
+        const DeleteBody=new FormData()
+        sendRequestFormData('POST',PATH+'/files/delete/'+dataEdit.id+'/'+newOldFiles[id],DeleteBody)
+        newOldFiles.splice(id, 1);
+        setOldFiles(newOldFiles);
+        filesName.filesArr=oldFiles;
+    };
+  
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+    }
 
-        const handleSelectChange = (e) => {
-            setShowInput(e.target.value === 'yes');
-          };
+    const handleToggleChange = () => {
+        ForLan.lan=!lan; 
+        setLan(!lan);
+    };
 
-        const handleSelectChangeDataPeople = (e) => {
-            setShowInputDataPeople(e.target.value === 'yes');
-          };
+    const handleSelectChange = (e) => {
+        setShowInput(e.target.value === 'yes');
+    };
+
+    const handleSelectChangeDataPeople = (e) => {
+        setShowInputDataPeople(e.target.value === 'yes');
+    };
         
-        const ProgressBar = ({ percent }) => {
+    const ProgressBar = ({ percent }) => {
         const width = percent + '%';
             return (
                 <div className="progress-container">
                     <div className="progress-bar" style={{ width }}></div>
                 </div>
             );
-        };
-
+    };
 
     return (
     <div>
@@ -1021,7 +1024,7 @@ function Anketa() {
                 <div align ="center" >
                     <button disabled={(surnamerus.isRus||surnamerus.isEmpty)||(namerus.isEmpty||namerus.isRus)||(name.isEmpty||name.isEng)||(surname.isEng||surname.isEmpty)||(date_of_expiry.isEmpty||date_of_expiry.inputData)||(date_of_birth.inputData||date_of_birth.isEmpty)||settlement_name.isEmpty||number.isEmpty||(date_of_issue.isEmpty||date_of_issue.inputData)||(mobile_tel.isEmpty||mobile_tel.ismobileNum)||(email.isemailCheck||email.isEmpty)||PlaceOfIssue.isEmpty||!DD.checked}
                     onClick={handleClick}
-                    type="button" className="glow-button" >{t('ButtonUpload')}</button>     
+                    type="submit" className="glow-button" >{t('ButtonUpload')}</button>     
                     </div>
         </form>
     </div>

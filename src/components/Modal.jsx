@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 const Modal=({active,setActive,children})=>{
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
     const navigate = useNavigate();
     
 return (
@@ -18,4 +18,5 @@ return (
 </div>
 );
 }
+
 export default Modal;

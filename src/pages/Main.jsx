@@ -37,6 +37,7 @@ import "../style/ButtonForNavigate.css"
       else{
         i18n.changeLanguage('ru');
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
 },[lan,location.search,parameter,i18n,checkLanguage])
 
   return ( 
@@ -48,8 +49,8 @@ import "../style/ButtonForNavigate.css"
                   <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
               </label>
         </div>
-        <div align="center">
-            <ButtonForNavigate title={t('But1')} adress='FillData' style={'btn btn-1 btn-sep'}/>
+        <div align="center"  /* eslint-disable-next-line*/>
+            <ButtonForNavigate title={t('But1')} adress='FillData' style={'btn btn-1 btn-sep'}  /* eslint-disable-next-line*//>
             <ButtonForNavigate title={t('But2')} adress='FindData' style={'btn btn-4 btn-sep'}/>
         </div>
       </main>

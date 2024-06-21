@@ -3,6 +3,7 @@ import { useEffect, useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {dataEdit,Data,edit, errorCod, ForLan,filesName} from '../data/DataForInput'
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line no-unused-vars
 import { ToastContainer, toast } from 'react-toastify';
 
 const useValidation=(value,validations)=>{
@@ -165,6 +166,7 @@ function ForRead() {
         else{
             i18n.changeLanguage('ru');
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[lan,ButtonClick,RequestURL,date_of_issue.value,i18n,number.value])
 
     function handleClick(e) {
