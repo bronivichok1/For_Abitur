@@ -382,6 +382,7 @@ i18n
                     
                     EditFill:"Edit statement",
                     DropFill: "Delete statement",
+                    DropData:   "Are you sure you want to delete the application?",
                 }
             },
             ru: {
@@ -758,6 +759,7 @@ i18n
                     TypeFiles:"Допустимые форматы прикрепляемых файлов: jpg/jpeg/pdf размером до 10 мегабайт.",
                     EditFill:"Изменить заявление",
                     DropFill:"Удалить заявление",
+                    DropData:"Вы уверены, что хотите удалить заявление?",
                 }
             }
         },

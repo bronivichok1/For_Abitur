@@ -67,7 +67,9 @@ useEffect(()=>{
 
 function Drop(e) {
         e.preventDefault()
-        setButtonDrop(true)
+        if (window.confirm(t('DropData'))) {
+            setButtonDrop(true);
+        } else {}
     }
 
 function Edit(e) {
