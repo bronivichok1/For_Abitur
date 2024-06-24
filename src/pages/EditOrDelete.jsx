@@ -44,7 +44,7 @@ function sendRequestDrop(method, url, body = null) {
         }).then( response => {
           if (response.ok) {
             edit.Edit=false
-            navigate("/", { replace: false })    
+            navigate("/", { replace: true })    
           }else{
             throw  toast.error(t('ErrorIDK'), {
               position: "top-right"
