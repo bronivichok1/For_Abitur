@@ -82,7 +82,7 @@ function ForRead() {
     }
     const data = await response.json();
     filesName.filesArr=data;
-    navigate("/FillData", { replace: false })
+    navigate("/Drop", { replace: false })
   })}
 
   function sendRequest(method, url, body = null) {
@@ -96,8 +96,8 @@ function ForRead() {
     }).then(response => {
       if (response.ok) {
         return  response.json()
-      }else{
-        if(errorCod==='3'||response.status===404){
+      }else{// eslint-disable-next-line eqeqeq
+        if(errorCod=='3'||response.status==404){
           toast.error(t('Error2'), {
           position: "top-right"
         });

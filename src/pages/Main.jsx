@@ -1,7 +1,7 @@
 import ButtonForNavigate from '../components/ButtonForNavigate'
 import { useTranslation } from 'react-i18next';
 import { useEffect,useState } from 'react';
-import { ForLan } from '../data/DataForInput';
+import { ForLan, edit } from '../data/DataForInput';
 import { useLocation } from 'react-router-dom';
 import "../style/ButtonForNavigate.css"
  
@@ -37,8 +37,9 @@ import "../style/ButtonForNavigate.css"
       else{
         i18n.changeLanguage('ru');
       }
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
-},[lan,location.search,parameter,i18n,checkLanguage])
+},[lan,location.search,parameter,i18n,checkLanguage,edit.Edit])
 
   return ( 
     <div >

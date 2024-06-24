@@ -379,6 +379,9 @@ i18n
                     DataInp:"dd.мм.yyyy",
                     serialPass:"Seria",
                     TypeFiles: "Acceptable formats for attached files: jpg/jpeg/pdf up to 10 megabytes in size.",
+                    
+                    EditFill:"Edit statement",
+                    DropFill: "Delete statement",
                 }
             },
             ru: {
@@ -753,6 +756,8 @@ i18n
 
                     serialPass:"Серия",
                     TypeFiles:"Допустимые форматы прикрепляемых файлов: jpg/jpeg/pdf размером до 10 мегабайт.",
+                    EditFill:"Изменить заявление",
+                    DropFill:"Удалить заявление",
                 }
             }
         },

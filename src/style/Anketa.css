@@ -847,3 +847,53 @@
         height: 10px; 
         background-color: rgb(101, 157, 241); 
     }
+
+    .btn_Edit {
+      background: #426b94;
+      color: #fff;
+      height: 100px;
+    }
+    
+    .btn_Edit:hover {
+      background: #314f6d;
+    }
+    
+    .btn_Edit:active {
+      background: #28415a;
+      top: 2px;
+    }
+    
+    .btn_Edit:before {
+      position: center;
+      height: 100%;
+      left: 0;
+      top: 0;
+      line-height: 3;
+      font-size: 100%;
+      width: 60px;
+    }
+    .btn_Drop {
+      background: #d84519;
+      color: #fff;
+      height: 100px;
+    }
+    
+    .btn_Drop:hover {
+      background: #c43f17;;
+    }
+    
+    .btn_Drop:active {
+      background: #ad3814;;
+      top: 2px;
+    }
+    
+    .btn_Drop:before {
+      position: center;
+      height: 100%;
+      left: 0;
+      top: 0;
+      line-height: 3;
+      font-size: 100%;
+      width: 60px;
+    }
+    

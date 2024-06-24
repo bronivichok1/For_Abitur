@@ -138,8 +138,8 @@ function Anketa() {
                     setOldFiles([])
                     edit.Edit=false
                 }                
-                else{
-                    if(resp.status==='404'||errorCod.error==='1'){
+                else{// eslint-disable-next-line eqeqeq
+                    if(resp.status=='404'||errorCod.error=='1'){
                         toast.error(t('Error1'), {
                             position: "top-right"
                           });
