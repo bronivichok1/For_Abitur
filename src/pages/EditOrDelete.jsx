@@ -85,22 +85,22 @@ const handleToggleChange = () => {
 return(
 <div className="div">
     <div className="btn-container">
-        <label className="switch btn-color-mode-switch">
-            <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
-            <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
-        </label>
+      <label className="switch btn-color-mode-switch">
+        <input checked={ForLan.lan} id="color_mode" name="color_mode" type="checkbox" onChange={handleToggleChange}></input>
+        <label className="btn-color-mode-switch-inner" data-off="RUS" data-on="ENG" htmlFor="color_mode" ></label>
+      </label>
     </div>
-    <form>
-        <div align ="center" >
-            <button 
-                onClick={Edit}
-                type="submit" className="btn btn_Edit btn-sep">{t('EditFill')}</button>
-        </div>
-        <div align ="center" >
-            <button 
-                onClick={Drop}
-                type="submit" className="btn btn_Drop btn-sep">{t('DropFill')}</button>
-        </div>
+  <form>
+    <div align ="center" >
+      <button 
+        onClick={Edit}
+        type="submit" className="btn btn_Edit btn-sep">{t('EditFill')}</button>
+      </div>
+      <div align ="center" >
+        <button 
+          onClick={Drop}
+          type="submit" className="btn btn_Drop btn-sep">{t('DropFill')}</button>
+      </div>
     </form>
 </div>
 )
