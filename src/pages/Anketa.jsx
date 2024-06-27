@@ -188,13 +188,15 @@ function Anketa() {
                 Metod='POST'
                 sendRequest(Metod, PATH +'/user', body2)
             }
-        }       
+        }    
+
         if(lan===true){
             i18n.changeLanguage('en');  
         }
         else{
             i18n.changeLanguage('ru');
         }
+        
         if(edit.Edit===true){
             setOldFiles(filesName.filesArr.fileNames)
         }
