@@ -33,6 +33,7 @@ function sendRequestDrop(method, url, body = null) {
         }); 
     }
   })}
+
     function sendRequestDropFiles(method, url, body = null) {
         const headers = {
           'Content-Type': 'application/json'
@@ -51,6 +52,7 @@ function sendRequestDrop(method, url, body = null) {
             }); 
         }
       })}
+      
 useEffect(()=>{
     if(lan===true){
         i18n.changeLanguage('en');

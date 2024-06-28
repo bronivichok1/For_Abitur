@@ -160,7 +160,9 @@ function Anketa() {
           if (response.ok) {
             return  response
           }else{ 
-        
+            toast.error(t('ErrorIDK'), {
+                position: "top-right"
+              })
     }})}
     
     function sendFormDataToServer(url, formData,setProgress) {
