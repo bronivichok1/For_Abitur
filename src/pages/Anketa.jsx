@@ -115,6 +115,7 @@ function Anketa() {
         .then((response) => {
             setResp(response)
             return response.json()
+            // eslint-disable-next-line eqeqeq
           }).then((data) => {
               if (data.id) {
                   const body2=new FormData()
@@ -122,8 +123,8 @@ function Anketa() {
                   body2.append('name',nameFolder)
                   files.forEach((files)=>{
                   body2.append('file',files)
-              })
-      
+                  }
+              )
               sendFormDataToServer(PATH +'/files',body2,setProgress)
               setFiles([])
                 }else{
@@ -173,10 +174,10 @@ function Anketa() {
                   setProgress(percentComplete);
                 }
               }
-            }).then(() => {
-                setModalActive(true);
-                setBarActive(false);
-    });}
+            }).then(response => {
+                    setModalActive(true);
+                    setBarActive(false);
+                });}
 // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
         if(ButtonClick===true){
@@ -203,7 +204,7 @@ function Anketa() {
             setOldFiles(filesName.filesArr.fileNames)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [ButtonClick,lan,PATH,i18n]);
+        }, [ButtonClick,lan,PATH,i18n,modalActive]);
 
     function handleClick(e) {
         e.preventDefault()
