@@ -356,7 +356,7 @@ i18n
                     FinalMessage: "Your data has been processed",
 
                     But1:"Fill out the application for applicants",
-                    But2:"Correct the applicant's application",
+                    But2:"Correct/delete the applicant's application",
 
                     ForReadData: "Enter document data:",
                     ForReadDataNum: "Number",
@@ -731,7 +731,7 @@ i18n
                     FinalMessage:"Ваши данные приняты к обработке",
 
                     But1:"Заполнить заявление абитуриента",
-                    But2:"Исправить заявление абитуриента",
+                    But2:"Исправить/удалить заявление абитуриента",
 
 
                     ForReadData:"Введите данные документа:",
