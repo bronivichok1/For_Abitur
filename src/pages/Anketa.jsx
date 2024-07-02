@@ -204,7 +204,7 @@ function Anketa() {
             setOldFiles(filesName.filesArr.fileNames)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [ButtonClick,lan,PATH,i18n,modalActive]);
+        }, [ButtonClick,lan,PATH,i18n,modalActive,progress]);
 
     function handleClick(e) {
         e.preventDefault()
