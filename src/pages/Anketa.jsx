@@ -203,6 +203,7 @@ function Anketa() {
         if(edit.Edit===true){
             setOldFiles(filesName.filesArr.fileNames)
         }
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [ButtonClick,lan,PATH,i18n,modalActive,progress]);
 
@@ -972,7 +973,7 @@ function Anketa() {
                     </div >     
                     </label>
                 </div>
-                    <legend className="text-center"> 
+                    <legend className="text-center" > 
                             <div className="wrapper">
                                 <div className={`form-drag${dragActive?"2":""}`}
                                     onDragEnter={handleDrag}
