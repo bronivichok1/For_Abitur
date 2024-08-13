@@ -255,6 +255,7 @@
     .glow-button {
     width: 100%;
     padding: 5%;
+    margin: 0%;
     }
   }
   .glow-button:hover {
@@ -277,5 +278,6 @@
     .glow-button:disabled {
     width: 100%;
     padding: 5%;
+    margin: 0%;
     }
   }

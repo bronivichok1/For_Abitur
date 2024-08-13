@@ -379,7 +379,7 @@ function Anketa() {
         <Modal active={modalActive} setActive={setModalActive}>
             <h5>{t('FinalMessage')}</h5>
         </Modal>
-<legend>{t('AppDetails')}</legend>        
+<legend className="text-center">{t('AppDetails')}</legend>        
         <div className="row">
             <label className="form-label col-sm">{t('Surname')}<span>*</span>
                 <input  className={surname.isDirty&&(surname.isEng||surname.isEmpty)?"input_w600-error":"input_w600"} onChange={e=>surname.onChange(e)} onBlur={e=>surname.onBlur(e)} value={surname.value}   name="surname" maxLength="40" />
