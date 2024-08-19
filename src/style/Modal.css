@@ -37,14 +37,14 @@
     font-weight: bold;
     text-transform: uppercase;
     color: white;
-    background-color: #4CAF50; /* Зелёный цвет кнопки */
+    background-color: #4CAF50; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .button_modal::after {
-    content: "\2714"; /* Зелёная галочка как символ */
+    content: "\2714"; 
     margin-left: 10px;
     color: white;
 }

@@ -1,9 +1,9 @@
-
     @media (orientation: portrait) and (max-width: 1100px) {
       hr {
       width: 100%;
       }
     }
+
     @media (orientation: portrait) and (max-width: 1100px) {
       .text-center {
       width: 100%;
@@ -12,6 +12,7 @@
       margin-bottom: 10px;
       }
     }
+
     @media (orientation: portrait) and (max-width: 1100px) {
       option {
         width: 100%;
@@ -32,7 +33,6 @@
         line-height: inherit;
     }
 
-    
     .row {
         --bs-gutter-x: 1.5rem;
         --bs-gutter-y: 0;
@@ -44,6 +44,7 @@
         border: none;
         background-clip: content-box;
     }
+
     @media (orientation: portrait) and (max-width: 1100px){
       .row {
         display:block;
@@ -62,41 +63,83 @@
         width: 100%;
         box-sizing: border-box;
     }
+
     @media (orientation: portrait) and (max-width: 1100px) {
       .form-label {
       width: 100%;
       }
     }
 
-
     select {
-        margin-top: 10px;
+        border: 1px solid #ced4da;
+        color: black;
+        height: 40px;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-right: 10px;
+        border-radius: 0.25rem;
         border-color: #ced4da;
-        width: 100px;
-        height: auto;
-        padding: 0px;
-        border-radius: 4px;
-        background-color: #fff;
         box-sizing: border-box;
-        margin: 10px;
+        background-color: #fff;
+        font-size: 16px;
+        margin-bottom: 10px;
+        padding-left: 10px;  
     }
+
     @media (orientation: portrait) and (max-width: 1100px) {
       select {
       width: 100%;
       }
     }
+
     input{
-      width: 150px;
-      margin: 10px;
-      margin-top: 10px;
+      border: 1px solid #ced4da;
+      color: black;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
       border-color: #ced4da;
       box-sizing: border-box;
+      font-size: 16px;
+      padding-left: 10px;
+      height: 40px;
+      background-color: #fff;
+      padding-right: 10px;
     }
+    
     @media (orientation: portrait) and (max-width: 1100px) {
       input {
       width: 100%;
       }
     }
+
+    .input_error{
+      border: 1px solid #ced4da;
+      color: black;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      border-color: #ced4da;
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 16px;
+      padding-left: 10px;
+      height: 40px;
+      padding-right: 1em;
+      border-color: #e26647;
+      outline: 0;
+      padding-right: 10px;
+    }
+
+    @media(orientation: portrait) and (max-width: 1100px){
+    .input_error{
+      width: 100%;
+    }
+  }
+
     form {
         position: relative;
         width: 1200px;
@@ -104,11 +147,13 @@
         margin: 0 auto;
         box-sizing: border-box;
     }
+
     @media (orientation: portrait) and (max-width: 1100px) {
       form {
-      width: 100%;
+        width: 100%;
       }
     }
+
     .form-ForRead {
       position: relative;
       width: 600px;
@@ -117,11 +162,13 @@
       box-sizing: border-box;
 
     }
+
     @media (orientation: portrait) and (max-width: 1100px) {
       .form-ForRead {
-      width: 100%;
+        width: 100%;
       }
     }
+
     body{
       font-family: var(--bs-body-font-family);
       font-family: Verdana,'Roboto', sans-serif;
@@ -129,12 +176,14 @@
       background-color: #edf3d8c0;
       box-sizing: border-box;
       }
-      @media (orientation: portrait) and (max-width: 1100px) {
-        body {
-          width: 100%;
-        }
+
+    @media (orientation: portrait) and (max-width: 1100px) {
+      body {
+        width: 100%;
       }
-      .textarea_show{
+    }
+
+    .textarea_show{
         border: 1px solid #ced4da;
         color: black;
         margin-top: 10px;
@@ -151,12 +200,14 @@
         background-color: #fff;
         padding-right: 1em;
       }
-      @media (orientation: portrait) and (max-width: 1100px) {
+
+    @media (orientation: portrait) and (max-width: 1100px) {
         .textarea_show {
-        width: 100%;
+          width: 100%;
         }
-      }
-      .textarea_show_error{
+    }
+
+    .textarea_show_error{
         border: 1px solid #ced4da;
         color: black;
         margin-top: 10px;
@@ -172,14 +223,16 @@
         height: 200px;
         background-color: #fff;
         padding-right: 1em;
-      }
-      @media (orientation: portrait) and (max-width: 1100px) {
+    }
+
+    @media (orientation: portrait) and (max-width: 1100px) {
         .textarea_show-error {
         width: 100%;
         background: url('exclamation-circle.svg') no-repeat 95%  #fff;
         }
-      }
-      .textarea_show_error:focus{
+    }
+
+    .textarea_show_error:focus{
         border-color: #e26647;
         outline: 0;
         -webkit-box-shadow: inset 0 1px 1px rgba(231, 46, 46, 0.075),0 0 8px rgba(233, 43, 43, 0.6);
@@ -187,483 +240,230 @@
       }
 
      .input_w400{
-      border: 1px solid #ced4da;
-      color: black;
       width: 400px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      padding-right: 1em;
-      font-size: 16px;
-      padding: 0px;
-      padding-left: 10px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w400 {
-      width: 100%;
+        width: 100%;
       }
     }
 
      .input_w400-error{
-      border: 1px solid #ced4da;
-      color: black;
       width: 400px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      padding: 0px;
-      padding-right: 1em;
-      font-size: 16px;
-      border-color: #e26647;
-      outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      padding-left: 10px;
       background: url('exclamation-circle.svg') no-repeat 370px  #fff;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w400-error {
-      width: 100%;
-      background: url('exclamation-circle.svg') no-repeat 95%  #fff;
+        width: 100%;
+        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
+
      .input_w390{
-      border: 1px solid #ced4da;
-      color: black;
       width: 390px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      padding-right: 1em;
-      padding: 0px;
-      font-size: 16px;
-      padding-left: 10px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w390 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .input_w390-error{
-      border: 1px solid #ced4da;
-      color: black;
       width: 390px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      padding-right: 1em;
-      font-size: 16px;
-      border-color: #e26647;
-      outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      padding: 0px;
-      padding-left: 10px;
       background: url('exclamation-circle.svg') no-repeat 360px  #fff;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w390-error {
-      width: 100%;
-      background: url('exclamation-circle.svg') no-repeat 95%  #fff;
+        width: 100%;
+        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
+
      .input_w600{
-      border: 1px solid #ced4da;
-      color: black;
       width: 600px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      padding: 0px;
-      padding-left: 10px;   
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w600 {
-      width: 100%;
+        width: 100%;
       }
     }
 
      .input_w600-error{
-      border: 1px solid #ced4da;
-      color: black;
       width: 600px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      border-color: #e26647;
-      outline: 0;
-      font-size: 16px;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      padding: 0px;
-      padding-left: 10px;
       background: url('exclamation-circle.svg') no-repeat 570px  #fff;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w600-error {
-      width: 100%;
-      background: url('exclamation-circle.svg') no-repeat 95%  #fff;
+        width: 100%;
+        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
+
      .input_w590-error{
-      border: 1px solid #ced4da;
-      color: rgb(0, 0, 0);
       width: 600px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      border-color: #e26647;
-      outline: 0;
-      font-size: 16px;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      padding: 0px;
-      padding-left: 10px;
       background: url('exclamation-circle.svg') no-repeat 570px  #fff;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w590-error {
-      width: 100%;
-      background: url('exclamation-circle.svg') no-repeat 95%  #fff;
+        width: 100%;
+        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
+
      .input_w590{
-      border: 1px solid #ced4da;
-      color: black;
-      width: 600px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      padding: 0px;
-      padding-left: 10px;   
+        width: 600px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w590 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .select_w300{
-      border: 1px solid #ced4da;
-      color: black;
       width: 295px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      margin-bottom: 10px;
-      padding: 0;
-      padding-left: 10px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .select_w300 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .select_show{
-      border: 1px solid #ced4da;
-      color: black;
-      width: 100px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 20px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      margin-bottom: 10px;
-      padding: 0;
-      padding-left: 10px;
+        width: 100px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .select_show {
-      width: 100%;
-      margin: 0%;
+        width: 100%;
+        margin: 0%;
       }
     }
 
      .select_w900{
-      border: 1px solid #ced4da;
-      color: black;
-      width: 905px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      margin-bottom: 10px;
-      padding: 0;
-      padding-left: 10px;
+        width: 905px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .select_w900 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .select_w595{
-      border: 1px solid #ced4da;
-      color: black;
-      padding: 20px;
-      font: 18px/1.5 sans-serif;
-      width: 600px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      margin-bottom: 10px;
-      padding: 0;
-      padding-left: 10px;
+        width: 600px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .select_w595 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .select_w400{
-      border: 1px solid #ced4da;
-      color: black;
-      width: 400px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      margin-bottom: 10px;
-      padding: 0;
-      padding-left: 10px;
+        width: 400px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .select_w400 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .input_w295{
-      border: 1px solid #ced4da;
-      color: black;
-      border-color: #ced4da;
-      width: 295px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: none;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      padding: 0px;
-      padding-left: 10px;
+        width: 295px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w295 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .input_w295-error{
-      border: 1px solid #ced4da;
-      color: black;
-      border-color: #ced4da;
       width: 295px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: none;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      border-color: #e26647;
-      outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      padding: 0px;
-      padding-left: 10px;
       background: url('exclamation-circle.svg') no-repeat 270px  #fff;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w295-error {
-      width: 100%;
-      background: url('exclamation-circle.svg') no-repeat 95%  #fff;
+        width: 100%;
+        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
+
      .input_w580{
-      border: 1px solid #ced4da;
-      color: black;
-      border-color: #ced4da;
-      width: 575px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: none;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      padding: 0px;
-      padding-left: 10px;
+       width: 575px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w580 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .input_w1210{
-      border: 1px solid #ced4da;
-      color: black;
-      border-color: #ced4da;
-      width: 1210px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: none;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      padding: 0px;
-      padding-left: 10px;
+        width: 1210px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w1210 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .input_w1210-error{
-      border: 1px solid #ced4da;
-      color: black;
-      border-color: #ced4da;
       width: 1210px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: none;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      border-color: #e26647;
-      outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      padding: 0px;
-      padding-left: 10px;
       background: url('exclamation-circle.svg') no-repeat 1180px  #fff;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w1210-error {
-      width: 100%;
-      background: url('exclamation-circle.svg') no-repeat 95%  #fff;
+        width: 100%;
+        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
+
      .input_w200{
-      border: 1px solid #ced4da;
-      color: black;
-      border-color: #ced4da;
-      width: 200px;
-      height: 40px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: none;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      padding: 0px;
-      padding-left: 10px;
+        width: 200px;
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w200 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .select_w1210{
-      border: 1px solid #ced4da;
-      color: black;
-      height: 40px;
-      width: 1210px;
-      margin-top: 0px;
-      margin-left: 0px;
-      margin-right: 10px;
-      border-radius: 0.25rem;
-      border-color: #ced4da;
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 16px;
-      margin-bottom: 10px;
-      padding: 0;
-      padding-left: 10px;   
+       width: 1210px; 
      }
+
      @media (orientation: portrait) and (max-width: 1100px) {
       .select_w1210 {
-      width: 100%;
+        width: 100%;
       }
     }
+
      .input_w400:focus,
      .input_w200:focus,
      .select_w300:focus,
@@ -708,7 +508,7 @@
       .select_show:-webkit-autofill,
       .textarea_show_error:-webkit-autofill,
       .textarea_show:-webkit-autofill{
-          -webkit-box-shadow: 0 0 0 1000px white inset; /* Добавьте свойство box-shadow с нужным цветом фона */
+          -webkit-box-shadow: 0 0 0 1000px white inset; 
           transition: background-color 5000s ease-in-out 0s;
           box-shadow: 0 0 0 30px white inset;
         }
@@ -718,23 +518,21 @@
     .labeltext {
         display: inline-block;
         padding-top: 6px;
-        padding-left: 10px;
-        
+        padding-left: 10px;   
     }
-
 
     .custom-radio {
       position: absolute;
       z-index: -1;
       opacity: 0;
     }
-    /* для элемента label связанного с .custom-radio */
+
     .custom-radio+label {
       display: inline-flex;
       align-items: center;
       user-select: none;
     }
-    /* создание в label псевдоэлемента  before со следующими стилями */
+
     .custom-radio+label::before {
       content: '';
       display: inline-flex;
@@ -751,33 +549,31 @@
       margin-top: 0px;
       margin-left: 16px;
       margin-right: 5px;
-
-
     }
-    /* стили при наведении курсора на радио */
+
     .custom-radio:not(:disabled):not(:checked)+label:hover::before {
       border-color: #b3d7ff;
     }
-    /* стили для активной радиокнопки (при нажатии на неё) */
+
     .custom-radio:not(:disabled):active+label::before {
       background-color: #b3d7ff;
       border-color: #b3d7ff;
     }
-    /* стили для радиокнопки, находящейся в фокусе */
+
     .custom-radio:focus+label::before {
       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
-    /* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+
     .custom-radio:focus:not(:checked)+label::before {
       border-color: #80bdff;
     }
-    /* стили для радиокнопки, находящейся в состоянии checked */
+
     .custom-radio:checked+label::before {
       border-color: #0b76ef;
       background-color: #0b76ef;
       background: url('check-circle-fill.svg') no-repeat center  #fff;
     }
-    /* стили для радиокнопки, находящейся в состоянии disabled */
+
     .custom-radio:disabled+label::before {
       background-color: #e9ecef;
     }
@@ -791,6 +587,7 @@
       display: inline-flex;
       font-size: 22px;
     }
+
     .modal {
       display: none;
       position: fixed;
@@ -850,63 +647,67 @@
       align-items: center;
       display: flex;
       flex-direction: column;
-
     }
 
-      .wrapper{
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 16px;
-        background: #edf3d807;
-        padding-bottom: 100px;
+    .wrapper{
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 16px;
+      background: #edf3d807;
+      padding-bottom: 100px;
+    }
+
+    @media (orientation: portrait) and (max-width: 1100px) {
+      .wrapper {
+        padding-bottom: 5px; 
+        padding-left: 0%;
       }
-      @media (orientation: portrait) and (max-width: 1100px) {
-        .wrapper {
-          padding-bottom: 5px; 
-          padding-left: 0%;
-        }
-      }
-      h1{
-        margin-bottom: 24px;
-        font-size: 26px;
-        color:#3498db;
+    }
+
+    h1{
+      margin-bottom: 24px;
+      font-size: 26px;
+      color:#3498db;
+    }
+
+    h2,p{
+      font-size: 24px;
+      font-weight: 400;
+      color: #007195;
+      text-align: center;
+    }
+      
+    p{
+      margin-top: 15px;
+      margin-bottom: 22px;
       }
 
-      h2,p{
-        font-size: 24px;
-        font-weight: 400;
-        color: #007195;
-        text-align: center;
+    .form-drag{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 50px 20px;
+      background-color: #ededed;
+      border: 2px dashed rgb(186,191,195);
+      border-radius: 10px;
+      box-shadow: 0 0 4px 4px rgba(255,255,255,0.5);
+      transition: border-color 0.3s, background-color 0.3s;
+      height: auto;
       }
-      p{
-        margin-top: 15px;
-        margin-bottom: 22px;
-      }
-      .form-drag{
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 1200px;
-        padding: 50px 20px;
-        background-color: #ededed;
-        border: 2px dashed rgb(186,191,195);
-        border-radius: 10px;
-        box-shadow: 0 0 4px 4px rgba(255,255,255,0.5);
-        transition: border-color 0.3s, background-color 0.3s;
-        height: auto;
 
-      }
       @media (orientation: portrait) and (max-width: 1100px) {
         .form-drag {
           width: 90%;
           max-width: 90%;
         }
       }
+
       .form-drag2{
         position: relative;
         display: flex;
@@ -923,8 +724,8 @@
         border-color: rgb(62,201,80);
         background-color: #e6ffe3;
         height: auto;
-
       }
+
       .label-drag{
         padding: 5px 10px;
         background-color: #0998d3;
@@ -933,11 +734,13 @@
         color:#fff;
         cursor: pointer;
       }
+
       @media (orientation: portrait) and (max-width: 1100px) {
         .label-drag {
           padding: 0%;
         }
       }
+
       .input_drag{
         margin: 0;
         padding: 0;
@@ -945,12 +748,14 @@
         height: 0;
         visibility: hidden;
       }
+
       .file-list{
         margin-top: 1.25rem;
         width: 100%;
         padding:0;
         list-style-type: none;
       }
+
       .file-list li{
         width: 100%;
         text-align: center;
@@ -960,8 +765,8 @@
         font-size: 14px;
         line-height: 1;
         color:#515151;
-
       }
+
       .file-uploader__remove-button{
         width: 20px;
         height: 20px;
@@ -976,11 +781,13 @@
         margin: 0;
         margin-left: 98%;
       }
+
       @media (orientation: portrait) and (max-width: 1100px) {
         .file-uploader__remove-button {
           margin-left: 90%;
         }
       }
+
       .file-list li:nth-child(n+2){
         margin-top: 4px;
       }
@@ -988,32 +795,37 @@
       .span-drag{
         color:#fff;
       }
+
       h5{
         color:black;
         font-size: 24px;
         align-items: center;
       }
+
       .customText{
-        font-weight: bold; /* Устанавливаем жирное начертание текста */
-        font-size: 20px; /* Устанавливаем размер текста 24 пикселя */
+        font-weight: bold; 
+        font-size: 20px; 
         text-align: center;
         margin-bottom: 15px;
       }
+
       .typeFiles{
-        font-weight: bold; /* Устанавливаем жирное начертание текста */
-        font-size: 15px; /* Устанавливаем размер текста 24 пикселя */
+        font-weight: bold; 
+        font-size: 15px; 
         text-align: center;
         color:red;
         margin-left: 200px;
       }
+
       @media (orientation: portrait) and (max-width: 1100px) {
         .typeFiles {
         width: 100%;
         margin-left: auto;
         }
       }
+
       .progress-container {
-        margin: 0 auto; /* Центрируем контейнер по горизонтали */
+        margin: 0 auto; 
         border: 1px solid #ccc;
         width: 50%; 
         align-items: center;
@@ -1050,6 +862,7 @@
       font-size: 100%;
       width: 60px;
     }
+    
     .btn_Drop {
       background: #d84519;
       color: #fff;
