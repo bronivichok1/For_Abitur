@@ -66,7 +66,7 @@
 
     @media (orientation: portrait) and (max-width: 1100px) {
       .form-label {
-      width: 100%;
+        width: 100%;
       }
     }
 
@@ -88,7 +88,7 @@
 
     @media (orientation: portrait) and (max-width: 1100px) {
       select {
-      width: 100%;
+        width: 100%;
       }
     }
 
@@ -111,7 +111,7 @@
     
     @media (orientation: portrait) and (max-width: 1100px) {
       input {
-      width: 100%;
+        width: 100%;
       }
     }
 
@@ -132,6 +132,8 @@
       border-color: #e26647;
       outline: 0;
       padding-right: 10px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
     }
 
     @media(orientation: portrait) and (max-width: 1100px){
@@ -141,11 +143,11 @@
   }
 
     form {
-        position: relative;
-        width: 1200px;
-        height: 498px;
-        margin: 0 auto;
-        box-sizing: border-box;
+      position: relative;
+      width: 1200px;
+      height: 498px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
     @media (orientation: portrait) and (max-width: 1100px) {
@@ -174,32 +176,32 @@
       font-family: Verdana,'Roboto', sans-serif;
       font-size: 14.5px;
       background-color: #edf3d8c0;
-      box-sizing: border-box;
-      }
+    }
 
     @media (orientation: portrait) and (max-width: 1100px) {
       body {
         width: 100%;
       }
     }
-
+    .textarea_all{
+      border: 1px solid #ced4da;
+      color: black;
+      margin-top: 10px;
+      margin-left: 0px;
+      margin-right: 10px;
+      border-radius: 0.25rem;
+      box-sizing: border-box;
+      font-size: 16px;
+      padding: 0px;
+      padding-left: 10px;
+      width: 1210px;
+      height: 200px;
+      background-color: #fff;
+      padding-right: 1em;
+    }
     .textarea_show{
-        border: 1px solid #ced4da;
-        color: black;
-        margin-top: 10px;
-        margin-left: 0px;
-        margin-right: 10px;
-        border-color: #ced4da;
-        border-radius: 0.25rem;
-        box-sizing: border-box;
-        font-size: 16px;
-        padding: 0px;
-        padding-left: 10px;
-        width: 1210px;
-        height: 200px;
-        background-color: #fff;
-        padding-right: 1em;
-      }
+      border-color: #ced4da;
+    }
 
     @media (orientation: portrait) and (max-width: 1100px) {
         .textarea_show {
@@ -208,52 +210,32 @@
     }
 
     .textarea_show_error{
-        border: 1px solid #ced4da;
-        color: black;
-        margin-top: 10px;
-        margin-left: 0px;
-        margin-right: 10px;
-        border-color: #e26647;
-        border-radius: 0.25rem;
-        box-sizing: border-box;
-        font-size: 16px;
-        padding: 0px;
-        padding-left: 10px;
-        width: 1210px;
-        height: 200px;
-        background-color: #fff;
-        padding-right: 1em;
+      border-color: #e26647;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
     }
 
     @media (orientation: portrait) and (max-width: 1100px) {
-        .textarea_show-error {
+      .textarea_show-error {
         width: 100%;
         background: url('exclamation-circle.svg') no-repeat 95%  #fff;
-        }
+      }
     }
 
-    .textarea_show_error:focus{
-        border-color: #e26647;
-        outline: 0;
-        -webkit-box-shadow: inset 0 1px 1px rgba(231, 46, 46, 0.075),0 0 8px rgba(233, 43, 43, 0.6);
-        box-shadow: inset 0 1px 1px rgba(228, 26, 26, 0.075),0 0 8px rgba(226, 32, 32, 0.6);
+      .input_w400{
+        width: 400px;
       }
 
-     .input_w400{
-      width: 400px;
-     }
-
-     @media (orientation: portrait) and (max-width: 1100px) {
+    @media (orientation: portrait) and (max-width: 1100px) {
       .input_w400 {
         width: 100%;
       }
     }
 
-     .input_w400-error{
-      width: 400px;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      background: url('exclamation-circle.svg') no-repeat 370px  #fff;
+      .input_w400-error{
+        width: 400px;
+        background: url('exclamation-circle.svg') no-repeat 370px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
@@ -263,8 +245,8 @@
       }
     }
 
-     .input_w390{
-      width: 390px;
+      .input_w390{
+        width: 390px;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
@@ -273,11 +255,9 @@
       }
     }
 
-     .input_w390-error{
-      width: 390px;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      background: url('exclamation-circle.svg') no-repeat 360px  #fff;
+      .input_w390-error{
+        width: 390px;
+        background: url('exclamation-circle.svg') no-repeat 360px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
@@ -287,8 +267,8 @@
       }
     }
 
-     .input_w600{
-      width: 600px;
+      .input_w600{
+        width: 600px;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
@@ -297,11 +277,9 @@
       }
     }
 
-     .input_w600-error{
-      width: 600px;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      background: url('exclamation-circle.svg') no-repeat 570px  #fff;
+      .input_w600-error{
+        width: 600px;
+        background: url('exclamation-circle.svg') no-repeat 570px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
@@ -311,11 +289,9 @@
       }
     }
 
-     .input_w590-error{
-      width: 600px;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      background: url('exclamation-circle.svg') no-repeat 570px  #fff;
+      .input_w590-error{
+        width: 600px;
+        background: url('exclamation-circle.svg') no-repeat 570px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
@@ -347,6 +323,7 @@
 
      .select_show{
         width: 100px;
+        margin-left: 10px;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
@@ -398,8 +375,6 @@
 
      .input_w295-error{
       width: 295px;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       background: url('exclamation-circle.svg') no-repeat 270px  #fff;
      }
 
@@ -432,8 +407,6 @@
 
      .input_w1210-error{
       width: 1210px;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
       background: url('exclamation-circle.svg') no-repeat 1180px  #fff;
      }
 
@@ -673,18 +646,6 @@
       color:#3498db;
     }
 
-    h2,p{
-      font-size: 24px;
-      font-weight: 400;
-      color: #007195;
-      text-align: center;
-    }
-      
-    p{
-      margin-top: 15px;
-      margin-bottom: 22px;
-      }
-
     .form-drag{
       position: relative;
       display: flex;
@@ -862,7 +823,7 @@
       font-size: 100%;
       width: 60px;
     }
-    
+
     .btn_Drop {
       background: #d84519;
       color: #fff;

@@ -661,7 +661,7 @@ function Anketa() {
                         <option value="yes">{t('Yes')}</option>
                     </select>
                             {showInputDataPeople && (  
-                        <textarea className={showInputDataPeople&&DataYourPeople.isDirty&&DataYourPeople.isEmpty?"textarea_show_error":"textarea_show"} onChange={e=>DataYourPeople.onChange(e)} onBlur={e=>DataYourPeople.onBlur(e)} value={DataYourPeople.value}  name="DataYourPeople" maxLength="200" />)}
+                        <textarea className={showInputDataPeople&&DataYourPeople.isDirty&&DataYourPeople.isEmpty?"textarea_all textarea_show_error":"textarea_all textarea_show"} onChange={e=>DataYourPeople.onChange(e)} onBlur={e=>DataYourPeople.onBlur(e)} value={DataYourPeople.value}  name="DataYourPeople" maxLength="200" />)}
                             {(showInputDataPeople&&DataYourPeople.isDirty&&DataYourPeople.isEmpty)&&<div style={{color:'red'}}> {t('DataYourPeopleErrorEmpty')}</div>}
                 </label>
             </div>
