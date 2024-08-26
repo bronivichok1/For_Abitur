@@ -133,7 +133,9 @@
       outline: 0;
       padding-right: 10px;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      background: url('exclamation-circle.svg') no-repeat 98%  #fff;
+
     }
 
     @media(orientation: portrait) and (max-width: 1100px){
@@ -213,13 +215,14 @@
       border-color: #e26647;
       outline: 0;
       -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(243, 77, 35, 0.6);
+      background: url('exclamation-circle.svg') no-repeat 99%  #fff;
+
     }
 
     @media (orientation: portrait) and (max-width: 1100px) {
       .textarea_show-error {
         width: 100%;
-        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
 
@@ -235,13 +238,11 @@
 
       .input_w400-error{
         width: 400px;
-        background: url('exclamation-circle.svg') no-repeat 370px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w400-error {
         width: 100%;
-        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
 
@@ -257,13 +258,11 @@
 
       .input_w390-error{
         width: 390px;
-        background: url('exclamation-circle.svg') no-repeat 360px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w390-error {
         width: 100%;
-        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
 
@@ -279,25 +278,21 @@
 
       .input_w600-error{
         width: 600px;
-        background: url('exclamation-circle.svg') no-repeat 570px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w600-error {
         width: 100%;
-        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
 
       .input_w590-error{
         width: 600px;
-        background: url('exclamation-circle.svg') no-repeat 570px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w590-error {
         width: 100%;
-        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
 
@@ -375,13 +370,11 @@
 
      .input_w295-error{
       width: 295px;
-      background: url('exclamation-circle.svg') no-repeat 270px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w295-error {
         width: 100%;
-        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
 
@@ -407,13 +400,11 @@
 
      .input_w1210-error{
       width: 1210px;
-      background: url('exclamation-circle.svg') no-repeat 1180px  #fff;
      }
 
      @media (orientation: portrait) and (max-width: 1100px) {
       .input_w1210-error {
         width: 100%;
-        background: url('exclamation-circle.svg') no-repeat 95%  #fff;
       }
     }
 

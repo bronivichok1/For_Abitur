@@ -144,10 +144,10 @@ function Anketa() {
                         toast.error(t('Error1'), {
                             position: "top-right"
                           });
-                      } else{
-                  toast.error(t('ErrorIDK'), {
-                      position: "top-right"
-                    }
+                    } else{
+                        toast.error(t('ErrorIDK'), {
+                        position: "top-right"
+                      }
                     );
                 }
         edit.Edit=false
@@ -929,7 +929,8 @@ function Anketa() {
                             <option value={t('Fac15')}>{t('Fac15')}</option>
                             <option value={t('Fac16')}>{t('Fac16')}</option>
                         </optgroup>
-                    </select></label>
+                    </select>
+                    </label>
                     <label className="form-label">{t('HostelLive')}
                         <select className="select select_w1210"  onChange={e=>HostelLive.onChange(e)} onBlur={e=>HostelLive.onBlur(e)} value={HostelLive.value} name="HostelLive" maxLength="150"  >
                         <option value='1'></option>
